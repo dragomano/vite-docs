@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import { buildEnd } from './buildEnd.config'
 
-const ogDescription = 'Next Generation Frontend Tooling'
+const ogDescription = 'Инструментарий для фронтенда нового поколения'
 const ogImage = 'https://vitejs.dev/og-image.png'
 const ogTitle = 'Vite'
 const ogUrl = 'https://vitejs.dev'
@@ -35,15 +35,15 @@ const additionalTitle = ((): string => {
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   const oldVersions: DefaultTheme.NavItemWithLink[] = [
     {
-      text: 'Vite 4 Docs',
+      text: 'Документация Vite 4',
       link: 'https://v4.vitejs.dev',
     },
     {
-      text: 'Vite 3 Docs',
+      text: 'Документация Vite 3',
       link: 'https://v3.vitejs.dev',
     },
     {
-      text: 'Vite 2 Docs',
+      text: 'Документация Vite 2',
       link: 'https://v2.vitejs.dev',
     },
   ]
@@ -53,7 +53,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
     case 'local':
       return [
         {
-          text: 'Vite 5 Docs (release)',
+          text: 'Документация Vite 5 (релиз)',
           link: 'https://vitejs.dev',
         },
         ...oldVersions,
@@ -65,7 +65,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
 
 export default defineConfig({
   title: `Vite${additionalTitle}`,
-  description: 'Next Generation Frontend Tooling',
+  description: 'Инструментарий для фронтенда нового поколения',
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
@@ -95,7 +95,8 @@ export default defineConfig({
   ],
 
   locales: {
-    root: { label: 'English' },
+    root: { label: 'Русский' },
+    en: { label: 'English', link: 'https://vitejs.dev' },
     zh: { label: '简体中文', link: 'https://cn.vitejs.dev' },
     ja: { label: '日本語', link: 'https://ja.vitejs.dev' },
     es: { label: 'Español', link: 'https://es.vitejs.dev' },
@@ -109,7 +110,7 @@ export default defineConfig({
 
     editLink: {
       pattern: 'https://github.com/vitejs/vite/edit/main/docs/:path',
-      text: 'Suggest changes to this page',
+      text: 'Предложить изменения',
     },
 
     socialLinks: [
@@ -124,8 +125,50 @@ export default defineConfig({
       apiKey: 'deaab78bcdfe96b599497d25acc6460e',
       indexName: 'vitejs',
       searchParameters: {
-        facetFilters: ['tags:en'],
+        facetFilters: ['tags:en', 'tags:ru'],
       },
+      placeholder: 'Поиск в документации',
+      translations: {
+        button: {
+          buttonText: 'Поиск',
+          buttonAriaLabel: 'Поиск'
+        },
+        modal: {
+          searchBox: {
+            resetButtonTitle: 'Сбросить поиск',
+            resetButtonAriaLabel: 'Сбросить поиск',
+            cancelButtonText: 'Отменить поиск',
+            cancelButtonAriaLabel: 'Отменить поиск'
+          },
+          startScreen: {
+            recentSearchesTitle: 'История поиска',
+            noRecentSearchesText: 'Нет истории поиска',
+            saveRecentSearchButtonTitle: 'Сохранить в истории поиска',
+            removeRecentSearchButtonTitle: 'Удалить из истории поиска',
+            favoriteSearchesTitle: 'Избранное',
+            removeFavoriteSearchButtonTitle: 'Удалить из избранного'
+          },
+          errorScreen: {
+            titleText: 'Невозможно получить результаты',
+            helpText:
+              'Вам может потребоваться проверить подключение к Интернету'
+          },
+          footer: {
+            selectText: 'выбрать',
+            navigateText: 'перейти',
+            closeText: 'закрыть',
+            searchByText: 'поставщик поиска'
+          },
+          noResultsScreen: {
+            noResultsText: 'Нет результатов для',
+            suggestedQueryText: 'Вы можете попытаться узнать',
+            reportMissingResultsText:
+              'Считаете, что поиск даёт ложные результаты？',
+            reportMissingResultsLinkText:
+              'Нажмите на кнопку «Обратная связь»'
+          }
+        }
+      }
     },
 
     carbonAds: {
@@ -134,20 +177,20 @@ export default defineConfig({
     },
 
     footer: {
-      message: `Released under the MIT License. (${commitRef})`,
-      copyright: 'Copyright © 2019-present Evan You & Vite Contributors',
+      message: `Выпущено под лицензией MIT. (${commitRef})`,
+      copyright: '© 2019 — настоящее время, Эван Ю и контрибьюторы Vite',
     },
 
     nav: [
-      { text: 'Guide', link: '/guide/', activeMatch: '/guide/' },
-      { text: 'Config', link: '/config/', activeMatch: '/config/' },
-      { text: 'Plugins', link: '/plugins/', activeMatch: '/plugins/' },
+      { text: 'Руководство', link: '/guide/', activeMatch: '/guide/' },
+      { text: 'Конфигурация', link: '/config/', activeMatch: '/config/' },
+      { text: 'Плагины', link: '/plugins/', activeMatch: '/plugins/' },
       {
-        text: 'Resources',
+        text: 'Ресурсы',
         items: [
-          { text: 'Team', link: '/team' },
-          { text: 'Blog', link: '/blog' },
-          { text: 'Releases', link: '/releases' },
+          { text: 'Команда', link: '/team' },
+          { text: 'Блог', link: '/blog' },
+          { text: 'Релизы', link: '/releases' },
           {
             items: [
               {
@@ -159,7 +202,7 @@ export default defineConfig({
                 link: 'https://twitter.com/vite_js',
               },
               {
-                text: 'Discord Chat',
+                text: 'Чат Discord',
                 link: 'https://chat.vitejs.dev',
               },
               {
@@ -175,11 +218,11 @@ export default defineConfig({
                 link: 'https://dev.to/t/vite',
               },
               {
-                text: 'Changelog',
+                text: 'Журнал изменений',
                 link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
               },
               {
-                text: 'Contributing',
+                text: 'Сотрудничество',
                 link: 'https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md',
               },
             ],
@@ -187,7 +230,7 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Version',
+        text: 'Версия',
         items: versionLinks,
       },
     ],
@@ -195,80 +238,80 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: 'Guide',
+          text: 'Руководство',
           items: [
             {
-              text: 'Why Vite',
+              text: 'Почему Vite',
               link: '/guide/why',
             },
             {
-              text: 'Getting Started',
+              text: 'Начало работы',
               link: '/guide/',
             },
             {
-              text: 'Features',
+              text: 'Возможности',
               link: '/guide/features',
             },
             {
-              text: 'CLI',
+              text: 'Консоль',
               link: '/guide/cli',
             },
             {
-              text: 'Using Plugins',
+              text: 'Использование плагинов',
               link: '/guide/using-plugins',
             },
             {
-              text: 'Dependency Pre-Bundling',
+              text: 'Предварительное объединение зависимостей',
               link: '/guide/dep-pre-bundling',
             },
             {
-              text: 'Static Asset Handling',
+              text: 'Обработка статических ресурсов',
               link: '/guide/assets',
             },
             {
-              text: 'Building for Production',
+              text: 'Производственная сборка',
               link: '/guide/build',
             },
             {
-              text: 'Deploying a Static Site',
+              text: 'Развёртывание статического сайта',
               link: '/guide/static-deploy',
             },
             {
-              text: 'Env Variables and Modes',
+              text: 'Переменные окружения и режимы',
               link: '/guide/env-and-mode',
             },
             {
-              text: 'Server-Side Rendering (SSR)',
+              text: 'Серверный рендеринг (SSR)',
               link: '/guide/ssr',
             },
             {
-              text: 'Backend Integration',
+              text: 'Интеграция с бэкэндом',
               link: '/guide/backend-integration',
             },
             {
-              text: 'Comparisons',
+              text: 'Сравнения',
               link: '/guide/comparisons',
             },
             {
-              text: 'Troubleshooting',
+              text: 'Устранение неполадок',
               link: '/guide/troubleshooting',
             },
             {
-              text: 'Performance',
+              text: 'Производительность',
               link: '/guide/performance',
             },
             {
-              text: 'Philosophy',
+              text: 'Философия',
               link: '/guide/philosophy',
             },
             {
-              text: 'Migration from v4',
+              text: 'Переход с версии v4',
               link: '/guide/migration',
             },
           ],
         },
         {
-          text: 'APIs',
+          text: 'Интерфейсы',
           items: [
             {
               text: 'Plugin API',
@@ -287,7 +330,7 @@ export default defineConfig({
               link: '/guide/api-vite-runtime',
             },
             {
-              text: 'Config Reference',
+              text: 'Справочник по конфигурации',
               link: '/config/',
             },
           ],
@@ -295,38 +338,38 @@ export default defineConfig({
       ],
       '/config/': [
         {
-          text: 'Config',
+          text: 'Конфигурация',
           items: [
             {
-              text: 'Configuring Vite',
+              text: 'Настройка Vite',
               link: '/config/',
             },
             {
-              text: 'Shared Options',
+              text: 'Общие параметры',
               link: '/config/shared-options',
             },
             {
-              text: 'Server Options',
+              text: 'Параметры сервера',
               link: '/config/server-options',
             },
             {
-              text: 'Build Options',
+              text: 'Параметры сборки',
               link: '/config/build-options',
             },
             {
-              text: 'Preview Options',
+              text: 'Параметры предварительного просмотра',
               link: '/config/preview-options',
             },
             {
-              text: 'Dep Optimization Options',
+              text: 'Параметры оптимизации зависимостей',
               link: '/config/dep-optimization-options',
             },
             {
-              text: 'SSR Options',
+              text: 'Параметры SSR',
               link: '/config/ssr-options',
             },
             {
-              text: 'Worker Options',
+              text: 'Параметры воркера',
               link: '/config/worker-options',
             },
           ],
