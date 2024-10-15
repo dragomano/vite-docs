@@ -16,7 +16,7 @@ jobs:
           email: "action@github.com"
 
           # TODO: Replace this with your own repo URL
-          upstream-repo: https://github.com/tony19/vite-docs-template.git
+          upstream-repo: https://github.com/dragomano/vite-docs.git
           # TODO: Replace this with your own repo's branch name
           upstream-repo-branch: main
 
