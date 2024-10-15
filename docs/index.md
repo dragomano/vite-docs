@@ -2,24 +2,24 @@
 layout: home
 
 title: Vite
-titleTemplate: Next Generation Frontend Tooling
+titleTemplate: Инструментарий для фронтенда нового поколения
 
 hero:
   name: Vite
-  text: Next Generation Frontend Tooling
-  tagline: Get ready for a development environment that can finally catch up with you.
+  text: Инструментарий для фронтенда нового поколения
+  tagline: Приготовьтесь к тому, что среда разработки наконец-то сможет догнать вас.
   image:
     src: /logo-with-shadow.png
     alt: Vite
   actions:
     - theme: brand
-      text: Get Started
+      text: Первые шаги
       link: /guide/
     - theme: alt
-      text: Why Vite?
+      text: Почему Vite?
       link: /guide/why
     - theme: alt
-      text: View on GitHub
+      text: Посмотреть на GitHub
       link: https://github.com/vitejs/vite
     - theme: brand
       text: ⚡ ViteConf 24!
@@ -27,23 +27,23 @@ hero:
 
 features:
   - icon: 💡
-    title: Instant Server Start
-    details: On demand file serving over native ESM, no bundling required!
+    title: Мгновенный запуск сервера
+    details: Обслуживание файлов по требованию через собственный ESM, не требующий подключения!
   - icon: ⚡️
-    title: Lightning Fast HMR
-    details: Hot Module Replacement (HMR) that stays fast regardless of app size.
+    title: Молниеносный HMR
+    details: Горячая замена модулей (HMR), которая остаётся быстрой независимо от размера приложения.
   - icon: 🛠️
-    title: Rich Features
-    details: Out-of-the-box support for TypeScript, JSX, CSS and more.
+    title: Богатые возможности
+    details: Встроенная поддержка TypeScript, JSX, CSS и других языков.
   - icon: 📦
-    title: Optimized Build
-    details: Pre-configured Rollup build with multi-page and library mode support.
+    title: Оптимизированная сборка
+    details: Предварительно настроенная сборка Rollup с поддержкой многостраничного режима и режима библиотеки.
   - icon: 🔩
-    title: Universal Plugins
-    details: Rollup-superset plugin interface shared between dev and build.
+    title: Универсальные плагины
+    details: Интерфейс плагина Rollup-superset, разделяемый между dev и build.
   - icon: 🔑
-    title: Fully Typed APIs
-    details: Flexible programmatic APIs with full TypeScript typing.
+    title: Полностью типизированные API
+    details: Гибкие программные API с полной типизацией TypeScript.
 ---
 
 <script setup>
