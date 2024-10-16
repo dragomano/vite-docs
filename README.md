@@ -1,9 +1,3 @@
-
-<!-- You can remove the following notice from your fork -->
-## This repo is a template for [Vite.js docs translation repositories](https://github.com/vitejs?q=docs). See [guide](/.github/CONTRIBUTING.md).
-
----
-
 <p align="center">
   <a href="https://vitejs.dev" target="_blank" rel="noopener noreferrer">
     <img width="180" src="https://vitejs.dev/logo.svg" alt="Vite logo">
@@ -21,42 +15,42 @@
 
 # Vite ⚡
 
-> Next Generation Frontend Tooling
+> Инструментарий для фронтенда нового поколения
 
-- 💡 Instant Server Start
-- ⚡️ Lightning Fast HMR
-- 🛠️ Rich Features
-- 📦 Optimized Build
-- 🔩 Universal Plugin Interface
-- 🔑 Fully Typed APIs
+- 💡 Мгновенный запуск сервера
+- ⚡️ Молниеносный HMR
+- 🛠️ Богатые возможности
+- 📦 Оптимизированная сборка
+- 🔩 Универсальный интерфейс плагинов
+- 🔑 Полностью типизированные API
 
-Vite (French word for "quick", pronounced [`/vit/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), like "veet") is a new breed of frontend build tooling that significantly improves the frontend development experience. It consists of two major parts:
+Vite (французское слово, означающее «быстрый», произносится [`/vit/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), как «вит») - это новый вид инструментария для сборки фронтендов, который значительно улучшает опыт разработки. Он состоит из двух основных частей:
 
-- A dev server that serves your source files over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), with [rich built-in features](https://vitejs.dev/guide/features.html) and astonishingly fast [Hot Module Replacement (HMR)](https://vitejs.dev/guide/features.html#hot-module-replacement).
+- Сервер разработки, который обслуживает ваши исходные файлы через [собственные модули ES](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) с [богатыми встроенными функциями](https://vitejs.dev/guide/features.html) и удивительно быструю [горячую замену модулей (HMR)](https://vitejs.dev/guide/features.html#hot-module-replacement).
 
-- A [build command](https://vitejs.dev/guide/build.html) that bundles your code with [Rollup](https://rollupjs.org), pre-configured to output highly optimized static assets for production.
+- [Команда сборки](https://vitejs.dev/guide/build.html), которая объединяет ваш код с [Rollup](https://rollupjs.org), предварительно настроенным для вывода высокооптимизированных статических ресурсов для производства.
 
-In addition, Vite is highly extensible via its [Plugin API](https://vitejs.dev/guide/api-plugin.html) and [JavaScript API](https://vitejs.dev/guide/api-javascript.html) with full typing support.
+Кроме того, Vite обладает широкими возможностями расширения благодаря [API плагинов](https://vitejs.dev/guide/api-plugin.html) и [JavaScript API](https://vitejs.dev/guide/api-javascript.html) с полной поддержкой типизации.
 
-[Read the Docs to Learn More](https://vitejs.dev).
+[Чтобы узнать больше, прочитайте документацию](https://vitejs.dev).
 
-## Packages
+## Пакеты
 
-| Package                                         | Version (click for changelogs)                                                                                                    |
+| Package                                         | Версия (нажмите, чтобы просмотреть журнал изменений)                                                                                                    |
 | ----------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
 | [vite](packages/vite)                           | [![vite version](https://img.shields.io/npm/v/vite.svg?label=%20)](packages/vite/CHANGELOG.md)                                    |
 | [@vitejs/plugin-legacy](packages/plugin-legacy) | [![plugin-legacy version](https://img.shields.io/npm/v/@vitejs/plugin-legacy.svg?label=%20)](packages/plugin-legacy/CHANGELOG.md) |
 | [create-vite](packages/create-vite)             | [![create-vite version](https://img.shields.io/npm/v/create-vite.svg?label=%20)](packages/create-vite/CHANGELOG.md)               |
 
-## Contribution
+## Сотрудничество
 
-See [Contributing Guide](CONTRIBUTING.md).
+См. [Руководство для участников](CONTRIBUTING.md).
 
-## License
+## Лицензия
 
 [MIT](LICENSE).
 
-## Sponsors
+## Спонсоры
 
 <p align="center">
   <a target="_blank" href="https://github.com/sponsors/yyx990803">
