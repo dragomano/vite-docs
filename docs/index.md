@@ -19,7 +19,7 @@ hero:
       text: Почему Vite?
       link: /guide/why
     - theme: alt
-      text: Посмотреть на GitHub
+      text: GitHub
       link: https://github.com/vitejs/vite
     - theme: brand
       text: ⚡ ViteConf 24!
