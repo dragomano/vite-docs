@@ -30,7 +30,7 @@ Vite (французское слово, означающее «быстрый»
 
 - [Команда сборки](https://vitejs.dev/guide/build.html), которая объединяет ваш код с [Rollup](https://rollupjs.org), предварительно настроенным для вывода высокооптимизированных статических ресурсов для производства.
 
-Кроме того, Vite обладает широкими возможностями расширения благодаря [API плагинов](https://vitejs.dev/guide/api-plugin.html) и [JavaScript API](https://vitejs.dev/guide/api-javascript.html) с полной поддержкой типизации.
+Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vitejs.dev/guide/api-plugin.html) и [JavaScript API](https://vitejs.dev/guide/api-javascript.html) с полной поддержкой типизации.
 
 [Чтобы узнать больше, прочитайте документацию](https://vitejs.dev).
 
