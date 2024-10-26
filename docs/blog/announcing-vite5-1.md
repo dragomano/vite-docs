@@ -1,5 +1,5 @@
 ---
-title: Vite 5.1 is out!
+title: Доступен Vite 5.1!
 author:
   name: The Vite Team
 date: 2024-02-08
@@ -10,7 +10,7 @@ head:
       content: website
   - - meta
     - property: og:title
-      content: Announcing Vite 5.1
+      content: Анонс Vite 5.1
   - - meta
     - property: og:image
       content: https://vitejs.dev/og-image-announcing-vite5-1.png
@@ -19,114 +19,114 @@ head:
       content: https://vitejs.dev/blog/announcing-vite5-1
   - - meta
     - property: og:description
-      content: Vite 5.1 Release Announcement
+      content: Анонс выпуска Vite 5.1
   - - meta
     - name: twitter:card
       content: summary_large_image
 ---
 
-# Vite 5.1 is out!
+# Доступен Vite 5.1!
 
-_February 8, 2024_
+_8 февраля 2024_
 
-![Vite 5.1 Announcement Cover Image](/og-image-announcing-vite5-1.png)
+![Обложка объявления Vite 5.1](/og-image-announcing-vite5-1.png)
 
-Vite 5 [was released](./announcing-vite5.md) last November, and it represented another big leap for Vite and the ecosystem. A few weeks ago we celebrated 10 million weekly npm downloads and 900 contributors to the Vite repo. Today, we're excited to announce the release of Vite 5.1.
+Vite 5 [был выпущен](./announcing-vite5.md) в ноябре, и это стало ещё одним большим шагом вперёд для Vite и экосистемы. Несколько недель назад мы отметили 10 миллионов загрузок npm в неделю и 900 участников в репозитории Vite. Сегодня мы рады объявить о выпуске Vite 5.1.
 
-Quick links: [Docs](/), [Changelog](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#510-2024-02-08)
+Быстрые ссылки: [Документация](/), [Изменения](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#510-2024-02-08)
 
-Docs in other languages: [简体中文](https://cn.vitejs.dev/), [日本語](https://ja.vitejs.dev/), [Español](https://es.vitejs.dev/), [Português](https://pt.vitejs.dev/), [한국어](https://ko.vitejs.dev/), [Deutsch](https://de.vitejs.dev/)
+Документация на других языках: [简体中文](https://cn.vitejs.dev/), [日本語](https://ja.vitejs.dev/), [Español](https://es.vitejs.dev/), [Português](https://pt.vitejs.dev/), [한국어](https://ko.vitejs.dev/), [Deutsch](https://de.vitejs.dev/)
 
-Try Vite 5.1 online in StackBlitz: [vanilla](https://vite.new/vanilla-ts), [vue](https://vite.new/vue-ts), [react](https://vite.new/react-ts), [preact](https://vite.new/preact-ts), [lit](https://vite.new/lit-ts), [svelte](https://vite.new/svelte-ts), [solid](https://vite.new/solid-ts), [qwik](https://vite.new/qwik-ts).
+Попробуйте Vite 5.1 онлайн в StackBlitz: [vanilla](https://vite.new/vanilla-ts), [vue](https://vite.new/vue-ts), [react](https://vite.new/react-ts), [preact](https://vite.new/preact-ts), [lit](https://vite.new/lit-ts), [svelte](https://vite.new/svelte-ts), [solid](https://vite.new/solid-ts), [qwik](https://vite.new/qwik-ts).
 
-If you're new to Vite, we suggest reading first the [Getting Started](/guide/) and [Features](/guide/features) guides.
+Если вы новичок в Vite, мы рекомендуем сначала прочитать руководства [Начало работы](/guide/) и [Возможности](/guide/features).
 
-To stay up to date, follow us on [X](https://x.com/vite_js) or [Mastodon](https://webtoo.ls/@vite).
+Чтобы быть в курсе событий, следите за нами в [X](https://x.com/vite_js) или [Mastodon](https://webtoo.ls/@vite).
 
 ## Vite Runtime API
 
-Vite 5.1 adds experimental support for a new Vite Runtime API. It allows running any code by processing it with Vite plugins first. It is different from `server.ssrLoadModule` because the runtime implementation is decoupled from the server. This lets library and framework authors implement their own layer of communication between the server and the runtime. This new API is intended to replace Vite's current SSR primitives once it is stable.
+Vite 5.1 добавляет экспериментальную поддержку нового API Vite Runtime. Он позволяет выполнять любой код, предварительно обрабатывая его с помощью плагинов Vite. Это отличается от `server.ssrLoadModule`, поскольку реализация времени выполнения отделена от сервера. Это позволяет авторам библиотек и фреймворков реализовывать свой собственный уровень взаимодействия между сервером и временем выполнения. Этот новый API предназначен для замены текущих примитивов SSR Vite, как только он станет стабильным.
 
-The new API brings many benefits:
+Новый API приносит множество преимуществ:
 
-- Support for HMR during SSR.
-- It is decoupled from the server, so there is no limit on how many clients can use a single server - every client has its own module cache (you can even communicate with it how you want - using message channel/fetch call/direct function call/websocket).
-- It doesn't depend on any node/bun/deno built-in APIs, so it can run in any environment.
-- It's easy to integrate with tools that have their own mechanism to run code (you can provide a runner to use `eval` instead of `new AsyncFunction` for example).
+- Поддержка HMR во время SSR.
+- Он отделен от сервера, поэтому нет ограничений на количество клиентов, которые могут использовать один сервер — у каждого клиента есть свой собственный кэш модулей (вы даже можете взаимодействовать с ним так, как хотите — используя каналы сообщений, вызовы fetch, прямые вызовы функций или веб-сокеты).
+- Он не зависит от каких-либо встроенных API node/bun/deno, поэтому может работать в любой среде.
+- Легко интегрируется с инструментами, которые имеют свой собственный механизм выполнения кода (например, вы можете предоставить исполнителя для использования `eval` вместо `new AsyncFunction`).
 
-The initial idea [was proposed by Pooya Parsa](https://github.com/nuxt/vite/pull/201) and implemented by [Anthony Fu](https://github.com/antfu) as the [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/vite-node#readme) package to [power Nuxt 3 Dev SSR](https://antfu.me/posts/dev-ssr-on-nuxt) and later also used as the base for [Vitest](https://vitest.dev). So the general idea of vite-node has been battle-tested for quite some time now. This is a new iteration of the API by [Vladimir Sheremet](https://github.com/sheremet-va), who had already re-implemented vite-node in Vitest and took the learnings to make the API even more powerful and flexible when adding it to Vite Core. The PR was one year in the makings, you can see the evolution and discussions with ecosystem maintainers [here](https://github.com/vitejs/vite/issues/12165).
+Изначальная идея [была предложена Пуйя Парса](https://github.com/nuxt/vite/pull/201) и реализована [Энтони Фу](https://github.com/antfu) в виде пакета [vite-node](https://github.com/vitest-dev/vitest/tree/main/packages/vite-node#readme) для [поддержки Dev SSR в Nuxt 3](https://antfu.me/posts/dev-ssr-on-nuxt), а позже также использовалась в качестве основы для [Vitest](https://vitest.dev). Таким образом, общая идея vite-node была протестирована в боевых условиях на протяжении довольно долгого времени. Это новая итерация API от [Владимира Шеремета](https://github.com/sheremet-va), который уже повторно реализовал vite-node в Vitest и использовал полученные знания, чтобы сделать API ещё более мощным и гибким при добавлении его в ядро Vite. Подготовка PR заняла целый год, вы можете увидеть эволюцию и обсуждения с поддерживающими экосистему [здесь](https://github.com/vitejs/vite/issues/12165).
 
-Read more in the [Vite Runtime API guide](/guide/api-vite-runtime) and [give us feedback](https://github.com/vitejs/vite/discussions/15774).
+Узнайте подробности в [руководстве по Vite Runtime API](/guide/api-vite-runtime) и [оставьте нам отзыв](https://github.com/vitejs/vite/discussions/15774).
 
-## Features
+## Возможности
 
-### Improved support for `.css?url`
+### Улучшена поддержка `.css?url`
 
-Import CSS files as URLs now works reliably and correctly. This was the last remaining hurdle in Remix's move to Vite. See ([#15259](https://github.com/vitejs/vite/issues/15259)).
+Импорт CSS-файлов в виде URL теперь работает надежно и корректно. Это было последнее препятствие на пути перехода Remix в Vite. См. ([#15259](https://github.com/vitejs/vite/issues/15259)).
 
-### `build.assetsInlineLimit` now supports a callback
+### `build.assetsInlineLimit` теперь поддерживает обратный вызов
 
-Users can now [provide a callback](/config/build-options.html#build-assetsinlinelimit) that returns a boolean to opt-in or opt-out of inlining for specific assets. If `undefined` is returned, the default logic applies. See ([#15366](https://github.com/vitejs/vite/issues/15366)).
+Теперь пользователи могут [предоставить обратный вызов](/config/build-options.html#build-assetsinlinelimit), который возвращает булево значение для отказа или включения инлайнинга для определённых ресурсов. Если возвращается `undefined`, применяется логика по умолчанию. См. ([#15366](https://github.com/vitejs/vite/issues/15366)).
 
-### Improved HMR for circular import
+### Улучшен HMR для циклического импорта
 
-In Vite 5.0, accepted modules within circular imports always triggered a full page reload even if they can be handled fine in the client. This is now relaxed to allow HMR to apply without a full page reload, but if any error happens during HMR, the page will be reloaded. See ([#15118](https://github.com/vitejs/vite/issues/15118)).
+В Vite 5.0 принимаемые модули в рамках кругового импорта всегда вызывали полную перезагрузку страницы, даже если они прекрасно обрабатывались в клиенте. Теперь это сделано для того, чтобы HMR применялся без полной перезагрузки страницы, но если во время HMR произойдет какая-либо ошибка, страница будет перезагружена. См. ([#15118](https://github.com/vitejs/vite/issues/15118)).
 
-### Support `ssr.external: true` to externalize all SSR packages
+### Поддержка `ssr.external: true` для экстернализации всех пакетов SSR
 
-Historically, Vite externalizes all packages except for linked packages. This new option can be used to force externalize all packages including linked packages too. This is handy in tests within monorepos where we want to emulate the usual case of all packages externalized, or when using `ssrLoadModule` to load an arbitrary file and we want to always external packages as we don't care about HMR. See ([#10939](https://github.com/vitejs/vite/issues/10939)).
+Исторически сложилось так, что Vite экстернализирует все пакеты, за исключением связанных пакетов. Эта новая опция может быть использована для принудительной экстернализации всех пакетов, включая связанные пакеты. Это удобно в тестах в рамках монорепозиториев, где мы хотим эмулировать обычный случай, когда все пакеты внешние, или когда мы используем `ssrLoadModule` для загрузки произвольного файла и хотим всегда иметь внешние пакеты, поскольку нас не волнует HMR. См. ([#10939](https://github.com/vitejs/vite/issues/10939)).
 
 ### Expose `close` method in the preview server
 
-The preview server now exposes a `close` method, which will properly teardown the server including all opened socket connections. See ([#15630](https://github.com/vitejs/vite/issues/15630)).
+Сервер предварительного просмотра теперь предоставляет метод `close`, который корректно завершает работу сервера, включая все открытые сокетные соединения. См. ([#15630](https://github.com/vitejs/vite/issues/15630)).
 
-## Performance improvements
+## Улучшение производительности
 
-Vite keeps getting faster with each release, and Vite 5.1 is packed with performance improvements. We measured the loading time for 10K modules (25 level deep tree) using [vite-dev-server-perf](https://github.com/yyx990803/vite-dev-server-perf) for all minor versions from Vite 4.0. This is a good benchmark to measure the effect of Vite's bundle-less approach. Each module is a small TypeScript file with a counter and imports to other files in the tree, so this mostly measuring the time it takes to do the requests a separate modules. In Vite 4.0, loading 10K modules took 8 seconds on a M1 MAX. We had a breakthrough in [Vite 4.3 were we focused on performance](./announcing-vite4-3.md), and we were able to load them in 6.35 seconds. In Vite 5.1, we managed to do another performance leap. Vite is now serving the 10K modules in 5.35 seconds.
+Vite продолжает становиться быстрее с каждым релизом, и Vite 5.1 наполнен улучшениями производительности. Мы измерили время загрузки для 10K модулей (дерево глубиной 25 уровней), используя [vite-dev-server-perf](https://github.com/yyx990803/vite-dev-server-perf) для всех минорных версий начиная с Vite 4.0. Это хороший бенчмарк для измерения эффекта безбандлового подхода Vite. Каждый модуль — это небольшой файл TypeScript с счётчиком и импортами в другие файлы в дереве, поэтому это в основном измеряет время, необходимое для выполнения запросов к отдельным модулям. В Vite 4.0 загрузка 10K модулей заняла 8 секунд на M1 MAX. У нас был прорыв в [Vite 4.3, когда мы сосредоточились на производительности](./announcing-vite4-3.md), и нам удалось загрузить их за 6.35 секунд. В Vite 5.1 мы смогли сделать ещё один скачок в производительности. Vite теперь обслуживает 10K модулей за 5.35 секунд.
 
-![Vite 10K Modules Loading time progression](/vite5-1-10K-modules-loading-time.png)
+![Прогресс времени загрузки 10K модулей Vite](/vite5-1-10K-modules-loading-time.png)
 
-The results of this benchmark run on Headless Puppeteer and are a good way to compare versions. They don't represent the time as experienced by users though. When running the same 10K modules in an Incognito window is Chrome, we have:
+Результаты этого бенчмарка работают на Headless Puppeteer и являются хорошим способом сравнения версий. Однако они не отражают время, которое испытывают пользователи. При запуске тех же 10K модулей в приватном режиме в Chrome мы имеем:
 
-| 10K Modules           | Vite 5.0 | Vite 5.1 |
+| 10K модулей           | Vite 5.0 | Vite 5.1 |
 | --------------------- | :------: | :------: |
-| Loading time          |  2892ms  |  2765ms  |
-| Loading time (cached) |  2778ms  |  2477ms  |
-| Full reload           |  2003ms  |  1878ms  |
-| Full reload (cached)  |  1682ms  |  1604ms  |
+| Время загрузки          |  2892 мс  |  2765 мс  |
+| Время загрузки (кэш) |  2778 мс  |  2477 мс  |
+| Полная перезагрузка           |  2003 мс  |  1878 мс  |
+| Полная перезагрузка (кэш)  |  1682 мс  |  1604 мс  |
 
-### Run CSS preprocessors in threads
+### Запуск препроцессоров CSS в потоках
 
-Vite now has opt-in support for running CSS preprocessors in threads. You can enable it using [`css.preprocessorMaxWorkers: true`](/config/shared-options.html#css-preprocessormaxworkers). For a Vuetify 2 project, dev startup time was reduced by 40% with this feature enabled. There is [performance comparison for others setups in the PR](https://github.com/vitejs/vite/pull/13584#issuecomment-1678827918). See ([#13584](https://github.com/vitejs/vite/issues/13584)). [Give Feedback](https://github.com/vitejs/vite/discussions/15835).
+Vite теперь имеет поддержку запуска CSS-препроцессоров в потоках по желанию. Вы можете включить это, используя [`css.preprocessorMaxWorkers: true`](/config/shared-options.html#css-preprocessormaxworkers). Для проекта на Vuetify 2 время запуска в режиме разработки было сокращено на 40% благодаря включению этой функции. Есть [сравнение производительности для других настроек в PR](https://github.com/vitejs/vite/pull/13584#issuecomment-1678827918). См. ([#13584](https://github.com/vitejs/vite/issues/13584)). [Оставьте отзыв](https://github.com/vitejs/vite/discussions/15835).
 
-### New options to improve server cold starts
+### Новые опции для улучшения холодного запуска сервера
 
-You can set `optimizeDeps.holdUntilCrawlEnd: false` to switch to a new strategy for deps optimization that may help in big projects. We're considering switching to this strategy by default in the future. [Give Feedback](https://github.com/vitejs/vite/discussions/15834). ([#15244](https://github.com/vitejs/vite/issues/15244))
+Вы можете установить `optimizeDeps.holdUntilCrawlEnd: false`, чтобы переключиться на новую стратегию оптимизации зависимостей, которая может помочь в больших проектах. Мы рассматриваем возможность переключения на эту стратегию по умолчанию в будущем. [Оставьте отзыв](https://github.com/vitejs/vite/discussions/15834). ([#15244](https://github.com/vitejs/vite/issues/15244))
 
-### Faster resolving with cached checks
+### Более быстрое разрешение с помощью кэшированных проверок
 
-The `fs.cachedChecks` optimization is now enabled by default. In Windows, `tryFsResolve` was ~14x faster with it, and resolving ids overall got a ~5x speed up in the triangle benchmark. ([#15704](https://github.com/vitejs/vite/issues/15704))
+Оптимизация `fs.cachedChecks` теперь включена по умолчанию. В Windows `tryFsResolve` стал примерно в 14 раз быстрее с этой оптимизацией, а разрешение идентификаторов в целом получило примерно 5-кратное ускорение в треугольном бенчмарке. ([#15704](https://github.com/vitejs/vite/issues/15704))
 
-### Internal performance improvements
+### Улучшение внутренней производительности
 
-The dev server had several incremental performance gains. A new middleware to short-circuit on 304 ([#15586](https://github.com/vitejs/vite/issues/15586)). We avoided `parseRequest` in hot paths ([#15617](https://github.com/vitejs/vite/issues/15617)). Rollup is now properly lazy loaded ([#15621](https://github.com/vitejs/vite/issues/15621))
+Сервер разработки получил несколько постепенных улучшений производительности. Новое промежуточное ПО для короткого замыкания на 304 ([#15586](https://github.com/vitejs/vite/issues/15586)). Мы избегали `parseRequest` в горячих путях ([#15617](https://github.com/vitejs/vite/issues/15617)). Rollup теперь правильно загружается по требованию ([#15621](https://github.com/vitejs/vite/issues/15621)).
 
-## Deprecations
+## Устаревания
 
-We continue to reduce Vite's API surface where possible to make the project maintainable long term.
+Мы продолжаем сокращать API Vite, где это возможно, чтобы сделать проект более поддерживаемым в долгосрочной перспективе.
 
-### Deprecated `as` option in `import.meta.glob`
+### Утратившая актуальность опция `as` в `import.meta.glob`
 
-The standard moved to [Import Attributes](https://github.com/tc39/proposal-import-attributes), but we don't plan to replace `as` with a new option at this point. Instead, it is recommended that the user switches to `query`. See ([#14420](https://github.com/vitejs/vite/issues/14420)).
+Стандарт перешёл к [атрибутам импорта](https://github.com/tc39/proposal-import-attributes), но мы не планируем заменять `as` на новую опцию на данный момент. Вместо этого рекомендуется, чтобы пользователи переключились на `query`. См. ([#14420](https://github.com/vitejs/vite/issues/14420)).
 
-### Removed experimental build-time pre-bundling
+### Удалено экспериментальное предварительное связывание во время сборки
 
-Build-time pre-bundling, an experimental feature added in Vite 3, is removed. With Rollup 4 switching its parser to native, and Rolldown being worked on, both the performance and the dev-vs-build inconsistency story for this feature are no longer valid. We want to continue improving dev/build consistency, and have concluded that using Rolldown for "prebundling during dev" and "production builds" is the better bet moving forward. Rolldown may also implement caching in a way that is a lot more efficient during build than deps prebundling. See ([#15184](https://github.com/vitejs/vite/issues/15184)).
+Предварительное объединение во время сборки, экспериментальная функция, добавленная в Vite 3, удалена. С переходом Rollup 4 на нативный парсер и разработкой Rolldown, как производительность, так и несоответствие между разработкой и сборкой для этой функции больше не актуальны. Мы хотим продолжать улучшать согласованность разработки и сборки и пришли к выводу, что использование Rolldown для «предварительной сборки во время разработки» и «производственных сборок» является более надёжным решением на будущее. Rolldown также может реализовать кэширование таким образом, что это будет гораздо более эффективно во время сборки, чем предварительная сборка зависимостей. См. ([#15184](https://github.com/vitejs/vite/issues/15184)).
 
-## Get Involved
+## Примите участие
 
-We are grateful to the [900 contributors to Vite Core](https://github.com/vitejs/vite/graphs/contributors), and the maintainers of plugins, integrations, tools, and translations that keeps pushing the ecosystem forward. If you're enjoying Vite, we invite you to participate and help us. Check out our [Contributing Guide](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md), and jump into [triaging issues](https://github.com/vitejs/vite/issues), [reviewing PRs](https://github.com/vitejs/vite/pulls), answering questions at [GitHub Discussions](https://github.com/vitejs/vite/discussions) and helping others in the community in [Vite Land](https://chat.vitejs.dev).
+Мы благодарны [900 участникам ядра Vite](https://github.com/vitejs/vite/graphs/contributors) и поддерживающим плагинов, интеграций, инструментов и переводов, которые продолжают развивать экосистему. Если вам нравится Vite, мы приглашаем вас участвовать и помогать нам. Ознакомьтесь с нашим [Руководством по участию](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md) и присоединяйтесь к [разбору проблем](https://github.com/vitejs/vite/issues), [обзору PR](https://github.com/vitejs/vite/pulls), ответам на вопросы в [GitHub Discussions](https://github.com/vitejs/vite/discussions) и помощи другим в сообществе в [Vite Land](https://chat.vitejs.dev).
 
-## Acknowledgments
+## Благодарности
 
-Vite 5.1 is possible thanks to our community of contributors, maintainers in the ecosystem, and the [Vite Team](/team). A shout out to the individuals and companies sponsoring Vite development. [StackBlitz](https://stackblitz.com/), [Nuxt Labs](https://nuxtlabs.com/), and [Astro](https://astro.build) for hiring Vite team members. And also to the sponsors on [Vite's GitHub Sponsors](https://github.com/sponsors/vitejs), [Vite's Open Collective](https://opencollective.com/vite), and [Evan You's GitHub Sponsors](https://github.com/sponsors/yyx990803).
+Vite 5.1 стал возможен благодаря нашему сообществу участников, поддерживающим в экосистеме и [команде Vite](/team). Особая благодарность отдельным лицам и компаниям, спонсирующим разработку Vite. [StackBlitz](https://stackblitz.com/), [Nuxt Labs](https://nuxtlabs.com/) и [Astro](https://astro.build) за найм членов команды Vite. А также спонсорам на [GitHub Sponsors Vite](https://github.com/sponsors/vitejs), [Open Collective Vite](https://opencollective.com/vite) и [GitHub Sponsors Эвана Ю](https://github.com/sponsors/yyx990803).
