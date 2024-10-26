@@ -269,7 +269,7 @@ export default defineConfig({
               link: '/guide/assets',
             },
             {
-              text: 'Производственная сборка',
+              text: 'Рабочая сборка',
               link: '/guide/build',
             },
             {
