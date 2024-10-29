@@ -293,7 +293,7 @@ export default defineConfig({
               link: '/guide/comparisons',
             },
             {
-              text: 'Устранение неполадок',
+              text: 'Решение проблем',
               link: '/guide/troubleshooting',
             },
             {
