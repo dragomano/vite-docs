@@ -1,63 +1,63 @@
-# Env Variables and Modes
+# Переменные окружения и режимы {#env-variables-and-modes}
 
-## Env Variables
+## Переменные окружения {#env-variables}
 
-Vite exposes env variables on the special **`import.meta.env`** object, which are statically replaced at build time. Some built-in variables are available in all cases:
+Vite предоставляет переменные окружения через специальный объект **`import.meta.env`**, которые статически заменяются во время сборки. Некоторые встроенные переменные доступны во всех случаях:
 
-- **`import.meta.env.MODE`**: {string} the [mode](#modes) the app is running in.
+- **`import.meta.env.MODE`**: {string} режим, в котором работает приложение ([mode](#modes)).
 
-- **`import.meta.env.BASE_URL`**: {string} the base url the app is being served from. This is determined by the [`base` config option](/config/shared-options.md#base).
+- **`import.meta.env.BASE_URL`**: {string} базовый URL, с которого обслуживается приложение. Это определяется с помощью [опции конфигурации `base`](/config/shared-options.md#base).
 
-- **`import.meta.env.PROD`**: {boolean} whether the app is running in production (running the dev server with `NODE_ENV='production'` or running an app built with `NODE_ENV='production'`).
+- **`import.meta.env.PROD`**: {boolean} указывает, работает ли приложение в рабочем режиме (работает ли сервер разработки с `NODE_ENV='production'` или приложение, собранное с `NODE_ENV='production'`).
 
-- **`import.meta.env.DEV`**: {boolean} whether the app is running in development (always the opposite of `import.meta.env.PROD`)
+- **`import.meta.env.DEV`**: {boolean} указывает, работает ли приложение в режиме разработки (всегда противоположно `import.meta.env.PROD`).
 
-- **`import.meta.env.SSR`**: {boolean} whether the app is running in the [server](./ssr.md#conditional-logic).
+- **`import.meta.env.SSR`**: {boolean} указывает, работает ли приложение в [серверном режиме](./ssr.md#conditional-logic).
 
-## `.env` Files
+## Файлы `.env` {#env-files}
 
-Vite uses [dotenv](https://github.com/motdotla/dotenv) to load additional environment variables from the following files in your [environment directory](/config/shared-options.md#envdir):
+Vite использует [dotenv](https://github.com/motdotla/dotenv) для загрузки дополнительных переменных окружения из следующих файлов в вашем [каталоге окружения](/config/shared-options.md#envdir):
 
 ```
-.env                # loaded in all cases
-.env.local          # loaded in all cases, ignored by git
-.env.[mode]         # only loaded in specified mode
-.env.[mode].local   # only loaded in specified mode, ignored by git
+.env                # загружается во всех случаях
+.env.local          # загружается во всех случаях, игнорируется git
+.env.[mode]         # загружается только в указанном режиме
+.env.[mode].local   # загружается только в указанном режиме, игнорируется git
 ```
 
-:::tip Env Loading Priorities
+:::tip Приоритеты загрузки переменных окружения
 
-An env file for a specific mode (e.g. `.env.production`) will take higher priority than a generic one (e.g. `.env`).
+Файл переменных окружения для конкретного режима (например, `.env.production`) имеет более высокий приоритет, чем общий файл (например, `.env`).
 
-In addition, environment variables that already exist when Vite is executed have the highest priority and will not be overwritten by `.env` files. For example, when running `VITE_SOME_KEY=123 vite build`.
+Кроме того, переменные окружения, которые уже существуют на момент выполнения Vite, имеют наивысший приоритет и не будут перезаписаны файлами `.env`. Например, при выполнении `VITE_SOME_KEY=123 vite build`.
 
-`.env` files are loaded at the start of Vite. Restart the server after making changes.
+Файлы `.env` загружаются в начале работы Vite. Перезапустите сервер после внесения изменений.
 :::
 
-Loaded env variables are also exposed to your client source code via `import.meta.env` as strings.
+Загруженные переменные окружения также доступны в вашем клиентском исходном коде через `import.meta.env` в виде строк.
 
-To prevent accidentally leaking env variables to the client, only variables prefixed with `VITE_` are exposed to your Vite-processed code. e.g. for the following env variables:
+Чтобы предотвратить случайное утечку переменных окружения в клиентский код, только переменные, начинающиеся с префикса `VITE_`, доступны в вашем коде, обработанном Vite. Например, для следующих переменных окружения:
 
 ```
 VITE_SOME_KEY=123
 DB_PASSWORD=foobar
 ```
 
-Only `VITE_SOME_KEY` will be exposed as `import.meta.env.VITE_SOME_KEY` to your client source code, but `DB_PASSWORD` will not.
+Только `VITE_SOME_KEY` будет доступен как `import.meta.env.VITE_SOME_KEY` в вашем клиентском исходном коде, но `DB_PASSWORD` не будет доступен.
 
 ```js
 console.log(import.meta.env.VITE_SOME_KEY) // "123"
 console.log(import.meta.env.DB_PASSWORD) // undefined
 ```
 
-:::tip Env parsing
+:::tip Парсинг переменных окружения
 
-As shown above, `VITE_SOME_KEY` is a number but returns a string when parsed. The same would also happen for boolean env variables. Make sure to convert to the desired type when using it in your code.
+Как показано выше, `VITE_SOME_KEY` является числом, но возвращает строку при парсинге. То же самое произойдёт и с булевыми переменными окружения. Убедитесь, что вы преобразуете в нужный тип при использовании в вашем коде.
 :::
 
-Also, Vite uses [dotenv-expand](https://github.com/motdotla/dotenv-expand) to expand variables out of the box. To learn more about the syntax, check out [their docs](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow).
+Кроме того, Vite использует [dotenv-expand](https://github.com/motdotla/dotenv-expand) для расширения переменных из коробки. Чтобы узнать больше о синтаксисе, ознакомьтесь с [их документацией](https://github.com/motdotla/dotenv-expand#what-rules-does-the-expansion-engine-follow).
 
-Note that if you want to use `$` inside your environment value, you have to escape it with `\`.
+Обратите внимание, что если вы хотите использовать `$` внутри значения вашей переменной окружения, вам нужно экранировать его с помощью `\`:
 
 ```
 KEY=123
@@ -66,27 +66,27 @@ NEW_KEY2=test\$foo  # test$foo
 NEW_KEY3=test$KEY   # test123
 ```
 
-If you want to customize the env variables prefix, see the [envPrefix](/config/shared-options.html#envprefix) option.
+Если вы хотите настроить префикс переменных окружения, посмотрите опцию [envPrefix](/config/shared-options.html#envprefix).
 
-:::warning SECURITY NOTES
+:::warning ЗАМЕТКИ ПО БЕЗОПАСНОСТИ
 
-- `.env.*.local` files are local-only and can contain sensitive variables. You should add `*.local` to your `.gitignore` to avoid them being checked into git.
+- Файлы `.env.*.local` являются локальными и могут содержать конфиденциальные переменные. Вам следует добавить `*.local` в ваш `.gitignore`, чтобы избежать их добавления в git.
 
-- Since any variables exposed to your Vite source code will end up in your client bundle, `VITE_*` variables should _not_ contain any sensitive information.
+- Поскольку любые переменные, доступные в вашем исходном коде Vite, окажутся в вашем клиентском пакете, переменные `VITE_*` _не должны_ содержать конфиденциальную информацию.
   :::
 
-### IntelliSense for TypeScript
+### IntelliSense для TypeScript {#intellisense-for-typescript}
 
-By default, Vite provides type definitions for `import.meta.env` in [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). While you can define more custom env variables in `.env.[mode]` files, you may want to get TypeScript IntelliSense for user-defined env variables that are prefixed with `VITE_`.
+По умолчанию Vite предоставляет определения типов для `import.meta.env` в [`vite/client.d.ts`](https://github.com/vitejs/vite/blob/main/packages/vite/client.d.ts). Хотя вы можете определить дополнительные пользовательские переменные окружения в файлах `.env.[mode]`, вы можете захотеть получить IntelliSense TypeScript для пользовательских переменных окружения, которые начинаются с префикса `VITE_`.
 
-To achieve this, you can create an `vite-env.d.ts` in `src` directory, then augment `ImportMetaEnv` like this:
+Чтобы достичь этого, можно создать файл `vite-env.d.ts` в каталоге `src`, а затем дополнить `ImportMetaEnv` следующим образом:
 
 ```typescript
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
-  // more env variables...
+  // больше переменных окружения...
 }
 
 interface ImportMeta {
@@ -94,7 +94,7 @@ interface ImportMeta {
 }
 ```
 
-If your code relies on types from browser environments such as [DOM](https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts) and [WebWorker](https://github.com/microsoft/TypeScript/blob/main/src/lib/webworker.generated.d.ts), you can update the [lib](https://www.typescriptlang.org/tsconfig#lib) field in `tsconfig.json`.
+Если ваш код зависит от типов из браузерных сред, таких как [DOM](https://github.com/microsoft/TypeScript/blob/main/src/lib/dom.generated.d.ts) и [WebWorker](https://github.com/microsoft/TypeScript/blob/main/src/lib/webworker.generated.d.ts), вы можете обновить поле [lib](https://www.typescriptlang.org/tsconfig#lib) в `tsconfig.json`.
 
 ```json
 {
@@ -102,85 +102,85 @@ If your code relies on types from browser environments such as [DOM](https://git
 }
 ```
 
-:::warning Imports will break type augmentation
+:::warning Импорты нарушат расширение типов
 
-If the `ImportMetaEnv` augmentation does not work, make sure you do not have any `import` statements in `vite-env.d.ts`. See the [TypeScript documentation](https://www.typescriptlang.org/docs/handbook/2/modules.html#how-javascript-modules-are-defined) for more information.
+Если расширение `ImportMetaEnv` не работает, убедитесь, что в `vite-env.d.ts` нет никаких операторов `import`. См. [документацию TypeScript](https://www.typescriptlang.org/docs/handbook/2/modules.html#how-javascript-modules-are-defined) для получения дополнительной информации.
 :::
 
-## HTML Env Replacement
+## Замена переменных окружения в HTML {#html-env-replacement}
 
-Vite also supports replacing env variables in HTML files. Any properties in `import.meta.env` can be used in HTML files with a special `%ENV_NAME%` syntax:
+Vite также поддерживает замену переменных окружения в HTML-файлах. Любые свойства из `import.meta.env` могут использоваться в HTML-файлах с помощью специального синтаксиса `%ENV_NAME%`:
 
 ```html
-<h1>Vite is running in %MODE%</h1>
-<p>Using data from %VITE_API_URL%</p>
+<h1>Vite работает в режиме %MODE%</h1>
+<p>Используются данные из %VITE_API_URL%</p>
 ```
 
-If the env doesn't exist in `import.meta.env`, e.g. `%NON_EXISTENT%`, it will be ignored and not replaced, unlike `import.meta.env.NON_EXISTENT` in JS where it's replaced as `undefined`.
+Если переменная окружения не существует в `import.meta.env`, например, `%NON_EXISTENT%`, она будет проигнорирована и не заменена, в отличие от `import.meta.env.NON_EXISTENT` в JS, где она заменяется на `undefined`.
 
-Given that Vite is used by many frameworks, it is intentionally unopinionated about complex replacements like conditionals. Vite can be extended using [an existing userland plugin](https://github.com/vitejs/awesome-vite#transformers) or a custom plugin that implements the [`transformIndexHtml` hook](./api-plugin#transformindexhtml).
+Учитывая, что Vite используется многими фреймворками, он намеренно не навязывает сложные замены, такие как условные операторы. Vite можно расширить с помощью [существующего пользовательского плагина](https://github.com/vitejs/awesome-vite#transformers) или пользовательского плагина, который реализует [хук `transformIndexHtml`](./api-plugin#transformindexhtml).
 
-## Modes
+## Режимы {#modes}
 
-By default, the dev server (`dev` command) runs in `development` mode and the `build` command runs in `production` mode.
+По умолчанию сервер разработки (команда `dev`) работает в режиме `development`, а команда `build` работает в режиме `production`.
 
-This means when running `vite build`, it will load the env variables from `.env.production` if there is one:
+Это означает, что при выполнении `vite build` будут загружены переменные окружения из `.env.production`, если такой файл существует:
 
 ```
 # .env.production
-VITE_APP_TITLE=My App
+VITE_APP_TITLE=Мое приложение
 ```
 
-In your app, you can render the title using `import.meta.env.VITE_APP_TITLE`.
+В вашем приложении вы можете отобразить заголовок, используя `import.meta.env.VITE_APP_TITLE`.
 
-In some cases, you may want to run `vite build` with a different mode to render a different title. You can overwrite the default mode used for a command by passing the `--mode` option flag. For example, if you want to build your app for a staging mode:
+В некоторых случаях вы можете захотеть выполнить `vite build` с другим режимом, чтобы отобразить другой заголовок. Вы можете переопределить режим по умолчанию, используемый для команды, передав флаг `--mode`. Например, если вы хотите собрать ваше приложение для режима предварительной проверки («staging»):
 
 ```bash
 vite build --mode staging
 ```
 
-And create a `.env.staging` file:
+И создайте файл `.env.staging`:
 
 ```
 # .env.staging
-VITE_APP_TITLE=My App (staging)
+VITE_APP_TITLE=Мое приложение (staging)
 ```
 
-As `vite build` runs a production build by default, you can also change this and run a development build by using a different mode and `.env` file configuration:
+Поскольку `vite build` по умолчанию собирает рабочую сборку, вы также можете изменить это и собрать сборку для разработки, используя другой режим и конфигурацию файлов `.env`:
 
 ```
 # .env.testing
 NODE_ENV=development
 ```
 
-## NODE_ENV and Modes
+## NODE_ENV и режимы {#node-env-and-modes}
 
-It's important to note that `NODE_ENV` (`process.env.NODE_ENV`) and modes are two different concepts. Here's how different commands affect the `NODE_ENV` and mode:
+Важно отметить, что `NODE_ENV` (`process.env.NODE_ENV`) и режимы — это два разных понятия. Вот как различные команды влияют на `NODE_ENV` и режим:
 
-| Command                                              | NODE_ENV        | Mode            |
+| Команда                                              | NODE_ENV        | Режим            |
 | ---------------------------------------------------- | --------------- | --------------- |
 | `vite build`                                         | `"production"`  | `"production"`  |
 | `vite build --mode development`                      | `"production"`  | `"development"` |
 | `NODE_ENV=development vite build`                    | `"development"` | `"production"`  |
 | `NODE_ENV=development vite build --mode development` | `"development"` | `"development"` |
 
-The different values of `NODE_ENV` and mode also reflect on its corresponding `import.meta.env` properties:
+Разные значения `NODE_ENV` и режима также отражаются на соответствующих свойствах `import.meta.env`:
 
-| Command                | `import.meta.env.PROD` | `import.meta.env.DEV` |
+| Команда                | `import.meta.env.PROD` | `import.meta.env.DEV` |
 | ---------------------- | ---------------------- | --------------------- |
 | `NODE_ENV=production`  | `true`                 | `false`               |
 | `NODE_ENV=development` | `false`                | `true`                |
 | `NODE_ENV=other`       | `false`                | `true`                |
 
-| Command              | `import.meta.env.MODE` |
+| Команда              | `import.meta.env.MODE` |
 | -------------------- | ---------------------- |
 | `--mode production`  | `"production"`         |
 | `--mode development` | `"development"`        |
 | `--mode staging`     | `"staging"`            |
 
-:::tip `NODE_ENV` in `.env` files
+:::tip `NODE_ENV` в `.env`-файлах
 
-`NODE_ENV=...` can be set in the command, and also in your `.env` file. If `NODE_ENV` is specified in a `.env.[mode]` file, the mode can be used to control its value. However, both `NODE_ENV` and modes remain as two different concepts.
+`NODE_ENV=...` можно установить в команде, а также в вашем файле `.env`. Если `NODE_ENV` указано в файле `.env.[mode]`, режим может быть использован для управления его значением. Однако `NODE_ENV` и режимы остаются двумя разными понятиями.
 
-The main benefit with `NODE_ENV=...` in the command is that it allows Vite to detect the value early. It also allows you to read `process.env.NODE_ENV` in your Vite config as Vite can only load the env files once the config is evaluated.
+Основное преимущество использования `NODE_ENV=...` в команде заключается в том, что это позволяет Vite рано обнаружить значение. Это также позволяет вам читать `process.env.NODE_ENV` в вашей конфигурации Vite, так как Vite может загружать файлы окружения только после анализа конфигурации.
 :::
