@@ -1,63 +1,63 @@
-# Performance
+# Производительность {#performance}
 
-While Vite is fast by default, performance issues can creep in as the project's requirements grow. This guide aims to help you identify and fix common performance issues, such as:
+Хотя Vite по умолчанию быстрый, проблемы с производительностью могут возникнуть по мере роста требований проекта. Это руководство направлено на то, чтобы помочь вам выявить и исправить распространённые проблемы с производительностью, такие как:
 
-- Slow server starts
-- Slow page loads
-- Slow builds
+- Медленный старт сервера
+- Медленная загрузка страниц
+- Медленные сборки
 
-## Review your Browser Setup
+## Проверьте настройки браузера {#review-your-browser-setup}
 
-Some browser extensions may interfere with requests and slow down startup and reload times for large apps, especially when using browser dev tools. We recommend creating a dev-only profile without extensions, or switch to incognito mode, while using Vite's dev server in these cases. Incognito mode should also be faster than a regular profile without extensions.
+Некоторые расширения браузера могут мешать запросам и замедлять время запуска и перезагрузки для крупных приложений, особенно при использовании инструментов разработчика браузера. В подобных случаях мы рекомендуем создать профиль только для разработки без расширений или переключиться в режим инкогнито, используя сервер разработки Vite. Режим инкогнито также должен быть быстрее, чем обычный профиль без расширений.
 
-The Vite dev server does hard caching of pre-bundled dependencies and implements fast 304 responses for source code. Disabling the cache while the Browser Dev Tools are open can have a big impact in startup and full-page reload times. Please check that "Disable Cache" isn't enabled while you work with the Vite server.
+Сервер разработки Vite выполняет жёсткое кэширование предварительно собранных зависимостей и реализует быстрые ответы 304 для исходного кода. Отключение кэша, пока открыты инструменты разработчика браузера, может значительно повлиять на время запуска и полных перезагрузок страниц. Пожалуйста, убедитесь, что опция «Отключить кэш» в инструментах разработчика не включена, пока вы работаете с сервером Vite.
 
-## Audit Configured Vite Plugins
+## Аудит настроенных плагинов Vite {#audit-configured-vite-plugins}
 
-Vite's internal and official plugins are optimized to do the least amount of work possible while providing compatibility with the broader ecosystem. For example, code transformations use regex in dev, but do a complete parse in build to ensure correctness.
+Внутренние и официальные плагины Vite оптимизированы для выполнения минимального объёма работы при обеспечении совместимости с более широкой экосистемой. Например, преобразования кода используют регулярные выражения в режиме разработки, но выполняют полный парсинг при сборке для обеспечения корректности.
 
-However, the performance of community plugins is out of Vite's control, which may affect the developer experience. Here are a few things you can look out for when using additional Vite plugins:
+Однако производительность плагинов сообщества находится вне контроля Vite, что может повлиять на опыт разработчика. Вот несколько моментов, на которые стоит обратить внимание при использовании дополнительных плагинов Vite:
 
-1. Large dependencies that are only used in certain cases should be dynamically imported to reduce the Node.js startup time. Example refactors: [vite-plugin-react#212](https://github.com/vitejs/vite-plugin-react/pull/212) and [vite-plugin-pwa#224](https://github.com/vite-pwa/vite-plugin-pwa/pull/244).
+1. Большие зависимости, которые используются только в определённых случаях, следует динамически импортировать, чтобы сократить время запуска Node.js. Примеры рефакторинга: [vite-plugin-react#212](https://github.com/vitejs/vite-plugin-react/pull/212) и [vite-plugin-pwa#224](https://github.com/vite-pwa/vite-plugin-pwa/pull/244).
 
-2. The `buildStart`, `config`, and `configResolved` hooks should not run long and extensive operations. These hooks are awaited during dev server startup, which delays when you can access the site in the browser.
+2. Хуки `buildStart`, `config` и `configResolved` не должны выполнять длительные и обширные операции. Эти хуки ожидаются во время запуска сервера разработки, что задерживает доступ к сайту в браузере.
 
-3. The `resolveId`, `load`, and `transform` hooks may cause some files to load slower than others. While sometimes unavoidable, it's still worth checking for possible areas to optimize. For example, checking if the `code` contains a specific keyword, or the `id` matches a specific extension, before doing the full transformation.
+3. Хуки `resolveId`, `load` и `transform` могут вызывать более медленную загрузку некоторых файлов по сравнению с другими. Хотя иногда это неизбежно, всё же стоит проверить возможные области для оптимизации. Например, проверьте, содержит ли `code` определённое ключевое слово или соответствует ли `id` определённому расширению, прежде чем выполнять полное преобразование.
 
-   The longer it takes to transform a file, the more significant the request waterfall will be when loading the site in the browser.
+   Чем больше времени требуется для преобразования файла, тем значительнее будет водопад запросов при загрузке сайта в браузере.
 
-   You can inspect the duration it takes to transform a file using `vite --debug plugin-transform` or [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect). Note that as asynchronous operations tend to provide inaccurate timings, you should treat the numbers as a rough estimate, but it should still reveal the more expensive operations.
+   Вы можете проверить время, необходимое для преобразования файла, используя команду `vite --debug plugin-transform` или [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect). Обратите внимание, что асинхронные операции, как правило, предоставляют неточные временные показатели, поэтому следует рассматривать эти цифры как приблизительные, но они всё же должны выявить более затратные операции.
 
-::: tip Profiling
-You can run `vite --profile`, visit the site, and press `p + enter` in your terminal to record a `.cpuprofile`. A tool like [speedscope](https://www.speedscope.app) can then be used to inspect the profile and identify the bottlenecks. You can also [share the profiles](https://chat.vitejs.dev) with the Vite team to help us identify performance issues.
+::: tip Профилирование
+Вы можете запустить `vite --profile`, посетить сайт и нажать `p + enter` в вашем терминале, чтобы записать файл `.cpuprofile`. Затем вы можете использовать инструмент, такой как [speedscope](https://www.speedscope.app), чтобы проанализировать профиль и выявить узкие места. Вы также можете [поделиться профилями](https://chat.vitejs.dev) с командой Vite, чтобы помочь нам выявить проблемы с производительностью.
 :::
 
-## Reduce Resolve Operations
+## Сокращение операций разрешения {#reduce-resolve-operations}
 
-Resolving import paths can be an expensive operation when hitting its worst case often. For example, Vite supports "guessing" import paths with the [`resolve.extensions`](/config/shared-options.md#resolve-extensions) option, which defaults to `['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json']`.
+Разрешение путей импорта может быть дорогостоящей операцией, особенно в худших случаях. Например, Vite поддерживает «угадывание» путей импорта с помощью опции [`resolve.extensions`](/config/shared-options.md#resolve-extensions), которая по умолчанию равна `['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json']`.
 
-When you try to import `./Component.jsx` with `import './Component'`, Vite will run these steps to resolve it:
+Когда вы пытаетесь импортировать `./Component.jsx` с помощью `import './Component'`, Vite выполнит следующие шаги для его разрешения:
 
-1. Check if `./Component` exists, no.
-2. Check if `./Component.mjs` exists, no.
-3. Check if `./Component.js` exists, no.
-4. Check if `./Component.mts` exists, no.
-5. Check if `./Component.ts` exists, no.
-6. Check if `./Component.jsx` exists, yes!
+1. Проверит, существует ли `./Component`
+2. Проверит, существует ли `./Component.mjs`
+3. Проверит, существует ли `./Component.js`
+4. Проверит, существует ли `./Component.mts`
+5. Проверит, существует ли `./Component.ts`
+6. Проверит, существует ли `./Component.jsx`
 
-As shown, a total of 6 filesystem checks is required to resolve an import path. The more implicit imports you have, the more time it adds up to resolve the paths.
+Как показано, для разрешения пути импорта требуется в общей сложности 6 проверок файловой системы. Чем больше неявных импортов у вас есть, тем больше времени требуется для разрешения путей.
 
-Hence, it's usually better to be explicit with your import paths, e.g. `import './Component.jsx'`. You can also narrow down the list for `resolve.extensions` to reduce the general filesystem checks, but you have to make sure it works for files in `node_modules` too.
+Поэтому обычно лучше указывать имена файлов с расширениями, например, `import './Component.jsx'`. Вы также можете сузить список для `resolve.extensions`, чтобы уменьшить общее количество проверок файловой системы, но вам нужно убедиться, что это работает и для файлов в `node_modules`.
 
-If you're a plugin author, make sure to only call [`this.resolve`](https://rollupjs.org/plugin-development/#this-resolve) when needed to reduce the number of checks above.
+Если вы автор плагина, убедитесь, что вызываете [`this.resolve`](https://rollupjs.org/plugin-development/#this-resolve) только при необходимости, чтобы сократить количество проверок выше.
 
 ::: tip TypeScript
-If you are using TypeScript, enable `"moduleResolution": "bundler"` and `"allowImportingTsExtensions": true` in your `tsconfig.json`'s `compilerOptions` to use `.ts` and `.tsx` extensions directly in your code.
+Если вы используете TypeScript, включите `"moduleResolution": "bundler"` и `"allowImportingTsExtensions": true` в `compilerOptions` вашего `tsconfig.json`, чтобы использовать расширения `.ts` и `.tsx` напрямую в вашем коде.
 :::
 
-## Avoid Barrel Files
+## Избегайте файлов-агрегаторов {#avoid-barrel-files}
 
-Barrel files are files that re-export the APIs of other files in the same directory. For example:
+Файлы-агрегаторы — это файлы, которые повторно экспортируют API других файлов в той же директории. Например:
 
 ```js
 // src/utils/index.js
@@ -66,25 +66,25 @@ export * from './dom.js'
 export * from './slash.js'
 ```
 
-When you only import an individual API, e.g. `import { slash } from './utils'`, all the files in that barrel file need to be fetched and transformed as they may contain the `slash` API and may also contain side-effects that run on initialization. This means you're loading more files than required on the initial page load, resulting in a slower page load.
+Когда вы импортируете только отдельный API, например, `import { slash } from './utils'`, все файлы в этом файле-агрегаторе должны быть загружены и преобразованы, так как они могут содержать API `slash` и также могут содержать побочные эффекты, которые выполняются при инициализации. Это означает, что вы загружаете больше файлов, чем необходимо, при первоначальной загрузке страницы, что приводит к более медленной загрузке.
 
-If possible, you should avoid barrel files and import the individual APIs directly, e.g. `import { slash } from './utils/slash.js'`. You can read [issue #8237](https://github.com/vitejs/vite/issues/8237) for more information.
+Если возможно, следует избегать подобных файлов и импортировать отдельные API напрямую, например, `import { slash } from './utils/slash.js'`. Вы можете прочитать [issue #8237](https://github.com/vitejs/vite/issues/8237) для получения дополнительной информации.
 
-## Warm Up Frequently Used Files
+## Разогрев часто используемых файлов {#warm-up-frequently-used-files}
 
-The Vite dev server only transforms files as requested by the browser, which allows it to start up quickly and only apply transformations for used files. It can also pre-transform files if it anticipates certain files will be requested shortly. However, request waterfalls may still happen if some files take longer to transform than others. For example:
+Сервер разработки Vite преобразует файлы только по запросу браузера, что позволяет ему быстро запускаться и применять преобразования только к использованным файлам. Он также может предварительно преобразовать файлы, если ожидает, что некоторые файлы будут запрошены в ближайшее время. Однако водопады запросов всё ещё могут происходить, если некоторые файлы требуют больше времени для преобразования, чем другие. Например:
 
-Given an import graph where the left file imports the right file:
+Учитывая график импорта, где левый файл импортирует правый файл:
 
 ```
 main.js -> BigComponent.vue -> big-utils.js -> large-data.json
 ```
 
-The import relationship can only be known after the file is transformed. If `BigComponent.vue` takes some time to transform, `big-utils.js` has to wait for its turn, and so on. This causes an internal waterfall even with pre-transformation built-in.
+Отношение импорта может быть известно только после преобразования файла. Если `BigComponent.vue` требует времени для преобразования, `big-utils.js` должен ждать своей очереди и так далее. Это вызывает внутренний водопад запросов, даже с учётом встроенного предварительного преобразования.
 
-Vite allows you to warm up files that you know are frequently used, e.g. `big-utils.js`, using the [`server.warmup`](/config/server-options.md#server-warmup) option. This way `big-utils.js` will be ready and cached to be served immediately when requested.
+Vite позволяет вам разогревать файлы, про которые вы знаете, что они часто используются, например, `big-utils.js`, с помощью опции [`server.warmup`](/config/server-options.md#server-warmup). Таким образом, `big-utils.js` будет готов и кэширован для немедленного обслуживания по запросу.
 
-You can find files that are frequently used by running `vite --debug transform` and inspect the logs:
+Вы можете найти файлы, которые часто используются, запустив `vite --debug transform` и проверив логи:
 
 ```bash
 vite:transform 28.72ms /@vite/client +1ms
@@ -105,23 +105,23 @@ export default defineConfig({
 })
 ```
 
-Note that you should only warm up files that are frequently used to not overload the Vite dev server on startup. Check the [`server.warmup`](/config/server-options.md#server-warmup) option for more information.
+Обратите внимание, что вы должны разогревать только те файлы, которые часто используются, чтобы не перегружать сервер разработки Vite при запуске. Ознакомьтесь с опцией [`server.warmup`](/config/server-options.md#server-warmup) для получения дополнительной информации.
 
-Using [`--open` or `server.open`](/config/server-options.html#server-open) also provides a performance boost, as Vite will automatically warm up the entry point of your app or the provided URL to open.
+Использование [`--open` или `server.open`](/config/server-options.html#server-open) также обеспечивает прирост производительности, так как Vite автоматически разогревает точку входа вашего приложения или предоставленный URL для открытия.
 
-## Use Lesser or Native Tooling
+## Используйте менее сложные или нативные инструменты {#use-lesser-or-native-tooling}
 
-Keeping Vite fast with a growing codebase is about reducing the amount of work for the source files (JS/TS/CSS).
+Сохранение скорости Vite с растущей кодовой базой связано с уменьшением объёма работы для исходных файлов (JS/TS/CSS).
 
-Examples of doing less work:
+Примеры уменьшения объема работы:
 
-- Use CSS instead of Sass/Less/Stylus when possible (nesting can be handled by PostCSS)
-- Don't transform SVGs into UI framework components (React, Vue, etc). Import them as strings or URLs instead.
-- When using `@vitejs/plugin-react`, avoid configuring the Babel options, so it skips the transformation during build (only esbuild will be used).
+- Используйте CSS вместо Sass/Less/Stylus, когда это возможно (вложенность можно обрабатывать с помощью PostCSS).
+- Не преобразовывайте SVG в компоненты UI-фреймворков (React, Vue и т. д.). Импортируйте их как строки или URL.
+- При использовании `@vitejs/plugin-react` избегайте настройки параметров Babel, чтобы пропустить преобразование во время сборки (будет использоваться только esbuild).
 
-Examples of using native tooling:
+Примеры использования нативных инструментов:
 
-Using native tooling often brings larger installation size and as so is not the default when starting a new Vite project. But it may be worth the cost for larger applications.
+Использование нативных инструментов часто приводит к большему размеру пакета и поэтому не является стандартным при создании нового проекта Vite. Но это может оправдать затраты для более крупных приложений.
 
-- Try out the experimental support for [LightningCSS](https://github.com/vitejs/vite/discussions/13835)
-- Use [`@vitejs/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) in place of `@vitejs/plugin-react`.
+- Попробуйте экспериментальную поддержку [Lightning CSS](https://github.com/vitejs/vite/discussions/13835).
+- Используйте [`@vitejs/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) вместо `@vitejs/plugin-react`.
