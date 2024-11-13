@@ -1,20 +1,20 @@
-# Vite Runtime API
+# Vite Runtime API {#vite-runtime-api}
 
-:::warning Low-level API
-This API was introduced in Vite 5.1 as an experimental feature. It was added to [gather feedback](https://github.com/vitejs/vite/discussions/15774). There will likely be breaking changes, so make sure to pin the Vite version to `~5.1.0` when using it. This is a low-level API meant for library and framework authors. If your goal is to create an application, make sure to check out the higher-level SSR plugins and tools at [Awesome Vite SSR section](https://github.com/vitejs/awesome-vite#ssr) first.
+:::warning Низкоуровневый API
+Этот API был введён в Vite 5.1 как экспериментальная функция. Он был добавлен для [сбора отзывов](https://github.com/vitejs/vite/discussions/15774). Вероятно, будут изменения, которые могут привести к поломке, поэтому убедитесь, что вы зафиксировали версию Vite на `~5.1.0`, когда используете его. Это низкоуровневый API, предназначенный для авторов библиотек и фреймворков. Если ваша цель — создать приложение, сначала ознакомьтесь с более высокоуровневыми плагинами и инструментами SSR в разделе [Awesome Vite SSR](https://github.com/vitejs/awesome-vite#ssr).
 
-Currently, the API is being revised as the [Environment API](https://github.com/vitejs/vite/discussions/16358) which is released at `^6.0.0-alpha.0`.
+В настоящее время API пересматривается как [Environment API](https://github.com/vitejs/vite/discussions/16358), который будет выпущен в `^6.0.0-alpha.0`.
 :::
 
-The "Vite Runtime" is a tool that allows running any code by processing it with Vite plugins first. It is different from `server.ssrLoadModule` because the runtime implementation is decoupled from the server. This allows library and framework authors to implement their own layer of communication between the server and the runtime.
+«Vite Runtime» — это инструмент, который позволяет выполнять любой код, предварительно обрабатывая его с помощью плагинов Vite. Он отличается от `server.ssrLoadModule`, потому что реализация среды выполнения отделена от сервера. Это позволяет авторам библиотек и фреймворков реализовывать свой собственный уровень взаимодействия между сервером и средой выполнения.
 
-One of the goals of this feature is to provide a customizable API to process and run the code. Vite provides enough tools to use Vite Runtime out of the box, but users can build upon it if their needs do not align with Vite's built-in implementation.
+Одна из целей этой функции — предоставить настраиваемый API для обработки и выполнения кода. Vite предоставляет достаточно инструментов для использования Vite Runtime из коробки, но пользователи могут расширять его, если их потребности не совпадают с встроенной реализацией Vite.
 
-All APIs can be imported from `vite/runtime` unless stated otherwise.
+Все API можно импортировать из `vite/runtime`, если не указано иное.
 
 ## `ViteRuntime`
 
-**Type Signature:**
+**Сигнатура типа:**
 
 ```ts
 export class ViteRuntime {
@@ -24,42 +24,42 @@ export class ViteRuntime {
     private debug?: ViteRuntimeDebugger,
   ) {}
   /**
-   * URL to execute. Accepts file path, server path, or id relative to the root.
+   * URL для выполнения. Принимает путь к файлу, путь к серверу или идентификатор, относительный к корню.
    */
   public async executeUrl<T = any>(url: string): Promise<T>
   /**
-   * Entry point URL to execute. Accepts file path, server path or id relative to the root.
-   * In the case of a full reload triggered by HMR, this is the module that will be reloaded.
-   * If this method is called multiple times, all entry points will be reloaded one at a time.
+   * URL точки входа для выполнения. Принимает путь к файлу, путь к серверу или идентификатор, относительный к корню.
+   * В случае полного перезагрузки, вызванного HMR, это модуль, который будет перезагружен.
+   * Если этот метод вызывается несколько раз, все точки входа будут перезагружены по одной.
    */
   public async executeEntrypoint<T = any>(url: string): Promise<T>
   /**
-   * Clear all caches including HMR listeners.
+   * Очищает все кэши, включая слушатели HMR.
    */
   public clearCache(): void
   /**
-   * Clears all caches, removes all HMR listeners, and resets source map support.
-   * This method doesn't stop the HMR connection.
+   * Очищает все кэши, удаляет всех слушателей HMR и сбрасывает поддержку карт источников.
+   * Этот метод не останавливает соединение HMR.
    */
   public async destroy(): Promise<void>
   /**
-   * Returns `true` if the runtime has been destroyed by calling `destroy()` method.
+   * Возвращает `true`, если среда выполнения была уничтожено вызовом метода `destroy()`.
    */
   public isDestroyed(): boolean
 }
 ```
 
-::: tip Advanced Usage
-If you are just migrating from `server.ssrLoadModule` and want to support HMR, consider using [`createViteRuntime`](#createviteruntime) instead.
+::: tip Расширенное использование
+Если вы просто мигрируете с `server.ssrLoadModule` и хотите поддерживать HMR, рассмотрите возможность использования [`createViteRuntime`](#createviteruntime).
 :::
 
-The `ViteRuntime` class requires `root` and `fetchModule` options when initiated. Vite exposes `ssrFetchModule` on the [`server`](/guide/api-javascript) instance for easier integration with Vite SSR. Vite also exports `fetchModule` from its main entry point - it doesn't make any assumptions about how the code is running unlike `ssrFetchModule` that expects the code to run using `new Function`. This can be seen in source maps that these functions return.
+Класс `ViteRuntime` требует параметры `root` и `fetchModule` при инициализации. Vite предоставляет `ssrFetchModule` на экземпляре [`server`](/guide/api-javascript) для более простой интеграции с Vite SSR. Vite также экспортирует `fetchModule` из своей основной точки входа — он не делает никаких предположений о том, как выполняется код, в отличие от `ssrFetchModule`, который ожидает, что код будет выполняться с использованием `new Function`. Это можно увидеть в картах источников, которые возвращают эти функции.
 
-Runner in `ViteRuntime` is responsible for executing the code. Vite exports `ESModulesRunner` out of the box, it uses `new AsyncFunction` to run the code. You can provide your own implementation if your JavaScript runtime doesn't support unsafe evaluation.
+Исполнитель в `ViteRuntime` отвечает за выполнение кода. Vite экспортирует `ESModulesRunner` из коробки, он использует `new AsyncFunction` для выполнения кода. Вы можете предоставить свою собственную реализацию, если ваша среда выполнения JavaScript не поддерживает небезопасную оценку.
 
-The two main methods that runtime exposes are `executeUrl` and `executeEntrypoint`. The only difference between them is that all modules executed by `executeEntrypoint` will be reexecuted if HMR triggers `full-reload` event. Be aware that Vite Runtime doesn't update `exports` object when this happens (it overrides it), you would need to run `executeUrl` or get the module from `moduleCache` again if you rely on having the latest `exports` object.
+Два основных метода, которые предоставляет среда выполнения, — это `executeUrl` и `executeEntrypoint`. Единственное различие между ними заключается в том, что все модули, выполняемые с помощью `executeEntrypoint`, будут повторно выполнены, если HMR вызовет событие `full-reload`. Имейте в виду, что Vite Runtime не обновляет объект `exports`, когда это происходит (он перезаписывает его), вам нужно будет снова выполнить `executeUrl` или получить модуль из `moduleCache`, если вы полагаетесь на наличие актуального объекта `exports`.
 
-**Example Usage:**
+**Пример использования:**
 
 ```js
 import { ViteRuntime, ESModulesRunner } from 'vite/runtime'
@@ -69,7 +69,7 @@ const runtime = new ViteRuntime(
   {
     root,
     fetchModule,
-    // you can also provide hmr.connection to support HMR
+    // Вы также можете предоставить `hmr.connection` для поддержки HMR
   },
   new ESModulesRunner(),
 )
@@ -82,19 +82,19 @@ await runtime.executeEntrypoint('/src/entry-point.js')
 ```ts
 export interface ViteRuntimeOptions {
   /**
-   * Root of the project
+   * Корень проекта
    */
   root: string
   /**
-   * A method to get the information about the module.
-   * For SSR, Vite exposes `server.ssrFetchModule` function that you can use here.
-   * For other runtime use cases, Vite also exposes `fetchModule` from its main entry point.
+   * Метод для получения информации о модуле.
+   * Для SSR Vite предоставляет функцию `server.ssrFetchModule`, которую вы можете использовать здесь.
+   * Для других случаев использования среды выполнения Vite также предоставляет `fetchModule` из своей основной точки входа.
    */
   fetchModule: FetchFunction
   /**
-   * Configure how source maps are resolved. Prefers `node` if `process.setSourceMapsEnabled` is available.
-   * Otherwise it will use `prepareStackTrace` by default which overrides `Error.prepareStackTrace` method.
-   * You can provide an object to configure how file contents and source maps are resolved for files that were not processed by Vite.
+   * Настройте, как разрешаются карты источников. Предпочитает `node`, если доступен `process.setSourceMapsEnabled`.
+   * В противном случае по умолчанию будет использоваться `prepareStackTrace`, который переопределяет метод `Error.prepareStackTrace`.
+   * Вы можете предоставить объект для настройки того, как содержимое файлов и карты источников разрешаются для файлов, которые не были обработаны Vite.
    */
   sourcemapInterceptor?:
     | false
@@ -102,13 +102,13 @@ export interface ViteRuntimeOptions {
     | 'prepareStackTrace'
     | InterceptorOptions
   /**
-   * Disable HMR or configure HMR options.
+   * Отключить HMR или настроить параметры HMR.
    */
   hmr?:
     | false
     | {
         /**
-         * Configure how HMR communicates between the client and the server.
+         * Настройте, как HMR взаимодействует между клиентом и сервером.
          */
         connection: HMRRuntimeConnection
         /**
@@ -117,7 +117,7 @@ export interface ViteRuntimeOptions {
         logger?: false | HMRLogger
       }
   /**
-   * Custom module cache. If not provided, it creates a separate module cache for each ViteRuntime instance.
+   * Пользовательский кэш модулей. Если не предоставлен, создается отдельный кэш модулей для каждого экземпляра ViteRuntime.
    */
   moduleCache?: ModuleCacheMap
 }
@@ -125,15 +125,15 @@ export interface ViteRuntimeOptions {
 
 ## `ViteModuleRunner`
 
-**Type Signature:**
+**Сигнатура типа:**
 
 ```ts
 export interface ViteModuleRunner {
   /**
-   * Run code that was transformed by Vite.
-   * @param context Function context
-   * @param code Transformed code
-   * @param id ID that was used to fetch the module
+   * Выполняет код, который был преобразован Vite.
+   * @param context Контекст функции
+   * @param code Преобразованный код
+   * @param id Идентификатор, который использовался для получения модуля
    */
   runViteModule(
     context: ViteRuntimeModuleContext,
@@ -141,40 +141,40 @@ export interface ViteModuleRunner {
     id: string,
   ): Promise<any>
   /**
-   * Run externalized module.
-   * @param file File URL to the external module
+   * Выполняет экстернализированный модуль.
+   * @param file URL файла для внешнего модуля
    */
   runExternalModule(file: string): Promise<any>
 }
 ```
 
-Vite exports `ESModulesRunner` that implements this interface by default. It uses `new AsyncFunction` to run code, so if the code has inlined source map it should contain an [offset of 2 lines](https://tc39.es/ecma262/#sec-createdynamicfunction) to accommodate for new lines added. This is done automatically by `server.ssrFetchModule`. If your runner implementation doesn't have this constraint, you should use `fetchModule` (exported from `vite`) directly.
+Vite экспортирует `ESModulesRunner`, который по умолчанию реализует этот интерфейс. Он использует `new AsyncFunction` для выполнения кода, поэтому, если код содержит встроенную карту источников, она должна содержать [смещение в 2 строки](https://tc39.es/ecma262/#sec-createdynamicfunction), чтобы учесть добавленные новые строки. Это делается автоматически с помощью `server.ssrFetchModule`. Если ваша реализация исполнителя не имеет этого ограничения, вы должны использовать `fetchModule` (экспортируемый из `vite`) напрямую.
 
-## HMRRuntimeConnection
+## `HMRRuntimeConnection` {#hmrruntimeconnection}
 
-**Type Signature:**
+**Сигнатура типа:**
 
 ```ts
 export interface HMRRuntimeConnection {
   /**
-   * Checked before sending messages to the client.
+   * Проверяется перед отправкой сообщений клиенту.
    */
   isReady(): boolean
   /**
-   * Send message to the client.
+   * Отправляет сообщение клиенту.
    */
   send(message: string): void
   /**
-   * Configure how HMR is handled when this connection triggers an update.
-   * This method expects that connection will start listening for HMR updates and call this callback when it's received.
+   * Настройте, как обрабатывается HMR, когда это соединение вызывает обновление.
+   * Этот метод ожидает, что соединение начнет прослушивать обновления HMR и вызовет этот колбек, когда они будут получены.
    */
   onUpdate(callback: (payload: HMRPayload) => void): void
 }
 ```
 
-This interface defines how HMR communication is established. Vite exports `ServerHMRConnector` from the main entry point to support HMR during Vite SSR. The `isReady` and `send` methods are usually called when the custom event is triggered (like, `import.meta.hot.send("my-event")`).
+Этот интерфейс определяет, как устанавливается связь HMR. Vite экспортирует `ServerHMRConnector` из основной точки входа для поддержки HMR во время Vite SSR. Методы `isReady` и `send` обычно вызываются, когда срабатывает пользовательское событие (например, `import.meta.hot.send("my-event")`).
 
-`onUpdate` is called only once when the new runtime is initiated. It passed down a method that should be called when connection triggers the HMR event. The implementation depends on the type of connection (as an example, it can be `WebSocket`/`EventEmitter`/`MessageChannel`), but it usually looks something like this:
+`onUpdate` вызывается только один раз, когда инициализируется новая среда выполнения. Он передает метод, который должен быть вызван, когда соединение вызывает событие HMR. Реализация зависит от типа соединения (например, это может быть `WebSocket`/`EventEmitter`/`MessageChannel`), но обычно выглядит примерно так:
 
 ```js
 function onUpdate(callback) {
@@ -182,11 +182,11 @@ function onUpdate(callback) {
 }
 ```
 
-The callback is queued and it will wait for the current update to be resolved before processing the next update. Unlike the browser implementation, HMR updates in Vite Runtime wait until all listeners (like, `vite:beforeUpdate`/`vite:beforeFullReload`) are finished before updating the modules.
+Функция обратного вызова ставится в очередь, и она будет ждать, пока текущее обновление не завершшится, прежде чем обрабатывать следующее обновление. В отличие от реализации в браузере, обновления HMR в Vite Runtime ждут, пока все слушатели (например, `vite:beforeUpdate`/`vite:beforeFullReload`) не завершат свою работу, прежде чем обновить модули.
 
 ## `createViteRuntime`
 
-**Type Signature:**
+**Сигнатура типа:**
 
 ```ts
 async function createViteRuntime(
@@ -195,7 +195,7 @@ async function createViteRuntime(
 ): Promise<ViteRuntime>
 ```
 
-**Example Usage:**
+**Пример использования:**
 
 ```js
 import { createServer } from 'vite'
@@ -213,7 +213,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 })()
 ```
 
-This method serves as an easy replacement for `server.ssrLoadModule`. Unlike `ssrLoadModule`, `createViteRuntime` provides HMR support out of the box. You can pass down [`options`](#mainthreadruntimeoptions) to customize how SSR runtime behaves to suit your needs.
+Этот метод служит простым заменителем для `server.ssrLoadModule`. В отличие от `ssrLoadModule`, `createViteRuntime` предоставляет поддержку HMR из коробки. Вы можете передать [`options`](#mainthreadruntimeoptions), чтобы настроить поведение SSR среды выполнения в соответствии с вашими потребностями.
 
 ## `MainThreadRuntimeOptions`
 
@@ -221,7 +221,7 @@ This method serves as an easy replacement for `server.ssrLoadModule`. Unlike `ss
 export interface MainThreadRuntimeOptions
   extends Omit<ViteRuntimeOptions, 'root' | 'fetchModule' | 'hmr'> {
   /**
-   * Disable HMR or configure HMR logger.
+   * Отключить HMR или настроить логгер HMR.
    */
   hmr?:
     | false
@@ -229,7 +229,7 @@ export interface MainThreadRuntimeOptions
         logger?: false | HMRLogger
       }
   /**
-   * Provide a custom module runner. This controls how the code is executed.
+   * Предоставьте пользовательский исполнитель модулей. Это контролирует, как выполняется код.
    */
   runner?: ViteModuleRunner
 }
