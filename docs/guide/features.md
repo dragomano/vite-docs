@@ -300,7 +300,7 @@ npm add -D lightningcss
 
 Для настройки CSS-модулей нужно будет использовать [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) вместо [`css.modules`](../config/shared-options.md#css-modules) (который настраивает способ работы PostCSS с CSS-модулями).
 
-По умолчанию Vite использует esbuild для минификации CSS. Lightning CSS также можно использовать в качестве минификатора CSS с помощью опции [`build.cssMinify: 'lightningcss'`](.../config/build-options.md#build-cssminify).
+По умолчанию Vite использует esbuild для минификации CSS. Lightning CSS также можно использовать в качестве минификатора CSS с помощью опции [`build.cssMinify: 'lightningcss'`](../config/build-options.md#build-cssminify).
 
 ::: tip ПРИМЕЧАНИЕ
 [Препроцессоры CSS](#css-pre-processors) не поддерживаются при использовании Lightning CSS.
@@ -702,7 +702,7 @@ import MyWorker from './worker?worker&url'
 
 Значение мета-тега `nonce` с `property="csp-nonce"` будет использоваться Vite всякий раз, когда это необходимо, как в процессе разработки, так и после сборки.
 
-:::warning ПРЕДУПРЕЖДЕНИЕ
+:::warning
 Убедитесь, что вы заменяете placeholder уникальным значением для каждого запроса. Это важно для предотвращения обхода политики ресурса, что в противном случае можно легко сделать.
 :::
 
@@ -710,7 +710,7 @@ import MyWorker from './worker?worker&url'
 
 По умолчанию, во время сборки Vite встраивает небольшие ресурсы в виде data URI. Необходимо разрешить `data:` для связанных директив (например, [`img-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src), [`font-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src)) или отключить это, установив [`build.assetsInlineLimit: 0`](/config/build-options#build-assetsinlinelimit).
 
-:::warning ПРЕДУПРЕЖДЕНИЕ
+:::warning
 Не разрешайте `data:` для [`script-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src). Это позволит внедрить произвольные скрипты.
 :::
 

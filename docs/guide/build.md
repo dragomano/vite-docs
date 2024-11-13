@@ -225,7 +225,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 ## Расширенные параметры базового пути {#advanced-base-options}
 
-::: warning Предупреждение
+::: warning
 Эта функция является экспериментальной. [Оставьте отзыв](https://github.com/vitejs/vite/discussions/13834).
 :::
 
