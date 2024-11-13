@@ -394,6 +394,13 @@ export default defineConfig({
   },
   markdown: {
     codeTransformers: [transformerTwoslash()],
+    container: {
+      tipLabel: 'СОВЕТ',
+      warningLabel: 'ПРЕДУПРЕЖДЕНИЕ',
+      dangerLabel: 'ОПАСНОСТЬ',
+      infoLabel: 'ИНФОРМАЦИЯ',
+      detailsLabel: 'Подробная информация'
+    }
   },
   buildEnd,
 })
