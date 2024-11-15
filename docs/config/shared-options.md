@@ -51,7 +51,7 @@ export default defineConfig({
 })
 ```
 
-::: tip NOTE
+::: tip ПРИМЕЧАНИЕ
 For TypeScript users, make sure to add the type declarations in the `env.d.ts` or `vite-env.d.ts` file to get type checks and Intellisense.
 
 Example:

@@ -338,10 +338,10 @@ export default defineConfig({
       ],
       '/config/': [
         {
-          text: 'Конфигурация',
+          text: 'Настройка',
           items: [
             {
-              text: 'Настройка Vite',
+              text: 'Конфигурация Vite',
               link: '/config/',
             },
             {
