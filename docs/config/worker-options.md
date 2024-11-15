@@ -1,23 +1,23 @@
-# Worker Options
+# Параметры воркера {#worker-options}
 
-Options related to Web Workers.
+Опции, связанные с веб-воркерами.
 
 ## worker.format
 
-- **Type:** `'es' | 'iife'`
-- **Default:** `'iife'`
+- **Тип:** `'es' | 'iife'`
+- **По умолчанию:** `'iife'`
 
-Output format for worker bundle.
+Формат вывода для сборки воркера.
 
 ## worker.plugins
 
-- **Type:** [`() => (Plugin | Plugin[])[]`](./shared-options#plugins)
+- **Тип:** [`() => (Plugin | Plugin[])[]`](./shared-options#plugins)
 
-Vite plugins that apply to the worker bundles. Note that [config.plugins](./shared-options#plugins) only applies to workers in dev, it should be configured here instead for build.
-The function should return new plugin instances as they are used in parallel rollup worker builds. As such, modifying `config.worker` options in the `config` hook will be ignored.
+Плагины Vite, которые применяются к сборкам воркеров. Обратите внимание, что [config.plugins](./shared-options#plugins) применяется только к воркерам в режиме разработки, поэтому их следует настраивать здесь для сборки.
+Функция должна возвращать новые экземпляры плагинов, так как они используются в параллельных сборках воркеров Rollup. Таким образом, изменения опций `config.worker` в хуке `config` будут проигнорированы.
 
 ## worker.rollupOptions
 
-- **Type:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
+- **Тип:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
 
-Rollup options to build worker bundle.
+Опции Rollup для сборки воркера.
