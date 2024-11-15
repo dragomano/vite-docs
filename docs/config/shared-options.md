@@ -1,46 +1,46 @@
-# Shared Options
+# Общие параметры {#shared-options}
 
 ## root
 
-- **Type:** `string`
-- **Default:** `process.cwd()`
+- **Тип:** `string`
+- **По умолчанию:** `process.cwd()`
 
-Project root directory (where `index.html` is located). Can be an absolute path, or a path relative to the current working directory.
+Корневая директория проекта (где находится `index.html`). Может быть абсолютным путём или путём относительно текущей рабочей директории.
 
-See [Project Root](/guide/#index-html-and-project-root) for more details.
+Смотрите [Корень проекта](/guide/#index-html-and-project-root) для получения дополнительной информации.
 
 ## base
 
-- **Type:** `string`
-- **Default:** `/`
-- **Related:** [`server.origin`](/config/server-options.md#server-origin)
+- **Тип:** `string`
+- **По умолчанию:** `/`
+- **Связано:** [`server.origin`](/config/server-options.md#server-origin)
 
-Base public path when served in development or production. Valid values include:
+Базовый публичный путь при обслуживании в режиме разработки или продакшена. Допустимые значения включают:
 
-- Absolute URL pathname, e.g. `/foo/`
-- Full URL, e.g. `https://bar.com/foo/` (The origin part won't be used in development so the value is the same as `/foo/`)
-- Empty string or `./` (for embedded deployment)
+- Абсолютный путь URL, например, `/foo/`
+- Полный URL, например, `https://bar.com/foo/` (часть происхождения не будет использоваться в режиме разработки, поэтому значение будет таким же, как `/foo/`)
+- Пустая строка или `./` (для встроенной развертки)
 
-See [Public Base Path](/guide/build#public-base-path) for more details.
+Смотрите [Публичный базовый путь](/guide/build#public-base-path) для получения дополнительной информации.
 
 ## mode
 
-- **Type:** `string`
-- **Default:** `'development'` for serve, `'production'` for build
+- **Тип:** `string`
+- **По умолчанию:** `'development'` для просмотра, `'production'` для сборки
 
-Specifying this in config will override the default mode for **both serve and build**. This value can also be overridden via the command line `--mode` option.
+Указание этого в конфигурации переопределит режим по умолчанию как режимов **просмотра и сборки**. Это значение также может быть переопределено через командную строку с помощью опции `--mode`.
 
-See [Env Variables and Modes](/guide/env-and-mode) for more details.
+Смотрите [Переменные окружения и режимы](/guide/env-and-mode) для получения дополнительной информации.
 
 ## define
 
-- **Type:** `Record<string, string>`
+- **Тип:** `Record<string, string>`
 
-Define global constant replacements. Entries will be defined as globals during dev and statically replaced during build.
+Определите замены глобальных констант. Записи будут определены как глобальные во время разработки и статически заменены во время сборки.
 
-Vite uses [esbuild defines](https://esbuild.github.io/api/#define) to perform replacements, so value expressions must be a string that contains a JSON-serializable value (null, boolean, number, string, array, or object) or a single identifier. For non-string values, Vite will automatically convert it to a string with `JSON.stringify`.
+Vite использует [esbuild с параметром `define`](https://esbuild.github.io/api/#define) для выполнения замен, поэтому выражения значений должны быть строкой, содержащей значение, сериализуемое в JSON (null, boolean, number, string, array или object), или единственным идентификатором. Для нестроковых значений Vite автоматически преобразует их в строку с помощью `JSON.stringify`.
 
-**Example:**
+**Пример:**
 
 ```js
 export default defineConfig({
@@ -52,9 +52,13 @@ export default defineConfig({
 ```
 
 ::: tip ПРИМЕЧАНИЕ
+<<<<<<< HEAD
+Для пользователей TypeScript убедитесь, что вы добавили объявления типов в файл `env.d.ts` или `vite-env.d.ts`, чтобы получить проверку типов и интеллектуальные подсказки.
+=======
 For TypeScript users, make sure to add the type declarations in the `env.d.ts` or `vite-env.d.ts` file to get type checks and Intellisense.
+>>>>>>> 3b56690cbbca41a833dc3a66c65cc0c5d16bf456
 
-Example:
+Пример:
 
 ```ts
 // vite-env.d.ts
@@ -65,60 +69,60 @@ declare const __APP_VERSION__: string
 
 ## plugins
 
-- **Type:** `(Plugin | Plugin[] | Promise<Plugin | Plugin[]>)[]`
+- **Тип:** `(Plugin | Plugin[] | Promise<Plugin | Plugin[]>)[]`
 
-Array of plugins to use. Falsy plugins are ignored and arrays of plugins are flattened. If a promise is returned, it would be resolved before running. See [Plugin API](/guide/api-plugin) for more details on Vite plugins.
+Массив плагинов для использования. Ложные плагины игнорируются, а массивы плагинов упрощаются. Если возвращается `Promise` (обещание), он будет разрешен перед выполнением. См. [Plugin API](/guide/api-plugin) для получения дополнительной информации о плагинах Vite.
 
 ## publicDir
 
-- **Type:** `string | false`
-- **Default:** `"public"`
+- **Тип:** `string | false`
+- **По умолчанию:** `"public"`
 
-Directory to serve as plain static assets. Files in this directory are served at `/` during dev and copied to the root of `outDir` during build, and are always served or copied as-is without transform. The value can be either an absolute file system path or a path relative to project root.
+Директория для обслуживания в качестве обычных статических ресурсов. Файлы в этой директории обслуживаются по адресу `/` во время разработки и копируются в корень `outDir` во время сборки, и всегда обслуживаются или копируются без преобразования. Значение может быть либо абсолютным путём к файловой системе, либо путём относительно корня проекта.
 
-Defining `publicDir` as `false` disables this feature.
+Определение `publicDir` как `false` отключает эту функцию.
 
-See [The `public` Directory](/guide/assets#the-public-directory) for more details.
+Смотрите [Директория `public`](/guide/assets#the-public-directory) для получения дополнительной информации.
 
 ## cacheDir
 
-- **Type:** `string`
-- **Default:** `"node_modules/.vite"`
+- **Тип:** `string`
+- **По умолчанию:** `"node_modules/.vite"`
 
-Directory to save cache files. Files in this directory are pre-bundled deps or some other cache files generated by vite, which can improve the performance. You can use `--force` flag or manually delete the directory to regenerate the cache files. The value can be either an absolute file system path or a path relative to project root. Default to `.vite` when no package.json is detected.
+Директория для сохранения файлов кэша. Файлы в этой директории — это предварительно упакованные зависимости или другие файлы кэша, сгенерированные Vite, которые могут улучшить производительность. Вы можете использовать флаг `--force` или вручную удалить директорию, чтобы регенерировать файлы кэша. Значение может быть либо абсолютным путём к файловой системе, либо путём относительно корня проекта. По умолчанию используется `.vite`, если файл package.json не обнаружен.
 
 ## resolve.alias
 
-- **Type:**
+- **Тип:**
   `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
-Will be passed to `@rollup/plugin-alias` as its [entries option](https://github.com/rollup/plugins/tree/master/packages/alias#entries). Can either be an object, or an array of `{ find, replacement, customResolver }` pairs.
+Будет передано в `@rollup/plugin-alias` как его [опция `entries`](https://github.com/rollup/plugins/tree/master/packages/alias#entries). Может быть либо объектом, либо массивом пар `{ find, replacement, customResolver }`.
 
-When aliasing to file system paths, always use absolute paths. Relative alias values will be used as-is and will not be resolved into file system paths.
+При создании псевдонимов для путей файловой системы всегда используйте абсолютные пути. Относительные значения псевдонимов будут использоваться как есть и не будут разрешены в пути файловой системы.
 
-More advanced custom resolution can be achieved through [plugins](/guide/api-plugin).
+Более сложное пользовательское разрешение можно достичь с помощью [плагинов](/guide/api-plugin).
 
-::: warning Using with SSR
-If you have configured aliases for [SSR externalized dependencies](/guide/ssr.md#ssr-externals), you may want to alias the actual `node_modules` packages. Both [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) and [pnpm](https://pnpm.io/aliases/) support aliasing via the `npm:` prefix.
+::: warning Использование с SSR
+Если вы настроили псевдонимы для [экстернализованных зависимостей SSR](/guide/ssr.md#ssr-externals), вы можете захотеть создать псевдонимы для фактических пакетов `node_modules`. Как [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias), так и [pnpm](https://pnpm.io/aliases/) поддерживают создание псевдонимов через префикс `npm:`.
 :::
 
 ## resolve.dedupe
 
-- **Type:** `string[]`
+- **Тип:** `string[]`
 
-If you have duplicated copies of the same dependency in your app (likely due to hoisting or linked packages in monorepos), use this option to force Vite to always resolve listed dependencies to the same copy (from project root).
+Если у вас есть дублированные копии одной и той же зависимости в вашем приложении (вероятно, из-за подъёма или связанных пакетов в монорепозиториях), используйте эту опцию, чтобы принудить Vite всегда разрешать указанные зависимости к одной и той же копии (из корня проекта).
 
 :::warning SSR + ESM
-For SSR builds, deduplication does not work for ESM build outputs configured from `build.rollupOptions.output`. A workaround is to use CJS build outputs until ESM has better plugin support for module loading.
+Для сборок SSR дедупликация не работает для выходных данных сборки ESM, настроенных с помощью `build.rollupOptions.output`. Обходным решением является использование выходных данных сборки CJS, пока ESM не получит лучшую поддержку плагинов для загрузки модулей.
 :::
 
 ## resolve.conditions
 
-- **Type:** `string[]`
+- **Тип:** `string[]`
 
-Additional allowed conditions when resolving [Conditional Exports](https://nodejs.org/api/packages.html#packages_conditional_exports) from a package.
+Дополнительные разрешённые условия при разрешении [условных экспортов](https://nodejs.org/api/packages.html#packages_conditional_exports) из пакета.
 
-A package with conditional exports may have the following `exports` field in its `package.json`:
+Пакет с условными экспортами может иметь следующее поле `exports` в своем `package.json`:
 
 ```json
 {
@@ -131,48 +135,47 @@ A package with conditional exports may have the following `exports` field in its
 }
 ```
 
-Here, `import` and `require` are "conditions". Conditions can be nested and should be specified from most specific to least specific.
+Здесь `import` и `require` являются «условиями». Условия могут быть вложенными и должны указываться от наиболее специфичных к наименее специфичным.
 
-Vite has a list of "allowed conditions" and will match the first condition that is in the allowed list. The default allowed conditions are: `import`, `module`, `browser`, `default`, and `production/development` based on current mode. The `resolve.conditions` config option allows specifying additional allowed conditions.
+Vite имеет список «разрешённых условий» и будет соответствовать первому условию, которое находится в разрешённом списке. Разрешённые условия по умолчанию: `import`, `module`, `browser`, `default` и `production/development` в зависимости от текущего режима. Опция конфигурации `resolve.conditions` позволяет указывать дополнительные разрешённые условия.
 
-:::warning Resolving subpath exports
-Export keys ending with "/" is deprecated by Node and may not work well. Please contact the package author to use [`*` subpath patterns](https://nodejs.org/api/packages.html#package-entry-points) instead.
+:::warning Разрешение экспортов подкаталогов
+Ключи экспорта, заканчивающиеся на `/`, устарели в Node и могут работать некорректно. Пожалуйста, свяжитесь с автором пакета, чтобы использовать [`*` шаблоны подкаталогов](https://nodejs.org/api/packages.html#package-entry-points) вместо этого.
 :::
 
 ## resolve.mainFields
 
-- **Type:** `string[]`
-- **Default:** `['browser', 'module', 'jsnext:main', 'jsnext']`
+- **Тип:** `string[]`
+- **По умолчанию:** `['browser', 'module', 'jsnext:main', 'jsnext']`
 
-List of fields in `package.json` to try when resolving a package's entry point. Note this takes lower precedence than conditional exports resolved from the `exports` field: if an entry point is successfully resolved from `exports`, the main field will be ignored.
+Список полей в `package.json`, которые будут проверяться при разрешении точки входа пакета. Обратите внимание, что это имеет меньший приоритет, чем условные экспорты, разрешённые из поля `exports`: если точка входа успешно разрешена из `exports`, поле main будет проигнорировано.
 
 ## resolve.extensions
 
-- **Type:** `string[]`
-- **Default:** `['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json']`
+- **Тип:** `string[]`
+- **По умолчанию:** `['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json']`
 
-List of file extensions to try for imports that omit extensions. Note it is **NOT** recommended to omit extensions for custom import types (e.g. `.vue`) since it can interfere with IDE and type support.
+Список расширений файлов, которые будут проверяться для импортов, опускающих расширения. Обратите внимание, что **не рекомендуется** опускать расширения для пользовательских типов импорта (например, `.vue`), так как это может повлиять на поддержку в IDE и типах.
 
 ## resolve.preserveSymlinks
 
-- **Type:** `boolean`
-- **Default:** `false`
+- **Тип:** `boolean`
+- **По умолчанию:** `false`
 
-Enabling this setting causes vite to determine file identity by the original file path (i.e. the path without following symlinks) instead of the real file path (i.e. the path after following symlinks).
+Включение этой настройки заставляет Vite определять идентичность файла по исходному пути файла (т. е. пути без учёта символических ссылок), а не по реальному пути файла (т. е. пути с учётом символических ссылок).
 
-- **Related:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks
-  ](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
+- **Связано:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
 ## html.cspNonce
 
-- **Type:** `string`
-- **Related:** [Content Security Policy (CSP)](/guide/features#content-security-policy-csp)
+- **Тип:** `string`
+- **Связано:** [Политика безопасности контента (CSP)](/guide/features#content-security-policy-csp)
 
-A nonce value placeholder that will be used when generating script / style tags. Setting this value will also generate a meta tag with nonce value.
+Заполнитель значения `nonce`, который будет использоваться при генерации тегов script / style. Установка этого значения также создаст мета-тег с значением `nonce`.
 
 ## css.modules
 
-- **Type:**
+- **Тип:**
   ```ts
   interface CSSModulesOptions {
     getJSON?: (
@@ -188,7 +191,7 @@ A nonce value placeholder that will be used when generating script / style tags.
       | ((name: string, filename: string, css: string) => string)
     hashPrefix?: string
     /**
-     * default: undefined
+     * по умолчанию: undefined
      */
     localsConvention?:
       | 'camelCase'
@@ -203,35 +206,35 @@ A nonce value placeholder that will be used when generating script / style tags.
   }
   ```
 
-Configure CSS modules behavior. The options are passed on to [postcss-modules](https://github.com/css-modules/postcss-modules).
+Настройте поведение CSS-модулей. Опции передаются в [postcss-modules](https://github.com/css-modules/postcss-modules).
 
-This option doesn't have any effect when using [Lightning CSS](../guide/features.md#lightning-css). If enabled, [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) should be used instead.
+Эта опция не имеет эффекта при использовании [Lightning CSS](../guide/features.md#lightning-css). Если включено, следует использовать [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) вместо этого.
 
 ## css.postcss
 
-- **Type:** `string | (postcss.ProcessOptions & { plugins?: postcss.AcceptedPlugin[] })`
+- **Тип:** `string | (postcss.ProcessOptions & { plugins?: postcss.AcceptedPlugin[] })`
 
-Inline PostCSS config or a custom directory to search PostCSS config from (default is project root).
+Встроенная конфигурация PostCSS или пользовательская директория для поиска конфигурации PostCSS (по умолчанию — корень проекта).
 
-For inline PostCSS config, it expects the same format as `postcss.config.js`. But for `plugins` property, only [array format](https://github.com/postcss/postcss-load-config/blob/main/README.md#array) can be used.
+Для встроенной конфигурации PostCSS ожидается такой же формат, как в `postcss.config.js`. Однако для свойства `plugins` можно использовать только [формат массива](https://github.com/postcss/postcss-load-config/blob/main/README.md#array).
 
-The search is done using [postcss-load-config](https://github.com/postcss/postcss-load-config) and only the supported config file names are loaded.
+Поиск выполняется с помощью [postcss-load-config](https://github.com/postcss/postcss-load-config), и загружаются только поддерживаемые имена файлов конфигурации.
 
-Note if an inline config is provided, Vite will not search for other PostCSS config sources.
+Обратите внимание, что если предоставлена встроенная конфигурация, Vite не будет искать другие источники конфигурации PostCSS.
 
 ## css.preprocessorOptions
 
-- **Type:** `Record<string, object>`
+- **Тип:** `Record<string, object>`
 
-Specify options to pass to CSS pre-processors. The file extensions are used as keys for the options. The supported options for each preprocessors can be found in their respective documentation:
+Укажите параметры, которые будут переданы CSS-препроцессорам. Расширения файлов используются в качестве ключей для параметров. Поддерживаемые параметры для каждого препроцессора можно найти в их соответствующей документации:
 
-- `sass`/`scss` - top level option `api: "legacy" | "modern"` (default `"legacy"`) allows switching which sass API to use. [Options (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions), [Options (modern)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/).
-- `less` - [Options](https://lesscss.org/usage/#less-options).
-- `styl`/`stylus` - Only [`define`](https://stylus-lang.com/docs/js.html#define-name-node) is supported, which can be passed as an object.
+- `sass`/`scss` - верхний уровень опции `api: "legacy" | "modern"` (по умолчанию `"legacy"`), позволяющий переключаться между API Sass. [Опции (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions), [Опции (modern)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/).
+- `less` - [Опции](https://lesscss.org/usage/#less-options).
+- `styl`/`stylus` - Поддерживается только [`define`](https://stylus-lang.com/docs/js.html#define-name-node), который можно передать в виде объекта.
 
-All preprocessor options also support the `additionalData` option, which can be used to inject extra code for each style content.
+Все параметры препроцессора также поддерживают опцию `additionalData`, которая может быть использована для внедрения дополнительного кода в каждое содержимое стиля.
 
-**Example:**
+**Пример:**
 
 ```js
 export default defineConfig({
@@ -246,7 +249,7 @@ export default defineConfig({
         },
       },
       scss: {
-        api: 'modern', // or "legacy"
+        api: 'modern', // или "legacy"
         importers: [
           // ...
         ],
@@ -258,11 +261,11 @@ export default defineConfig({
 
 ### css.preprocessorOptions[extension].additionalData
 
-- **Type:** `string | ((source: string, filename: string) => (string | { content: string; map?: SourceMap }))`
+- **Тип:** `string | ((source: string, filename: string) => (string | { content: string; map?: SourceMap }))`
 
-This option can be used to inject extra code for each style content. Note that if you include actual styles and not just variables, those styles will be duplicated in the final bundle.
+Эта опция может быть использована для внедрения дополнительного кода в каждое содержимое стиля. Обратите внимание, что если вы включаете фактические стили, а не только переменные, эти стили будут дублироваться в финальной сборке.
 
-**Example:**
+**Пример:**
 
 ```js
 export default defineConfig({
@@ -278,36 +281,36 @@ export default defineConfig({
 
 ## css.preprocessorMaxWorkers
 
-- **Experimental:** [Give Feedback](https://github.com/vitejs/vite/discussions/15835)
-- **Type:** `number | true`
-- **Default:** `0` (does not create any workers and run in the main thread)
+- **Экспериментально:** [Оставить отзыв](https://github.com/vitejs/vite/discussions/15835)
+- **Тип:** `number | true`
+- **По умолчанию:** `0` (не создает никаких воркеров и работает в основном потоке)
 
-If this option is set, CSS preprocessors will run in workers when possible. `true` means the number of CPUs minus 1.
+Если эта опция установлена, CSS-препроцессоры будут работать в воркерах, когда это возможно. Значение `true` означает количество ЦПУ минус 1.
 
 ## css.devSourcemap
 
-- **Experimental:** [Give Feedback](https://github.com/vitejs/vite/discussions/13845)
-- **Type:** `boolean`
-- **Default:** `false`
+- **Экспериментально:** [Оставить отзыв](https://github.com/vitejs/vite/discussions/13845)
+- **Тип:** `boolean`
+- **По умолчанию:** `false`
 
-Whether to enable sourcemaps during dev.
+Включать ли карты источников во время разработки.
 
 ## css.transformer
 
-- **Experimental:** [Give Feedback](https://github.com/vitejs/vite/discussions/13835)
-- **Type:** `'postcss' | 'lightningcss'`
-- **Default:** `'postcss'`
+- **Экспериментально:** [Оставить отзыв](https://github.com/vitejs/vite/discussions/13835)
+- **Тип:** `'postcss' | 'lightningcss'`
+- **По умолчанию:** `'postcss'`
 
-Selects the engine used for CSS processing. Check out [Lightning CSS](../guide/features.md#lightning-css) for more information.
+Выбирает движок, используемый для обработки CSS. Ознакомьтесь с [Lightning CSS](../guide/features.md#lightning-css) для получения дополнительной информации.
 
-::: info Duplicate `@import`s
-Note that postcss (postcss-import) has a different behavior with duplicated `@import` from browsers. See [postcss/postcss-import#462](https://github.com/postcss/postcss-import/issues/462).
+::: info Дублирующиеся `@import`
+Обратите внимание, что postcss (postcss-import) имеет другое поведение с дублирующимися `@import` по сравнению с браузерами. См. [postcss/postcss-import#462](https://github.com/postcss/postcss-import/issues/462).
 :::
 
 ## css.lightningcss
 
-- **Experimental:** [Give Feedback](https://github.com/vitejs/vite/discussions/13835)
-- **Type:**
+- **Экспериментально:** [Оставить отзыв](https://github.com/vitejs/vite/discussions/13835)
+- **Тип:**
 
 ```js
 import type {
@@ -334,29 +337,29 @@ import type {
 }
 ```
 
-Configures Lightning CSS. Full transform options can be found in [the Lightning CSS repo](https://github.com/parcel-bundler/lightningcss/blob/master/node/index.d.ts).
+Настраивает Lightning CSS. Полные параметры трансформации можно найти в [репозитории Lightning CSS](https://github.com/parcel-bundler/lightningcss/blob/master/node/index.d.ts).
 
 ## json.namedExports
 
-- **Type:** `boolean`
-- **Default:** `true`
+- **Тип:** `boolean`
+- **По умолчанию:** `true`
 
-Whether to support named imports from `.json` files.
+Поддерживать ли именованные импорты из файлов `.json`.
 
 ## json.stringify
 
-- **Type:** `boolean`
-- **Default:** `false`
+- **Тип:** `boolean`
+- **По умолчанию:** `false`
 
-If set to `true`, imported JSON will be transformed into `export default JSON.parse("...")` which is significantly more performant than Object literals, especially when the JSON file is large.
+Если установлено значение `true`, импортированный JSON будет преобразован в `export default JSON.parse("...")`, что значительно более производительно, чем литералы объектов, особенно когда файл JSON большой.
 
-Enabling this disables named imports.
+Включение этой опции отключает именованные импорты.
 
 ## esbuild
 
-- **Type:** `ESBuildOptions | false`
+- **Тип:** `ESBuildOptions | false`
 
-`ESBuildOptions` extends [esbuild's own transform options](https://esbuild.github.io/api/#transform). The most common use case is customizing JSX:
+`ESBuildOptions` расширяет [опции трансформации esbuild](https://esbuild.github.io/api/#transform). Наиболее распространённый случай использования — это настройка JSX:
 
 ```js
 export default defineConfig({
@@ -367,9 +370,9 @@ export default defineConfig({
 })
 ```
 
-By default, esbuild is applied to `ts`, `jsx` and `tsx` files. You can customize this with `esbuild.include` and `esbuild.exclude`, which can be a regex, a [picomatch](https://github.com/micromatch/picomatch#globbing-features) pattern, or an array of either.
+По умолчанию esbuild применяется к файлам `ts`, `jsx` и `tsx`. Вы можете настроить это с помощью `esbuild.include` и `esbuild.exclude`, которые могут быть регулярным выражением, шаблоном [picomatch](https://github.com/micromatch/picomatch#globbing-features) или массивом любого из них.
 
-In addition, you can also use `esbuild.jsxInject` to automatically inject JSX helper imports for every file transformed by esbuild:
+Кроме того, вы также можете использовать `esbuild.jsxInject`, чтобы автоматически внедрять импорты вспомогательных функций JSX для каждого файла, преобразованного с помощью esbuild:
 
 ```js
 export default defineConfig({
@@ -379,24 +382,24 @@ export default defineConfig({
 })
 ```
 
-When [`build.minify`](./build-options.md#build-minify) is `true`, all minify optimizations are applied by default. To disable [certain aspects](https://esbuild.github.io/api/#minify) of it, set any of `esbuild.minifyIdentifiers`, `esbuild.minifySyntax`, or `esbuild.minifyWhitespace` options to `false`. Note the `esbuild.minify` option can't be used to override `build.minify`.
+Когда [`build.minify`](./build-options.md#build-minify) установлено в `true`, все оптимизации минификации применяются по умолчанию. Чтобы отключить [определённые аспекты](https://esbuild.github.io/api/#minify) минификации, установите любое из параметров `esbuild.minifyIdentifiers`, `esbuild.minifySyntax` или `esbuild.minifyWhitespace` в `false`. Обратите внимание, что опцию `esbuild.minify` нельзя использовать для переопределения `build.minify`.
 
-Set to `false` to disable esbuild transforms.
+Установите в `false`, чтобы отключить трансформации esbuild.
 
 ## assetsInclude
 
-- **Type:** `string | RegExp | (string | RegExp)[]`
-- **Related:** [Static Asset Handling](/guide/assets)
+- **Тип:** `string | RegExp | (string | RegExp)[]`
+- **Связано:** [Обработка статических ресурсов](/guide/assets)
 
-Specify additional [picomatch patterns](https://github.com/micromatch/picomatch#globbing-features) to be treated as static assets so that:
+Укажите дополнительные [шаблоны picomatch](https://github.com/micromatch/picomatch#globbing-features), которые будут рассматриваться как статические ресурсы, чтобы:
 
-- They will be excluded from the plugin transform pipeline when referenced from HTML or directly requested over `fetch` or XHR.
+- Они были исключены из конвейера трансформации плагина, когда на них ссылаются из HTML или когда они запрашиваются напрямую через `fetch` или XHR.
 
-- Importing them from JS will return their resolved URL string (this can be overwritten if you have a `enforce: 'pre'` plugin to handle the asset type differently).
+- Импортирование их из JS вернёт строку их разрешённого URL (это можно переопределить, если у вас есть плагин с `enforce: 'pre'`, чтобы обрабатывать тип ресурса иначе).
 
-The built-in asset type list can be found [here](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts).
+Список встроенных типов ресурсов можно найти [здесь](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/constants.ts).
 
-**Example:**
+**Пример:**
 
 ```js
 export default defineConfig({
@@ -406,13 +409,13 @@ export default defineConfig({
 
 ## logLevel
 
-- **Type:** `'info' | 'warn' | 'error' | 'silent'`
+- **Тип:** `'info' | 'warn' | 'error' | 'silent'`
 
-Adjust console output verbosity. Default is `'info'`.
+Настройте уровень подробности вывода в консоль. По умолчанию установлено значение `'info'`.
 
 ## customLogger
 
-- **Type:**
+- **Тип:**
   ```ts
   interface Logger {
     info(msg: string, options?: LogOptions): void
@@ -425,7 +428,7 @@ Adjust console output verbosity. Default is `'info'`.
   }
   ```
 
-Use a custom logger to log messages. You can use Vite's `createLogger` API to get the default logger and customize it to, for example, change the message or filter out certain warnings.
+Используйте пользовательский логгер для записи сообщений. Вы можете использовать API Vite `createLogger`, чтобы получить логгер по умолчанию и настроить его, например, изменить сообщение или отфильтровать определённые предупреждения.
 
 ```ts twoslash
 import { createLogger, defineConfig } from 'vite'
@@ -434,7 +437,7 @@ const logger = createLogger()
 const loggerWarn = logger.warn
 
 logger.warn = (msg, options) => {
-  // Ignore empty CSS files warning
+  // Игнорировать предупреждение о пустых CSS-файлах
   if (msg.includes('vite:css') && msg.includes(' is empty')) return
   loggerWarn(msg, options)
 }
@@ -446,31 +449,31 @@ export default defineConfig({
 
 ## clearScreen
 
-- **Type:** `boolean`
-- **Default:** `true`
+- **Тип:** `boolean`
+- **По умолчанию:** `true`
 
-Set to `false` to prevent Vite from clearing the terminal screen when logging certain messages. Via command line, use `--clearScreen false`.
+Установите значение `false`, чтобы предотвратить очистку экрана терминала Vite при записи определённых сообщений. Через командную строку используйте `--clearScreen false`.
 
 ## envDir
 
-- **Type:** `string`
-- **Default:** `root`
+- **Тип:** `string`
+- **По умолчанию:** `root`
 
-The directory from which `.env` files are loaded. Can be an absolute path, or a path relative to the project root.
+Директория, из которой загружаются файлы `.env`. Может быть абсолютным путём или путём относительно корня проекта.
 
-See [here](/guide/env-and-mode#env-files) for more about environment files.
+Смотрите [здесь](/guide/env-and-mode#env-files) для получения дополнительной информации о файлах окружения.
 
 ## envPrefix
 
-- **Type:** `string | string[]`
-- **Default:** `VITE_`
+- **Тип:** `string | string[]`
+- **По умолчанию:** `VITE_`
 
-Env variables starting with `envPrefix` will be exposed to your client source code via import.meta.env.
+Переменные окружения, начинающиеся с `envPrefix`, будут доступны в вашем клиентском исходном коде через `import.meta.env`.
 
-:::warning SECURITY NOTES
-`envPrefix` should not be set as `''`, which will expose all your env variables and cause unexpected leaking of sensitive information. Vite will throw an error when detecting `''`.
+:::warning ЗАМЕТКИ ПО БЕЗОПАСНОСТИ
+`envPrefix` не должен быть установлен в `''`, так как это приведёт к раскрытию всех ваших переменных окружения и может вызвать неожиданное утечку конфиденциальной информации. Vite выдаст ошибку при обнаружении `''`.
 
-If you would like to expose an unprefixed variable, you can use [define](#define) to expose it:
+Если вы хотите раскрыть переменную без префикса, вы можете использовать [define](#define) для её экспонирования:
 
 ```js
 define: {
@@ -482,13 +485,13 @@ define: {
 
 ## appType
 
-- **Type:** `'spa' | 'mpa' | 'custom'`
-- **Default:** `'spa'`
+- **Тип:** `'spa' | 'mpa' | 'custom'`
+- **По умолчанию:** `'spa'`
 
-Whether your application is a Single Page Application (SPA), a [Multi Page Application (MPA)](../guide/build#multi-page-app), or Custom Application (SSR and frameworks with custom HTML handling):
+Независимо от того, является ли ваше приложение одностраничным приложением (SPA), [многостраничным приложением (MPA)](../guide/build#multi-page-app) или пользовательским приложением (SSR и фреймворки с пользовательской обработкой HTML):
 
-- `'spa'`: include HTML middlewares and use SPA fallback. Configure [sirv](https://github.com/lukeed/sirv) with `single: true` in preview
-- `'mpa'`: include HTML middlewares
-- `'custom'`: don't include HTML middlewares
+- `'spa'`: включите HTML-промежуточные программы и используйте резервное копирование SPA. Настройте [sirv](https://github.com/lukeed/sirv) с `single: true` в режиме предварительного просмотра
+- `'mpa'`: включите HTML-промежуточные программы
+- `'custom'`: не включайте HTML-промежуточные программы
 
-Learn more in Vite's [SSR guide](/guide/ssr#vite-cli). Related: [`server.middlewareMode`](./server-options#server-middlewaremode).
+Узнайте больше в [руководстве по SSR](/guide/ssr#vite-cli) Vite. Связано: [`server.middlewareMode`](./server-options#server-middlewaremode).
