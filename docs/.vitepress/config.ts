@@ -66,6 +66,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
 export default defineConfig({
   title: `Vite${additionalTitle}`,
   description: 'Инструментарий для фронтенда нового поколения',
+  base: '/vite-docs/',
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
