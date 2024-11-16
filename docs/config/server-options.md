@@ -370,9 +370,5 @@ export default defineConfig({
 ```
 
 ::: tip Примечание
-<<<<<<< HEAD
 [`server.sourcemapIgnoreList`](#server-sourcemapignorelist) и [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) необходимо устанавливать независимо. `server.sourcemapIgnoreList` — это конфигурация только для сервера и не получает своего значения по умолчанию из определённых опций rollup.
-=======
-[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) and [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) need to be set independently. `server.sourcemapIgnoreList` is a server only config and doesn't get its default value from the defined rollup options.
->>>>>>> 3b56690cbbca41a833dc3a66c65cc0c5d16bf456
 :::

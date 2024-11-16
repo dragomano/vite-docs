@@ -142,9 +142,9 @@ const foo = _foo.default
 
 ### Сочетания клавиш CLI требуют дополнительного нажатия `Enter` {#cli-shortcuts-require-an-additional-enter-press}
 
-Сочетания клавиш интерфейса командной строки, такие как `r` для перезапуска сервера разработки, теперь требуют дополнительного нажатия `Enter` для активации сочетания. Например, `r + Enter` для перезапуска сервера разработки.
+Сочетания клавиш интерфейса командной строки, такие как `r` для перезапуска dev-сервера, теперь требуют дополнительного нажатия `Enter` для активации сочетания. Например, `r + Enter` для перезапуска dev-сервера.
 
-Это изменение предотвращает захват и управление специфическими для ОС сочетаниями клавиш Vite, что позволяет лучше совместить сервер разработки Vite с другими процессами и избегает [предыдущих проблем](https://github.com/vitejs/vite/pull/14342).
+Это изменение предотвращает захват и управление специфическими для ОС сочетаниями клавиш Vite, что позволяет лучше совместить dev-сервер Vite с другими процессами и избегает [предыдущих проблем](https://github.com/vitejs/vite/pull/14342).
 
 ### Обновление поведения TypeScript для `experimentalDecorators` и `useDefineForClassFields` {#update-experimentalDecorators-and-useDefineForClassFields-typescript-behaviour}
 
@@ -214,7 +214,7 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf-8'))
 - [[#14119] refactor!: merge `PreviewServerForHook` into `PreviewServer` type](https://github.com/vitejs/vite/pull/14119)
   - Хук `configurePreviewServer` теперь принимает тип `PreviewServer` вместо типа `PreviewServerForHook`.
 - [[#14818] refactor(preview)!: use base middleware](https://github.com/vitejs/vite/pull/14818)
-  - Посредники, добавленные из возвращаемой функции в `configurePreviewServer`, теперь не имеют доступа к `base` при сравнении значения `req.url`. Это согласует поведение с сервером разработки. При необходимости вы можете проверить `base` из хука `configResolved`.
+  - Посредники, добавленные из возвращаемой функции в `configurePreviewServer`, теперь не имеют доступа к `base` при сравнении значения `req.url`. Это согласует поведение с dev-сервером. При необходимости вы можете проверить `base` из хука `configResolved`.
 - [[#14834] fix(types)!: expose httpServer with Http2SecureServer union](https://github.com/vitejs/vite/pull/14834)
   - Вместо `http.Server` теперь используется `http.Server | http2.Http2SecureServer`, где это уместно.
 

@@ -52,11 +52,7 @@ export default defineConfig({
 ```
 
 ::: tip ПРИМЕЧАНИЕ
-<<<<<<< HEAD
 Для пользователей TypeScript убедитесь, что вы добавили объявления типов в файл `env.d.ts` или `vite-env.d.ts`, чтобы получить проверку типов и интеллектуальные подсказки.
-=======
-For TypeScript users, make sure to add the type declarations in the `env.d.ts` or `vite-env.d.ts` file to get type checks and Intellisense.
->>>>>>> 3b56690cbbca41a833dc3a66c65cc0c5d16bf456
 
 Пример:
 

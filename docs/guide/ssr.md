@@ -65,7 +65,7 @@ if (import.meta.env.SSR) {
 
 This is statically replaced during build so it will allow tree-shaking of unused branches.
 
-## Настройка сервера разработки {#setting-up-the-dev-server}
+## Настройка dev-сервера {#setting-up-the-dev-server}
 
 При создании приложения SSR вы, вероятно, захотите иметь полный контроль над вашим основным сервером и отделить Vite от рабочей среды. Поэтому рекомендуется использовать Vite в режиме посредника. Вот пример с [express](https://expressjs.com/):
 
@@ -200,7 +200,7 @@ app.use('*', async (req, res, next) => {
 
 - Вместо `await vite.ssrLoadModule('/src/entry-server.js')` используйте `import('./dist/server/entry-server.js')` (этот файл является результатом сборки SSR).
 
-- Переместите создание и всё использование сервера разработки `vite` за условные ветви, предназначенные только для разработки, затем добавьте посредника для обслуживания статических файлов из `dist/client`.
+- Переместите создание и всё использование dev-сервера `vite` за условные ветви, предназначенные только для разработки, затем добавьте посредника для обслуживания статических файлов из `dist/client`.
 
 Обратитесь к [примерам проектов](#example-projects) для рабочей настройки.
 
@@ -292,7 +292,7 @@ export function mySSRPlugin() {
 
 ## Vite CLI {#vite-cli}
 
-Команды CLI `$ vite dev` и `$ vite preview` также могут использоваться для приложений SSR. Вы можете добавить свои посредники SSR к серверу разработки с помощью [`configureServer`](/guide/api-plugin#configureserver) и к серверу предварительного просмотра с помощью [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
+Команды CLI `$ vite dev` и `$ vite preview` также могут использоваться для приложений SSR. Вы можете добавить свои посредники SSR к dev-серверу с помощью [`configureServer`](/guide/api-plugin#configureserver) и к серверу предварительного просмотра с помощью [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
 
 :::tip Примечание
 Используйте пост-хук, чтобы ваше промежуточное ПО SSR выполнялось _после_ промежуточных ПО Vite.

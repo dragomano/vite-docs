@@ -357,7 +357,7 @@ export default defineConfig({
               link: '/config/build-options',
             },
             {
-              text: 'Параметры предварительного просмотра',
+              text: 'Параметры сервера предварительного просмотра',
               link: '/config/preview-options',
             },
             {
