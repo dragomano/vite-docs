@@ -122,11 +122,11 @@ export default defineConfig({
     ],
 
     algolia: {
-      appId: '7H67QR5P0A',
-      apiKey: 'deaab78bcdfe96b599497d25acc6460e',
-      indexName: 'vitejs',
+      appId: '2ACEBREEXB',
+      apiKey: 'a22b601c17d7f746322d0df34b5bbdb2',
+      indexName: 'dragomanoio',
       searchParameters: {
-        facetFilters: ['tags:en', 'tags:ru'],
+        //facetFilters: ['tags:en', 'tags:ru'],
       },
       placeholder: 'Поиск в документации',
       translations: {
