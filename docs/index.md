@@ -1,60 +1,47 @@
 ---
-layout: home
-
 title: Vite
 titleTemplate: Инструментарий для фронтенда нового поколения
+pageClass: landing dark
 
-hero:
-  name: Vite
-  text: Инструментарий для фронтенда нового поколения
-  tagline: Приготовьтесь к тому, что среда разработки наконец-то сможет догнать вас.
-  image:
-    src: /logo-with-shadow.png
-    alt: Vite
-  actions:
-    - theme: brand
-      text: Первые шаги
-      link: /guide/
-    - theme: alt
-      text: Почему Vite?
-      link: /guide/why
-    - theme: alt
-      text: GitHub
-      link: https://github.com/vitejs/vite
-    - theme: brand
-      text: ⚡ ViteConf 24!
-      link: https://viteconf.org/?utm=vite-homepage
-
-features:
-  - icon: 💡
-    title: Мгновенный запуск сервера
-    details: Обслуживание файлов по требованию через собственный ESM, не требующий подключения!
-  - icon: ⚡️
-    title: Молниеносный HMR
-    details: Горячая замена модулей (HMR), которая остаётся быстрой независимо от размера приложения.
-  - icon: 🛠️
-    title: Богатые возможности
-    details: Встроенная поддержка TypeScript, JSX, CSS и других языков.
-  - icon: 📦
-    title: Оптимизированная сборка
-    details: Предварительно настроенная сборка Rollup с поддержкой многостраничного режима и режима библиотеки.
-  - icon: 🔩
-    title: Универсальные плагины
-    details: Интерфейс плагина Rollup-superset, разделяемый между dev и build.
-  - icon: 🔑
-    title: Полностью типизированные API
-    details: Гибкие программные API с полной типизацией TypeScript.
+layout: home
+aside: false
+editLink: false
+markdownStyles: false
 ---
 
 <script setup>
-import { onMounted } from 'vue'
-
-onMounted(() => {
-  const urlParams = new URLSearchParams(window.location.search)
-  if (urlParams.get('uwu') != null) {
-    const img = document.querySelector('.VPHero .VPImage.image-src')
-    img.src = '/logo-uwu.png'
-    img.alt = 'Vite Kawaii Logo by @icarusgkx'
-  }
-})
+import Hero from '.vitepress/theme/components/landing/1. hero-section/HeroSection.vue'
+import FeatureSection from './.vitepress/theme/components/landing/2. feature-section/FeatureSection.vue'
+import FrameworksSection from './.vitepress/theme/components/landing/3. frameworks-section/FrameworksSection.vue'
+import CommunitySection from './.vitepress/theme/components/landing/4. community-section/CommunitySection.vue'
+import SponsorSection from './.vitepress/theme/components/landing/5. sponsor-section/SponsorSection.vue'
+import GetStartedSection from '.vitepress/theme/components/landing/6. get-started-section/GetStartedSection.vue'
+import FeatureInstantServerStart from './.vitepress/theme/components/landing/2. feature-section/FeatureInstantServerStart.vue'
+import FeatureHMR from './.vitepress/theme/components/landing/2. feature-section/FeatureHMR.vue'
+import FeatureRichFeatures from './.vitepress/theme/components/landing/2. feature-section/FeatureRichFeatures.vue'
+import FeatureOptimizedBuild from './.vitepress/theme/components/landing/2. feature-section/FeatureOptimizedBuild.vue'
+import FeatureFlexiblePlugins from './.vitepress/theme/components/landing/2. feature-section/FeatureFlexiblePlugins.vue'
+import FeatureTypedAPI from './.vitepress/theme/components/landing/2. feature-section/FeatureTypedAPI.vue'
+import FeatureSSRSupport from './.vitepress/theme/components/landing/2. feature-section/FeatureSSRSupport.vue'
+import FeatureCI from './.vitepress/theme/components/landing/2. feature-section/FeatureCI.vue'
 </script>
+
+<div class="VPHome">
+  <Hero/>
+  <FeatureSection title="Переосмысление опыта разработчиков" description="Vite снова упрощает веб-разработку" type="blue">
+    <FeatureInstantServerStart />
+    <FeatureHMR />
+    <FeatureRichFeatures />
+    <FeatureOptimizedBuild />
+  </FeatureSection>
+  <FeatureSection title="Общий фундамент, на котором можно строить" type="pink" class="feature-section--flip">
+    <FeatureFlexiblePlugins />
+    <FeatureTypedAPI />
+    <FeatureSSRSupport />
+    <FeatureCI />
+  </FeatureSection>
+  <FrameworksSection />
+  <CommunitySection />
+  <SponsorSection />
+  <GetStartedSection />
+</div>
