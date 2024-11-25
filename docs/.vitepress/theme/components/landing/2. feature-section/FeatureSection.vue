@@ -216,6 +216,7 @@ const startAnimation = () => {
       position: relative;
       z-index: 2;
       pointer-events: none;
+      text-align: center;
 
       .meta__title {
         color: #fff;
