@@ -514,7 +514,9 @@ export default defineConfig({
     return pageData
   },
   markdown: {
-    codeTransformers: [transformerTwoslash()],
+    /* codeTransformers: [
+      transformerTwoslash()
+    ], */
     config(md) {
       md.use(groupIconMdPlugin)
     },
