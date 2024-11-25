@@ -1,5 +1,7 @@
 # Общие параметры {#shared-options}
 
+Если не указано иное, параметры, описанные в этом разделе, применяются ко всем процессам разработки, сборки и режима предварительного просмотра.
+
 ## root
 
 - **Тип:** `string`
@@ -34,7 +36,7 @@
 
 ## define
 
-- **Тип:** `Record<string, string>`
+- **Тип:** `Record<string, any>`
 
 Определите замены глобальных констант. Записи будут определены как глобальные во время разработки и статически заменены во время сборки.
 
@@ -46,8 +48,8 @@ Vite использует [esbuild с параметром `define`](https://esb
 export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify('v1.0.0'),
-    __API_URL__: 'window.__backend_api_url',
-  },
+    __API_URL__: 'window.__backend_api_url'
+  }
 })
 ```
 
@@ -115,6 +117,7 @@ declare const __APP_VERSION__: string
 ## resolve.conditions
 
 - **Тип:** `string[]`
+- **По умолчанию:** `['module', 'browser', 'development|production']` (`defaultClientConditions`)
 
 Дополнительные разрешённые условия при разрешении [условных экспортов](https://nodejs.org/api/packages.html#packages_conditional_exports) из пакета.
 
@@ -133,7 +136,9 @@ declare const __APP_VERSION__: string
 
 Здесь `import` и `require` являются «условиями». Условия могут быть вложенными и должны указываться от наиболее специфичных к наименее специфичным.
 
-Vite имеет список «разрешённых условий» и будет соответствовать первому условию, которое находится в разрешённом списке. Разрешённые условия по умолчанию: `import`, `module`, `browser`, `default` и `production/development` в зависимости от текущего режима. Опция конфигурации `resolve.conditions` позволяет указывать дополнительные разрешённые условия.
+`development|production` — это специальное значение, которое заменяется на `production` или `development` в зависимости от значения `process.env.NODE_ENV`. Оно заменяется на `production`, когда `process.env.NODE_ENV === 'production'`, и на `development` в противном случае.
+
+Обратите внимание, что условия `import`, `require`, `default` всегда применяются, если требования выполнены.
 
 :::warning Разрешение экспортов подкаталогов
 Ключи экспорта, заканчивающиеся на `/`, устарели в Node и могут работать некорректно. Пожалуйста, свяжитесь с автором пакета, чтобы использовать [`*` шаблоны подкаталогов](https://nodejs.org/api/packages.html#package-entry-points) вместо этого.
@@ -142,7 +147,7 @@ Vite имеет список «разрешённых условий» и буд
 ## resolve.mainFields
 
 - **Тип:** `string[]`
-- **По умолчанию:** `['browser', 'module', 'jsnext:main', 'jsnext']`
+- **По умолчанию:** `['browser', 'module', 'jsnext:main', 'jsnext']` (`defaultClientMainFields`)
 
 Список полей в `package.json`, которые будут проверяться при разрешении точки входа пакета. Обратите внимание, что это имеет меньший приоритет, чем условные экспорты, разрешённые из поля `exports`: если точка входа успешно разрешена из `exports`, поле main будет проигнорировано.
 
@@ -177,7 +182,7 @@ Vite имеет список «разрешённых условий» и буд
     getJSON?: (
       cssFileName: string,
       json: Record<string, string>,
-      outputFileName: string,
+      outputFileName: string
     ) => void
     scopeBehaviour?: 'global' | 'local'
     globalModulePaths?: RegExp[]
@@ -197,7 +202,7 @@ Vite имеет список «разрешённых условий» и буд
       | ((
           originalClassName: string,
           generatedClassName: string,
-          inputFile: string,
+          inputFile: string
         ) => string)
   }
   ```
@@ -214,7 +219,7 @@ Vite имеет список «разрешённых условий» и буд
 
 Для встроенной конфигурации PostCSS ожидается такой же формат, как в `postcss.config.js`. Однако для свойства `plugins` можно использовать только [формат массива](https://github.com/postcss/postcss-load-config/blob/main/README.md#array).
 
-Поиск выполняется с помощью [postcss-load-config](https://github.com/postcss/postcss-load-config), и загружаются только поддерживаемые имена файлов конфигурации.
+Поиск выполняется с помощью [postcss-load-config](https://github.com/postcss/postcss-load-config), и загружаются только поддерживаемые имена файлов конфигурации. Конфигурационные файлы вне корня рабочего пространства (или [корня проекта](/guide/#index-html-and-project-root), если рабочее пространство не найдено) по умолчанию не ищутся. При необходимости вы можете указать пользовательский путь вне корня для загрузки конкретного конфигурационного файла.
 
 Обратите внимание, что если предоставлена встроенная конфигурация, Vite не будет искать другие источники конфигурации PostCSS.
 
@@ -224,11 +229,12 @@ Vite имеет список «разрешённых условий» и буд
 
 Укажите параметры, которые будут переданы CSS-препроцессорам. Расширения файлов используются в качестве ключей для параметров. Поддерживаемые параметры для каждого препроцессора можно найти в их соответствующей документации:
 
-- `sass`/`scss` - верхний уровень опции `api: "legacy" | "modern"` (по умолчанию `"legacy"`), позволяющий переключаться между API Sass. [Опции (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions), [Опции (modern)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/).
-- `less` - [Опции](https://lesscss.org/usage/#less-options).
-- `styl`/`stylus` - Поддерживается только [`define`](https://stylus-lang.com/docs/js.html#define-name-node), который можно передать в виде объекта.
-
-Все параметры препроцессора также поддерживают опцию `additionalData`, которая может быть использована для внедрения дополнительного кода в каждое содержимое стиля.
+- `sass`/`scss`:
+  - Выберите API Sass для использования с `api: "modern-compiler" | "modern" | "legacy"` (по умолчанию `"modern-compiler"`, если установлен `sass-embedded`, в противном случае `"modern"`). Для достижения наилучшей производительности рекомендуется использовать `api: "modern-compiler"` с пакетом `sass-embedded`. `legacy` API устарел и будет удален в версии 7.
+  - [Опции (modern)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
+  - [Опции (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions).
+- `less`: [Опции](https://lesscss.org/usage/#less-options).
+- `styl`/`stylus`: Поддерживается только [`define`](https://stylus-lang.com/docs/js.html#define-name-node), который можно передать в виде объекта.
 
 **Пример:**
 
@@ -237,21 +243,21 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        math: 'parens-division',
+        math: 'parens-division'
       },
       styl: {
         define: {
-          $specialColor: new stylus.nodes.RGBA(51, 197, 255, 1),
-        },
+          $specialColor: new stylus.nodes.RGBA(51, 197, 255, 1)
+        }
       },
       scss: {
-        api: 'modern', // или "legacy"
+        api: 'modern-compiler', // или "modern", "legacy"
         importers: [
           // ...
-        ],
-      },
-    },
-  },
+        ]
+      }
+    }
+  }
 })
 ```
 
@@ -268,10 +274,10 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `$injectedColor: orange;`,
-      },
-    },
-  },
+        additionalData: `$injectedColor: orange;`
+      }
+    }
+  }
 })
 ```
 
@@ -315,7 +321,7 @@ import type {
   Features,
   NonStandard,
   PseudoClasses,
-  Targets,
+  Targets
 } from 'lightningcss'
 ```
 
@@ -344,12 +350,12 @@ import type {
 
 ## json.stringify
 
-- **Тип:** `boolean`
-- **По умолчанию:** `false`
+- **Тип:** `boolean | 'auto'`
+- **По умолчанию:** `'auto'`
 
 Если установлено значение `true`, импортированный JSON будет преобразован в `export default JSON.parse("...")`, что значительно более производительно, чем литералы объектов, особенно когда файл JSON большой.
 
-Включение этой опции отключает именованные импорты.
+Если установлено значение `'auto'`, данные будут сериализованы в строку только в том случае, если [они весят больше 10 КБ](https://v8.dev/blog/cost-of-javascript-2019#json:~:text=A%20good%20rule%20of%20thumb%20is%20to%20apply%20this%20technique%20for%20objects%20of%2010%20kB%20or%20larger).
 
 ## esbuild
 
@@ -361,8 +367,8 @@ import type {
 export default defineConfig({
   esbuild: {
     jsxFactory: 'h',
-    jsxFragment: 'Fragment',
-  },
+    jsxFragment: 'Fragment'
+  }
 })
 ```
 
@@ -373,8 +379,8 @@ export default defineConfig({
 ```js
 export default defineConfig({
   esbuild: {
-    jsxInject: `import React from 'react'`,
-  },
+    jsxInject: `import React from 'react'`
+  }
 })
 ```
 
@@ -399,7 +405,7 @@ export default defineConfig({
 
 ```js
 export default defineConfig({
-  assetsInclude: ['**/*.gltf'],
+  assetsInclude: ['**/*.gltf']
 })
 ```
 
@@ -439,7 +445,7 @@ logger.warn = (msg, options) => {
 }
 
 export default defineConfig({
-  customLogger: logger,
+  customLogger: logger
 })
 ```
 
@@ -491,3 +497,12 @@ define: {
 - `'custom'`: не включайте HTML-промежуточные программы
 
 Узнайте больше в [руководстве по SSR](/guide/ssr#vite-cli) Vite. Связано: [`server.middlewareMode`](./server-options#server-middlewaremode).
+
+## future
+
+- **Тип:** `Record<string, 'warn' | undefined>`
+- **Связано:** [Критические изменения](/changes/)
+
+Включите будущие разрушительные изменения, чтобы подготовиться к плавной миграции на следующую основную версию Vite. Список может быть обновлён, добавлен или удалён в любое время по мере разработки новых функций.
+
+Смотрите страницу [Критические изменения](/changes/) для получения подробной информации о возможных опциях.

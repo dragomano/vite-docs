@@ -103,15 +103,16 @@ export default defineConfig(async ({ command, mode }) => {
 ```js twoslash
 import { defineConfig, loadEnv } from 'vite'
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ mode }) => {
   // Загрузите файл окружения на основе `mode` в текущем рабочем каталоге.
-  // Установите третий параметр в '' для загрузки всех переменных окружения независимо от префикса `VITE_`.
+  // Установите третий параметр в '' для загрузки всех переменных окружения
+  // независимо от префикса `VITE_`.
   const env = loadEnv(mode, process.cwd(), '')
   return {
     // конфигурация vite
     define: {
-      __APP_ENV__: JSON.stringify(env.APP_ENV),
-    },
+      __APP_ENV__: JSON.stringify(env.APP_ENV)
+    }
   }
 })
 ```

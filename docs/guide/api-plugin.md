@@ -6,9 +6,9 @@
 
 ## Создание плагина {#authoring-a-plugin}
 
-Vite стремится предлагать устоявшиеся паттерны из коробки, поэтому перед созданием нового плагина убедитесь, что вы проверили [Руководство по функциям](https://vitejs.dev/guide/features), чтобы узнать, покрывает ли оно вашу потребность. Также ознакомьтесь с доступными плагинами сообщества, как в виде [совместимого плагина Rollup](https://github.com/rollup/awesome), так и [специфичных для Vite плагинов](https://github.com/vitejs/awesome-vite#plugins).
+Vite стремится предлагать устоявшиеся паттерны из коробки, поэтому перед созданием нового плагина убедитесь, что вы проверили [Руководство по функциям](https://vite.dev/guide/features), чтобы узнать, покрывает ли оно вашу потребность. Также ознакомьтесь с доступными плагинами сообщества, как в виде [совместимого плагина Rollup](https://github.com/rollup/awesome), так и [специфичных для Vite плагинов](https://github.com/vitejs/awesome-vite#plugins).
 
-При создании плагина вы можете встроить его в ваш `vite.config.js`. Нет необходимости создавать для него новый пакет. Как только вы увидите, что плагин был полезен в ваших проектах, подумайте о том, чтобы поделиться им для помощи другим [в экосистеме](https://chat.vitejs.dev).
+При создании плагина вы можете встроить его в ваш `vite.config.js`. Нет необходимости создавать для него новый пакет. Как только вы увидите, что плагин был полезен в ваших проектах, подумайте о том, чтобы поделиться им для помощи другим [в экосистеме](https://chat.vite.dev).
 
 ::: tip
 При обучении, отладке или написании плагинов мы рекомендуем включить [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) в ваш проект. Он позволяет вам просматривать промежуточное состояние плагинов Vite. После установки вы можете посетить `localhost:5173/__inspect/`, чтобы просмотреть модули и стек трансформаций вашего проекта. Ознакомьтесь с инструкциями по установке в [документации vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect).
@@ -548,11 +548,11 @@ normalizePath('foo/bar') // 'foo/bar'
 
 ## Фильтрация, шаблон include/exclude {#filtering-include-exclude-pattern}
 
-Vite предоставляет функцию [`createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) из `@rollup/pluginutils`, чтобы побудить специфичные для Vite плагины и интеграции использовать стандартный шаблон фильтрации include/exclude, который также используется в самом ядре Vite.
+Vite предоставляет функцию [`createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) из `@rollup/pluginutils`, чтобы побудить специфичные для Vite плагины и интеграции использовать стандартный шаблон фильтрации include/exclude, который также используется в Vite Core.
 
 ## Связь клиент-сервер {#client-server-communication}
 
-Since Vite 2.9, we provide some utilities for plugins to help handle the communication with clients.
+Начиная с Vite 2.9, мы предоставляем некоторые утилиты для плагинов, чтобы помочь в обработке связи с клиентами.
 
 ### От сервера к клиенту {#server-to-client}
 

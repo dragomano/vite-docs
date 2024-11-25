@@ -2,13 +2,15 @@
 
 - **Связано:** [Предварительное объединение зависимостей](/guide/dep-pre-bundling)
 
+Если не указано иное, параметры в этом разделе применяются только к оптимизатору зависимостей, который используется только в режиме разработки.
+
 ## optimizeDeps.entries
 
 - **Тип:** `string | string[]`
 
 По умолчанию Vite будет просматривать все ваши `.html` файлы, чтобы обнаружить зависимости, которые необходимо предварительно объединить (игнорируя `node_modules`, `build.outDir`, `__tests__` и `coverage`). Если указано `build.rollupOptions.input`, Vite будет просматривать эти точки входа вместо этого.
 
-Если ни один из этих вариантов не подходит для ваших нужд, вы можете указать пользовательские точки входа, используя эту опцию - значение должно быть [шаблоном fast-glob](https://github.com/mrmlnc/fast-glob#basic-syntax) или массивом шаблонов, которые относительны от корня проекта Vite. Это перезапишет вывод по умолчанию для точек входа. Только папки `node_modules` и `build.outDir` будут игнорироваться по умолчанию, когда `optimizeDeps.entries` явно определены. Если другие папки необходимо игнорировать, вы можете использовать шаблон игнорирования как часть списка точек входа, помеченный начальным `!`.
+Если ни один из этих вариантов не подходит для ваших нужд, вы можете указать пользовательские точки входа, используя эту опцию - значение должно быть [шаблоном tinyglobby](https://github.com/SuperchupuDev/tinyglobby) или массивом шаблонов, которые относительны от корня проекта Vite. Это перезапишет вывод по умолчанию для точек входа. Только папки `node_modules` и `build.outDir` будут игнорироваться по умолчанию, когда `optimizeDeps.entries` явно определены. Если другие папки необходимо игнорировать, вы можете использовать шаблон игнорирования как часть списка точек входа, помеченный начальным `!`. Если вы не хотите игнорировать `node_modules` и `build.outDir`, вы можете указать вместо этого буквенные строковые пути (без шаблонов `tinyglobby`).
 
 ## optimizeDeps.exclude
 
@@ -24,8 +26,8 @@ import { defineConfig } from 'vite'
 // ---cut---
 export default defineConfig({
   optimizeDeps: {
-    include: ['esm-dep > cjs-dep'],
-  },
+    include: ['esm-dep > cjs-dep']
+  }
 })
 ```
 
@@ -44,24 +46,24 @@ import { defineConfig } from 'vite'
 // ---cut---
 export default defineConfig({
   optimizeDeps: {
-    include: ['my-lib/components/**/*.vue'],
-  },
+    include: ['my-lib/components/**/*.vue']
+  }
 })
 ```
 
 ## optimizeDeps.esbuildOptions
 
-- **Тип:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#simple-options)`,
-  | 'bundle'
-  | 'entryPoints'
-  | 'external'
-  | 'write'
-  | 'watch'
-  | 'outdir'
-  | 'outfile'
-  | 'outbase'
-  | 'outExtension'
-  | 'metafile'>`
+- **Тип:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
+| 'bundle'
+| 'entryPoints'
+| 'external'
+| 'write'
+| 'watch'
+| 'outdir'
+| 'outfile'
+| 'outbase'
+| 'outExtension'
+| 'metafile'>`
 
 Опции, которые можно передать esbuild во время сканирования зависимостей и оптимизации.
 

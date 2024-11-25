@@ -8,9 +8,10 @@ export const core = [
     desc: 'Независимый разработчик с открытым исходным кодом, создатель Vue.js и Vite.',
     links: [
       { icon: 'github', link: 'https://github.com/yyx990803' },
-      { icon: 'twitter', link: 'https://twitter.com/youyuxi' },
+      { icon: 'x', link: 'https://x.com/youyuxi' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/evanyou.me' }
     ],
-    sponsor: 'https://github.com/sponsors/yyx990803',
+    sponsor: 'https://github.com/sponsors/yyx990803'
   },
   {
     avatar: 'https://www.github.com/patak-dev.png',
@@ -21,10 +22,10 @@ export const core = [
     desc: 'Член основной команды Vite. Член команды Vue.',
     links: [
       { icon: 'github', link: 'https://github.com/patak-dev' },
-      { icon: 'twitter', link: 'https://twitter.com/patak_dev' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@patak' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/patak.dev' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@patak' }
     ],
-    sponsor: 'https://github.com/sponsors/patak-dev',
+    sponsor: 'https://github.com/sponsors/patak-dev'
   },
   {
     avatar: 'https://www.github.com/antfu.png',
@@ -35,22 +36,23 @@ export const core = [
     desc: 'Член основной команды Vite & Vue. Работает в NuxtLabs.',
     links: [
       { icon: 'github', link: 'https://github.com/antfu' },
-      { icon: 'twitter', link: 'https://twitter.com/antfu7' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@antfu' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/antfu.me' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@antfu' }
     ],
-    sponsor: 'https://github.com/sponsors/antfu',
+    sponsor: 'https://github.com/sponsors/antfu'
   },
   {
     avatar: 'https://github.com/bluwy.png',
     name: 'Бьорн Лу',
     title: 'Разработчик с открытым исходным кодом',
-    desc: 'Резиденция ядра Astro. Член основной команды Svelte и Vite.',
+    desc: 'Член основной команды Vite, Astro и Svelte.',
     links: [
       { icon: 'github', link: 'https://github.com/bluwy' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/bluwy.me' },
       { icon: 'twitter', link: 'https://twitter.com/bluwyoo' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@bluwy' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@bluwy' }
     ],
-    sponsor: 'https://bjornlu.com/sponsor',
+    sponsor: 'https://bjornlu.com/sponsor'
   },
   {
     avatar: 'https://github.com/sapphi-red.png',
@@ -59,10 +61,11 @@ export const core = [
     desc: 'Член основной команды Vite. Зовите меня сапфи, или грин, или мидори ;)',
     links: [
       { icon: 'github', link: 'https://github.com/sapphi-red' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/sapphi.red' },
       { icon: 'twitter', link: 'https://twitter.com/sapphi_red' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@sapphi_red' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@sapphi_red' }
     ],
-    sponsor: 'https://github.com/sponsors/sapphi-red',
+    sponsor: 'https://github.com/sponsors/sapphi-red'
   },
   {
     avatar: 'https://github.com/ArnaudBarre.png',
@@ -71,10 +74,13 @@ export const core = [
     desc: 'Увлечён работой с TypeScript и React.',
     links: [
       { icon: 'github', link: 'https://github.com/ArnaudBarre' },
-      { icon: 'twitter', link: 'https://twitter.com/_ArnaudBarre' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@ArnaudBarre' },
+      {
+        icon: 'bluesky',
+        link: 'https://bsky.app/profile/arnaud-barre.bsky.social'
+      },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@ArnaudBarre' }
     ],
-    sponsor: 'https://github.com/sponsors/ArnaudBarre',
+    sponsor: 'https://github.com/sponsors/ArnaudBarre'
   },
   {
     avatar: 'https://github.com/dominikg.png',
@@ -83,21 +89,21 @@ export const core = [
     desc: 'Член команды Vite и Svelte',
     links: [
       { icon: 'github', link: 'https://github.com/dominikg' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@dominikg' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@dominikg' }
     ],
-    sponsor: 'https://github.com/sponsors/dominikg',
+    sponsor: 'https://github.com/sponsors/dominikg'
   },
   {
     avatar: 'https://github.com/sheremet-va.png',
     name: 'Владимир',
-    title: 'Основной член команды Vitest & Vite',
+    title: 'Член основной команды Vitest & Vite',
     desc: 'Fullstack-разработчик с открытым исходным кодом',
     links: [
       { icon: 'github', link: 'https://github.com/sheremet-va' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@sheremet_va' },
-      { icon: 'twitter', link: 'https://twitter.com/sheremet_va' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/erus.dev' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@sheremet_va' }
     ],
-    sponsor: 'https://github.com/sponsors/sheremet-va',
+    sponsor: 'https://github.com/sponsors/sheremet-va'
   },
   {
     avatar: 'https://github.com/hi-ogawa.png',
@@ -106,10 +112,10 @@ export const core = [
     desc: 'Энтузиаст открытого исходного кода',
     links: [
       { icon: 'github', link: 'https://github.com/hi-ogawa' },
-      { icon: 'twitter', link: 'https://twitter.com/hiroshi_18181' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/hiogawa.bsky.social' }
     ],
-    sponsor: 'https://github.com/sponsors/hi-ogawa',
-  },
+    sponsor: 'https://github.com/sponsors/hi-ogawa'
+  }
 ]
 
 export const emeriti = [
@@ -120,8 +126,12 @@ export const emeriti = [
     desc: 'Увлекается социальной электронной коммерцией, метафреймворками и настольными играми',
     links: [
       { icon: 'github', link: 'https://github.com/aleclarson' },
-      { icon: 'twitter', link: 'https://twitter.com/retropragma' },
-    ],
+      { icon: 'x', link: 'https://x.com/retropragma' },
+      {
+        icon: 'bluesky',
+        link: 'https://bsky.app/profile/retropragma.bsky.social'
+      }
+    ]
   },
   {
     avatar: 'https://github.com/poyoho.png',
@@ -130,8 +140,8 @@ export const emeriti = [
     desc: 'Фронтендер. Член команды Vite.',
     links: [
       { icon: 'github', link: 'https://github.com/poyoho' },
-      { icon: 'twitter', link: 'https://twitter.com/yoho_po' },
-    ],
+      { icon: 'x', link: 'https://x.com/yoho_po' }
+    ]
   },
   {
     avatar: 'https://github.com/ygj6.png',
@@ -140,8 +150,8 @@ export const emeriti = [
     desc: 'Веб-разработчик. Член команды Vue & Vite',
     links: [
       { icon: 'github', link: 'https://github.com/ygj6' },
-      { icon: 'twitter', link: 'https://twitter.com/ygj_66' },
-    ],
+      { icon: 'x', link: 'https://x.com/ygj_66' }
+    ]
   },
   {
     avatar: 'https://github.com/Niputi.png',
@@ -151,26 +161,30 @@ export const emeriti = [
     desc: 'weeb/javascript lover.',
     links: [
       { icon: 'github', link: 'https://github.com/Niputi' },
-      { icon: 'twitter', link: 'https://twitter.com/Niputi_' },
-    ],
+      { icon: 'x', link: 'https://x.com/Niputi_' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/niputi.bsky.social' }
+    ]
   },
   {
     avatar: 'https://github.com/underfin.png',
     name: 'underfin',
     title: 'Разработчик',
-    links: [{ icon: 'github', link: 'https://github.com/underfin' }],
+    links: [{ icon: 'github', link: 'https://github.com/underfin' }]
   },
   {
     avatar: 'https://github.com/GrygrFlzr.png',
     name: 'GrygrFlzr',
     title: 'Разработчик',
-    links: [{ icon: 'github', link: 'https://github.com/GrygrFlzr' }],
+    links: [
+      { icon: 'github', link: 'https://github.com/GrygrFlzr' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/bsky.cybeast.dev' }
+    ]
   },
   {
     avatar: 'https://github.com/nihalgonsalves.png',
     name: 'Нихал Гонсалвес',
     title: 'Старший инженер-программист',
-    links: [{ icon: 'github', link: 'https://github.com/nihalgonsalves' }],
+    links: [{ icon: 'github', link: 'https://github.com/nihalgonsalves' }]
   },
   {
     avatar: 'https://github.com/Shinigami92.png',
@@ -181,21 +195,21 @@ export const emeriti = [
     desc: 'Страстный энтузиаст TypeScript, активно работающий с Vue SPA.',
     links: [
       { icon: 'github', link: 'https://github.com/Shinigami92' },
-      { icon: 'mastodon', link: 'https://elk.zone/mas.to/@Shini92' },
-    ],
+      { icon: 'mastodon', link: 'https://elk.zone/mas.to/@Shini92' }
+    ]
   },
   {
-    avatar: 'https://github.com/sodatea.png',
+    avatar: 'https://github.com/haoqunjiang.png',
     name: 'Хаоцюнь Цзян',
-    title: 'Разработчик',
+    title: 'Член основной команды',
     org: 'Vue.js',
     orgLink: 'https://vuejs.org/',
-    desc: 'Член команды Vue/Vite. Открытый исследователь, работающий полный рабочий день.',
+    desc: 'Куратор лучших практик для инструментов Vue.js',
     links: [
-      { icon: 'github', link: 'https://github.com/sodatea' },
-      { icon: 'twitter', link: 'https://twitter.com/haoqunjiang' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@haoqun' },
+      { icon: 'github', link: 'https://github.com/haoqunjiang' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/haoqun.dev' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@haoqun' }
     ],
-    sponsor: 'https://github.com/sponsors/sodatea',
-  },
+    sponsor: 'https://github.com/sponsors/haoqunjiang'
+  }
 ]

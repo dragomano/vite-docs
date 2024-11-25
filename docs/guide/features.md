@@ -501,7 +501,7 @@ const modules = {
 
 #### Пользовательские запросы {#custom-queries}
 
-Можно также использовать опцию `query`, чтобы задать запросы к импорту, например, импортировать ресурсы [как строку](https://vitejs.dev/guide/assets.html#importing-asset-as-string) или [как url](https://vitejs.dev/guide/assets.html#importing-asset-as-url):
+Можно также использовать опцию `query`, чтобы задать запросы к импорту, например, импортировать ресурсы [как строку](https://vite.dev/guide/assets.html#importing-asset-as-string) или [как url](https://vite.dev/guide/assets.html#importing-asset-as-url):
 
 ```ts twoslash
 import 'vite/client'

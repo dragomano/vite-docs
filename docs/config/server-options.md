@@ -1,5 +1,7 @@
 # Параметры сервера {#server-options}
 
+Если не указано иное, параметры в этом разделе применяются только в режиме разработки.
+
 ## server.host
 
 - **Тип:** `string | boolean`
@@ -18,8 +20,7 @@
 
 Вы можете установить [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order), чтобы отключить поведение изменения порядка. Vite тогда будет выводить адрес как `localhost`.
 
-```js twoslash
-// vite.config.js
+```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
 import dns from 'node:dns'
 
@@ -77,8 +78,8 @@ export default defineConfig({
 ```js
 export default defineConfig({
   server: {
-    open: '/docs/index.html',
-  },
+    open: '/docs/index.html'
+  }
 })
 ```
 
@@ -86,11 +87,11 @@ export default defineConfig({
 
 - **Тип:** `Record<string, string | ProxyOptions>`
 
-Настройте пользовательские правила прокси для dev-сервера. Ожидает объект пар `{ ключ: опции }`. Любые запросы, путь которых начинается с этого ключа, будут проксироваться на указанный целевой адрес. Если ключ начинается с `^`, он будет интерпретироваться как `RegExp`. Опция `configure` может быть использована для доступа к экземпляру прокси.
+Настройте пользовательские правила прокси для dev-сервера. Ожидает объект пар `{ ключ: опции }`. Любые запросы, путь которых начинается с этого ключа, будут проксироваться на указанный целевой адрес. Если ключ начинается с `^`, он будет интерпретироваться как `RegExp`. Опция `configure` может быть использована для доступа к экземпляру прокси. Если запрос соответствует какому-либо из настроенных правил прокси-сервера, он не будет преобразован Vite.
 
 Обратите внимание, что если вы используете неотносительный [`base`](/config/shared-options.md#base), вы должны префиксировать каждый ключ этим `base`.
 
-Расширяет [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Дополнительные опции можно найти [здесь](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13). Обратите внимание, что [в отличие от http-proxy](https://github.com/http-party/node-http-proxy/issues/1669) опция `changeOrigin` изменит как заголовки host, так и origin, чтобы соответствовать целевому адресу.
+Расширяет [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Дополнительные опции можно найти [здесь](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13).
 
 В некоторых случаях вам также может понадобиться настроить основной dev-сервер (например, чтобы добавить пользовательские промежуточные программы в внутреннее приложение [connect](https://github.com/senchalabs/connect)). Для этого вам нужно написать свой собственный [плагин](/guide/using-plugins.html) и использовать функцию [configureServer](/guide/api-plugin.html#configureserver).
 
@@ -100,19 +101,23 @@ export default defineConfig({
 export default defineConfig({
   server: {
     proxy: {
-      // сокращение строки: http://localhost:5173/foo -> http://localhost:4567/foo
+      // сокращение строки:
+      // http://localhost:5173/foo
+      //   -> http://localhost:4567/foo
       '/foo': 'http://localhost:4567',
-      // с параметрами: http://localhost:5173/api/bar-> http://jsonplaceholder.typicode.com/bar
+      // с параметрами:
+      // http://localhost:5173/api/bar
+      //   -> http://jsonplaceholder.typicode.com/bar
       '/api': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        rewrite: (path) => path.replace(/^\/api/, '')
       },
       // с RegEx: http://localhost:5173/fallback/ -> http://jsonplaceholder.typicode.com/
       '^/fallback/.*': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/fallback/, ''),
+        rewrite: (path) => path.replace(/^\/fallback/, '')
       },
       // Использование экземпляра прокси-сервера
       '/api': {
@@ -120,15 +125,20 @@ export default defineConfig({
         changeOrigin: true,
         configure: (proxy, options) => {
           // прокси будет представлять собой экземпляр 'http-proxy'
-        },
+        }
       },
-      // Проксирование веб-сокетов или socket.io: ws://localhost:5173/socket.io -> ws://localhost:5174/socket.io
+      // Проксирование веб-сокетов или socket.io:
+      // ws://localhost:5173/socket.io
+      //   -> ws://localhost:5174/socket.io
+      // Будьте осторожны, используя "rewriteWsOrigin", так как это может оставить
+      // проксирование открытым для атак CSRF.
       '/socket.io': {
         target: 'ws://localhost:5174',
         ws: true,
-      },
-    },
-  },
+        rewriteWsOrigin: true
+      }
+    }
+  }
 })
 ```
 
@@ -152,6 +162,8 @@ export default defineConfig({
 
 Установите `server.hmr.overlay` в `false`, чтобы отключить наложение ошибок сервера.
 
+`protocol` устанавливает протокол WebSocket, используемый для подключения HMR: `ws` (WebSocket) или `wss` (WebSocket Secure).
+
 `clientPort` — это расширенная опция, которая переопределяет порт только на стороне клиента, позволяя вам обслуживать веб-сокет на другом порту, чем тот, который ищет клиентский код.
 
 Когда `server.hmr.server` определён, Vite будет обрабатывать запросы на соединение HMR через предоставленный сервер. Если не в режиме посредника, Vite попытается обработать запросы на соединение HMR через существующий сервер. Это может быть полезно при использовании самоподписанных сертификатов или когда вы хотите открыть Vite через сеть на одном порту.
@@ -163,7 +175,7 @@ export default defineConfig({
 С учётом конфигурации по умолчанию, обратные прокси перед Vite должны поддерживать проксирование WebSocket. Если клиент HMR Vite не может подключиться к WebSocket, клиент будет переключаться на прямое подключение к серверу HMR Vite, обходя обратные прокси:
 
 ```
-Прямое подключение веб-сокета в качестве резервного варианта. Ознакомьтесь с https://vitejs.dev/config/server-options.html#server-hmr, чтобы устранить предыдущую ошибку подключения.
+Прямое подключение веб-сокета в качестве резервного варианта. Ознакомьтесь с https://vite.dev/config/server-options.html#server-hmr, чтобы устранить предыдущую ошибку подключения.
 ```
 
 Ошибка, которая появляется в браузере, когда происходит переключение на резервный вариант, может быть проигнорирована. Чтобы избежать ошибки, обходя обратные прокси, вы можете:
@@ -181,7 +193,7 @@ export default defineConfig({
 
 Предварительно прогрейте файлы для трансформации и кэшируйте результаты заранее. Это улучшает начальную загрузку страницы при старте сервера и предотвращает каскадные трансформации.
 
-`clientFiles` — это файлы, которые используются только на клиенте, в то время как `ssrFiles` — это файлы, которые используются только в SSR. Они принимают массив путей к файлам или шаблоны [`fast-glob`](https://github.com/mrmlnc/fast-glob), относительные к `root`.
+`clientFiles` — это файлы, которые используются только на клиенте, в то время как `ssrFiles` — это файлы, которые используются только в SSR. Они принимают массив путей к файлам или шаблоны [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby), относительные к `root`.
 
 Убедитесь, что вы добавляете только те файлы, которые часто используются, чтобы не перегружать dev-сервер Vite при запуске.
 
@@ -190,9 +202,9 @@ export default defineConfig({
   server: {
     warmup: {
       clientFiles: ['./src/components/*.vue', './src/utils/big-utils.js'],
-      ssrFiles: ['./src/server/modules/*.js'],
-    },
-  },
+      ssrFiles: ['./src/server/modules/*.js']
+    }
+  }
 })
 ```
 
@@ -200,7 +212,7 @@ export default defineConfig({
 
 - **Тип:** `object | null`
 
-Опции для наблюдателя файловой системы, которые передаются в [chokidar](https://github.com/paulmillr/chokidar#api).
+Опции для наблюдателя файловой системы, которые передаются в [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api).
 
 Наблюдатель сервера Vite следит за `root` и по умолчанию пропускает директории `.git/`, `node_modules/`, а также `cacheDir` и `build.outDir` Vite. При обновлении отслеживаемого файла Vite применит HMR и обновит страницу только при необходимости.
 
@@ -221,7 +233,7 @@ export default defineConfig({
 - **Рекомендуется**: Используйте приложения WSL2 для редактирования ваших файлов.
   - Также рекомендуется переместить папку проекта за пределы файловой системы Windows. Доступ к файловой системе Windows из WSL2 медленный. Устранение этой накладной нагрузки улучшит производительность.
 - Установите `{ usePolling: true }`.
-  - Обратите внимание, что [`usePolling` приводит к высокой загрузке ЦП](https://github.com/paulmillr/chokidar#performance).
+  - Обратите внимание, что [`usePolling` приводит к высокой загрузке ЦП](https://github.com/paulmillr/chokidar/tree/3.6.0#performance).
 
 :::
 
@@ -246,16 +258,17 @@ async function createServer() {
   // Создаём сервер Vite в режиме посредника
   const vite = await createViteServer({
     server: { middlewareMode: true },
-    appType: 'custom', // не включаем стандартные модули-посредники Vite для работы с HTML
+    // не включаем стандартные модули-посредники Vite для работы с HTML
+    appType: 'custom'
   })
   // Используем экземпляр connect в качестве посредника
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
     // Поскольку `appType` равен `'custom'`, здесь следует обслуживать ответ.
-    // Примечание: если `appType` равен `'spa'` или `'mpa'`, Vite включает посредников для обработки
-    // HTML-запросов и 404, поэтому пользовательские посредники должны быть добавлены
-    // перед посредниками Vite, чтобы они вступили в силу.
+    // Примечание: если `appType` равен `'spa'` или `'mpa'`, Vite включает посредников
+    // для обработки HTML-запросов и 404, поэтому пользовательские посредники должны
+    // быть добавлены перед посредниками Vite, чтобы они вступили в силу.
   })
 }
 
@@ -291,9 +304,9 @@ export default defineConfig({
   server: {
     fs: {
       // Разрешаем обслуживать файлы с одного уровня до корня проекта
-      allow: ['..'],
-    },
-  },
+      allow: ['..']
+    }
+  }
 })
 ```
 
@@ -310,27 +323,19 @@ export default defineConfig({
         searchForWorkspaceRoot(process.cwd()),
         // ваши пользовательские правила
         '/path/to/custom/allow_directory',
-        '/path/to/custom/allow_file.demo',
-      ],
-    },
-  },
+        '/path/to/custom/allow_file.demo'
+      ]
+    }
+  }
 })
 ```
 
 ## server.fs.deny
 
 - **Тип:** `string[]`
-- **По умолчанию:** `['.env', '.env.*', '*.{crt,pem}']`
+- **По умолчанию:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
 
 Чёрный список для чувствительных файлов, которые ограничены для обслуживания dev-сервером Vite. Этот список будет иметь более высокий приоритет, чем [`server.fs.allow`](#server-fs-allow). Поддерживаются [шаблоны picomatch](https://github.com/micromatch/picomatch#globbing-features).
-
-## server.fs.cachedChecks
-
-- **Тип:** `boolean`
-- **По умолчанию:** `false`
-- **Экспериментально**
-
-Кэширует имена файлов доступных директорий, чтобы избежать повторных операций с файловой системой. Особенно на Windows это может привести к увеличению производительности. По умолчанию эта функция отключена из-за крайних случаев, когда файл записывается в кэшированную папку и сразу же импортируется.
 
 ## server.origin
 
@@ -341,8 +346,8 @@ export default defineConfig({
 ```js
 export default defineConfig({
   server: {
-    origin: 'http://127.0.0.1:8080',
-  },
+    origin: 'http://127.0.0.1:8080'
+  }
 })
 ```
 
@@ -351,7 +356,7 @@ export default defineConfig({
 - **Тип:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
 - **По умолчанию:** `(sourcePath) => sourcePath.includes('node_modules')`
 
-Определяет, следует ли игнорировать исходные файлы в sourcemap сервера, используемом для заполнения расширения sourcemap [`x_google_ignoreList`](https://developer.chrome.com/blog/devtools-better-angular-debugging/#the-x_google_ignorelist-source-map-extension).
+Определяет, следует ли игнорировать исходные файлы в sourcemap сервера, используемом для заполнения расширения sourcemap [`x_google_ignoreList`](https://developer.chrome.com/articles/x-google-ignore-list/).
 
 `server.sourcemapIgnoreList` является эквивалентом [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) для dev-сервера. Разница между этими двумя параметрами конфигурации заключается в том, что функция rollup вызывается с относительным путём для `sourcePath`, в то время как `server.sourcemapIgnoreList` вызывается с абсолютным путём. В процессе разработки большинство модулей имеют карту и источник в одной папке, поэтому относительный путь для `sourcePath` — это само имя файла. В этих случаях использование абсолютных путей делает это более удобным.
 
@@ -364,8 +369,8 @@ export default defineConfig({
     // в их путях в список игнорируемых.
     sourcemapIgnoreList(sourcePath, sourcemapPath) {
       return sourcePath.includes('node_modules')
-    },
-  },
+    }
+  }
 })
 ```
 
