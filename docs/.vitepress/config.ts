@@ -39,6 +39,10 @@ const additionalTitle = ((): string => {
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   const oldVersions: DefaultTheme.NavItemWithLink[] = [
     {
+      text: 'Документация Vite 5',
+      link: 'https://v5.vite.dev',
+    },
+    {
       text: 'Документация Vite 4',
       link: 'https://v4.vite.dev',
     },
@@ -57,7 +61,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
     case 'local':
       return [
         {
-          text: 'Документация Vite 5 (релиз)',
+          text: 'Документация Vite 6 (релиз)',
           link: 'https://vite.dev',
         },
         ...oldVersions,
@@ -68,6 +72,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
 })()
 
 export default defineConfig({
+  lang: 'ru',
   title: `Vite${additionalTitle}`,
   description: 'Инструментарий для фронтенда нового поколения',
   //base: '/vite-docs/',
@@ -136,6 +141,24 @@ export default defineConfig({
 
   themeConfig: {
     logo: '/logo.svg',
+
+    outlineTitle: 'Содержание',
+    docFooter: {
+      prev: 'Предыдущая страница',
+      next: 'Следующая страница'
+    },
+    darkModeSwitchLabel: 'Оформление',
+    lightModeSwitchTitle: 'Переключить на светлую тему',
+    darkModeSwitchTitle: 'Переключить на тёмную тему',
+    sidebarMenuLabel: 'Меню',
+    returnToTopLabel: 'Вернуться к началу',
+    langMenuLabel: 'Изменить язык',
+    notFound: {
+      title: 'СТРАНИЦА НЕ НАЙДЕНА',
+      quote: 'Но если не менять направление и продолжать искать, то можно оказаться там, где надо.',
+      linkLabel: 'перейти на главную',
+      linkText: 'Вернуться на главную'
+    },
 
     editLink: {
       pattern: 'https://github.com/vitejs/vite/edit/main/docs/:path',
@@ -451,19 +474,19 @@ export default defineConfig({
               link: '/changes/this-environment-in-hooks',
             },
             {
-              text: 'HMR hotUpdate Plugin Hook',
+              text: 'Хук hotUpdate плагина HMR',
               link: '/changes/hotupdate-hook',
             },
             {
-              text: 'Move to per-environment APIs',
+              text: 'Переход на API для каждой среды',
               link: '/changes/per-environment-apis',
             },
             {
-              text: 'SSR using ModuleRunner API',
+              text: 'SSR с использованием ModuleRunner API',
               link: '/changes/ssr-using-modulerunner',
             },
             {
-              text: 'Shared plugins during build',
+              text: 'Общие плагины во время сборки',
               link: '/changes/shared-plugins-during-build',
             },
           ],

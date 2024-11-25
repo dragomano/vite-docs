@@ -126,7 +126,7 @@ export default {
 Мы не рекомендуем пока переходить на Environment API. Мы стремимся к тому, чтобы значительная часть пользователей приняла Vite 6, прежде чем плагины не будут вынуждены поддерживать две версии. Ознакомьтесь с разделом о будущих разрушающих изменениях для получения информации о будущих устареваниях и пути обновления:
 
 - [`this.environment` в хуках](/changes/this-environment-in-hooks)
-- [Подключаемый плагин HMR `hotUpdate`](/changes/hotupdate-hook)
+- [Хук `hotUpdate` плагина HMR](/changes/hotupdate-hook)
 - [Переход на API для каждой среды](/changes/per-environment-apis)
 - [SSR с использованием `ModuleRunner` API](/changes/ssr-using-modulerunner)
 - [Общие плагины во время сборки](/changes/shared-plugins-during-build)
