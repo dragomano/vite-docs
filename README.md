@@ -28,7 +28,7 @@ Vite (французское слово, означающее «быстрый»
 
 - Сервер разработки, который обслуживает ваши исходные файлы через [собственные модули ES](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) с [богатыми встроенными функциями](https://vite.dev/guide/features.html) и удивительно быструю [горячую замену модулей (HMR)](https://vite.dev/guide/features.html#hot-module-replacement).
 
-- [Команда сборки](https://vite.dev/guide/build.html), которая объединяет ваш код с [Rollup](https://rollupjs.org), предварительно настроенным для вывода высокооптимизированных статических ресурсов для производства.
+- [Команда сборки](https://vite.dev/guide/build.html), которая объединяет ваш код с [Rollup](https://rollupjs.org), предварительно настроенным для вывода высокооптимизированных статических ресурсов для рабочей сборки.
 
 Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite.dev/guide/api-plugin.html) и [JavaScript API](https://vite.dev/guide/api-javascript.html) с полной поддержкой типизации.
 
@@ -36,11 +36,11 @@ Vite (французское слово, означающее «быстрый»
 
 ## Пакеты
 
-| Package                                         | Версия (нажмите, чтобы просмотреть журнал изменений)                                                                                                    |
+| Пакет                                         | Версия (нажмите для просмотра журнала изменений)                                                                                                    |
 | ----------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
-| [vite](packages/vite)                           | [![vite version](https://img.shields.io/npm/v/vite.svg?label=%20)](packages/vite/CHANGELOG.md)                                    |
-| [@vitejs/plugin-legacy](packages/plugin-legacy) | [![plugin-legacy version](https://img.shields.io/npm/v/@vitejs/plugin-legacy.svg?label=%20)](packages/plugin-legacy/CHANGELOG.md) |
-| [create-vite](packages/create-vite)             | [![create-vite version](https://img.shields.io/npm/v/create-vite.svg?label=%20)](packages/create-vite/CHANGELOG.md)               |
+| [vite](https://github.com/vitejs/vite/blob/main/packages/vite)                           | [![vite version](https://img.shields.io/npm/v/vite.svg?label=%20)](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md)                                    |
+| [@vitejs/plugin-legacy](https://github.com/vitejs/vite/blob/main/packages/plugin-legacy) | [![plugin-legacy version](https://img.shields.io/npm/v/@vitejs/plugin-legacy.svg?label=%20)](https://github.com/vitejs/vite/blob/main/packages/plugin-legacy/CHANGELOG.md) |
+| [create-vite](https://github.com/vitejs/vite/blob/main/packages/create-vite)             | [![create-vite version](https://img.shields.io/npm/v/create-vite.svg?label=%20)](https://github.com/vitejs/vite/blob/main/packages/create-vite/CHANGELOG.md)               |
 
 ## Сотрудничество
 
