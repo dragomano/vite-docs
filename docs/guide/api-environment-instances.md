@@ -64,13 +64,17 @@ class DevEnvironment {
    */
   config: ResolvedConfig & ResolvedDevEnvironmentOptions
 
-  constructor(name, config, { hot, options }: DevEnvironmentSetup)
+  constructor(
+    name: string,
+    config: ResolvedConfig,
+    context: DevEnvironmentContext,
+  )
 
   /**
    * Разрешает URL в идентификатор, загружает его и обрабатывает код с помощью
    * конвейера плагинов. Граф модулей также обновляется.
    */
-  async transformRequest(url: string): TransformResult
+  async transformRequest(url: string): Promise<TransformResult | null>
 
   /**
    * Регистрирует запрос для обработки с низким приоритетом. Это полезно
@@ -78,11 +82,25 @@ class DevEnvironment {
    * импортированных модулях от других запросов, поэтому он может предварительно
    * подготовить граф модулей, чтобы модули уже были обработаны, когда они запрашиваются.
    */
-  async warmupRequest(url: string): void
+  async warmupRequest(url: string): Promise<void>
 }
 ```
 
-С `TransformResult`, который является:
+С `DevEnvironmentContext`, являющимся:
+
+```ts
+interface DevEnvironmentContext {
+  hot: boolean
+  transport?: HotChannel | WebSocketServer
+  options?: EnvironmentOptions
+  remoteRunner?: {
+    inlineSourceMap?: boolean
+  }
+  depsOptimizer?: DepsOptimizer
+}
+```
+
+и с `TransformResult`, являющимся:
 
 ```ts
 interface TransformResult {
@@ -156,9 +174,13 @@ export class EnvironmentModuleGraph {
     rawUrl: string,
   ): Promise<EnvironmentModuleNode | undefined>
 
+  getModuleById(id: string): EnvironmentModuleNode | undefined
+
   getModulesByFile(file: string): Set<EnvironmentModuleNode> | undefined
 
   onFileChange(file: string): void
+
+  onFileDelete(file: string): void
 
   invalidateModule(
     mod: EnvironmentModuleNode,

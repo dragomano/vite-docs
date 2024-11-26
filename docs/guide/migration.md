@@ -99,6 +99,48 @@ Vite 6 расширяет поддержку ещё большего колич�
   - Эта оптимизация по желанию была удалена из-за крайних случаев при записи файла в кэшированную папку и немедленном его импорте.
 - [[#18697] fix(deps)!: update dependency dotenv-expand to v12](https://github.com/vitejs/vite/pull/18697)
   - Переменные, используемые в интерполяции, теперь должны быть объявлены до интерполяции. Для получения дополнительной информации смотрите [журнал изменений `dotenv-expand`](https://github.com/motdotla/dotenv-expand/blob/v12.0.1/CHANGELOG.md#1200-2024-11-16).
+- [[#16471] feat: v6 - Environment API](https://github.com/vitejs/vite/pull/16471)
+
+  - Обновления модуля, поддерживающего только SSR, больше не приводят к полной перезагрузке страницы в клиенте. Чтобы вернуться к предыдущему поведению, можно использовать пользовательский плагин Vite:
+    <details>
+    <summary>Посмотреть пример</summary>
+
+    ```ts twoslash
+    import type { Plugin, EnvironmentModuleNode } from 'vite'
+    function hmrReload(): Plugin {
+      return {
+        name: 'hmr-reload',
+        enforce: 'post',
+        hotUpdate: {
+          order: 'post',
+          handler({ modules, server, timestamp }) {
+            if (this.environment.name !== 'ssr') return
+            let hasSsrOnlyModules = false
+            const invalidatedModules = new Set<EnvironmentModuleNode>()
+            for (const mod of modules) {
+              if (mod.id == null) continue
+              const clientModule =
+                server.environments.client.moduleGraph.getModuleById(mod.id)
+              if (clientModule != null) continue
+              this.environment.moduleGraph.invalidateModule(
+                mod,
+                invalidatedModules,
+                timestamp,
+                true,
+              )
+              hasSsrOnlyModules = true
+            }
+            if (hasSsrOnlyModules) {
+              server.ws.send({ type: 'full-reload' })
+              return []
+            }
+          },
+        },
+      }
+    }
+    ```
+
+    </details>
 
 ## Миграция с v4 {#migration-from-v4}
 

@@ -1,4 +1,4 @@
-export const core = [
+const coreTeam = [
   {
     avatar: 'https://www.github.com/yyx990803.png',
     name: 'Эван Ю',
@@ -15,7 +15,7 @@ export const core = [
   },
   {
     avatar: 'https://www.github.com/patak-dev.png',
-    name: 'Патак',
+    name: 'Patak',
     title: 'Готов к сотрудничеству',
     org: 'StackBlitz',
     orgLink: 'https://stackblitz.com/',
@@ -56,9 +56,9 @@ export const core = [
   },
   {
     avatar: 'https://github.com/sapphi-red.png',
-    name: 'грин',
+    name: 'green',
     title: 'Веб-разработчик',
-    desc: 'Член основной команды Vite. Зовите меня сапфи, или грин, или мидори ;)',
+    desc: 'Член основной команды Vite. Зовите меня sapphi, или green, или midori ;)',
     links: [
       { icon: 'github', link: 'https://github.com/sapphi-red' },
       { icon: 'bluesky', link: 'https://bsky.app/profile/sapphi.red' },
@@ -118,7 +118,7 @@ export const core = [
   }
 ]
 
-export const emeriti = [
+const emeritiMembers = [
   {
     avatar: 'https://i.imgur.com/KMed6rQ.jpeg',
     name: 'Алек Ларсон',
@@ -188,7 +188,7 @@ export const emeriti = [
   },
   {
     avatar: 'https://github.com/Shinigami92.png',
-    name: 'Синигами',
+    name: 'Shinigami',
     title: 'Старший фронтенд-инженер',
     org: 'Faker',
     orgLink: 'https://fakerjs.dev',
@@ -213,3 +213,6 @@ export const emeriti = [
     sponsor: 'https://github.com/sponsors/haoqunjiang'
   }
 ]
+
+export const core = coreTeam.map(obj => ({ ...obj, actionText: 'Поддержать' }));
+export const emeriti = emeritiMembers.map(obj => ({ ...obj, actionText: 'Поддержать' }));

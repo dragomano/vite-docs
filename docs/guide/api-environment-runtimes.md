@@ -118,7 +118,7 @@ function createWorkerdDevEnvironment(
 export class ModuleRunner {
   constructor(
     public options: ModuleRunnerOptions,
-    public evaluator: ModuleEvaluator,
+    public evaluator: ModuleEvaluator = new ESModulesEvaluator(),
     private debug?: ModuleRunnerDebugger
   ) {}
   /**
@@ -165,8 +165,21 @@ await moduleRunner.import('/src/entry-point.js')
 
 ## `ModuleRunnerOptions`
 
-```ts
-export interface ModuleRunnerOptions {
+```ts twoslash
+import type {
+  InterceptorOptions as InterceptorOptionsRaw,
+  ModuleRunnerHmr as ModuleRunnerHmrRaw,
+  EvaluatedModules,
+} from 'vite/module-runner'
+import type { Debug } from '@type-challenges/utils'
+
+type InterceptorOptions = Debug<InterceptorOptionsRaw>
+type ModuleRunnerHmr = Debug<ModuleRunnerHmrRaw>
+/** см. ниже */
+type ModuleRunnerTransport = unknown
+
+// ---cut---
+interface ModuleRunnerOptions {
   /**
    * Корень проекта
    */
@@ -190,15 +203,10 @@ export interface ModuleRunnerOptions {
     | InterceptorOptions
   /**
    * Отключить HMR или настроить параметры HMR.
+   *
+   * @default true
    */
-  hmr?:
-    | false
-    | {
-        /**
-         * Настроить логгер HMR.
-         */
-        logger?: false | HMRLogger
-      }
+  hmr?: boolean | ModuleRunnerHmr
   /**
    * Пользовательский кэш модулей. Если не предоставлен, создается отдельный кэш модулей
    * для каждого экземпляра модульного раннера.
@@ -211,7 +219,13 @@ export interface ModuleRunnerOptions {
 
 **Сигнатура типа:**
 
-```ts
+```ts twoslash
+import type { ModuleRunnerContext as ModuleRunnerContextRaw } from 'vite/module-runner'
+import type { Debug } from '@type-challenges/utils'
+
+type ModuleRunnerContext = Debug<ModuleRunnerContextRaw>
+
+// ---cut---
 export interface ModuleEvaluator {
   /**
    * Количество строк с префиксом в преобразованном коде.
@@ -242,7 +256,11 @@ Vite экспортирует `ESModulesEvaluator`, который по умол
 
 **Сигнатура типа:**
 
-```ts
+```ts twoslash
+import type { ModuleRunnerTransportHandlers } from 'vite/module-runner'
+/** объект */
+type HotPayload = unknown
+// ---cut---
 interface ModuleRunnerTransport {
   connect?(handlers: ModuleRunnerTransportHandlers): Promise<void> | void
   disconnect?(): Promise<void> | void
@@ -356,6 +374,7 @@ export const runner = new ModuleRunner(
         return response.json()
       }
     }
+    hmr: false, // отключите HMR, так как для HMR требуется transport.connect
   },
   new ESModulesEvaluator()
 )

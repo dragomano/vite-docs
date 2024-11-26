@@ -52,7 +52,7 @@
 Если вы автор плагина, убедитесь, что вызываете [`this.resolve`](https://rollupjs.org/plugin-development/#this-resolve) только при необходимости, чтобы сократить количество проверок выше.
 
 ::: tip TypeScript
-Если вы используете TypeScript, включите `"moduleResolution": "bundler"` и `"allowImportingTsExtensions": true` в `compilerOptions` вашего `tsconfig.json`, чтобы использовать расширения `.ts` и `.tsx` напрямую в вашем коде.
+Если вы используете TypeScript, включите `"moduleResolution": "bundler"` и `"allowImportingTsExtensions": true` в секции `compilerOptions` вашего `tsconfig.json`, чтобы использовать расширения `.ts` и `.tsx` напрямую в вашем коде.
 :::
 
 ## Избегайте файлов-агрегаторов {#avoid-barrel-files}
