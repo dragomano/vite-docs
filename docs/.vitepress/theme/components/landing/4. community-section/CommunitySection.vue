@@ -68,7 +68,7 @@ const testimonials: Testimonial[] = [
     name: 'Кристоф Наказава',
     handle: '@cpojer',
     avatar:
-      'https://pbs.twimg.com/profile_images/1189537722286952449/OrscO0bD_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1854151427595407360/4GyUCgEH_400x400.jpg',
     comment: ['Vite собирается покорить (JavaScript) мир.'],
   },
   {
