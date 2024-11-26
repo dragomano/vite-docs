@@ -1,6 +1,6 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
-import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+//import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
@@ -75,7 +75,6 @@ export default defineConfig({
   lang: 'ru',
   title: `Vite${additionalTitle}`,
   description: 'Инструментарий для фронтенда нового поколения',
-  //base: '/vite-docs/',
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
@@ -117,6 +116,15 @@ export default defineConfig({
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:site', content: '@vite_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
+    [
+      'script',
+      {},
+      `(function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "p4lpwfiwp1")`,
+    ],
     [
       'script',
       {
@@ -161,7 +169,7 @@ export default defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/vitejs/vite/edit/main/docs/:path',
+      pattern: 'https://github.com/dragomano/vite-docs/edit/main/docs/:path',
       text: 'Предложить изменения',
     },
 
@@ -514,9 +522,7 @@ export default defineConfig({
     return pageData
   },
   markdown: {
-    /* codeTransformers: [
-      transformerTwoslash()
-    ], */
+    /* codeTransformers: [transformerTwoslash()], */
     config(md) {
       md.use(groupIconMdPlugin)
     },
