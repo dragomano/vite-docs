@@ -1,4 +1,4 @@
-# Плагины
+# Плагины {#plugins}
 
 :::tip ПРИМЕЧАНИЕ
 Vite стремится обеспечить поддержку распространённых паттернов веб-разработки из коробки. Прежде чем искать плагин Vite или совместимый Rollup-плагин, ознакомьтесь с главой [Возможности](../guide/features.md). Многие случаи, когда плагин может понадобиться в проекте Rollup, уже покрываются в Vite.
@@ -6,7 +6,7 @@ Vite стремится обеспечить поддержку распрост
 
 Ознакомьтесь с информацией об [использовании плагинов](../guide/using-plugins).
 
-## Официальные плагины
+## Официальные плагины {#official-plugins}
 
 ### [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 
@@ -30,12 +30,12 @@ Vite стремится обеспечить поддержку распрост
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
-- Обеспечивает поддержку устаревших браузеров в рабочей сборке.
+- Обеспечивает поддержку устаревших браузеров в продакшен-сборке.
 
-## Плагины сообщества
+## Плагины сообщества {#community-plugins}
 
 Загляните на [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) — там вы также можете отправить PR со списком своих плагинов.
 
-## Плагины Rollup
+## Плагины Rollup {#rollup-plugins}
 
 [Плагины Vite](../guide/api-plugin) — это расширение интерфейса плагинов Rollup. Ознакомьтесь с главой [Совместимость плагинов Rollup](../guide/api-plugin#rollup-plugin-compatibility) для получения дополнительной информации.

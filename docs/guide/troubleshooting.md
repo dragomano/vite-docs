@@ -6,9 +6,9 @@
 
 ## CJS {#cjs}
 
-### Vite CJS Node API устарел {#vite-cjs-node-api-deprecated}
+### Депрекация Node API Vite для CommonJS {#vite-cjs-node-api-deprecated}
 
-CJS сборка Node API Vite устарела и будет удалена в Vite 6. Смотрите [обсуждение на GitHub](https://github.com/vitejs/vite/discussions/13928) для получения дополнительного контекста. Вам следует обновить ваши файлы или фреймворки, чтобы импортировать ESM сборку Vite.
+Сборка Vite Node API для CommonJS объявлена устаревшей и будет удалена в Vite 6. Смотрите [обсуждение на GitHub](https://github.com/vitejs/vite/discussions/13928) для получения дополнительного контекста. Вам следует обновить ваши файлы или фреймворки, чтобы импортировать ESM сборку Vite.
 
 В базовом проекте Vite убедитесь, что:
 

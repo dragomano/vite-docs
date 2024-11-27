@@ -94,7 +94,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
               class="client__bg"
               x="193"
               y="20"
-              width="282"
+              width="202"
               height="54"
               fill="url(#linear-client-bg)"
               fill-opacity="0.1"
@@ -122,7 +122,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
             class="client__border"
             x="193.507"
             y="22.507"
-            width="280.986"
+            width="200.986"
             height="50.0537"
             rx="11.661"
             stroke="#737373"
@@ -132,7 +132,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
         </g>
 
         <!-- Client Transform Text -->
-        <text class="client-text" x="236" y="53">Клиентская трансформация</text>
+        <text class="client-text" x="236" y="53">Файлы в браузере</text>
 
         <!-- Server Transform Box -->
         <g class="server" filter="url(#filter-server)">
@@ -141,7 +141,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
               class="server__bg"
               x="193"
               y="90"
-              width="286"
+              width="186"
               height="54"
               fill="url(#linear-server-bg)"
               fill-opacity="0.1"
@@ -161,7 +161,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
           <rect
             x="193.507"
             y="92.7135"
-            width="281.402"
+            width="201.402"
             height="50.0537"
             rx="11.661"
             stroke="#737373"
@@ -171,7 +171,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
         </g>
 
         <!-- Server Transform Text -->
-        <text class="server-text" x="236" y="122">Серверная трансформация</text>
+        <text class="server-text" x="236" y="122">Файлы на сервере</text>
 
         <!-- Definitions -->
         <defs>
@@ -179,7 +179,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
             id="filter-js-glow"
             x="0"
             y="1.09473"
-            width="164"
+            width="184"
             height="164"
             filterUnits="userSpaceOnUse"
             color-interpolation-filters="sRGB"
@@ -241,7 +241,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
             id="filter-client"
             x="193"
             y="22"
-            width="282"
+            width="202"
             height="55.0677"
             filterUnits="userSpaceOnUse"
             color-interpolation-filters="sRGB"
@@ -297,7 +297,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
             id="filter-server"
             x="193"
             y="92.2065"
-            width="282.416"
+            width="202.416"
             height="55.0677"
             filterUnits="userSpaceOnUse"
             color-interpolation-filters="sRGB"
@@ -375,7 +375,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
             id="linear-client-bg"
             x1="193"
             y1="47"
-            x2="475"
+            x2="375"
             y2="47"
             gradientUnits="userSpaceOnUse"
           >
@@ -386,7 +386,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
             id="linear-server-bg"
             x1="193"
             y1="117"
-            x2="475"
+            x2="375"
             y2="117"
             gradientUnits="userSpaceOnUse"
           >
@@ -397,7 +397,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
             <rect
               x="193"
               y="22"
-              width="282"
+              width="202"
               height="51.0677"
               rx="12.168"
               fill="white"
@@ -407,7 +407,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
             <rect
               x="193"
               y="92.2065"
-              width="282.416"
+              width="202.416"
               height="51.0677"
               rx="12.168"
               fill="white"

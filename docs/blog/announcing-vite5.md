@@ -59,7 +59,7 @@ Vite 5 сосредоточен на очистке API (удаление уст
 
 Если вы новичок в Vite, мы рекомендуем сначала прочитать руководства [Начало работы](/guide/) и [Возможности](/guide/features).
 
-Мы благодарны более чем [850 участникам Vite Core](https://github.com/vitejs/vite/graphs/contributors), а также поддерживающим и вносящим вклад в плагины Vite, интеграции, инструменты и переводы, которые помогли нам достичь этого. Мы призываем вас участвовать и продолжать улучшать Vite вместе с нами. Вы можете узнать больше в нашем [Руководстве по внесению вклада](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md). Чтобы начать, мы рекомендуем [разобрать проблемы](https://github.com/vitejs/vite/issues), [просмотреть PR](https://github.com/vitejs/vite/pulls), отправить PR с неудачными тестами на основе открытых проблем и помогать другим в [Обсуждениях](https://github.com/vitejs/vite/discussions) и на [форуме помощи Vite Land](https://discord.com/channels/804011606160703521/1019670660856942652). Вы многому научитесь на этом пути и получите плавный путь к дальнейшему вкладу в проект. Если у вас есть сомнения, присоединяйтесь к нам в нашем [сообществе Discord](http://chat.vite.dev/) и поздоровайтесь в [канале #contributing](https://discord.com/channels/804011606160703521/804439875226173480).
+Мы благодарны более чем [850 участникам Vite Core](https://github.com/vitejs/vite/graphs/contributors), а также разработчикам и контрибьюторам плагинов Vite, интеграций, инструментов и переводов, которые помогли нам достичь этого. Мы призываем вас участвовать и продолжать улучшать Vite вместе с нами. Вы можете узнать больше в нашем [Руководстве по внесению вклада](https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md). Чтобы начать, мы рекомендуем [разобрать проблемы](https://github.com/vitejs/vite/issues), [просмотреть PR](https://github.com/vitejs/vite/pulls), отправить PR с неудачными тестами на основе открытых проблем и помогать другим в [Обсуждениях](https://github.com/vitejs/vite/discussions) и на [форуме помощи Vite Land](https://discord.com/channels/804011606160703521/1019670660856942652). Вы многому научитесь на этом пути и получите плавный путь к дальнейшему вкладу в проект. Если у вас есть сомнения, присоединяйтесь к нам в нашем [сообществе Discord](http://chat.vite.dev/) и поздоровайтесь в [канале #contributing](https://discord.com/channels/804011606160703521/804439875226173480).
 
 Чтобы быть в курсе событий, следите за нами в [X](https://twitter.com/vite_js) или [Mastodon](https://webtoo.ls/@vite).
 
@@ -84,7 +84,7 @@ Vite 5 также вводит [`server.warmup`](/guide/performance.html#warm-up
 - [Vite теперь работает на Rollup 4](/guide/migration#rollup-4)
 - [CJS Node API был признан устаревшим](/guide/migration#deprecate-cjs-node-api)
 - [Переработана стратегия замены `define` и `import.meta.env.*`](/guide/migration#rework-define-and-import-meta-env-replacement-strategy)
-- [Значение внешних модулей SSR теперь соответствует рабочей версии](/guide/migration#ssr-externalized-modules-value-now-matches-production)
+- [Значение внешних модулей SSR теперь соответствует продакшен-версии](/guide/migration#ssr-externalized-modules-value-now-matches-production)
 - [`worker.plugins` теперь является функцией](/guide/migration#worker-plugins-is-now-a-function)
 - [Разрешены пути, содержащие `.`, для возврата к index.html](/guide/migration#allow-path-containing-to-fallback-to-index-html)
 - [Согласование поведения при разработке и предварительном просмотре HTML-кода](/guide/migration#align-dev-and-preview-html-serving-behaviour)
@@ -98,14 +98,14 @@ Vite 5 также вводит [`server.warmup`](/guide/performance.html#warm-up
 
 ## Переход на Vite 5 {#migrating-to-vite-5}
 
-Мы работали с партнёрами экосистемы, чтобы обеспечить плавную миграцию на эту новую основную версию. В очередной раз, [vite-ecosystem-ci](https://www.youtube.com/watch?v=7L4I4lDzO48) сыграл ключевую роль в том, чтобы помочь нам внести более смелые изменения, избегая регрессий. Мы рады видеть, что другие экосистемы принимают аналогичные схемы для улучшения сотрудничества между своими проектами и поддерживающими разработку.
+Мы работали с партнёрами экосистемы, чтобы обеспечить плавную миграцию на эту новую основную версию. В очередной раз, [vite-ecosystem-ci](https://www.youtube.com/watch?v=7L4I4lDzO48) сыграл ключевую роль в том, чтобы помочь нам внести более смелые изменения, избегая регрессий. Мы рады видеть, что другие экосистемы принимают аналогичные схемы для улучшения сотрудничества между своими проектами и разработчиками.
 
-Для большинства проектов обновление до Vite 5 должно быть простым. Но мы рекомендуем ознакомиться с подробным [Руководством по миграции](/guide/migration) перед обновлением.
+Для большинства проектов обновление до Vite 5 должно быть простым. Но мы рекомендуем ознакомиться с подробным [Руководством по переходу](/guide/migration) перед обновлением.
 
 Подробный список изменений в ядре Vite можно найти в [Журнале изменений Vite 5](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#500-2023-11-16).
 
 ## Благодарности {#acknowledgments}
 
-Vite 5 — это результат долгих часов работы нашего сообщества участников, поддерживающих разработку, авторов плагинов и [команды Vite](/team). Огромная благодарность [Бьорну Лу](https://twitter.com/bluwyoo) за руководство процессом выпуска этой важной версии.
+Vite 5 — это результат долгих часов работы нашего сообщества участников, разработчиков, авторов плагинов и [команды Vite](/team). Огромная благодарность [Бьорну Лу](https://twitter.com/bluwyoo) за руководство процессом выпуска этой важной версии.
 
 Мы также благодарны отдельным лицам и компаниям, которые спонсируют разработку Vite. [StackBlitz](https://stackblitz.com/), [Nuxt Labs](https://nuxtlabs.com/) и [Astro](https://astro.build) продолжают инвестировать в Vite, нанимая членов команды Vite. Особая благодарность спонсорам на [GitHub Sponsors Vite](https://github.com/sponsors/vitejs), [Open Collective Vite](https://opencollective.com/vite) и [GitHub Sponsors Эвана Ю](https://github.com/sponsors/yyx990803). Особое упоминание [Remix](https://remix.run/) за то, что стал золотым спонсором и вернулся к поддержке после перехода на Vite.

@@ -35,7 +35,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
           <span class="code--red">await</span>
           <span class="code--purple">&nbsp;createServer</span>({<br />
           <span class="code--grey"
-            >&nbsp;&nbsp;&nbsp;// user config options</span
+            >&nbsp;&nbsp;&nbsp;// пользовательские параметры конфигурации</span
           ><br />
           })
         </span>
@@ -63,13 +63,13 @@ const { isCardActive, startAnimation } = useCardAnimation(
             class="code--blue"
             >&gt;</span
           ><br />
-          <span class="code--descriptor">Start the server.</span>
+          <span class="code--descriptor">Запуск сервера.</span>
         </span>
       </div>
     </div>
     <div class="feature__meta meta--center">
       <div class="meta__title">Полностью типизированные API</div>
-      <div class="meta__description">Спроектированы в качестве фундамента.</div>
+      <div class="meta__description">Разработаны для использования в качестве основы.</div>
     </div>
   </div>
 </template>

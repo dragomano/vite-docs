@@ -321,7 +321,7 @@ const { startAnimation, isCardActive } = useCardAnimation(
     <div class="feature__meta meta--center">
       <div class="meta__title">Непрерывная интеграция экосистемы</div>
       <div class="meta__description">
-        Наш CI постоянно тестирует изменения Vite на downstream-проектах, что позволяет нам улучшать Vite с уверенностью в стабильности.
+        Наш CI постоянно тестирует изменения Vite в зависящих проектах, что позволяет нам улучшать Vite с уверенностью в стабильности.
       </div>
     </div>
   </div>

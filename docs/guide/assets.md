@@ -14,7 +14,7 @@ import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-Например, `imgUrl` будет `/img.png` во время разработки и станет `/assets/img.2d8efhg.png` в рабочей сборке.
+Например, `imgUrl` будет `/img.png` во время разработки и станет `/assets/img.2d8efhg.png` в продакшен-сборке.
 
 Поведение аналогично `file-loader` в webpack. Разница в том, что импорт может использовать как абсолютные публичные пути (основанные на корне проекта во время разработки), так и относительные пути.
 
@@ -72,7 +72,7 @@ import shaderString from './shader.glsl?raw'
 ```js twoslash
 import 'vite/client'
 // ---cut---
-// Отдельный чанк в рабочей сборке
+// Отдельный чанк в продакшен-сборке
 import Worker from './shader.js?worker'
 const worker = new Worker()
 ```
@@ -113,7 +113,7 @@ import InlineWorker from './shader.js?worker&inline'
 
 ## new URL(url, import.meta.url) {#new-url-url-import-meta-url}
 
-[import.meta.url](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/import.meta) — это нативная функция ESM, которая предоставляет URL текущего модуля. Сочетая её с нативным [конструктором URL](https://developer.mozilla.org/ru/docs/Web/API/URL), мы можем получить полный, разрешённый URL статического ресурса, используя относительный путь из JavaScript модуля:
+[import.meta.url](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/import.meta) — это нативная функция ESM, которая предоставляет URL текущего модуля. Сочетая её со встроенным [конструктором URL](https://developer.mozilla.org/ru/docs/Web/API/URL), мы можем получить полный, разрешённый URL статического ресурса, используя относительный путь из JavaScript модуля:
 
 ```js
 const imgUrl = new URL('./img.png', import.meta.url).href
@@ -131,7 +131,7 @@ function getImageUrl(name) {
 }
 ```
 
-Во время создания рабочей сборки Vite выполнит необходимые преобразования, чтобы URL-адреса по-прежнему указывали на правильное местоположение, даже после объединения и хеширования ресурсов. Однако строка URL должна быть статической, чтобы её можно было проанализировать, в противном случае код останется без изменений, что может вызвать ошибки во время выполнения, если `build.target` не поддерживает `import.meta.url`.
+Во время создания продакшен-сборки Vite выполнит необходимые преобразования, чтобы URL-адреса по-прежнему указывали на правильное местоположение, даже после объединения и хеширования ресурсов. Однако строка URL должна быть статической, чтобы её можно было проанализировать, в противном случае код останется без изменений, что может вызвать ошибки во время выполнения, если `build.target` не поддерживает `import.meta.url`.
 
 ```js
 // Vite не будет преображать это
