@@ -24,7 +24,7 @@ import HeroDiagram from './HeroDiagram.vue'
 
       <!-- CTA Buttons -->
       <div class="hero__actions">
-        <a href="/guide/" class="btn btn--primary">Начать</a>
+        <a href="guide/" class="btn btn--primary">Начать</a>
         <a
           href="https://github.com/vitejs/vite"
           target="_blank"

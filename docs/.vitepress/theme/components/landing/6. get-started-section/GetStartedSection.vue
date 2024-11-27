@@ -113,7 +113,7 @@
     <h3>
       Встречайте среду разработки, которая наконец сможет поспевать за скоростью вашего мышления.
     </h3>
-    <a href="/guide/" class="btn btn--primary">Начать</a>
+    <a href="guide/" class="btn btn--primary">Начать</a>
     <div class="glow glow--purple" />
     <div class="glow glow--blue" />
   </div>
