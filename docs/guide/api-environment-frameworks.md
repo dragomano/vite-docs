@@ -43,7 +43,7 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 
 ## `RunnableDevEnvironment` по умолчанию {#default-runnabledevenvironment}
 
-Учитывая сервер Vite, настроенный в режиме посредника, как описано в [руководстве по настройке SSR](/guide/ssr#setting-up-the-dev-server), давайте реализуем посредник SSR, используя Environment API. Обработка ошибок опущена.
+Учитывая сервер Vite, настроенный в режиме мидлвара, как описано в [руководстве по настройке SSR](/guide/ssr#setting-up-the-dev-server), давайте реализуем мидлвар SSR, используя Environment API. Обработка ошибок опущена.
 
 ```js
 import { createServer } from 'vite'

@@ -67,7 +67,7 @@ This is statically replaced during build so it will allow tree-shaking of unused
 
 ## Настройка dev-сервера {#setting-up-the-dev-server}
 
-При создании приложения SSR вы, вероятно, захотите иметь полный контроль над вашим основным сервером и отделить Vite от продакшен-среды. Поэтому рекомендуется использовать Vite в режиме посредника. Вот пример с [express](https://expressjs.com/):
+При создании приложения SSR вы, вероятно, захотите иметь полный контроль над вашим основным сервером и отделить Vite от продакшен-среды. Поэтому рекомендуется использовать Vite в режиме мидлвара. Вот пример с [express](https://expressjs.com/):
 
 **server.js**
 
@@ -83,7 +83,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 async function createServer() {
   const app = express()
 
-  // Создаём сервер Vite в режиме посредника и настраиваем тип приложения как
+  // Создаём сервер Vite в режиме мидлвара и настраиваем тип приложения как
   // 'custom', отключая собственную логику обслуживания HTML Vite, чтобы родительский сервер
   // мог взять на себя управление
   const vite = await createViteServer({
@@ -91,11 +91,11 @@ async function createServer() {
     appType: 'custom'
   })
 
-  // Используем экземпляр Connect от Vite в качестве посредника. Если вы используете свой собственный
+  // Используем экземпляр Connect от Vite в качестве мидлвара. Если вы используете свой собственный
   // маршрутизатор express (express.Router()), вам следует использовать router.use.
   // Когда сервер перезапускается (например, после того, как пользователь изменяет
   // vite.config.js), `vite.middlewares` всё равно будет той же
-  // ссылкой (с новым внутренним стеком Vite и посредниками,
+  // ссылкой (с новым внутренним стеком Vite и мидлварами,
   // внедрёнными плагинами). Следующее будет действительным даже после перезапусков.
   app.use(vite.middlewares)
 
@@ -109,7 +109,7 @@ async function createServer() {
 createServer()
 ```
 
-Здесь `vite` — это экземпляр [ViteDevServer](./api-javascript#vitedevserver). `vite.middlewares` — это экземпляр [Connect](https://github.com/senchalabs/connect), который можно использовать в качестве посредника в любом совместимом с Connect фреймворке Node.js.
+Здесь `vite` — это экземпляр [ViteDevServer](./api-javascript#vitedevserver). `vite.middlewares` — это экземпляр [Connect](https://github.com/senchalabs/connect), который можно использовать в качестве мидлвара в любом совместимом с Connect фреймворке Node.js.
 
 Следующий шаг — реализовать обработчик `*`, чтобы обслуживать HTML, рендеренный на сервере:
 
@@ -200,7 +200,7 @@ app.use('*', async (req, res, next) => {
 
 - Вместо `await vite.ssrLoadModule('/src/entry-server.js')` используйте `import('./dist/server/entry-server.js')` (этот файл является результатом сборки SSR).
 
-- Переместите создание и всё использование dev-сервера `vite` за условные ветви, предназначенные только для разработки, затем добавьте посредника для обслуживания статических файлов из `dist/client`.
+- Переместите создание и всё использование dev-сервера `vite` за условные ветви, предназначенные только для разработки, затем добавьте мидлвара для обслуживания статических файлов из `dist/client`.
 
 Обратитесь к [примерам проектов](#example-projects) для продакшен-настройки.
 
@@ -292,7 +292,7 @@ export function mySSRPlugin() {
 
 ## Vite CLI {#vite-cli}
 
-Команды CLI `$ vite dev` и `$ vite preview` также могут использоваться для приложений SSR. Вы можете добавить свои посредники SSR к dev-серверу с помощью [`configureServer`](/guide/api-plugin#configureserver) и к серверу предварительного просмотра с помощью [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
+Команды CLI `$ vite dev` и `$ vite preview` также могут использоваться для приложений SSR. Вы можете добавить свои мидлвары SSR к dev-серверу с помощью [`configureServer`](/guide/api-plugin#configureserver) и к серверу предварительного просмотра с помощью [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
 
 :::tip Примечание
 Используйте пост-хук, чтобы ваше промежуточное ПО SSR выполнялось _после_ промежуточных ПО Vite.

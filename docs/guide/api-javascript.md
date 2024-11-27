@@ -37,7 +37,7 @@ server.bindCLIShortcuts({ print: true })
 :::
 
 ::: tip ПРИМЕЧАНИЕ
-При использовании [режима посредника](/config/server-options.html#server-middlewaremode) в сочетании с [конфигурацией прокси для WebSocket](/config/server-options.html#server-proxy) родительский http-сервер должен быть предоставлен в `middlewareMode`, чтобы правильно привязать прокси.
+При использовании [режима мидлвара](/config/server-options.html#server-middlewaremode) в сочетании с [конфигурацией прокси для WebSocket](/config/server-options.html#server-proxy) родительский http-сервер должен быть предоставлен в `middlewareMode`, чтобы правильно привязать прокси.
 
 <details>
 <summary>Пример</summary>
@@ -50,7 +50,7 @@ const parentServer = http.createServer() // или express, koa и т. д.
 
 const vite = await createServer({
   server: {
-    // Включаем режим посредника
+    // Включаем режим мидлвара
     middlewareMode: {
       // Предоставляем родительский http-сервер для прокси WebSocket
       server: parentServer,
@@ -96,16 +96,16 @@ interface ViteDevServer {
   config: ResolvedConfig
   /**
    * Экземпляр приложения connect
-   * - Может использоваться для подключения пользовательских посредников к dev-серверу.
+   * - Может использоваться для подключения пользовательских мидлваров к dev-серверу.
    * - Также может использоваться в качестве функции обработчика для пользовательского http-сервера
-   *   или в качестве посредника в любых фреймворках Node.js в стиле connect.
+   *   или в качестве мидлвара в любых фреймворках Node.js в стиле connect.
    *
    * https://github.com/senchalabs/connect#use-middleware
    */
   middlewares: Connect.Server
   /**
    * Экземпляр нативного http-сервера Node.
-   * Будет равен null в режиме посредника.
+   * Будет равен null в режиме мидлвара.
    */
   httpServer: http.Server | null
   /**
@@ -128,7 +128,7 @@ interface ViteDevServer {
    */
   moduleGraph: ModuleGraph
   /**
-   * Разрешенные URL-адреса, которые Vite выводит в CLI. Будет равен null в режиме посредника или
+   * Разрешенные URL-адреса, которые Vite выводит в CLI. Будет равен null в режиме мидлвара или
    * до вызова `server.listen`.
    */
   resolvedUrls: ResolvedServerUrls | null
