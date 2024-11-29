@@ -8,8 +8,8 @@
 
 Область применения: `Авторы плагинов Vite`
 
-::: warning Устаревание в будущем
-`this.environment` был введен в `v6.0`. Устаревание `options.ssr` запланировано на `v7.0`. В этот момент мы начнем рекомендовать миграцию ваших плагинов на использование нового API. Чтобы определить ваше использование, установите `future.removePluginHookSsrArgument` в `"warn"` в вашей конфигурации vite.
+::: warning Депрекация в будущем
+`this.environment` был введен в `v6.0`. Депрекация `options.ssr` запланировано на `v7.0`. В этот момент мы начнем рекомендовать миграцию ваших плагинов на использование нового API. Чтобы определить ваше использование, установите `future.removePluginHookSsrArgument` в `"warn"` в вашей конфигурации vite.
 :::
 
 ## Мотивация {#motivation}
@@ -18,7 +18,7 @@
 
 ## Руководство по переходу {#migration-guide}
 
-Для быстрой миграции существующего плагина замените аргумент `options.ssr` на `this.environment.name !== 'client'` в хуках `resolveId`, `load` и `transform`:
+Для быстрой адаптации существующего плагина замените аргумент `options.ssr` на `this.environment.name !== 'client'` в хуках `resolveId`, `load` и `transform`:
 
 ```ts
 import { Plugin } from 'vite'

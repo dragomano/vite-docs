@@ -93,7 +93,7 @@ export default defineConfig({
 
 Расширяет [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Дополнительные опции можно найти [здесь](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13).
 
-В некоторых случаях вам также может понадобиться настроить основной dev-сервер (например, чтобы добавить пользовательские промежуточные программы в внутреннее приложение [connect](https://github.com/senchalabs/connect)). Для этого вам нужно написать свой собственный [плагин](/guide/using-plugins.html) и использовать функцию [configureServer](/guide/api-plugin.html#configureserver).
+В некоторых случаях вам также может понадобиться настроить основной dev-сервер (например, чтобы добавить пользовательские мидлвары в внутреннее приложение [connect](https://github.com/senchalabs/connect)). Для этого вам нужно написать свой собственный [плагин](/guide/using-plugins.html) и использовать функцию [configureServer](/guide/api-plugin.html#configureserver).
 
 **Пример:**
 

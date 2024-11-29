@@ -4,12 +4,12 @@
 Оставьте нам отзыв в [обсуждении обратной связи по Environment API](https://github.com/vitejs/vite/discussions/16358)
 :::
 
-Мы планируем устаревание хука `handleHotUpdate` плагина в пользу хука [`hotUpdate`](/guide/api-environment#the-hotupdate-hook), чтобы он был осведомлён об [Environment API](/guide/api-environment.md) и обрабатывал дополнительные события наблюдения с `create` и `delete`.
+Мы планируем депрекацию хука `handleHotUpdate` плагина в пользу хука [`hotUpdate`](/guide/api-environment#the-hotupdate-hook), чтобы он был осведомлён об [Environment API](/guide/api-environment.md) и обрабатывал дополнительные события наблюдения с `create` и `delete`.
 
 Область применения: `Авторы плагинов Vite`
 
-::: warning Устаревание в будущем
-`hotUpdate` был впервые введен в `v6.0`. Устаревание `handleHotUpdate` запланировано на `v7.0`. Мы пока не рекомендуем отказываться от `handleHotUpdate`. Если вы хотите поэкспериментировать и оставить нам отзыв, вы можете установить `future.removePluginHookHandleHotUpdate` в `"warn"` в вашей конфигурации vite.
+::: warning Депрекация в будущем
+`hotUpdate` был впервые введен в `v6.0`. Депрекация `handleHotUpdate` запланировано на `v7.0`. Мы пока не рекомендуем отказываться от `handleHotUpdate`. Если вы хотите поэкспериментировать и оставить нам отзыв, вы можете установить `future.removePluginHookHandleHotUpdate` в `"warn"` в вашей конфигурации vite.
 :::
 
 ## Мотивация {#motivation}

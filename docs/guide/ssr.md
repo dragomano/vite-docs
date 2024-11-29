@@ -295,5 +295,5 @@ export function mySSRPlugin() {
 Команды CLI `$ vite dev` и `$ vite preview` также могут использоваться для приложений SSR. Вы можете добавить свои мидлвары SSR к dev-серверу с помощью [`configureServer`](/guide/api-plugin#configureserver) и к серверу предварительного просмотра с помощью [`configurePreviewServer`](/guide/api-plugin#configurepreviewserver).
 
 :::tip Примечание
-Используйте пост-хук, чтобы ваше промежуточное ПО SSR выполнялось _после_ промежуточных ПО Vite.
+Используйте пост-хук, чтобы ваш мидлвар SSR выполнялся _после_ мидлваров Vite.
 :::
