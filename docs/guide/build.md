@@ -1,10 +1,10 @@
-# Рабочая сборка {#building-for-production}
+# Продакшен-сборка {#building-for-production}
 
 Когда приходит время развернуть продакшен-версию вашего приложения, просто выполните команду `vite build`. По умолчанию она использует `<root>/index.html` в качестве точки входа для сборки и создает пакет приложения, который подходит для развёртывания на статическом хостинге. Ознакомьтесь с разделом [Развёртывание статического сайта](./static-deploy) для получения инструкций по популярным сервисам.
 
 ## Совместимость с браузерами {#browser-compatibility}
 
-Рабочая сборка предполагает поддержку современного JavaScript. По умолчанию Vite нацелен на браузеры, которые поддерживают [встроенные ES-модули](https://caniuse.com/es6-module), [встроенный динамический импорт ESM](https://caniuse.com/es6-module-dynamic-import) и [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta):
+Продакшен-сборка предполагает поддержку современного JavaScript. По умолчанию Vite нацелен на браузеры, которые поддерживают [встроенные ES-модули](https://caniuse.com/es6-module), [встроенный динамический импорт ESM](https://caniuse.com/es6-module-dynamic-import) и [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta):
 
 - Chrome >=87
 - Firefox >=78

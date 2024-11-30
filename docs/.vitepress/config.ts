@@ -335,7 +335,7 @@ export default defineConfig({
               link: '/guide/assets',
             },
             {
-              text: 'Рабочая сборка',
+              text: 'Продакшен-сборка',
               link: '/guide/build',
             },
             {

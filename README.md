@@ -28,7 +28,7 @@ Vite (французское слово, означающее «быстрый»
 
 - Сервер разработки, который обслуживает ваши исходные файлы через [собственные модули ES](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) с [богатыми встроенными функциями](https://vite.dev/guide/features.html) и удивительно быструю [горячую замену модулей (HMR)](https://vite.dev/guide/features.html#hot-module-replacement).
 
-- [Команда сборки](https://vite.dev/guide/build.html), которая объединяет ваш код с помощью [Rollup](https://rollupjs.org), предварительно настроенная на выдачу высокооптимизированных статических ресурсов для продакшена.
+- [Команда сборки](https://vite.dev/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенным на выдачу высокооптимизированных статических ресурсов для продакшена.
 
 Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite.dev/guide/api-plugin.html) и [JavaScript API](https://vite.dev/guide/api-javascript.html) с полной поддержкой типизации.
 
