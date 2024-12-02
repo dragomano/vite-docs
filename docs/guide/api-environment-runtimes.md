@@ -1,14 +1,14 @@
 # Environment API для сред выполнения {#environment-api-for-runtimes}
 
 :::warning Экспериментально
-Первоначальная работа над этим API была представлена в Vite 5.1 под названием «Vite Runtime API». Это руководство описывает пересмотренный API, переименованный в Environment API. Этот API будет выпущен в Vite 6 как экспериментальный. Вы уже можете протестировать его в последней версии `vite@6.0.0-beta.x`.
+Environment API является экспериментальным. Мы будем поддерживать стабильность API в Vite 6, чтобы дать экосистеме возможность экспериментировать и строить на его основе. Мы планируем стабилизировать эти новые API с возможными изменениями, нарушающими обратную совместимость, в Vite 7.
 
 Ресурсы:
 
 - [Обсуждение отзывов](https://github.com/vitejs/vite/discussions/16358), где мы собираем отзывы о новых API.
 - [PR Environment API](https://github.com/vitejs/vite/pull/16471), где новый API был реализован и рассмотрен.
 
-Пожалуйста, поделитесь с нами своими отзывами, пока вы тестируете предложение.
+Пожалуйста, поделитесь с нами своим мнением.
 :::
 
 ## Фабрики окружений {#environment-factories}
@@ -265,9 +265,7 @@ interface ModuleRunnerTransport {
   connect?(handlers: ModuleRunnerTransportHandlers): Promise<void> | void
   disconnect?(): Promise<void> | void
   send?(data: HotPayload): Promise<void> | void
-  invoke?(
-    data: HotPayload
-  ): Promise<{ /** результат */ r: any } | { /** ошибка */ e: any }>
+  invoke?(data: HotPayload): Promise<{ result: any } | { error: any }>
   timeout?: number
 }
 ```
