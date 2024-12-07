@@ -115,7 +115,13 @@ const coreTeam = [
       { icon: 'bluesky', link: 'https://bsky.app/profile/hiogawa.bsky.social' }
     ],
     sponsor: 'https://github.com/sponsors/hi-ogawa'
-  }
+  },
+  {
+    avatar: 'https://github.com/btea.png',
+    name: 'btea',
+    title: 'Веб-разработчик',
+    links: [{ icon: 'github', link: 'https://github.com/btea' }],
+  },
 ]
 
 const emeritiMembers = [
