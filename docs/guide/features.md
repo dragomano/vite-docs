@@ -182,8 +182,8 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   esbuild: {
     jsxFactory: 'h',
-    jsxFragment: 'Fragment',
-  },
+    jsxFragment: 'Fragment'
+  }
 })
 ```
 
@@ -197,8 +197,8 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   esbuild: {
-    jsxInject: `import React from 'react'`,
-  },
+    jsxInject: `import React from 'react'`
+  }
 })
 ```
 
@@ -210,7 +210,7 @@ export default defineConfig({
 
 Vite предварительно настроен для поддержки встраивания CSS `@import` через `postcss-import`. Также учитываются алиасы Vite для CSS `@import`. Кроме того, все ссылки CSS `url()`, даже если импортируемые файлы находятся в разных директориях, всегда автоматически перерабатываются для обеспечения корректности.
 
-Алиасы `@import` и переработка URL также поддерживаются для файлов Sass и Less (см. [CSS препроцессоры](#css-pre-processors)).
+Алиасы `@import` и обработка URL также поддерживаются для файлов Sass и Less (см. [Препроцессоры CSS](#css-pre-processors)).
 
 ### PostCSS
 
@@ -218,9 +218,9 @@ Vite предварительно настроен для поддержки в�
 
 Обратите внимание, что минификация CSS будет выполняться после PostCSS и будет использовать опцию [`build.cssTarget`](/config/build-options.md#build-csstarget).
 
-### Модули CSS {#css-modules}
+### CSS-модули {#css-modules}
 
-Любой CSS-файл, заканчивающийся на `.module.css`, считается [файлом CSS-модулей](https://github.com/css-modules/css-modules). Импорт такого файла вернет соответствующий объект модуля:
+Любой CSS-файл, заканчивающийся на `.module.css`, считается [CSS-модулем](https://github.com/css-modules/css-modules). Импорт такого файла вернет соответствующий объект модуля:
 
 ```css
 /* example.module.css */
@@ -378,7 +378,7 @@ const modules = import.meta.glob('./dir/*.js')
 // код, созданный vite
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js'),
-  './dir/bar.js': () => import('./dir/bar.js'),
+  './dir/bar.js': () => import('./dir/bar.js')
 }
 ```
 
@@ -408,7 +408,7 @@ import * as __glob__0_0 from './dir/foo.js'
 import * as __glob__0_1 from './dir/bar.js'
 const modules = {
   './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __glob__0_1
 }
 ```
 
@@ -422,9 +422,9 @@ import 'vite/client'
 const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
 ```
 
-### Отрицательные шаблоны {#negative-patterns}
+### Шаблоны исключений {#negative-patterns}
 
-Также поддерживаются отрицательные шаблоны (с префиксом `!`). Чтобы исключить некоторые файлы из результата, вы можете добавить шаблоны исключения в первый аргумент:
+Также поддерживаются шаблоны с префиксом `!`. Чтобы исключить некоторые файлы из результата, вы можете добавить шаблоны исключений в первый аргумент:
 
 ```js twoslash
 import 'vite/client'
@@ -435,7 +435,7 @@ const modules = import.meta.glob(['./dir/*.js', '!**/bar.js'])
 ```js
 // код, созданный vite
 const modules = {
-  './dir/foo.js': () => import('./dir/foo.js'),
+  './dir/foo.js': () => import('./dir/foo.js')
 }
 ```
 
@@ -453,7 +453,7 @@ const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 // код, созданный vite
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
-  './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup),
+  './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup)
 }
 ```
 
@@ -464,7 +464,7 @@ import 'vite/client'
 // ---cut---
 const modules = import.meta.glob('./dir/*.js', {
   import: 'setup',
-  eager: true,
+  eager: true
 })
 ```
 
@@ -474,7 +474,7 @@ import { setup as __glob__0_0 } from './dir/foo.js'
 import { setup as __glob__0_1 } from './dir/bar.js'
 const modules = {
   './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __glob__0_1
 }
 ```
 
@@ -485,7 +485,7 @@ import 'vite/client'
 // ---cut---
 const modules = import.meta.glob('./dir/*.js', {
   import: 'default',
-  eager: true,
+  eager: true
 })
 ```
 
@@ -495,7 +495,7 @@ import __glob__0_0 from './dir/foo.js'
 import __glob__0_1 from './dir/bar.js'
 const modules = {
   './dir/foo.js': __glob__0_0,
-  './dir/bar.js': __glob__0_1,
+  './dir/bar.js': __glob__0_1
 }
 ```
 
@@ -508,11 +508,11 @@ import 'vite/client'
 // ---cut---
 const moduleStrings = import.meta.glob('./dir/*.svg', {
   query: '?raw',
-  import: 'default',
+  import: 'default'
 })
 const moduleUrls = import.meta.glob('./dir/*.svg', {
   query: '?url',
-  import: 'default',
+  import: 'default'
 })
 ```
 
@@ -520,11 +520,11 @@ const moduleUrls = import.meta.glob('./dir/*.svg', {
 // код, созданный vite:
 const moduleStrings = {
   './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
-  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default'])
 }
 const moduleUrls = {
   './dir/foo.svg': () => import('./dir/foo.js?url').then((m) => m['default']),
-  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default']),
+  './dir/bar.svg': () => import('./dir/bar.js?url').then((m) => m['default'])
 }
 ```
 
@@ -534,7 +534,7 @@ const moduleUrls = {
 import 'vite/client'
 // ---cut---
 const modules = import.meta.glob('./dir/*.js', {
-  query: { foo: 'bar', bar: true },
+  query: { foo: 'bar', bar: true }
 })
 ```
 
@@ -582,8 +582,8 @@ init({
   imports: {
     someFunc: () => {
       /* ... */
-    },
-  },
+    }
+  }
 }).then(() => {
   /* ... */
 })
@@ -607,8 +607,9 @@ import wasmUrl from 'foo.wasm?url'
 
 const main = async () => {
   const responsePromise = fetch(wasmUrl)
-  const { module, instance } =
-    await WebAssembly.instantiateStreaming(responsePromise)
+  const { module, instance } = await WebAssembly.instantiateStreaming(
+    responsePromise
+  )
   /* ... */
 }
 
@@ -654,7 +655,7 @@ const worker = new Worker(new URL('./worker.js', import.meta.url))
 
 ```ts
 const worker = new Worker(new URL('./worker.js', import.meta.url), {
-  type: 'module',
+  type: 'module'
 })
 ```
 
