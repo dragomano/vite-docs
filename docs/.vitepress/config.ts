@@ -78,10 +78,10 @@ export default defineConfig({
   base: '/vite-docs/',
 
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/vite-docs/logo.svg' }],
     [
       'link',
-      { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
+      { rel: 'alternate', type: 'application/rss+xml', href: '/vite-docs/blog.rss' },
     ],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     [
@@ -126,7 +126,7 @@ export default defineConfig({
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "p4lpwfiwp1")`,
     ],
-    [
+/*     [
       'script',
       {
         src: 'https://cdn.usefathom.com/script.js',
@@ -134,7 +134,7 @@ export default defineConfig({
         'data-spa': 'auto',
         defer: '',
       },
-    ],
+    ], */
   ],
 
   locales: {
@@ -233,10 +233,10 @@ export default defineConfig({
       }
     },
 
-    carbonAds: {
+/*     carbonAds: {
       code: 'CEBIEK3N',
       placement: 'vitejsdev',
-    },
+    }, */
 
     footer: {
       message: `Выпущено под лицензией MIT. (${commitRef})`,
