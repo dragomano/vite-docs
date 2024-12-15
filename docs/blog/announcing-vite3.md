@@ -29,7 +29,7 @@ head:
 
 _23 июля 2022_ - посмотрите [анонс Vite 4.0](./announcing-vite4.md)
 
-В феврале прошлого года [Эван Ю](https://twitter.com/youyuxi) выпустил Vite 2. С тех пор его использование неуклонно растёт, достигая более 1 миллиона загрузок пакета npm в неделю. После релиза быстро сформировалась обширная экосистема. Vite стал движущей силой обновлённой гонки инноваций в веб-фреймворках. [Nuxt 3](https://v3.nuxtjs.org/) использует Vite по умолчанию. [SvelteKit](https://kit.svelte.dev/), [Astro](https://astro.build/), [Hydrogen](https://hydrogen.shopify.dev/) и [SolidStart](https://docs.solidjs.com/quick-start) все построены на Vite. [Laravel теперь решил использовать Vite по умолчанию](https://laravel.com/docs/9.x/vite). [Vite Ruby](https://vite-ruby.netlify.app/) показывает, как Vite может улучшить DX Rails. [Vitest](https://vitest.dev) делает успехи как Vite-нативная альтернатива Jest. Vite стоит за новыми функциями тестирования компонентов в [Cypress](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test) и [Playwright](https://playwright.dev/docs/test-components), а Storybook имеет [Vite в качестве официального билдера](https://github.com/storybookjs/builder-vite). И [список продолжается](https://patak.dev/vite/ecosystem.html). Поддерживающие большинство из этих проектов участвуют в улучшении самого ядра Vite, тесно сотрудничая с [командой](https://vite.dev/team) Vite и другими участниками.
+В феврале прошлого года [Эван Ю](https://twitter.com/youyuxi) выпустил Vite 2. С тех пор его использование неуклонно растёт, достигая более 1 миллиона загрузок пакета npm в неделю. После релиза быстро сформировалась обширная экосистема. Vite стал движущей силой обновлённой гонки инноваций в веб-фреймворках. [Nuxt 3](https://v3.nuxtjs.org/) использует Vite по умолчанию. [SvelteKit](https://kit.svelte.dev/), [Astro](https://astro.build/), [Hydrogen](https://hydrogen.shopify.dev/) и [SolidStart](https://docs.solidjs.com/quick-start) все построены на Vite. [Laravel теперь решил использовать Vite по умолчанию](https://laravel.com/docs/9.x/vite). [Vite Ruby](https://vite-ruby.netlify.app/) показывает, как Vite может улучшить DX Rails. [Vitest](https://vitest.dev) делает успехи как Vite-нативная альтернатива Jest. Vite стоит за новыми функциями тестирования компонентов в [Cypress](https://docs.cypress.io/guides/component-testing/writing-your-first-component-test) и [Playwright](https://playwright.dev/docs/test-components), а Storybook имеет [Vite в качестве официального билдера](https://github.com/storybookjs/builder-vite). И [список продолжается](https://patak.dev/vite/ecosystem.html). Поддерживающие большинство из этих проектов участвуют в улучшении самого ядра Vite, тесно сотрудничая с [командой](/team) Vite и другими участниками.
 
 ![Обложка анонса Vite 3](/og-image-announcing-vite3.png)
 
@@ -41,7 +41,7 @@ _23 июля 2022_ - посмотрите [анонс Vite 4.0](./announcing-vit
 - [Руководство по переходу](https://v3.vite.dev/guide/migration.html)
 - [Журнал изменений](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#300-2022-07-13)
 
-Если вы новичок в Vite, мы рекомендуем прочитать раздел [Почему Vite](https://vite.dev/guide/why.html). Затем ознакомьтесь с разделами [Начало работы](https://vite.dev/guide/) и [Возможности](https://vite.dev/guide/features), чтобы увидеть, что Vite предлагает из коробки. Как обычно, мы приветствуем ваши вклады на [GitHub](https://github.com/vitejs/vite). Более [600 человек](https://github.com/vitejs/vite/graphs/contributors) уже помогли улучшить Vite. Следите за обновлениями в [Twitter](https://twitter.com/vite_js) или присоединяйтесь к обсуждениям с другими пользователями Vite на нашем [Discord-сервере](http://chat.vite.dev/).
+Если вы новичок в Vite, мы рекомендуем прочитать раздел [Почему Vite](/guide/why.html). Затем ознакомьтесь с разделами [Начало работы](/guide/) и [Возможности](/guide/features), чтобы увидеть, что Vite предлагает из коробки. Как обычно, мы приветствуем ваши вклады на [GitHub](https://github.com/vitejs/vite). Более [600 человек](https://github.com/vitejs/vite/graphs/contributors) уже помогли улучшить Vite. Следите за обновлениями в [Twitter](https://twitter.com/vite_js) или присоединяйтесь к обсуждениям с другими пользователями Vite на нашем [Discord-сервере](http://chat.vite.dev/).
 
 ## Новая документация {#new-documentation}
 
@@ -186,7 +186,7 @@ init().then((instance) => {
 
 ### ESM SSR сборка по умолчанию {#esm-ssr-build-by-default}
 
-Большинство SSR-фреймворков в экосистеме уже использовали ESM-сборки. Поэтому Vite 3 делает ESM форматом по умолчанию для SSR-сборок. Это позволяет нам упростить предыдущие [эвристики внешних зависимостей SSR](https://vite.dev/guide/ssr.html#ssr-externals), экстернализируя зависимости по умолчанию.
+Большинство SSR-фреймворков в экосистеме уже использовали ESM-сборки. Поэтому Vite 3 делает ESM форматом по умолчанию для SSR-сборок. Это позволяет нам упростить предыдущие [эвристики внешних зависимостей SSR](/guide/ssr.html#ssr-externals), экстернализируя зависимости по умолчанию.
 
 ### Улучшенная поддержка относительного пути {#improved-relative-base-support}
 

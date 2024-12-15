@@ -26,8 +26,7 @@ import { core, emeriti } from './_data/team'
   <VPTeamPageSection>
     <template #title>Почётная команда</template>
     <template #lead>
-      Здесь мы чествуем некоторых уже не активных участников команды,
-      которые внесли ценный вклад в прошлом.
+      Здесь мы отмечаем участников команды, которые уже не активны, но внесли ценный вклад в прошлом.
     </template>
     <template #members>
       <VPTeamMembers size="small" :members="emeriti" />

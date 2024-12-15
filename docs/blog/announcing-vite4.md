@@ -35,7 +35,7 @@ Vite 3 [был выпущен](./announcing-vite3.md) пять месяцев н
 
 В качестве демонстрации роста, который испытали Vite и связанные с ним проекты, экосистема Vite собралась 11 октября на [ViteConf 2022](https://viteconf.org/2022/replay). Мы увидели представителей основных веб-фреймворков и инструментов, рассказывающих истории об инновациях и сотрудничестве. И в символическом шаге команда Rollup выбрала именно этот день для выпуска [Rollup 3](https://rollupjs.org).
 
-Сегодня [команда Vite](https://vite.dev/team) с помощью наших партнёров по экосистеме рада объявить о выпуске Vite 4, который в процессе сборки использует Rollup 3. Мы работали с экосистемой, чтобы обеспечить плавный путь обновления для этой новой мажорной версии. Vite теперь использует [Rollup 3](https://github.com/vitejs/vite/issues/9870), что позволило нам упростить внутреннюю обработку ресурсов Vite и получить множество улучшений. Смотрите [заметки о выпуске Rollup 3 здесь](https://github.com/rollup/rollup/releases/tag/v3.0.0).
+Сегодня [команда Vite](/team) с помощью наших партнёров по экосистеме рада объявить о выпуске Vite 4, который в процессе сборки использует Rollup 3. Мы работали с экосистемой, чтобы обеспечить плавный путь обновления для этой новой мажорной версии. Vite теперь использует [Rollup 3](https://github.com/vitejs/vite/issues/9870), что позволило нам упростить внутреннюю обработку ресурсов Vite и получить множество улучшений. Смотрите [заметки о выпуске Rollup 3 здесь](https://github.com/rollup/rollup/releases/tag/v3.0.0).
 
 ![Обложка анонса Vite 4](/og-image-announcing-vite4.png)
 
@@ -52,7 +52,7 @@ Vite 3 [был выпущен](./announcing-vite3.md) пять месяцев н
 - [日本語](https://ja.vite.dev/)
 - [Español](https://es.vite.dev/)
 
-Если вы недавно начали использовать Vite, мы рекомендуем прочитать следующие разделы руководства: [Почему Vite](https://vite.dev/guide/why.html), [Начало работы](https://vite.dev/guide/) и [Возможности](https://vite.dev/guide/features). Если вы хотите участвовать, мы будем рады вашим вкладам на [GitHub](https://github.com/vitejs/vite). Почти [700 человек](https://github.com/vitejs/vite/graphs/contributors) уже внесли свой вклад в Vite. Следите за обновлениями в [Twitter](https://twitter.com/vite_js) и [Mastodon](https://webtoo.ls/@vite), или присоединяйтесь к сотрудничеству с другими в нашем [сообществе Discord](http://chat.vite.dev/).
+Если вы недавно начали использовать Vite, мы рекомендуем прочитать следующие разделы руководства: [Почему Vite](/guide/why.html), [Начало работы](/guide/) и [Возможности](/guide/features). Если вы хотите участвовать, мы будем рады вашим вкладам на [GitHub](https://github.com/vitejs/vite). Почти [700 человек](https://github.com/vitejs/vite/graphs/contributors) уже внесли свой вклад в Vite. Следите за обновлениями в [Twitter](https://twitter.com/vite_js) и [Mastodon](https://webtoo.ls/@vite), или присоединяйтесь к сотрудничеству с другими в нашем [сообществе Discord](http://chat.vite.dev/).
 
 ## Поэкспериментируйте с Vite 4 {#start-playing-with-vite-4}
 
