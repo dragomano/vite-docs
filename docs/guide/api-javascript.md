@@ -33,11 +33,11 @@ server.bindCLIShortcuts({ print: true })
 ```
 
 ::: tip ПРИМЕЧАНИЕ
-При использовании `createServer` и `build` в одном и том же процессе Node.js обе функции зависят от `process.env.NODE_ENV` для правильной работы, что также зависит от параметра конфигурации `mode`. Чтобы избежать конфликтующего поведения, установите `process.env.NODE_ENV` или `mode` для двух API в значение `development`. В противном случае вы можете запустить дочерний процесс для выполнения API отдельно.
+При использовании `createServer` и `build` в одном процессе Node.js, обе функции зависят от переменной окружения `process.env.NODE_ENV` для правильной работы, что также связано с опцией конфигурации `mode`. Чтобы избежать конфликтов, установите `process.env.NODE_ENV` или `mode` обоих API в значение `development`. Альтернативно, можно запустить API в отдельных дочерних процессах.
 :::
 
 ::: tip ПРИМЕЧАНИЕ
-При использовании [режима мидлвара](/config/server-options.html#server-middlewaremode) в сочетании с [конфигурацией прокси для WebSocket](/config/server-options.html#server-proxy) родительский http-сервер должен быть предоставлен в `middlewareMode`, чтобы правильно привязать прокси.
+При использовании [режима мидлвара](/config/server-options.html#server-middlewaremode) в сочетании с [конфигурацией прокси для WebSocket](/config/server-options.html#server-proxy) необходимо указать родительский http-сервер в секции `middlewareMode`, чтобы правильно привязать прокси.
 
 <details>
 <summary>Пример</summary>
