@@ -126,15 +126,6 @@ export default defineConfig({
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "p4lpwfiwp1")`,
     ],
-/*     [
-      'script',
-      {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'CBDFBSLI',
-        'data-spa': 'auto',
-        defer: '',
-      },
-    ], */
   ],
 
   locales: {
@@ -232,11 +223,6 @@ export default defineConfig({
         }
       }
     },
-
-/*     carbonAds: {
-      code: 'CEBIEK3N',
-      placement: 'vitejsdev',
-    }, */
 
     footer: {
       message: `Выпущено под лицензией MIT. (${commitRef})`,
@@ -514,7 +500,7 @@ export default defineConfig({
   transformPageData(pageData) {
     const canonicalUrl = `${ogUrl}/${pageData.relativePath}`
       .replace(/\/index\.md$/, '/')
-      .replace(/\.md$/, '/')
+      .replace(/\.md$/, '')
     pageData.frontmatter.head ??= []
     pageData.frontmatter.head.unshift(
       ['link', { rel: 'canonical', href: canonicalUrl }],
