@@ -19,6 +19,15 @@
 
 :::
 
+## preview.allowedHosts
+
+- **Тип:** `string | true`
+- **По умолчанию:** [`server.allowedHosts`](./server-options#server-allowedhosts)
+
+Имена хостов, на которые Vite разрешено отвечать.
+
+Смотрите [`server.allowedHosts`](./server-options#server-allowedhosts) для получения дополнительной информации.
+
 ## preview.port
 
 - **Тип:** `number`
