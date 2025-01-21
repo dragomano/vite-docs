@@ -29,6 +29,16 @@ URL-адреса ресурсов, импортируемых через JS, с�
 
 Для более продвинутого управления базовым путём ознакомьтесь с [Расширенными параметрами базового пути](#advanced-base-options).
 
+### Относительный базовый путь {#relative-base}
+
+Если вы не знаете базовый путь заранее, вы можете установить относительный базовый путь с помощью `"base": "./"` или `"base": ""`. Это сделает все сгенерированные URL-адреса относительными к каждому файлу.
+
+:::warning Поддержка старых браузеров при использовании относительных базовых путей
+
+Поддержка `import.meta` необходима для относительных базовых путей. Если вам нужно поддерживать [браузеры, которые не поддерживают `import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta), вы можете использовать [плагин `legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy).
+
+:::
+
 ## Настройка сборки {#customizing-the-build}
 
 Сборку можно настроить с помощью различных [параметров конфигурации](/config/build-options.md). В частности, вы можете напрямую настроить основные [параметры Rollup](https://rollupjs.org/configuration-options/) через `build.rollupOptions`:
@@ -65,8 +75,7 @@ window.addEventListener('vite:preloadError', (event) => {
 
 Вы можете включить наблюдатель Rollup с помощью команды `vite build --watch`. Либо вы можете напрямую настроить основные параметры наблюдателя ([`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)) через опцию `build.watch`:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default defineConfig({
   build: {
     watch: {
@@ -96,10 +105,12 @@ export default defineConfig({
 
 Во время сборки всё, что вам нужно сделать, это указать несколько `.html` файлов в качестве точек входа:
 
-```js twoslash
-// vite.config.js
-import { resolve } from 'path'
+```js twoslash [vite.config.js]
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
@@ -123,15 +134,18 @@ export default defineConfig({
 
 Когда приходит время упаковать вашу библиотеку для распространения, используйте опцию конфигурации [`build.lib`](/config/build-options.md#build-lib). Убедитесь, что вы также исключили любые зависимости, которые не хотите включать в вашу библиотеку, например, `vue` или `react`:
 
-```js twoslash
-// vite.config.js
-import { resolve } from 'path'
+::: code-group
+
+```js twoslash [vite.config.js (одна точка входа)]
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
     lib: {
-      // Также может быть словарем или массивом нескольких точек входа
       entry: resolve(__dirname, 'lib/main.js'),
       name: 'MyLib',
       // соответствующие расширения будут добавлены
@@ -153,16 +167,54 @@ export default defineConfig({
 })
 ```
 
+```js twoslash [vite.config.js (несколько точек входа)]
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { defineConfig } from 'vite'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+export default defineConfig({
+  build: {
+    lib: {
+      entry: {
+        'my-lib': resolve(__dirname, 'lib/main.js'),
+        secondary: resolve(__dirname, 'lib/secondary.js'),
+      },
+      name: 'MyLib',
+    },
+    rollupOptions: {
+      // убедитесь, что вы исключили зависимости, которые не должны быть объединены
+      // в вашу библиотеку
+      external: ['vue'],
+      output: {
+        // Предоставьте глобальные переменные для использования в сборке UMD
+        // для исключённых зависимостей
+        globals: {
+          vue: 'Vue'
+        }
+      }
+    }
+  }
+})
+```
+
+:::
+
 Файл входа будет содержать экспорты, которые могут быть импортированы пользователями вашего пакета:
 
-```js
-// lib/main.js
+```js [lib/main.js]
 import Foo from './Foo.vue'
 import Bar from './Bar.vue'
 export { Foo, Bar }
 ```
 
 Запуск команды `vite build` с этой конфигурацией использует предустановку Rollup, ориентированную на создание библиотек, и производит два формата пакетов: `es` и `umd` (настраиваемые через `build.lib`):
+
+- `es` и `umd` (для одной точки входа)
+- `es` и `cjs` (для нескольких точек входа)
+
+Форматы можно настроить с помощью опции [`build.lib.formats`](/config/build-options.md#build-lib).
 
 ```
 $ vite build
@@ -173,7 +225,9 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 
 Рекомендуемый `package.json` для вашей библиотеки:
 
-```json
+::: code-group
+
+```json [package.json (одна точка входа)]
 {
   "name": "my-lib",
   "type": "module",
@@ -189,9 +243,7 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
 }
 ```
 
-Или, если вы хотите предоставить несколько точек входа:
-
-```json
+```json [package.json (несколько точек входа)]
 {
   "name": "my-lib",
   "type": "module",
@@ -207,6 +259,31 @@ dist/my-lib.umd.cjs 0.30 kB / gzip: 0.16 kB
       "import": "./dist/secondary.js",
       "require": "./dist/secondary.cjs"
     }
+  }
+}
+```
+
+:::
+
+### Поддержка CSS {#css-support}
+
+Если ваша библиотека импортирует какой-либо CSS, он будет собран в один CSS-файл наряду с собранными JS-файлами, например, `dist/my-lib.css`. Имя по умолчанию соответствует `build.lib.fileName`, но его также можно изменить с помощью опции [`build.lib.cssFileName`](/config/build-options.md#build-lib).
+
+Вы можете экспортировать CSS-файл в вашем `package.json`, чтобы его могли импортировать пользователи:
+
+```json {12}
+{
+  "name": "my-lib",
+  "type": "module",
+  "files": ["dist"],
+  "main": "./dist/my-lib.umd.cjs",
+  "module": "./dist/my-lib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/my-lib.js",
+      "require": "./dist/my-lib.umd.cjs"
+    },
+    "./style.css": "./dist/my-lib.css"
   }
 }
 ```
@@ -269,7 +346,9 @@ experimental: {
     if (type === 'public') {
       return 'https://www.domain.com/' + filename
     } else if (path.extname(hostId) === '.js') {
-      return { runtime: `window.__assetsPath(${JSON.stringify(filename)})` }
+      return {
+        runtime: `window.__assetsPath(${JSON.stringify(filename)})`
+      }
     } else {
       return 'https://cdn.domain.com/assets/' + filename
     }
