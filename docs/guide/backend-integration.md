@@ -13,6 +13,12 @@
    // ---cut---
    // vite.config.js
    export default defineConfig({
+     server: {
+       cors: {
+         // источник, к которому вы будете обращаться через браузер
+         origin: 'http://my-backend.example.com',
+       },
+     },
      build: {
        // генерация .vite/manifest.json в outDir
        manifest: true,
