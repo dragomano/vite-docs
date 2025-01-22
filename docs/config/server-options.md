@@ -27,7 +27,7 @@ import dns from 'node:dns'
 dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig({
-  // omit
+  // конфиг
 })
 ```
 
@@ -159,7 +159,7 @@ export default defineConfig({
 ## server.cors
 
 - **Тип:** `boolean | CorsOptions`
-- **По умолчанию:** `false`
+- **По умолчанию:** `{ origin: /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/ }` (разрешает localhost, `127.0.0.1` и `::1`)
 
 Настройте CORS для dev-сервера. Передайте [объект `options`](https://github.com/expressjs/cors#configuration-options), чтобы точно настроить поведение, или `true`, чтобы разрешить любой источник.
 
