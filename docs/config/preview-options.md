@@ -80,14 +80,16 @@ export default defineConfig({
 
 Настройте пользовательские правила прокси для сервера предварительного просмотра. Ожидает объект пар `{ key: options }`. Если ключ начинается с `^`, он будет интерпретироваться как `RegExp`. Опция `configure` может быть использована для доступа к экземпляру прокси.
 
-Использует [`http-proxy`](https://github.com/http-party/node-http-proxy). Полные опции [здесь](https://github.com/http-party/node-http-proxy#options).
+Использует [`http-proxy`](https://github.com/http-party/node-http-proxy). Полный список опций [здесь](https://github.com/http-party/node-http-proxy#options).
 
 ## preview.cors
 
 - **Тип:** `boolean | CorsOptions`
 - **По умолчанию:** [`server.cors`](./server-options#server-cors)
 
-Настройте CORS для сервера предварительного просмотра. Это включено по умолчанию и позволяет любые источники. Передайте [объект опций](https://github.com/expressjs/cors#configuration-options), чтобы настроить поведение, или `false`, чтобы отключить.
+Настройте CORS для сервера предварительного просмотра.
+
+Смотрите [`server.cors`](./server-options#server-cors) для получения дополнительной информации.
 
 ## preview.headers
 
