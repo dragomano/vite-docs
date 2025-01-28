@@ -4,7 +4,7 @@
 
 Если предложенные здесь решения не сработают, пожалуйста, попробуйте задать вопросы в [обсуждениях на GitHub](https://github.com/vitejs/vite/discussions) или в канале `#help` на [Vite Land Discord](https://chat.vite.dev).
 
-## CJS {#cjs}
+## CJS
 
 ### Депрекация Node API Vite для CommonJS {#vite-cjs-node-api-deprecated}
 
@@ -35,7 +35,7 @@ VITE_CJS_IGNORE_WARNING=true vite dev
 
 Обратите внимание, что файлы конфигурации postcss пока не поддерживают ESM + TypeScript (`.mts` или `.ts` в `"type": "module"`). Если у вас есть конфигурации postcss с `.ts` и вы добавили `"type": "module"` в package.json, вам также нужно будет переименовать конфигурацию postcss, чтобы использовать `.cts`.
 
-## CLI {#cli}
+## CLI
 
 ### `Error: Cannot find module 'C:\foo\bar&baz\vite\bin\vite.js'` {#error-cannot-find-module-c-foo-bar-baz-vite-bin-vite-js}
 
@@ -109,7 +109,7 @@ VITE_CJS_IGNORE_WARNING=true vite dev
 
 Смотрите: [Проблемы с кэшем](https://helpx.adobe.com/mt/experience-manager/kb/cache-problems-on-chrome-with-SSL-certificate-errors.html), [Проблема с Chrome](https://bugs.chromium.org/p/chromium/issues/detail?id=110649#c8)
 
-#### macOS {#macos}
+#### macOS
 
 Вы можете установить доверенный сертификат через CLI с помощью этой команды:
 
@@ -119,7 +119,7 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 Или, импортировав его в приложение Keychain Access и обновив уровень доверия вашего сертификата на «Always Trust» (всегда доверять).
 
-### 431 - Слишком большие заголовки запроса {#_431-request-header-fields-too-large}
+### 431 - Слишком большие заголовки запроса {#\_431-request-header-fields-too-large}
 
 Когда сервер / WebSocket-сервер получает большой HTTP заголовок, запрос будет отклонён, и будет показано следующее предупреждение:
 
@@ -129,7 +129,15 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 Чтобы избежать этого, попробуйте уменьшить размер заголовка запроса. Например, если куки длинные, удалите их. Или вы можете использовать [`--max-http-header-size`](https://nodejs.org/api/cli.html#--max-http-header-sizesize), чтобы изменить максимальный размер заголовка.
 
-## HMR {#hmr}
+### Dev-контейнеры / Перенаправление портов в VS Code
+
+Если вы используете dev-контейнер или функцию перенаправления портов в VS Code, вам может потребоваться установить опцию [`server.host`](/config/server-options.md#server-host) в `127.0.0.1` в конфигурации, чтобы это работало.
+
+Это связано с тем, что [функция перенаправления портов в VS Code не поддерживает IPv6](https://github.com/microsoft/vscode-remote-release/issues/7029).
+
+Смотрите [#16522](https://github.com/vitejs/vite/issues/16522) для получения дополнительных сведений.
+
+## HMR
 
 ### Vite обнаруживает изменение файла, но HMR не работает {#vite-detects-a-file-change-but-the-hmr-is-not-working}
 
@@ -168,7 +176,8 @@ import './Foo.js' // должен быть './foo.js'
 ## Оптимизированные зависимости {#optimized-dependencies}
 
 ### Устаревшие предварительно объединённые зависимости при объединении с локальным пакетом
- {#outdated-pre-bundled-deps-when-linking-to-a-local-package}
+
+{#outdated-pre-bundled-deps-when-linking-to-a-local-package}
 
 Ключ хеша, используемый для аннулирования оптимизированных зависимостей, зависит от содержимого блокировки пакетов, патчей, применённых к зависимостям, и параметров в файле конфигурации Vite, которые влияют на объединение узловых модулей. Это означает, что Vite будет обнаруживать, когда зависимость переопределяется с помощью функции, такой как [npm overrides](https://docs.npmjs.com/cli/v9/configuring-npm/package-json#overrides), и повторно объединить ваши зависимости при следующем запуске сервера. Vite не будет аннулировать зависимости, когда вы используете такие функции, как [npm link](https://docs.npmjs.com/cli/v9/commands/npm-link). В случае, если вы связываете или разъединяете зависимость, вам нужно будет принудительно повторно оптимизировать при следующем запуске сервера, используя `vite --force`. Мы рекомендуем использовать переопределения вместо этого, которые теперь поддерживаются каждым менеджером пакетов (см. также [pnpm overrides](https://pnpm.io/package_json#pnpmoverrides) и [yarn resolutions](https://yarnpkg.com/configuration/manifest/#resolutions)).
 
