@@ -4,19 +4,19 @@ import { Feed } from 'feed'
 import type { SiteConfig } from 'vitepress'
 import { createContentLoader } from 'vitepress'
 
-const siteUrl = 'https://vite.dev'
+const siteUrl = 'https://dragomano.github.io/vite-docs'
 const blogUrl = `${siteUrl}/blog`
 
 export const buildEnd = async (config: SiteConfig): Promise<void> => {
   const feed = new Feed({
-    title: 'Vite',
-    description: 'Next Generation Frontend Tooling',
+    title: 'Vite по-русски',
+    description: 'Инструментарий для фронтенда нового поколения',
     id: blogUrl,
     link: blogUrl,
-    language: 'en',
-    image: 'https://vite.dev/og-image.png',
-    favicon: 'https://vite.dev/logo.svg',
-    copyright: 'Copyright © 2019-present VoidZero Inc. & Vite Contributors',
+    language: 'ru',
+    image: 'https://dragomano.github.io/vite-docs/og-image.jpg',
+    favicon: 'https://dragomano.github.io/vite-docs/logo.svg',
+    copyright: '© 2019-present VoidZero Inc. и контрибьюторы Vite',
   })
 
   const posts = await createContentLoader('blog/*.md', {
