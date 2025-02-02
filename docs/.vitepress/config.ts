@@ -8,34 +8,10 @@ import {
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'Инструментарий для фронтенда нового поколения'
-const ogImage = 'https://vite.dev/og-image.png'
-const ogTitle = 'Vite'
-const ogUrl = 'https://vite.dev'
+const ogImage = 'https://dragomano.github.io/vite-docs/og-image.jpg'
+const ogTitle = 'Vite по-русски'
+const ogUrl = 'https://dragomano.github.io/vite-docs/'
 
-// netlify envs
-const deployURL = process.env.DEPLOY_PRIME_URL || ''
-const commitRef = process.env.COMMIT_REF?.slice(0, 8) || 'dev'
-
-const deployType = (() => {
-  switch (deployURL) {
-    case 'https://main--vite-docs-main.netlify.app':
-      return 'main'
-    case '':
-      return 'local'
-    default:
-      return 'release'
-  }
-})()
-const additionalTitle = ((): string => {
-  switch (deployType) {
-    case 'main':
-      return ' (main branch)'
-    case 'local':
-      return ' (local)'
-    case 'release':
-      return ''
-  }
-})()
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   const oldVersions: DefaultTheme.NavItemWithLink[] = [
     {
@@ -56,27 +32,24 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
     },
   ]
 
-  switch (deployType) {
-    case 'main':
-    case 'local':
-      return [
-        {
-          text: 'Документация Vite 6 (релиз)',
-          link: 'https://vite.dev',
-        },
-        ...oldVersions,
-      ]
-    case 'release':
-      return oldVersions
-  }
+  return [
+    {
+      text: 'Документация Vite 6 (релиз)',
+      link: 'https://vite.dev',
+    },
+    ...oldVersions,
+  ]
 })()
 
 export default defineConfig({
   lang: 'ru',
-  title: `Vite${additionalTitle}`,
+  title: `Vite по-русски`,
   description: 'Инструментарий для фронтенда нового поколения',
   base: '/vite-docs/',
-
+  sitemap: {
+    hostname: 'https://dragomano.github.io/vite-docs/'
+  },
+  lastUpdated: true,
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/vite-docs/logo.svg' }],
     [
@@ -225,7 +198,7 @@ export default defineConfig({
     },
 
     footer: {
-      message: `Выпущено под лицензией MIT. (${commitRef})`,
+      message: `Выпущено под лицензией MIT.`,
       copyright: '© 2019 — настоящее время, VoidZero Inc. и контрибьюторы Vite',
     },
 
