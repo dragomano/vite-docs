@@ -1,23 +1,3 @@
-<script setup lang="ts">
-import { computed } from 'vue'
-import { VPDocAsideSponsors } from 'vitepress/theme'
-import { useSponsor, voidZero } from '../composables/sponsor'
-
-const { data } = useSponsor()
-
-const sponsors = computed(() => {
-  return [
-    { size: 'small', items: [voidZero] },
-    ...(data?.value.map((sponsor) => {
-      return {
-        size: sponsor.size === 'big' ? 'mini' : 'xmini',
-        items: sponsor.items
-      }
-    }) ?? []),
-  ]
-})
-</script>
-
 <template>
   <a
     class="viteconf"
@@ -31,7 +11,6 @@ const sponsors = computed(() => {
       <p class="extra-info">Смотреть повтор!</p>
     </span>
   </a>
-  <VPDocAsideSponsors v-if="data" :data="sponsors" />
 </template>
 
 <style>
