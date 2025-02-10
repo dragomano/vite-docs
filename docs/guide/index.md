@@ -1,4 +1,4 @@
-# Первые шаги
+# Первые шаги {#getting-started}
 
 <audio id="vite-audio">
   <source src="/vite.mp3" type="audio/mpeg">
