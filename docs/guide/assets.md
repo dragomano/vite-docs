@@ -46,7 +46,7 @@ document.getElementById('hero-img').style.background = `url("${imgUrl}")`
 
 ### Импорт явных URL {#explicit-url-imports}
 
-Ресурсы, которые не включены во внутренний список или в `assetsInclude`, могут быть явно импортированы как URL-адреса с использованием суффикса `?url`. Это полезно, например, для импорта [Houdini Paint Worklets](https://houdini.how/usage) («Рабочие модули рисования Houdini»).
+Ресурсы, которые не включены во внутренний список или в `assetsInclude`, могут быть явно импортированы как URL-адреса с использованием суффикса `?url`. Это полезно, например, для импорта [Houdini Paint Worklets](https://developer.mozilla.org/en-US/docs/Web/API/CSS/paintWorklet_static) («Рабочие модули рисования Houdini»).
 
 ```js twoslash
 import 'vite/client'
