@@ -45,7 +45,7 @@ const coreTeam = [
     avatar: 'https://github.com/bluwy.png',
     name: 'Бьорн Лу',
     title: 'Разработчик с открытым исходным кодом',
-    desc: 'Член основной команды Vite, Astro и Svelte.',
+    desc: 'Создание инструментов ради фана.',
     links: [
       { icon: 'github', link: 'https://github.com/bluwy' },
       { icon: 'bluesky', link: 'https://bsky.app/profile/bluwy.me' },
