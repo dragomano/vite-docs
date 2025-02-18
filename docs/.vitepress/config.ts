@@ -264,16 +264,25 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: 'Руководство',
+          text: 'Введение',
           items: [
-            {
-              text: 'Почему Vite',
-              link: '/guide/why',
-            },
             {
               text: 'Начало работы',
               link: '/guide/',
             },
+            {
+              text: 'Философия',
+              link: '/guide/philosophy',
+            },
+            {
+              text: 'Почему Vite',
+              link: '/guide/why',
+            },
+          ],
+        },
+        {
+          text: 'Руководство',
+          items: [
             {
               text: 'Возможности',
               link: '/guide/features',
@@ -315,20 +324,12 @@ export default defineConfig({
               link: '/guide/backend-integration',
             },
             {
-              text: 'Сравнения',
-              link: '/guide/comparisons',
-            },
-            {
               text: 'Решение проблем',
               link: '/guide/troubleshooting',
             },
             {
               text: 'Производительность',
               link: '/guide/performance',
-            },
-            {
-              text: 'Философия',
-              link: '/guide/philosophy',
             },
             {
               text: 'Переход с версии v5',
