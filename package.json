@@ -29,9 +29,9 @@
   "homepage": "https://github.com/dragomano/vite-docs?tab=readme-ov-file#readme",
   "devDependencies": {
     "@algolia/client-search": "^5.20.3",
-    "@shikijs/vitepress-twoslash": "^2.4.2",
+    "@shikijs/vitepress-twoslash": "^2.5.0",
     "@types/express": "^5.0.0",
-    "@types/node": "22.13.4",
+    "@types/node": "22.13.5",
     "gsap": "^3.12.7",
     "feed": "^4.2.2",
     "vitepress": "^1.6.3",
