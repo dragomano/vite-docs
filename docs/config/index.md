@@ -121,3 +121,19 @@ export default defineConfig(({ mode }) => {
   }
 })
 ```
+
+## Отладка конфигурационного файла в VS Code {#debugging-the-config-file-on-vs-code}
+
+При использовании поведения по умолчанию `--configLoader bundle`, Vite записывает сгенерированный временный конфигурационный файл в папку `node_modules/.vite-temp`, и при установке точек останова для отладки в конфигурационном файле Vite возникнет ошибка «file not found» («файл не найден»). Чтобы исправить эту проблему, добавьте следующую конфигурацию в `.vscode/settings.json`:
+
+```json
+{
+  "debug.javascript.terminalOptions": {
+    "resolveSourceMapLocations": [
+      "${workspaceFolder}/**",
+      "!**/node_modules/**",
+      "**/node_modules/.vite-temp/**"
+    ]
+  }
+}
+```
