@@ -60,9 +60,9 @@ export default defineConfig({
 - **Тип:** `https.ServerOptions`
 - **По умолчанию:** [`server.https`](./server-options#server-https)
 
-Включите TLS + HTTP/2. Обратите внимание, что это понижается только до TLS, когда также используется опция [`server.proxy`](./server-options#server-proxy).
+Включите TLS + HTTP/2.
 
-Значение также может быть [объектом `options`](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener), переданным в `https.createServer()`.
+См. [`server.https`](./server-options#server-https) для получения дополнительной информации.
 
 ## preview.open
 
