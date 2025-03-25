@@ -333,6 +333,10 @@ export default defineConfig({
               link: '/guide/performance',
             },
             {
+              text: 'Rolldown',
+              link: '/guide/rolldown',
+            },
+            {
               text: 'Переход с версии v5',
               link: '/guide/migration',
             },

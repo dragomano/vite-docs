@@ -123,5 +123,6 @@ export default defineConfig({
 
 Использование встроенных инструментов часто приводит к увеличению размера пакета и поэтому не является стандартным при создании нового проекта Vite. Но это может оправдать затраты для более крупных приложений.
 
+- Используйте [Rolldown вместо Rollup и esbuild](./rolldown), чтобы ускорить сборку и добиться одинакового поведения в режимах разработки и продакшена.
 - Попробуйте экспериментальную поддержку [Lightning CSS](https://github.com/vitejs/vite/discussions/13835).
 - Используйте [`@vitejs/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) вместо `@vitejs/plugin-react`.
