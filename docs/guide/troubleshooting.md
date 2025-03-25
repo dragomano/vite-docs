@@ -64,15 +64,6 @@ VITE_CJS_IGNORE_WARNING=true vite dev
 - добавив `"type": "module"` в ближайший `package.json`
 - переименовав `vite.config.js`/`vite.config.ts` в `vite.config.mjs`/`vite.config.mts`
 
-### `failed to load config from '/path/to/config*/vite.config.js'` {#failed-to-load-config-from-path-to-config-vite-config-js}
-
-> failed to load config from '/path/to/config\*/vite.config.js'
-> error when starting dev server:
-> Error: Build failed with 1 error:
-> error: Must use "outdir" when there are multiple input files
-
-Ошибка выше может возникнуть, если путь к вашей папке проекта содержит `*`, которую `esbuild` интерпретирует как шаблон. Переименуйте директорию, чтобы удалить `*`.
-
 ## Сервер для разработки {#dev-server}
 
 ### Запросы зависают навсегда {#requests-are-stalled-forever}
