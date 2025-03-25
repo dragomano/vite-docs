@@ -27,15 +27,14 @@
   },
   "homepage": "https://github.com/dragomano/vite-docs?tab=readme-ov-file#readme",
   "devDependencies": {
-    "@algolia/client-search": "^5.21.0",
+    "@algolia/client-search": "^5.22.0",
     "@shikijs/vitepress-twoslash": "^3.2.1",
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.13.10",
-    "esbuild": "^0.25.1",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.13",
     "feed": "^4.2.2",
     "gsap": "^3.12.7",
-    "vitepress": "^1.6.3",
-    "vitepress-plugin-group-icons": "^1.3.7",
+    "vitepress": "2.0.0-alpha.4",
+    "vitepress-plugin-group-icons": "^1.3.8",
     "vue": "^3.5.13"
   }
 }
