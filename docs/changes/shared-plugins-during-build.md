@@ -4,7 +4,7 @@
 Оставьте нам отзыв в [обсуждении обратной связи по Environment API](https://github.com/vitejs/vite/discussions/16358)
 :::
 
-Смотрите [Общие плагины во время сборки](/guide/api-environment.md#shared-plugins-during-build).
+Смотрите [Общие плагины во время сборки](/guide/api-environment-plugins.md#shared-plugins-during-build).
 
 Область применения: `Авторы плагинов Vite`
 
