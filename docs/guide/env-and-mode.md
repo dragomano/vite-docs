@@ -108,6 +108,13 @@ VITE_BAR=bar
 ```typescript
 /// <reference types="vite/client" />
 
+
+ interface ViteTypeOptions {
+  // Добавив эту строку, вы можете сделать тип ImportMetaEnv строгим,
+  // чтобы запретить неизвестные ключи.
+  // strictImportMetaEnv: unknown
+}
+
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
   // больше переменных окружения...
