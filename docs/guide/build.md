@@ -64,9 +64,9 @@ export default defineConfig({
 
 Например, можно указать несколько выходных данных Rollup с плагинами, которые применяются только во время сборки.
 
-## Стратегия разбиения на чанки {#chunking-strategy}
+## Стратегия разделения на чанки {#chunking-strategy}
 
-Вы можете настроить, как чанки разбиваются, используя `build.rollupOptions.output.manualChunks` (см. [документацию Rollup](https://rollupjs.org/configuration-options/#output-manualchunks)). Если вы используете фреймворк, обратитесь к его документации для настройки разбиения чанков.
+Вы можете настроить, как чанки разделяются, используя `build.rollupOptions.output.manualChunks` (см. [документацию Rollup](https://rollupjs.org/configuration-options/#output-manualchunks)). Для настройки разделения сборки на чанки при работе с фреймворком обратитесь к соответствующей документации.
 
 ## Обработка ошибок загрузки {#load-error-handling}
 
