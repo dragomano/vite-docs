@@ -38,7 +38,52 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 ```
 
 :::warning
-`runner` оценивается жадно при первом доступе. Имейте в виду, что Vite включает поддержку карт источников, когда `runner` создаётся вызовом `process.setSourceMapsEnabled` или переопределением `Error.prepareStackTrace`, если это не доступно.
+`runner` вычисляется лениво (lazy evaluation) только при первом обращении к нему. Обратите внимание, что Vite включает поддержку карт источников (source maps) при создании `runner` через вызов `process.setSourceMapsEnabled` или переопределением `Error.prepareStackTrace`, если первый метод недоступен.
+:::
+
+Фреймворки, которые взаимодействуют со своей средой выполнения через [Fetch API](https://developer.mozilla.org/ru/docs/Web/API/Window/fetch), могут использовать `FetchableDevEnvironment`, предоставляющий стандартизированный способ обработки запросов через метод `handleRequest`:
+
+```ts
+import {
+  createServer,
+  createFetchableDevEnvironment,
+  isFetchableDevEnvironment,
+} from 'vite'
+
+const server = await createServer({
+  server: { middlewareMode: true },
+  appType: 'custom',
+  environments: {
+    custom: {
+      dev: {
+        createEnvironment(name, config) {
+          return createFetchableDevEnvironment(name, config, {
+            handleRequest(request: Request): Promise<Response> | Response {
+              // обрабатываем Request и возвращаем Response
+            },
+          })
+        },
+      },
+    },
+  },
+})
+
+// Теперь любой компонент, использующий Environment API, может вызывать `dispatchFetch`
+if (isFetchableDevEnvironment(server.environments.custom)) {
+  const response: Response = await server.environments.custom.dispatchFetch(
+    new Request('/request-to-handle'),
+  )
+}
+```
+
+:::warning
+Vite выполняет валидацию входных и выходных данных метода `dispatchFetch`:
+- Запрос должен быть экземпляром глобального класса `Request`
+- Ответ должен быть экземпляром глобального класса `Response`
+
+В случае несоответствия Vite выбросит ошибку `TypeError`.
+
+Хотя `FetchableDevEnvironment` реализован как класс, команда Vite считает это деталью реализации, которая может измениться в любой момент.
 :::
 
 ## `RunnableDevEnvironment` по умолчанию {#default-runnabledevenvironment}
