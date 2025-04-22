@@ -1,6 +1,6 @@
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
-//import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
+import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
@@ -491,7 +491,8 @@ export default defineConfig({
     return pageData
   },
   markdown: {
-    /* codeTransformers: [transformerTwoslash()], */
+    codeTransformers: [transformerTwoslash()],
+    languages: ['js', 'jsx', 'ts', 'tsx', 'json'],
     config(md) {
       md.use(groupIconMdPlugin)
     },
