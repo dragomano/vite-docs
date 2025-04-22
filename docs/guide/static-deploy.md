@@ -99,7 +99,7 @@ $ npm run preview
          - name: Set up Node
            uses: actions/setup-node@v4
            with:
-             node-version: 20
+             node-version: lts/*
              cache: 'npm'
          - name: Install dependencies
            run: npm ci
@@ -128,7 +128,7 @@ $ npm run preview
 2. Создайте файл с именем `.gitlab-ci.yml` в корне вашего проекта с содержимым ниже. Это будет собирать и развёртывать ваш сайт всякий раз, когда вы вносите изменения в ваш контент:
 
    ```yaml
-   image: node:16.5.0
+   image: node:lts
    pages:
      stage: deploy
      cache:
