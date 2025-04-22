@@ -63,59 +63,7 @@ $ npm run preview
 
 2. Перейдите к настройкам вашего репозитория на странице конфигурации GitHub Pages и выберите «GitHub Actions» в качестве источника развёртывания. Это приведёт вас к созданию рабочего процесса, который собирает и развёртывает ваш проект. Пример рабочего процесса, который устанавливает зависимости и собирает с помощью npm:
 
-   ```yml
-   # Простой рабочий процесс для развёртывания статического контента на GitHub Pages
-   name: Deploy static content to Pages
-
-   on:
-     # Запускается при пушах в целевую ветку по умолчанию
-     push:
-       branches: ['main']
-
-     # Позволяет вам запускать этот рабочий процесс вручную из вкладки Actions
-     workflow_dispatch:
-
-   # Устанавливает разрешения для GITHUB_TOKEN, чтобы разрешить развёртывание на GitHub Pages
-   permissions:
-     contents: read
-     pages: write
-     id-token: write
-
-   # Разрешает одно параллельное развёртывание
-   concurrency:
-     group: 'pages'
-     cancel-in-progress: true
-
-   jobs:
-     # Один рабочий процесс, так как мы просто развёртываем
-     deploy:
-       environment:
-         name: github-pages
-         url: ${{ steps.deployment.outputs.page_url }}
-       runs-on: ubuntu-latest
-       steps:
-         - name: Checkout
-           uses: actions/checkout@v4
-         - name: Set up Node
-           uses: actions/setup-node@v4
-           with:
-             node-version: lts/*
-             cache: 'npm'
-         - name: Install dependencies
-           run: npm ci
-         - name: Build
-           run: npm run build
-         - name: Setup Pages
-           uses: actions/configure-pages@v4
-         - name: Upload artifact
-           uses: actions/upload-pages-artifact@v3
-           with:
-             # Загружаем папку dist
-             path: './dist'
-         - name: Deploy to GitHub Pages
-           id: deployment
-           uses: actions/deploy-pages@v4
-   ```
+   <<< ./static-deploy-github-pages.yaml#content
 
 ## GitLab Pages и GitLab CI {#gitlab-pages-and-gitlab-ci}
 
