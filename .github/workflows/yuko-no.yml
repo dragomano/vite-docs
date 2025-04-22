@@ -31,4 +31,4 @@ jobs:
           # Enable release tracking
           # When enabled, Yuki-no will track releases for each issue
           # and add comments about release status.
-          release-tracking: true
+          release-tracking: false
