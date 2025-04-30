@@ -95,7 +95,7 @@ async function createServer() {
   // внедрёнными плагинами). Следующее будет действительным даже после перезапусков.
   app.use(vite.middlewares)
 
-  app.use('*', async (req, res) => {
+  app.use('*all', async (req, res) => {
     // Обслуживаем index.html - мы займемся этим далее
   })
 
@@ -121,7 +121,7 @@ var app
 var vite
 
 // ---cut---
-app.use('*', async (req, res, next) => {
+app.use('*all', async (req, res, next) => {
   const url = req.originalUrl
 
   try {
