@@ -65,6 +65,10 @@ $ pnpm create vite
 $ bun create vite
 ```
 
+```bash [Deno]
+$ deno init --npm vite
+```
+
 :::
 
 Затем следуйте подсказкам!
@@ -88,6 +92,10 @@ $ pnpm create vite my-vue-app --template vue
 
 ```bash [Bun]
 $ bun create vite my-vue-app --template vue
+```
+
+```bash [Deno]
+$ deno init --npm vite my-vue-app --template vue
 ```
 
 :::
@@ -134,6 +142,10 @@ $ pnpm add -D vite
 $ bun add -D vite
 ```
 
+```bash [Deno]
+$ deno add -D npm:vite
+```
+
 :::
 
 Затем создайте файл `index.html`:
@@ -160,6 +172,10 @@ $ pnpm vite
 
 ```bash [Bun]
 $ bunx vite
+```
+
+```bash [Deno]
+$ deno run -A npm:vite
 ```
 
 :::
@@ -222,11 +238,15 @@ $ pnpm add -D https://pkg.pr.new/vite@SHA
 $ bun add -D https://pkg.pr.new/vite@SHA
 ```
 
+```bash [Deno]
+$ deno add -D https://pkg.pr.new/vite@SHA
+```
+
 :::
 
 Замените `SHA` на любой из [SHA коммитов Vite](https://github.com/vitejs/vite/commits/main/). Обратите внимание, что будут работать только коммиты за последний месяц, так как более старые коммиты удаляются.
 
-В качестве альтернативы вы также можете клонировать [репозиторий vite](https://github.com/vitejs/vite) на свой локальный компьютер, а затем собрать и связать его самостоятельно (требуется [pnpm](https://pnpm.io/)):
+В качестве альтернативы вы также можете клонировать [репозиторий Vite](https://github.com/vitejs/vite) на свой локальный компьютер, а затем собрать и связать его самостоятельно (требуется [pnpm](https://pnpm.io/)):
 
 ```bash
 git clone https://github.com/vitejs/vite.git
