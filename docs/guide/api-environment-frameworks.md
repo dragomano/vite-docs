@@ -144,15 +144,15 @@ app.use('*', async (req, res, next) => {
 
 ## SSR, независимый от среды выполнения {#runtime-agnostic-ssr}
 
-Поскольку `RunnableDevEnvironment` может использоваться только для выполнения кода в той же среде выполнения, что и сервер Vite, он требует среды выполнения, которая может запускать сервер Vite (среда выполнения, совместимая с Node.js). Это означает, что вам нужно будет использовать сырой `DevEnvironment`, чтобы сделать его независимым от среды выполнения.
+Поскольку `RunnableDevEnvironment` может использоваться только для выполнения кода в той же среде выполнения, что и сервер Vite, он требует среды выполнения, которая может запускать сервер Vite (среда выполнения, совместимая с Node.js). Это означает, что вам нужно будет использовать базовый `DevEnvironment`, чтобы сделать его независимым от среды выполнения.
 
 :::info Предложение `FetchableDevEnvironment`
 
-Первоначальное предложение имело метод `run` в классе `DevEnvironment`, который позволял потребителям вызывать импорт на стороне runner, используя опцию `transport`. В ходе нашего тестирования мы обнаружили, что API не был достаточно универсальным, чтобы начать его рекомендовать. В данный момент мы собираем отзывы о [предложении `FetchableDevEnvironment`](https://github.com/vitejs/vite/discussions/18191).
+Первоначальное предложение включало метод `run` в классе `DevEnvironment`, позволяющий вызывать импорт на стороне раннера, используя опцию `transport`. В ходе нашего тестирования мы обнаружили, что API не был достаточно универсальным, чтобы начать его рекомендовать. Сейчас мы собираем отзывы о [предложении `FetchableDevEnvironment`](https://github.com/vitejs/vite/discussions/18191).
 
 :::
 
-`RunnableDevEnvironment` имеет функцию `runner.import`, которая возвращает значение модуля. Но эта функция недоступна в сыром `DevEnvironment` и требует, чтобы код, использующий API Vite, и пользовательские модули были отделены.
+`RunnableDevEnvironment` имеет функцию `runner.import`, которая возвращает значение модуля. Но эта функция недоступна в базовом `DevEnvironment` и требует, чтобы код, использующий API Vite, и пользовательские модули были отделены.
 
 Например, следующий пример использует значение пользовательского модуля из кода, использующего API Vite:
 
@@ -164,7 +164,7 @@ const server = createServer()
 const ssrEnvironment = server.environment.ssr
 const input = {}
 
-const { createHandler } = await ssrEnvironment.runner.import('./entry.js')
+const { createHandler } = await ssrEnvironment.runner.import('./entrypoint.js')
 const handler = createHandler(input)
 const response = handler(new Request('/'))
 
