@@ -375,6 +375,12 @@ export default defineConfig({
 
 Чёрный список для чувствительных файлов, которые ограничены для обслуживания dev-сервером Vite. Этот список будет иметь более высокий приоритет, чем [`server.fs.allow`](#server-fs-allow). Поддерживаются [шаблоны picomatch](https://github.com/micromatch/picomatch#globbing-features).
 
+:::tip ПРИМЕЧАНИЕ
+
+Этот чёрный список не применяется к [директории `public`](/guide/assets.md#the-public-directory). Все файлы в этой директории обслуживаются без фильтрации, так как они копируются напрямую в выходную директорию во время сборки.
+
+:::
+
 ## server.origin
 
 - **Тип:** `string`
