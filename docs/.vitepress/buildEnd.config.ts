@@ -14,8 +14,8 @@ export const buildEnd = async (config: SiteConfig): Promise<void> => {
     id: blogUrl,
     link: blogUrl,
     language: 'ru',
-    image: 'https://dragomano.github.io/vite-docs/og-image.jpg',
-    favicon: 'https://dragomano.github.io/vite-docs/logo.svg',
+    image: 'https://vite-docs.ru/og-image.jpg',
+    favicon: 'https://vite-docs.ru/logo.svg',
     copyright: '© 2019-present VoidZero Inc. и контрибьюторы Vite',
   })
 

@@ -26,13 +26,13 @@
 
 Vite (французское слово, означающее «быстрый», произносится [`/vit/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), как «вит») - это новый вид инструментария для сборки фронтендов, который значительно улучшает процесс разработки. Он состоит из двух основных частей:
 
-- Сервер разработки, который обслуживает ваши исходные файлы через [собственные ES-модули](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), обладает [богатыми встроенными функциями](https://dragomano.github.io/vite-docs/guide/features.html) и обеспечивает невероятно быструю [замену модулей в горячем режиме (HMR)](https://dragomano.github.io/vite-docs/guide/features.html#hot-module-replacement).
+- Сервер разработки, который обслуживает ваши исходные файлы через [собственные ES-модули](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), обладает [богатыми встроенными функциями](https://vite-docs.ru/guide/features.html) и обеспечивает невероятно быструю [замену модулей в горячем режиме (HMR)](https://vite-docs.ru/guide/features.html#hot-module-replacement).
 
-- [Команда сборки](https://dragomano.github.io/vite-docs/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенного на выдачу высокооптимизированных статических ресурсов для продакшена.
+- [Команда сборки](https://vite-docs.ru/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенного на выдачу высокооптимизированных статических ресурсов для продакшена.
 
-Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://dragomano.github.io/vite-docs/guide/api-plugin.html) и [JavaScript API](https://dragomano.github.io/vite-docs/guide/api-javascript.html) с полной поддержкой типизации.
+Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite-docs.ru/guide/api-plugin.html) и [JavaScript API](https://vite-docs.ru/guide/api-javascript.html) с полной поддержкой типизации.
 
-[Чтобы узнать больше, прочитайте документацию](https://dragomano.github.io/vite-docs/).
+[Чтобы узнать больше, прочитайте документацию](https://vite-docs.ru/).
 
 ## Пакеты
 

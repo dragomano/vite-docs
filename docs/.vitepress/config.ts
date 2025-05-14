@@ -10,9 +10,9 @@ import type { PluginOption } from 'vite'
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'Инструментарий для фронтенда нового поколения'
-const ogImage = 'https://dragomano.github.io/vite-docs/og-image.jpg'
+const ogImage = 'https://vite-docs.ru/og-image.jpg'
 const ogTitle = 'Vite по-русски'
-const ogUrl = 'https://dragomano.github.io/vite-docs/'
+const ogUrl = 'https://vite-docs.ru/'
 
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   const oldVersions: DefaultTheme.NavItemWithLink[] = [
@@ -49,7 +49,7 @@ export default defineConfig({
   description: 'Инструментарий для фронтенда нового поколения',
   base: '/vite-docs/',
   sitemap: {
-    hostname: 'https://dragomano.github.io/vite-docs/'
+    hostname: 'https://vite-docs.ru/'
   },
   lastUpdated: true,
   head: [
