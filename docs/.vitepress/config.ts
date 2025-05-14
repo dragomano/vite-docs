@@ -150,9 +150,9 @@ export default defineConfig({
     ],
 
     algolia: {
-      appId: '2ACEBREEXB',
-      apiKey: 'a22b601c17d7f746322d0df34b5bbdb2',
-      indexName: 'dragomanoio',
+      appId: 'VETIKID9KS',
+      apiKey: '9c447d0510cb766c2c7fbac08a206050',
+      indexName: 'vite-ru',
       searchParameters: {
         //facetFilters: ['tags:en', 'tags:ru'],
       },
