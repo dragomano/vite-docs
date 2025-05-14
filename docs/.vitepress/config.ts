@@ -47,7 +47,7 @@ export default defineConfig({
   lang: 'ru',
   title: `Vite по-русски`,
   description: 'Инструментарий для фронтенда нового поколения',
-  base: '/vite-docs/',
+  //base: '/vite-docs/',
   sitemap: {
     hostname: 'https://vite-docs.ru/'
   },
