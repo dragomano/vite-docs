@@ -247,7 +247,7 @@ const { startAnimation } = useCardAnimation(
       </div>
     </div>
     <div class="feature__meta meta--center">
-      <div class="meta__title">Молниеносный HMR</div>
+      <div class="meta__title">Молниеносная HMR</div>
       <div class="meta__description">
         Горячая замена модулей (HMR), которая остается быстрой независимо от размера приложения.
       </div>
