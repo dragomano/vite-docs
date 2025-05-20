@@ -226,9 +226,8 @@ declare const __APP_VERSION__: string
 Укажите параметры, которые будут переданы CSS-препроцессорам. Расширения файлов используются в качестве ключей для параметров. Поддерживаемые параметры для каждого препроцессора можно найти в их соответствующей документации:
 
 - `sass`/`scss`:
-  - Выберите API Sass для использования с `api: "modern-compiler" | "modern" | "legacy"` (по умолчанию `"modern-compiler"`, если установлен `sass-embedded`, в противном случае `"modern"`). Для достижения наилучшей производительности рекомендуется использовать `api: "modern-compiler"` с пакетом `sass-embedded`. `legacy` API устарел и будет удален в версии 7.
-  - [Опции (modern)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
-  - [Опции (legacy)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions).
+  - Выберите API Sass для использования с `api: "modern-compiler" | "modern"` (по умолчанию `"modern-compiler"`, если установлен `sass-embedded`, в противном случае `"modern"`). Для достижения наилучшей производительности рекомендуется использовать `api: "modern-compiler"` с пакетом `sass-embedded`.
+  - [Опции](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
 - `less`: [Опции](https://lesscss.org/usage/#less-options).
 - `styl`/`stylus`: Поддерживается только [`define`](https://stylus-lang.com/docs/js.html#define-name-node), который можно передать в виде объекта.
 
@@ -247,7 +246,7 @@ export default defineConfig({
         }
       },
       scss: {
-        api: 'modern-compiler', // или "modern", "legacy"
+        api: 'modern-compiler', // или "modern"
         importers: [
           // ...
         ]
