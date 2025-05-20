@@ -18,7 +18,7 @@
 
 ## Руководство по переходу {#migration-guide}
 
-Для быстрой адаптации существующего плагина замените аргумент `options.ssr` на `this.environment.name !== 'client'` в хуках `resolveId`, `load` и `transform`:
+Для быстрой адаптации существующего плагина замените аргумент `options.ssr` на `this.environment.config.consumer === 'server'` в хуках `resolveId`, `load` и `transform`:
 
 ```ts
 import { Plugin } from 'vite'
@@ -28,7 +28,7 @@ export function myPlugin(): Plugin {
     name: 'my-plugin',
     resolveId(id, importer, options) {
       const isSSR = options.ssr // [!code --]
-      const isSSR = this.environment.name !== 'client' // [!code ++]
+      const isSSR = this.environment.config.consumer === 'server' // [!code ++]
 
       if (isSSR) {
         // Логика, специфичная для SSR
