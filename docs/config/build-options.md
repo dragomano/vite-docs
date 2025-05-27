@@ -5,10 +5,10 @@
 ## build.target
 
 - **Тип:** `string | string[]`
-- **По умолчанию:** `'modules'`
+- **По умолчанию:** `'baseline-widely-available'`
 - **Связано:** [Совместимость с браузерами](/guide/build#browser-compatibility)
 
-Цель совместимости браузера для финального пакета. Значение по умолчанию — специальное значение Vite, `'modules'`, которое нацелено на браузеры с поддержкой [встроенных ES-модулей](https://caniuse.com/es6-module), [нативного динамического импорта ESM](https://caniuse.com/es6-module-dynamic-import) и поддержки [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta). Vite заменит `'modules'` на `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']`.
+Целевой уровень совместимости с браузерами для итоговой сборки. Значение по умолчанию — специальное значение Vite `'baseline-widely-available'`, которое ориентируется на браузеры, входящие в категорию [базовых](https://web-platform-dx.github.io/web-features/) широко распространённых на 1 мая 2025 года. В частности, это `['chrome107', 'edge107', 'firefox104', 'safari16']`.
 
 Другим специальным значением является `'esnext'`, которое предполагает встроенную поддержку динамического импорта и будет выполнять только минимальную транспиляцию.
 

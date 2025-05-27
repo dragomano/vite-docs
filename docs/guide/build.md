@@ -4,14 +4,14 @@
 
 ## Совместимость с браузерами {#browser-compatibility}
 
-Продакшен-сборка предполагает поддержку современного JavaScript по умолчанию: [встроенные ES-модули](https://caniuse.com/es6-module), [встроенный динамический импорт ESM](https://caniuse.com/es6-module-dynamic-import), [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta), [объединение с нулевыми значениями](https://caniuse.com/mdn-javascript_operators_nullish_coalescing) и [BigInt](https://caniuse.com/bigint). Поддерживаемые версии браузеров:
+По умолчанию продакшен-сборка ориентируется на современные браузеры, входящие в категорию [базовых](https://web-platform-dx.github.io/web-features/) широко распространённых. Поддерживаемые версии браузеров:
 
-<!-- Search for the `ESBUILD_MODULES_TARGET` constant for more information -->
+<!-- Search for the `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` constant for more information -->
 
-- Chrome >=87
-- Firefox >=78
-- Safari >=14
-- Edge >=88
+- Chrome >=107
+- Edge >=107
+- Firefox >=104
+- Safari >=16
 
 Вы можете указать пользовательские цели через опцию конфигурации [`build.target`](/config/build-options.md#build-target), где самой низкой целью является `es2015`. Если установлена более низкая цель, Vite всё равно будет требовать эти минимальные диапазоны поддержки браузеров, так как он полагается на [встроенный динамический импорт ESM](https://caniuse.com/es6-module-dynamic-import) и [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta):
 
