@@ -1,12 +1,12 @@
 # Использование экземпляров `Environment` {#using-environment-instances}
 
 :::warning Экспериментально
-Environment API является экспериментальным. Мы будем поддерживать стабильность API в Vite 6, чтобы дать экосистеме возможность экспериментировать и строить на его основе. Мы планируем стабилизировать эти новые API с возможными изменениями, нарушающими обратную совместимость, в Vite 7.
+Environment API находится на экспериментальной стадии. Мы будем сохранять стабильность API между крупными релизами, чтобы дать экосистеме возможность экспериментировать и развивать их. Планируется стабилизировать эти новые API (с возможными значительными изменениями) в будущем крупном релизе после того, как проекты-потребители смогут протестировать новые функции и подтвердить их работоспособность.
 
 Ресурсы:
 
 - [Обсуждение отзывов](https://github.com/vitejs/vite/discussions/16358), где мы собираем отзывы о новых API.
-- [PR Environment API](https://github.com/vitejs/vite/pull/16471), где новый API был реализован и рассмотрен.
+- [Пулреквест](https://github.com/vitejs/vite/pull/16471), в котором новый API был реализован и рассмотрен.
 
 Пожалуйста, поделитесь с нами своим мнением.
 :::
@@ -19,8 +19,8 @@ Environment API является экспериментальным. Мы буд
 // создайте сервер или получите его из хука configureServer
 const server = await createServer(/* options */)
 
-const environment = server.environments.client
-environment.transformRequest(url)
+const clientEnvironment = server.environments.client
+clientEnvironment.transformRequest(url)
 console.log(server.environments.ssr.moduleGraph)
 ```
 

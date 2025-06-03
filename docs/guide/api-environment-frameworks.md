@@ -1,12 +1,12 @@
 # Environment API для фреймворков {#environment-api-for-frameworks}
 
 :::warning Экспериментально
-Environment API является экспериментальным. Мы будем поддерживать стабильность API в Vite 6, чтобы дать экосистеме возможность экспериментировать и строить на его основе. Мы планируем стабилизировать эти новые API с возможными изменениями, нарушающими обратную совместимость, в Vite 7.
+Environment API находится на экспериментальной стадии. Мы будем сохранять стабильность API между крупными релизами, чтобы дать экосистеме возможность экспериментировать и развивать их. Планируется стабилизировать эти новые API (с возможными значительными изменениями) в будущем крупном релизе после того, как проекты-потребители смогут протестировать новые функции и подтвердить их работоспособность.
 
 Ресурсы:
 
 - [Обсуждение отзывов](https://github.com/vitejs/vite/discussions/16358), где мы собираем отзывы о новых API.
-- [PR Environment API](https://github.com/vitejs/vite/pull/16471), где новый API был реализован и рассмотрен.
+- [Пулреквест](https://github.com/vitejs/vite/pull/16471), в котором новый API был реализован и рассмотрен.
 
 Пожалуйста, поделитесь с нами своим мнением.
 :::
@@ -88,7 +88,7 @@ Vite выполняет валидацию входных и выходных д
 
 ## `RunnableDevEnvironment` по умолчанию {#default-runnabledevenvironment}
 
-Учитывая сервер Vite, настроенный в режиме мидлвара, как описано в [руководстве по настройке SSR](/guide/ssr#setting-up-the-dev-server), давайте реализуем мидлвар SSR, используя Environment API. Обработка ошибок опущена.
+Учитывая сервер Vite, настроенный в режиме мидлвара, как описано в [руководстве по настройке SSR](/guide/ssr#setting-up-the-dev-server), давайте реализуем мидлвар SSR, используя Environment API. Помните, что это не обязательно должно называться `ssr`, поэтому в этом примере мы назовём его `server`. Обработка ошибок опущена.
 
 ```js
 import fs from 'node:fs'
@@ -98,7 +98,7 @@ import { createServer } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const server = await createServer({
+const viteServer = await createServer({
   server: { middlewareMode: true },
   appType: 'custom',
   environments: {
@@ -110,7 +110,7 @@ const server = await createServer({
 
 // Возможно, вам потребуется привести это к RunnableDevEnvironment в TypeScript или
 // использовать isRunnableDevEnvironment для защиты доступа к runner
-const environment = server.environments.node
+const serverEnvironment = viteServer.environments.server
 
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
@@ -122,12 +122,14 @@ app.use('*', async (req, res, next) => {
   // 2. Применение HTML-преобразований Vite. Это внедряет клиент HMR Vite,
   //    а также применяет HTML-преобразования от плагинов Vite, например,
   //    глобальные преамбулы от @vitejs/plugin-react
-  template = await server.transformIndexHtml(url, template)
+  template = await viteServer.transformIndexHtml(url, template)
 
   // 3. Загрузка серверного входа. import(url) автоматически преобразует
   //    исходный код ESM для использования в Node.js! Не требуется сборка,
   //    и обеспечивается полная поддержка HMR.
-  const { render } = await environment.runner.import('/src/entry-server.js')
+  const { render } = await serverEnvironment.runner.import(
+    '/src/entry-server.js',
+  )
 
   // 4. Рендеринг HTML приложения. Это предполагает, что экспортированная
   //    функция `render` entry-server.js вызывает соответствующие API SSR фреймворка,
