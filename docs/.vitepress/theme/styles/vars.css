@@ -63,7 +63,7 @@
   over scoped class data attribute.
 */
 .dark .vp-doc a,
-.dark .vp-doc a > code,
+.dark .vp-doc a>code,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink:hover,
 .dark .VPNavBarMenuLink.VPNavBarMenuLink.active,
 .dark .link.link:hover,
@@ -74,7 +74,7 @@
 }
 
 .dark .vp-doc a:hover,
-.dark .vp-doc a > code:hover {
+.dark .vp-doc a>code:hover {
   color: var(--vp-c-brand-lightest);
   opacity: 1;
 }
@@ -89,7 +89,7 @@
 }
 
 .vp-sponsor-grid.big .vp-sponsor-grid-image {
-  max-height: 96px;
+  max-height: 56px;
 }
 
 .vp-sponsor-grid.mini .vp-sponsor-grid-image[alt='Bit'] {
