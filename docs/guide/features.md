@@ -153,7 +153,7 @@ Vite по умолчанию не транспилирует TypeScript с за�
     export default content
   }
   ```
-- Файл, содержащий ссылку на `vite/client`:
+- Файл, содержащий ссылку на `vite/client` (обычно `vite-env.d.ts`):
   ```ts
   /// <reference types="./vite-env-override.d.ts" />
   /// <reference types="vite/client" />
