@@ -212,7 +212,7 @@ HTML-файлы занимают [центральное место](/guide/#ind
 - Поддержка Vue через [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 - Поддержка Vue JSX через [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - Поддержка React через [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
-- Поддержка React с использованием SWC через [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+- Поддержка React с использованием SWC через [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
 Посмотрите [Руководство по плагинам](../plugins/) для получения дополнительной информации.
 
@@ -579,6 +579,32 @@ const modules = import.meta.glob('./dir/*.js', {
   query: { foo: 'bar', bar: true }
 })
 ```
+
+#### Базовый путь {#base-path}
+
+Вы также можете использовать опцию `base` для указания базового пути для импортов:
+
+```ts twoslash
+import 'vite/client'
+// ---cut---
+const modulesWithBase = import.meta.glob('./**/*.js', {
+  base: './base',
+})
+```
+
+```ts
+// код, созданный Vite:
+const modulesWithBase = {
+  './dir/foo.js': () => import('./base/dir/foo.js'),
+  './dir/bar.js': () => import('./base/dir/bar.js'),
+}
+```
+
+Опция `base` может быть только путём к директории, относительным к файлу-импортёру или абсолютным относительно корня проекта. Псевдонимы и виртуальные модули не поддерживаются.
+
+Только шаблоны, которые являются относительными путями, интерпретируются как относительные к разрешённому базовому пути.
+
+Все результирующие ключи модулей модифицируются, чтобы быть относительными к базовому пути, если он указан.
 
 ### Предостережения по поводу глобального импорта {#glob-import-caveats}
 
