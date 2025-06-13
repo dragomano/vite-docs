@@ -212,7 +212,7 @@ HTML-файлы занимают [центральное место](/guide/#ind
 - Поддержка Vue через [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 - Поддержка Vue JSX через [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - Поддержка React через [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
-- Поддержка React с использованием SWC через [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+- Поддержка React с использованием SWC через [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
 Посмотрите [Руководство по плагинам](../plugins/) для получения дополнительной информации.
 
@@ -417,7 +417,7 @@ const modules = import.meta.glob('./dir/*.js')
 Вышеизложенное преобразуется в следующее:
 
 ```js
-// код, созданный vite
+// код, созданный Vite
 const modules = {
   './dir/bar.js': () => import('./dir/bar.js'),
   './dir/foo.js': () => import('./dir/foo.js'),
@@ -445,7 +445,7 @@ const modules = import.meta.glob('./dir/*.js', { eager: true })
 Вышеизложенное преобразуется в следующее:
 
 ```js
-// код, созданный vite
+// код, созданный Vite
 import * as __vite_glob_0_0 from './dir/bar.js'
 import * as __vite_glob_0_1 from './dir/foo.js'
 const modules = {
@@ -475,7 +475,7 @@ const modules = import.meta.glob(['./dir/*.js', '!**/bar.js'])
 ```
 
 ```js
-// код, созданный vite
+// код, созданный Vite
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js')
 }
@@ -492,7 +492,7 @@ const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 ```
 
 ```ts
-// код, созданный vite
+// код, созданный Vite
 const modules = {
   './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup),
   './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
@@ -511,7 +511,7 @@ const modules = import.meta.glob('./dir/*.js', {
 ```
 
 ```ts
-// код, созданный vite:
+// код, созданный Vite:
 import { setup as __vite_glob_0_0 } from './dir/bar.js'
 import { setup as __vite_glob_0_1 } from './dir/foo.js'
 const modules = {
@@ -532,7 +532,7 @@ const modules = import.meta.glob('./dir/*.js', {
 ```
 
 ```ts
-// код, созданный vite:
+// код, созданный Vite:
 import __vite_glob_0_0 from './dir/bar.js'
 import __vite_glob_0_1 from './dir/foo.js'
 const modules = {
@@ -559,7 +559,7 @@ const moduleUrls = import.meta.glob('./dir/*.svg', {
 ```
 
 ```ts
-// код, созданный vite:
+// код, созданный Vite:
 const moduleStrings = {
   './dir/bar.svg': () => import('./dir/bar.svg?raw').then((m) => m['default']),
   './dir/foo.svg': () => import('./dir/foo.svg?raw').then((m) => m['default']),
@@ -579,6 +579,33 @@ const modules = import.meta.glob('./dir/*.js', {
   query: { foo: 'bar', bar: true }
 })
 ```
+
+#### Базовый путь {#base-path}
+
+Вы также можете использовать опцию `base` для указания базового пути для импортов:
+
+```ts twoslash
+// @errors: 2769
+import 'vite/client'
+// ---cut---
+const modulesWithBase = import.meta.glob('./**/*.js', {
+  base: './base',
+})
+```
+
+```ts
+// код, созданный Vite:
+const modulesWithBase = {
+  './dir/foo.js': () => import('./base/dir/foo.js'),
+  './dir/bar.js': () => import('./base/dir/bar.js'),
+}
+```
+
+Опция `base` может быть только путём к директории, относительным к файлу-импортёру или абсолютным относительно корня проекта. Псевдонимы и виртуальные модули не поддерживаются.
+
+Только шаблоны, которые являются относительными путями, интерпретируются как относительные к разрешённому базовому пути.
+
+Все результирующие ключи модулей модифицируются, чтобы быть относительными к базовому пути, если он указан.
 
 ### Предостережения по поводу глобального импорта {#glob-import-caveats}
 
