@@ -52,7 +52,7 @@
 Например, при установке `['node', 'custom']` вы должны запустить `NODE_OPTIONS='--conditions custom' vite` в режиме разработки и `NODE_OPTIONS="--conditions custom" node ./dist/server.js` после сборки.
 :::
 
-### ssr.resolve.mainFields
+## ssr.resolve.mainFields
 
 - **Тип:** `string[]`
 - **По умолчанию:** `['module', 'jsnext:main', 'jsnext']`
