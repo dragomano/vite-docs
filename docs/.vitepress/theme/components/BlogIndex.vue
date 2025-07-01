@@ -14,7 +14,7 @@ function getDateTime(time: number) {
           post.date.string
         }}</time>
         <h2 class="title">
-          <a :href="post.url.substring(1)">{{ post.title }}</a>
+          <a :href="post.url">{{ post.title }}</a>
         </h2>
       </article>
     </li>
