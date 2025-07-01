@@ -126,6 +126,29 @@ interface HotUpdateOptions {
   }
   ```
 
+## Состояние плагинов для разных окружений {#per-environment-state-in-plugins}
+
+Поскольку один и тот же экземпляр плагина используется для разных окружений, состояние плагина должно быть привязано к `this.environment`. Это соответствует подходу, уже используемому в экосистеме для хранения состояния модулей с использованием булева значения `ssr` в качестве ключа, чтобы избежать смешивания состояния клиентских и SSR-модулей. Для разделения состояния по окружениям можно использовать `Map<Environment, State>`. Обратите внимание, что для обратной совместимости хуки `buildStart` и `buildEnd` вызываются только для клиентского окружения, если не установлен флаг `perEnvironmentStartEndDuringDev: true`.
+
+```js
+function PerEnvironmentCountTransformedModulesPlugin() {
+  const state = new Map<Environment, { count: number }>()
+  return {
+    name: 'count-transformed-modules',
+    perEnvironmentStartEndDuringDev: true,
+    buildStart() {
+      state.set(this.environment, { count: 0 })
+    },
+    transform(id) {
+      state.get(this.environment).count++
+    },
+    buildEnd() {
+      console.log(this.environment.name, state.get(this.environment).count)
+    }
+  }
+}
+```
+
 ## Плагины для каждого окружения {#per-environment-plugins}
 
 Плагин может определить, к каким окружениям он должен применяться, с помощью функции `applyToEnvironment`.
