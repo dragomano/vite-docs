@@ -343,7 +343,7 @@ export default defineConfig({
               link: '/guide/rolldown',
             },
             {
-              text: 'Переход с версии v5',
+              text: 'Переход с версии v6',
               link: '/guide/migration',
             },
             {

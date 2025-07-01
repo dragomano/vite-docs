@@ -1,153 +1,58 @@
-# Переход с версии v5 {#migration-from-v5}
+# Переход с версии v6 {#migration-from-v6}
 
-## Environment API {#environment-api}
+## Поддержка Node.js {#node-js-support}
 
-В рамках нового экспериментального [Environment API](/guide/api-environment) потребовалась большой внутренний рефакторинг. Vite 6 стремится избегать критических изменений, чтобы обеспечить быстрый переход большинства проектов на новое крупное обновление. Мы подождем, пока значительная часть экосистемы перейдет на новое API, прежде чем стабилизировать его и начать рекомендовать использование новых API. Могут быть некоторые крайние случаи, но они должны затрагивать только низкоуровневое использование фреймворками и инструментами. Мы сотрудничали с разработчиками зависящих проектов в экосистеме, чтобы смягчить эти различия перед выпуском. Пожалуйста, [откройте задачу](https://github.com/vitejs/vite/issues/new?assignees=&labels=pending+triage&projects=&template=bug_report.yml), если заметите регрессию.
+Vite больше не поддерживает Node.js 18, так как её жизненный цикл завершён. Теперь требуется Node.js версии 20.19+ или 22.12+.
 
-Некоторые внутренние API были удалены из-за изменений в реализации Vite. Если вы полагались на один из них, пожалуйста, создайте [запрос на функцию](https://github.com/vitejs/vite/issues/new?assignees=&labels=enhancement%3A+pending+triage&projects=&template=feature_request.yml).
+## Изменение целевых браузеров по умолчанию {#default-browser-target-change}
 
-## Vite Runtime API {#vite-runtime-api}
+Значение по умолчанию для `build.target` обновлено до более новых версий браузеров:
 
-Экспериментальный Runtime API Vite эволюционировал в Module Runner API, выпущенный в Vite 6 как часть нового экспериментального [Environment API](/guide/api-environment). Учитывая, что функция была экспериментальной, удаление предыдущего API, введенного в Vite 5.1, не является критическим изменением, но пользователям потребуется обновить свое использование на эквивалент Module Runner API в процессе перехода на Vite 6.
+- Chrome: 87 → 107
+- Edge: 88 → 107
+- Firefox: 78 → 104
+- Safari: 14.0 → 16.0
+
+Эти версии браузеров соответствуют наборам функций [Baseline](https://web-platform-dx.github.io/web-features/), классифицируемых как широко доступные на 1 мая 2025. Другими словами, все они были выпущены до 1 ноября 2022.
+
+В Vite 5 целевой параметр по умолчанию назывался `'modules'`, но он больше не доступен. Вместо него введён новый целевой параметр по умолчанию: `'baseline-widely-available'`.
 
 ## Основные изменения {#general-changes}
 
-### Значение по умолчанию для `resolve.conditions` {#default-value-for-resolve-conditions}
+### Удалена поддержка устаревшего Sass API {#removed-sass-legacy-api-support}
 
-Это изменение не затрагивает пользователей, которые не настраивали [`resolve.conditions`](/config/shared-options#resolve-conditions) / [`ssr.resolve.conditions`](/config/ssr-options#ssr-resolve-conditions) / [`ssr.resolve.externalConditions`](/config/ssr-options#ssr-resolve-externalconditions).
+Как и планировалось, поддержка устаревшего Sass API удалена. Vite теперь поддерживает только современный API. Опции `css.preprocessorOptions.sass.api` и `css.preprocessorOptions.scss.api` можно удалить.
 
-В Vite 5 значением по умолчанию для `resolve.conditions` было `[]`, и некоторые условия добавлялись автоматически. Значением по умолчанию для `ssr.resolve.conditions` было `resolve.conditions`.
+## Удалённые устаревшие функции {#removed-deprecated-features}
 
-Начиная с Vite 6, некоторые условия больше не добавляются автоматически и должны быть указаны в конфигурации:
-
-- `resolve.conditions`: `['module', 'browser', 'development|production']`
-- `ssr.resolve.conditions`: `['module', 'node', 'development|production']`
-
-Значения по умолчанию для этих опций обновлены до соответствующих значений, и `ssr.resolve.conditions` больше не использует `resolve.conditions` в качестве значения по умолчанию. Обратите внимание, что `development|production` — это специальная переменная, которая заменяется на `production` или `development` в зависимости от значения `process.env.NODE_ENV`. Эти значения по умолчанию экспортируются из `vite` как `defaultClientConditions` и `defaultServerConditions`.
-
-Если вы указали пользовательское значение для `resolve.conditions` или `ssr.resolve.conditions`, вам необходимо обновить его, чтобы включить новые условия.
-Например, если вы ранее указывали `['custom']` для `resolve.conditions`, вам нужно указать `['custom', ...defaultClientConditions]` вместо этого.
-
-### JSON stringify {#json-stringify}
-
-В Vite 5, когда установлено [`json.stringify: true`](/config/shared-options#json-stringify), [`json.namedExports`](/config/shared-options#json-namedexports) был отключён.
-
-С Vite 6, даже когда установлено `json.stringify: true`, `json.namedExports` не отключается, и значение учитывается. Если вы хотите достичь предыдущего поведения, вы можете установить `json.namedExports: false`.
-
-Vite 6 также вводит новое значение по умолчанию для `json.stringify`, которое равно `'auto'`, что будет сериализовать только большие JSON-файлы. Чтобы отключить это поведение, установите `json.stringify: false`.
-
-### Расширенная поддержка ссылок на ресурсы в HTML-элементах {#extended-support-of-asset-references-in-html-elements}
-
-В Vite 5 только несколько поддерживаемых HTML-элементов могли ссылаться на ресурсы, которые будут обработаны и упакованы Vite, такие как `<link href>`, `<img src>` и т. д.
-
-Vite 6 расширяет поддержку ещё большего количества HTML-элементов. Полный список можно найти в документации по [HTML-функциям](/guide/features.html#html).
-
-Чтобы отключить обработку HTML для определённых элементов, вы можете добавить атрибут `vite-ignore` к элементу.
-
-### postcss-load-config {#postcss-load-config}
-
-[`postcss-load-config`](https://npmjs.com/package/postcss-load-config) был обновлён до версии 6 с версии 4. Теперь для загрузки файлов конфигурации PostCSS на TypeScript требуется [`tsx`](https://www.npmjs.com/package/tsx) или [`jiti`](https://www.npmjs.com/package/jiti) вместо [`ts-node`](https://www.npmjs.com/package/ts-node). Также теперь требуется [`yaml`](https://www.npmjs.com/package/yaml) для загрузки файлов конфигурации PostCSS в формате YAML.
-
-### Sass теперь по умолчанию использует современный API {#sass-now-uses-modern-api-by-default}
-
-В Vite 5 по умолчанию использовался устаревший API для Sass. Vite 5.4 добавил поддержку современного API.
-
-С Vite 6 по умолчанию используется современный API для Sass. Если вы всё ещё хотите использовать устаревший API, вы можете установить [`css.preprocessorOptions.sass.api: 'legacy'` / `css.preprocessorOptions.scss.api: 'legacy'`](/config/shared-options#css-preprocessoroptions). Но обратите внимание, что поддержка устаревшего API будет удалена в Vite 7.
-
-Чтобы перейти на современный API, смотрите [документацию по Sass](https://sass-lang.com/documentation/breaking-changes/legacy-js-api/).
-
-### Настройка имени выходного файла CSS в режиме библиотеки {#customize-css-output-file-name-in-library-mode}
-
-В Vite 5 имя выходного файла CSS в режиме библиотеки всегда было `style.css` и не могло быть легко изменено через конфигурацию Vite.
-
-С Vite 6 имя выходного файла по умолчанию теперь использует `"name"` из `package.json`, аналогично выходным файлам JS. Если [`build.lib.fileName`](/config/build-options.md#build-lib) установлено со строкой, это значение также будет использоваться для имени выходного файла CSS. Чтобы явно установить другое имя файла CSS, вы можете использовать новый [`build.lib.cssFileName`](/config/build-options.md#build-lib) для его настройки.
-
-Чтобы перейти, если вы полагались на имя файла `style.css`, вам следует обновить ссылки на него на новое имя, основанное на вашем имени пакета. Например:
-
-```json [package.json]
-{
-  "name": "my-lib",
-  "exports": {
-    "./style.css": "./dist/style.css" // [!code --]
-    "./style.css": "./dist/my-lib.css" // [!code ++]
-  }
-}
-```
-
-Если вы предпочитаете оставить `style.css`, как в Vite 5, вы можете установить `build.lib.cssFileName: 'style'` вместо этого.
+- `splitVendorChunkPlugin` (помечен как устаревший в v5.2.7)
+  - Этот плагин изначально был добавлен для упрощения миграции на Vite v2.9.
+  - Для управления разбиением на чанки при необходимости можно использовать опцию `build.rollupOptions.output.manualChunks`.
+- `enforce` / `transform` на уровне хуков для `transformIndexHtml` (помечены как устаревшие в v4.0.0)
+  - Интерфейс был изменён для соответствия [объектным хукам Rollup](https://rollupjs.org/plugin-development/#build-hooks:~:text=Instead%20of%20a%20function%2C%20hooks%20can%20also%20be%20objects.).
+  - Вместо `enforce` следует использовать `order`, а вместо `transform` — `handler`.
 
 ## Расширенные возможности {#advanced}
 
 Существуют и другие критические изменения, которые затрагивают лишь немногих пользователей.
 
-- [[#17922] fix(css)!: remove default import in ssr dev](https://github.com/vitejs/vite/pull/17922)
-  - Поддержка импорта по умолчанию для CSS-файлов была [устаревшей в Vite 4](https://v4.vite.dev/guide/migration.html#importing-css-as-a-string) и удалена в Vite 5, но она всё ещё непреднамеренно поддерживалась в режиме разработки SSR. Эта поддержка теперь удалена.
-- [[#15637] fix!: default `build.cssMinify` to `'esbuild'` for SSR](https://github.com/vitejs/vite/pull/15637)
-  - [`build.cssMinify`](/config/build-options#build-cssminify) теперь включен по умолчанию даже для сборок SSR.
-- [[#18070] feat!: proxy bypass with WebSocket](https://github.com/vitejs/vite/pull/18070)
-  - `server.proxy[path].bypass` теперь вызывается для запросов обновления WebSocket, и в этом случае параметр `res` будет `undefined`.
-- [[#18209] refactor!: bump minimal terser version to 5.16.0](https://github.com/vitejs/vite/pull/18209)
-  - Минимально поддерживаемая версия terser для [`build.minify: 'terser'`](/config/build-options#build-minify) была повышена с 5.4.0 до 5.16.0.
-- [[#18231] chore(deps): update dependency @rollup/plugin-commonjs to v28](https://github.com/vitejs/vite/pull/18231)
-  - [`commonjsOptions.strictRequires`](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#strictrequires) теперь по умолчанию равен `true` (ранее был `'auto'`).
-    - Это может привести к увеличению размера пакета, но обеспечит более детерминированные сборки.
-    - Если вы указываете файл CommonJS в качестве точки входа, вам могут потребоваться дополнительные шаги. Читайте [документацию плагина commonjs](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#using-commonjs-files-as-entry-points) для получения дополнительной информации.
-- [[#18243] chore(deps)!: migrate `fast-glob` to `tinyglobby`](https://github.com/vitejs/vite/pull/18243)
-  - Диафазные фигурные скобки (`{01..03}` ⇒ `['01', '02', '03']`) и инкрементные фигурные скобки (`{2..8..2}` ⇒ `['2', '4', '6', '8']`) больше не поддерживаются в glob-выражениях.
-- [[#18395] feat(resolve)!: allow removing conditions](https://github.com/vitejs/vite/pull/18395)
-  - Этот PR не только вводит критическое изменение, упомянутое выше как «Значение по умолчанию для `resolve.conditions`», но также делает так, что `resolve.mainFields` не используется для неэкспортируемых зависимостей в SSR. Если вы использовали `resolve.mainFields` и хотите применить это к неэкспортируемым зависимостям в SSR, вы можете использовать [`ssr.resolve.mainFields`](/config/ssr-options#ssr-resolve-mainfields).
-- [[#18493] refactor!: remove fs.cachedChecks option](https://github.com/vitejs/vite/pull/18493)
-  - Эта оптимизация по желанию была удалена из-за крайних случаев при записи файла в кэшированную папку и немедленном его импорте.
-- ~~[[#18697] fix(deps)!: update dependency dotenv-expand to v12](https://github.com/vitejs/vite/pull/18697)~~
-  - ~~Переменные, используемые в интерполяции, теперь должны быть объявлены до интерполяции. Для получения дополнительной информации смотрите [журнал изменений `dotenv-expand`](https://github.com/motdotla/dotenv-expand/blob/v12.0.1/CHANGELOG.md#1200-2024-11-16).~~ Это разрушающее изменение было отменено в v6.1.0.
-- [[#16471] feat: v6 - Environment API](https://github.com/vitejs/vite/pull/16471)
+- [[#19979] chore: определён диапазон версий для одноранговых зависимостей](https://github.com/vitejs/vite/pull/19979)
+  - Указан диапазон версий одноранговых зависимостей для препроцессоров CSS.
+- [[#20013] refactor: удалён неиспользуемый `legacy.proxySsrExternalModules`](https://github.com/vitejs/vite/pull/20013)
+  - Свойство `legacy.proxySsrExternalModules` не оказывало влияния начиная с Vite 6 и теперь удалено.
+- [[#19985] refactor!: удалены устаревшие свойства, используемые только для типов](https://github.com/vitejs/vite/pull/19985)
+  - Удалены следующие неиспользуемые свойства: `ModuleRunnerOptions.root`, `ViteDevServer._importGlobMap`, `ResolvePluginOptions.isFromTsImporter`, `ResolvePluginOptions.getDepsOptimizer`, `ResolvePluginOptions.shouldExternalize`, `ResolvePluginOptions.ssrConfig`.
+- [[#19986] refactor: удалены устаревшие свойства Environment API](https://github.com/vitejs/vite/pull/19986)
+  - Эти свойства были помечены как устаревшие с самого начала и теперь удалены.
+- [[#19987] refactor!: удалены устаревшие типы, связанные с `HotBroadcaster`](https://github.com/vitejs/vite/pull/19987)
+  - Эти типы были частью устаревшего Runtime API и теперь удалены: `HMRBroadcaster`, `HMRBroadcasterClient`, `ServerHMRChannel`, `HMRChannel`.
+- [[#19996] fix(ssr)!: исключён доступ к переменной `Object` в преобразованном SSR-коде](https://github.com/vitejs/vite/pull/19996)
+  - Теперь для контекста выполнения модуля требуется `__vite_ssr_exportName__`.
+- [[#20045] fix: все значения `optimizeDeps.entries` обрабатываются как шаблоны (globs)](https://github.com/vitejs/vite/pull/20045)
+  - `optimizeDeps.entries` больше не принимает строковые пути напрямую, теперь всегда используются шаблоны (globs).
+- [[#20222] feat: применение некоторых промежуточных слоёв до хука `configureServer`](https://github.com/vitejs/vite/pull/20222), [[#20224] feat: применение некоторых промежуточных слоёв до хука `configurePreviewServer`](https://github.com/vitejs/vite/pull/20224)
+  - Некоторые промежуточные слои теперь применяются до хуков `configureServer` / `configurePreviewServer`. Если вы не хотите, чтобы определённый маршрут использовал опции [`server.cors`](../config/server-options.md#server-cors) / [`preview.cors`](../config/preview-options.md#preview-cors), убедитесь, что связанные заголовки удалены из ответа.
 
-  - Обновления модуля, поддерживающего только SSR, больше не приводят к полной перезагрузке страницы в клиенте. Чтобы вернуться к предыдущему поведению, можно использовать пользовательский плагин Vite:
-    <details>
-    <summary>Посмотреть пример</summary>
+## Переход с v5 {#migration-from-v5}
 
-    ```ts twoslash
-    import type { Plugin, EnvironmentModuleNode } from 'vite'
-
-    function hmrReload(): Plugin {
-      return {
-        name: 'hmr-reload',
-        enforce: 'post',
-        hotUpdate: {
-          order: 'post',
-          handler({ modules, server, timestamp }) {
-            if (this.environment.name !== 'ssr') return
-
-            let hasSsrOnlyModules = false
-
-            const invalidatedModules = new Set<EnvironmentModuleNode>()
-            for (const mod of modules) {
-              if (mod.id == null) continue
-              const clientModule =
-                server.environments.client.moduleGraph.getModuleById(mod.id)
-              if (clientModule != null) continue
-
-              this.environment.moduleGraph.invalidateModule(
-                mod,
-                invalidatedModules,
-                timestamp,
-                true
-              )
-              hasSsrOnlyModules = true
-            }
-
-            if (hasSsrOnlyModules) {
-              server.ws.send({ type: 'full-reload' })
-              return []
-            }
-          }
-        }
-      }
-    }
-    ```
-
-    </details>
-
-## Переход с v4 {#migration-from-v4}
-
-Сначала ознакомьтесь с [Руководством по переходу с v4](https://v5.vite.dev/guide/migration.html) в документации Vite v5, чтобы увидеть необходимые изменения для переноса вашего приложения на Vite 5, а затем продолжите с изменениями на этой странице.
+Сначала ознакомьтесь с [Руководством по переходу с v5](https://v6.vite.dev/guide/migration.html) в документации Vite v6, чтобы увидеть необходимые изменения для переноса вашего приложения на Vite 6, а затем продолжите с изменениями на этой странице.
