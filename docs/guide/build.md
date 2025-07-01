@@ -4,7 +4,7 @@
 
 ## Совместимость с браузерами {#browser-compatibility}
 
-По умолчанию продакшен-сборка ориентируется на современные браузеры, входящие в категорию [базовых](https://web-platform-dx.github.io/web-features/) широко распространённых. Поддерживаемые версии браузеров:
+По умолчанию продакшен-сборка ориентируется на современные браузеры, входящие в категорию [базовых](https://web-platform-dx.github.io/web-features/) широко распространённых (Baseline Widely Available). Поддерживаемые версии браузеров:
 
 <!-- Search for the `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` constant for more information -->
 
