@@ -17,6 +17,10 @@ const ogUrl = 'https://vite-docs.ru/'
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   const oldVersions: DefaultTheme.NavItemWithLink[] = [
     {
+      text: 'Документация Vite 6',
+      link: 'https://v6.vite.dev',
+    },
+    {
       text: 'Документация Vite 5',
       link: 'https://v5.vite.dev',
     },
@@ -36,7 +40,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
 
   return [
     {
-      text: 'Документация Vite 6 (релиз)',
+      text: 'Документация Vite 7 (релиз)',
       link: 'https://vite.dev',
     },
     ...oldVersions,
