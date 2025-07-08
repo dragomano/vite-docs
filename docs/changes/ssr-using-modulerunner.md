@@ -6,7 +6,7 @@
 
 `server.ssrLoadModule` был заменён на импорт из [Module Runner](/guide/api-environment#modulerunner).
 
-Область применения: `Авторы плагинов Vite`
+Затронутая область: `Авторы плагинов Vite`
 
 ::: warning Депрекация в будущем
 `ModuleRunner` был впервые введен в `v6.0`. Депрекация `server.ssrLoadModule` запланировано на будущую основную версию. Чтобы определить ваше использование, установите `future.removeSsrLoadModule` в `"warn"` в вашей конфигурации vite.

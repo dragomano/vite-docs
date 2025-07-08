@@ -71,7 +71,7 @@ const coreTeam = [
     avatar: 'https://github.com/ArnaudBarre.png',
     name: 'Арно Барре',
     title: 'Фронтенд-разработчик',
-    desc: 'Увлечён работой с TypeScript и React.',
+    desc: 'Увлечен разработкой инструментов на TypeScript и React.',
     links: [
       { icon: 'github', link: 'https://github.com/ArnaudBarre' },
       {
@@ -164,7 +164,7 @@ const emeritiMembers = [
     name: 'Niputi',
     title: 'Разработчик',
     org: 'Computershare Denmark',
-    desc: 'weeb/javascript lover.',
+    desc: 'Любитель веба и JavaScript.',
     links: [
       { icon: 'github', link: 'https://github.com/Niputi' },
       { icon: 'x', link: 'https://x.com/Niputi_' },
