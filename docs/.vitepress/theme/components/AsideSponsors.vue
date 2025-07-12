@@ -1,14 +1,14 @@
 <template>
   <a
     class="viteconf"
-    href="https://viteconf.org/24/replay?utm=vite-sidebar"
+    href="https://viteconf.org/?utm=vite-sidebar"
     target="_blank"
   >
     <img width="22" height="22" src="/viteconf.svg" alt="ViteConf Logo" />
     <span>
       <p class="extra-info">Строим вместе</p>
-      <p class="heading">ViteConf 2024</p>
-      <p class="extra-info">Смотреть повтор!</p>
+      <p class="heading">ViteConf 2025</p>
+      <p class="extra-info">Первый раз вживую!</p>
     </span>
   </a>
 </template>
