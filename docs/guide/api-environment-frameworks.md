@@ -13,9 +13,13 @@ Environment API находится на стадии релиз-кандидат
 Пожалуйста, поделитесь с нами своим мнением.
 :::
 
-## Окружения и фреймворки {#environments-and-frameworks}
+## Уровни взаимодействия DevEnvironment {#devenvironment-communication-levels}
 
-Неявное окружение `ssr` и другие не-клиентские окружения по умолчанию используют `RunnableDevEnvironment` во время разработки. Хотя это требует, чтобы среда выполнения совпадала с той, в которой работает сервер Vite, это работает аналогично `ssrLoadModule` и позволяет фреймворкам мигрировать и включать HMR для их истории разработки SSR. Вы можете защитить любое исполняемое окружение с помощью функции `isRunnableDevEnvironment`.
+Поскольку среды могут выполняться в разных рантаймах, взаимодействие со средой может иметь ограничения в зависимости от рантайма. Чтобы фреймворки могли легко писать код, не зависящий от рантайма, Environment API предоставляет три уровня взаимодействия.
+
+### `RunnableDevEnvironment`
+
+`RunnableDevEnvironment` — это среда, которая может передавать произвольные значения. Неявная среда `ssr` и другие не-клиентские среды по умолчанию используют `RunnableDevEnvironment` во время разработки. Хотя это требует, чтобы рантайм совпадал с тем, в котором запущен Vite-сервер, данный подход работает аналогично `ssrLoadModule` и позволяет фреймворкам мигрировать и включить HMR для SSR-разработки. Проверить, является ли среда выполняемой, можно с помощью функции `isRunnableDevEnvironment`.
 
 ```ts
 export class RunnableDevEnvironment extends DevEnvironment {
@@ -42,53 +46,6 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 :::warning
 `runner` вычисляется лениво (lazy evaluation) только при первом обращении к нему. Обратите внимание, что Vite включает поддержку карт источников (source maps) при создании `runner` через вызов `process.setSourceMapsEnabled` или переопределением `Error.prepareStackTrace`, если первый метод недоступен.
 :::
-
-Фреймворки, которые взаимодействуют со своей средой выполнения через [Fetch API](https://developer.mozilla.org/ru/docs/Web/API/Window/fetch), могут использовать `FetchableDevEnvironment`, предоставляющий стандартизированный способ обработки запросов через метод `handleRequest`:
-
-```ts
-import {
-  createServer,
-  createFetchableDevEnvironment,
-  isFetchableDevEnvironment,
-} from 'vite'
-
-const server = await createServer({
-  server: { middlewareMode: true },
-  appType: 'custom',
-  environments: {
-    custom: {
-      dev: {
-        createEnvironment(name, config) {
-          return createFetchableDevEnvironment(name, config, {
-            handleRequest(request: Request): Promise<Response> | Response {
-              // обрабатываем Request и возвращаем Response
-            },
-          })
-        },
-      },
-    },
-  },
-})
-
-// Теперь любой компонент, использующий Environment API, может вызывать `dispatchFetch`
-if (isFetchableDevEnvironment(server.environments.custom)) {
-  const response: Response = await server.environments.custom.dispatchFetch(
-    new Request('/request-to-handle'),
-  )
-}
-```
-
-:::warning
-Vite выполняет валидацию входных и выходных данных метода `dispatchFetch`:
-- Запрос должен быть экземпляром глобального класса `Request`
-- Ответ должен быть экземпляром глобального класса `Response`
-
-В случае несоответствия Vite выбросит ошибку `TypeError`.
-
-Хотя `FetchableDevEnvironment` реализован как класс, команда Vite считает это деталью реализации, которая может измениться в любой момент.
-:::
-
-## `RunnableDevEnvironment` по умолчанию {#default-runnabledevenvironment}
 
 Учитывая сервер Vite, настроенный в режиме мидлвара, как описано в [руководстве по настройке SSR](/guide/ssr#setting-up-the-dev-server), давайте реализуем мидлвар SSR, используя Environment API. Помните, что это не обязательно должно называться `ssr`, поэтому в этом примере мы назовём его `server`. Обработка ошибок опущена.
 
@@ -146,40 +103,71 @@ app.use('*', async (req, res, next) => {
 })
 ```
 
-## SSR, независимый от среды выполнения {#runtime-agnostic-ssr}
+При использовании сред, поддерживающих HMR (таких как `RunnableDevEnvironment`), в ваш серверный входной файл следует добавить `import.meta.hot.accept()`, для оптимального поведения. Без этой правки изменения в серверных файлах приведут к инвалидации всего графа серверных модулей:
 
-Поскольку `RunnableDevEnvironment` может использоваться только для выполнения кода в той же среде выполнения, что и сервер Vite, он требует среды выполнения, которая может запускать сервер Vite (среда выполнения, совместимая с Node.js). Это означает, что вам нужно будет использовать базовый `DevEnvironment`, чтобы сделать его независимым от среды выполнения.
+```js
+// src/entry-server.js
+export function render(...) { ... }
 
-:::info Предложение `FetchableDevEnvironment`
+if (import.meta.hot) {
+  import.meta.hot.accept()
+}
+```
 
-Первоначальное предложение включало метод `run` в классе `DevEnvironment`, позволяющий вызывать импорт на стороне раннера, используя опцию `transport`. В ходе нашего тестирования мы обнаружили, что API не был достаточно универсальным, чтобы начать его рекомендовать. Сейчас мы собираем отзывы о [предложении `FetchableDevEnvironment`](https://github.com/vitejs/vite/discussions/18191).
+### `FetchableDevEnvironment`
+
+:::info
+
+Мы ждём ваших отзывов о [предложении `FetchableDevEnvironment`](https://github.com/vitejs/vite/discussions/18191).
 
 :::
 
-`RunnableDevEnvironment` имеет функцию `runner.import`, которая возвращает значение модуля. Но эта функция недоступна в базовом `DevEnvironment` и требует, чтобы код, использующий API Vite, и пользовательские модули были отделены.
+`FetchableDevEnvironment` — это среда, которая может взаимодействовать со своим рантаймом через интерфейс [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch). Поскольку `RunnableDevEnvironment` можно реализовать только в ограниченном наборе рантаймов, мы рекомендуем использовать `FetchableDevEnvironment` вместо `RunnableDevEnvironment`.
 
-Например, следующий пример использует значение пользовательского модуля из кода, использующего API Vite:
+Эта среда предоставляет стандартизированный способ обработки запросов через метод `handleRequest`:
 
 ```ts
-// код, использующий API Vite
-import { createServer } from 'vite'
+import {
+  createServer,
+  createFetchableDevEnvironment,
+  isFetchableDevEnvironment,
+} from
 
-const server = createServer()
-const ssrEnvironment = server.environment.ssr
-const input = {}
+const server = await createServer({
+  server: { middlewareMode: true },
+  appType: 'custom',
+  environments: {
+    custom: {
+      dev: {
+        createEnvironment(name, config) {
+          return createFetchableDevEnvironment(name, config, {
+            handleRequest(request: Request): Promise<Response> | Response {
+              // обрабатываем Request и возвращаем Response
+            },
+          })
+        },
+      },
+    },
+  },
+})
 
-const { createHandler } = await ssrEnvironment.runner.import('./entrypoint.js')
-const handler = createHandler(input)
-const response = handler(new Request('/'))
-
-// -------------------------------------
-// ./entrypoint.js
-export function createHandler(input) {
-  return function handler(req) {
-    return new Response('hello')
-  }
+// Любой потребитель Environment API теперь может вызывать `dispatchFetch`:
+if (isFetchableDevEnvironment(server.environments.custom)) {
+  const response: Response = await server.environments.custom.dispatchFetch(
+    new Request('/request-to-handle'),
+  )
 }
 ```
+
+:::warning
+Vite проверяет входные и выходные данные метода `dispatchFetch`: запрос должен быть экземпляром глобального класса `Request`, а ответ - экземпляром глобального класса `Response`. Vite выбросит `TypeError`, если это не так.
+
+Обратите внимание, что хотя `FetchableDevEnvironment` реализован как класс, команда Vite считает это деталью реализации, которая может измениться в любой момент.
+:::
+
+### `DevEnvironment` {#raw-devenvironment}
+
+Если среда не реализует интерфейсы `RunnableDevEnvironment` или `FetchableDevEnvironment`, вам нужно вручную настраивать коммуникацию.
 
 Если ваш код может выполняться в той же среде выполнения, что и пользовательские модули (т. е. он не зависит от специфичных для Node.js API), вы можете использовать виртуальный модуль. Этот подход устраняет необходимость доступа к значению из кода, использующего API Vite.
 
@@ -201,9 +189,7 @@ const input = {}
 
 // используйте открытые функции от каждой фабрики окружений, которые выполняют код
 // проверьте, что они предоставляют для каждой фабрики окружений
-if (ssrEnvironment instanceof RunnableDevEnvironment) {
-  ssrEnvironment.runner.import('virtual:entrypoint')
-} else if (ssrEnvironment instanceof CustomDevEnvironment) {
+if (ssrEnvironment instanceof CustomDevEnvironment) {
   ssrEnvironment.runEntrypoint('virtual:entrypoint')
 } else {
   throw new Error(`Unsupported runtime for ${ssrEnvironment.name}`)
