@@ -169,10 +169,16 @@ export default defineConfig({
               },
               modal: {
                 searchBox: {
-                  resetButtonTitle: 'Сбросить поиск',
-                  resetButtonAriaLabel: 'Сбросить поиск',
-                  cancelButtonText: 'Отменить поиск',
-                  cancelButtonAriaLabel: 'Отменить поиск'
+                  clearButtonTitle: 'Очистить поиск',
+                  clearButtonAriaLabel: 'Очистить поиск',
+                  closeButtonText: 'Закрыть',
+                  closeButtonAriaLabel: 'Закрыть',
+                  placeholderText: 'Поиск в документации',
+                  placeholderTextAskAi: 'Задайте вопрос ИИ:',
+                  placeholderTextAskAiStreaming: 'Формируется ответ...',
+                  searchInputLabel: 'Поиск',
+                  backToKeywordSearchButtonText: 'Вернуться к поиску по ключевым словам',
+                  backToKeywordSearchButtonAriaLabel: 'Вернуться к поиску по ключевым словам'
                 },
                 startScreen: {
                   recentSearchesTitle: 'История поиска',
@@ -180,26 +186,48 @@ export default defineConfig({
                   saveRecentSearchButtonTitle: 'Сохранить в истории поиска',
                   removeRecentSearchButtonTitle: 'Удалить из истории поиска',
                   favoriteSearchesTitle: 'Избранное',
-                  removeFavoriteSearchButtonTitle: 'Удалить из избранного'
+                  removeFavoriteSearchButtonTitle: 'Удалить из избранного',
+                  recentConversationsTitle: 'Последние диалоги',
+                  removeRecentConversationButtonTitle: 'Удалить диалог из истории'
                 },
                 errorScreen: {
                   titleText: 'Невозможно получить результаты',
-                  helpText:
-                    'Вам может потребоваться проверить подключение к Интернету'
+                  helpText: 'Проверьте подключение к Интернету'
+                },
+                noResultsScreen: {
+                  noResultsText: 'Ничего не найдено',
+                  suggestedQueryText: 'Попробуйте изменить запрос',
+                  reportMissingResultsText: 'Считаете, что результаты должны быть?',
+                  reportMissingResultsLinkText: 'Сообщите об этом'
+                },
+                resultsScreen: {
+                  askAiPlaceholder: 'Задайте вопрос ИИ: '
+                },
+                askAiScreen: {
+                  disclaimerText: 'Ответ сгенерирован ИИ и может быть неточным. Пожалуйста, проверьте информацию самостоятельно.',
+                  relatedSourcesText: 'Связанные источники',
+                  thinkingText: 'Думаю...',
+                  copyButtonText: 'Копировать',
+                  copyButtonCopiedText: 'Скопировано!',
+                  copyButtonTitle: 'Копировать',
+                  likeButtonTitle: 'Нравится',
+                  dislikeButtonTitle: 'Не нравится',
+                  thanksForFeedbackText: 'Спасибо за ваш отзыв!',
+                  preToolCallText: 'Идёт поиск...',
+                  duringToolCallText: 'Поиск ',
+                  afterToolCallText: 'Поиск выполнен'
                 },
                 footer: {
                   selectText: 'выбрать',
+                  submitQuestionText: 'Отправить вопрос',
+                  selectKeyAriaLabel: 'Клавиша Enter',
                   navigateText: 'перейти',
+                  navigateUpKeyAriaLabel: 'Стрелка вверх',
+                  navigateDownKeyAriaLabel: 'Стрелка вниз',
                   closeText: 'закрыть',
-                  searchByText: 'поставщик поиска'
-                },
-                noResultsScreen: {
-                  noResultsText: 'Нет результатов для',
-                  suggestedQueryText: 'Вы можете попытаться узнать',
-                  reportMissingResultsText:
-                    'Считаете, что поиск даёт ложные результаты？',
-                  reportMissingResultsLinkText:
-                    'Нажмите на кнопку «Обратная связь»'
+                  backToSearchText: 'Вернуться к поиску',
+                  closeKeyAriaLabel: 'Клавиша Esc',
+                  poweredByText: 'поиск от'
                 }
               }
             }
