@@ -29,6 +29,9 @@ importers:
       gsap:
         specifier: ^3.13.0
         version: 3.13.0
+      markdown-it-image-size:
+        specifier: ^14.7.0
+        version: 14.7.0(markdown-it@14.1.0)
       vite:
         specifier: ^7.0.6
         version: 7.0.6(@types/node@24.1.0)
@@ -755,6 +758,13 @@ packages:
     resolution: {integrity: sha512-qGNhgYygnefSkAHHrNHqC7p3R8J0/xQDS/cYUud8er/qD9EFGWyCdUDfULHTJQN1d3H3WprzVwMc9MfB4J50Wg==}
     engines: {node: '>=20', pnpm: '>=10'}
 
+  flat-cache@5.0.0:
+    resolution: {integrity: sha512-JrqFmyUl2PnPi1OvLyTVHnQvwQ0S+e6lGSwu8OkAZlSaNIZciTY2H/cOOROxsBA1m/LZNHDsqAgDZt6akWcjsQ==}
+    engines: {node: '>=18'}
+
+  flatted@3.3.3:
+    resolution: {integrity: sha512-GX+ysw4PBCz0PzosHDepZGANEuFCMLrnRTiEy9McGjmkCQYwRq4A/X786G/fjM/+OjsWSU1ZrY5qyARZmO/uwg==}
+
   floating-vue@5.2.2:
     resolution: {integrity: sha512-afW+h2CFafo+7Y9Lvw/xsqjaQlKLdJV7h1fCHfcYQ1C4SVMlu7OAekqWgu5d4SgvkBVU0pVpLlVsrSTBURFRkg==}
     peerDependencies:
@@ -807,6 +817,11 @@ packages:
   html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
 
+  image-size@2.0.2:
+    resolution: {integrity: sha512-IRqXKlaXwgSMAMtpNzZa1ZAe8m+Sa1770Dhk8VkSsP9LS+iHD62Zd8FQKs8fbPiagBE7BzoFX23cxFnwshpV6w==}
+    engines: {node: '>=16.x'}
+    hasBin: true
+
   is-extendable@0.1.1:
     resolution: {integrity: sha512-5BMULNob1vgFX6EjQw5izWDxrecWK9AM72rugNr0TFldMOi0fj6Jk+zeKIt0xGj4cEfQIJth4w3OKWOJ4f+AFw==}
     engines: {node: '>=0.10.0'}
@@ -826,6 +841,12 @@ packages:
   js-yaml@3.14.1:
     resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
     hasBin: true
+
+  json-buffer@3.0.1:
+    resolution: {integrity: sha512-4bV5BfR2mqfQTJm+V5tPPdf+ZpuhiIvTuAB5g8kcrXOZpTT/QwwVRWBywX1ozr6lEuPdbHxwaJlm9G6mI2sfSQ==}
+
+  keyv@4.5.4:
+    resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
 
   kind-of@6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
@@ -849,6 +870,12 @@ packages:
 
   mark.js@8.11.1:
     resolution: {integrity: sha512-1I+1qpDt4idfgLQG+BNWmrqku+7/2bi5nLf4YwF8y8zXvmfiTBY3PV3ZibfrjBueCByROpuBjLLFCajqkgYoLQ==}
+
+  markdown-it-image-size@14.7.0:
+    resolution: {integrity: sha512-Tdsi5drDNv9mP8+0mJx8uyVO3VLu2faBAuQdO1ure/KCYXbFY1lRVViXNxG1l/ExqA6F765VA8XmXciTaOkKjg==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      markdown-it: '>= 10 < 15'
 
   markdown-it@14.1.0:
     resolution: {integrity: sha512-a54IwgWPaeBCAAsv13YgmALOF1elABB08FxO9i+r4VFk5Vl4pKokRPeX8u5TCgSsPi6ec1otfLjdOpVcgbpshg==}
@@ -997,6 +1024,15 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+
   oniguruma-parser@0.12.1:
     resolution: {integrity: sha512-8Unqkvk1RYc6yq2WBYRj4hdnsAxVze8i7iPfQr8e4uSP3tRv0rpZcbGUDvxfQQcdwHt/e9PrMvGCsa8OqG9X3w==}
 
@@ -1122,6 +1158,10 @@ packages:
     resolution: {integrity: sha512-5JRxVqC8I8NuOUjzBbvVJAKNM8qoVuH0O77h4WInc/qC2q5IreqKxYwgkga3PfA22OayK2ikceb/B26dztPl+Q==}
     engines: {node: '>=16'}
 
+  sync-fetch@0.5.2:
+    resolution: {integrity: sha512-6gBqqkHrYvkH65WI2bzrDwrIKmt3U10s4Exnz3dYuE5Ah62FIfNv/F63inrNhu2Nyh3GH5f42GKU3RrSJoaUyQ==}
+    engines: {node: '>=14'}
+
   tabbable@6.2.0:
     resolution: {integrity: sha512-Cat63mxsVJlzYvN51JmVXIgNoUokrIaT2zLclCXjRd8boZ0004U4KCs/sToJ75C6sdlByWxpYnb5Boif1VSFew==}
 
@@ -1134,6 +1174,9 @@ packages:
 
   tokenx@1.1.0:
     resolution: {integrity: sha512-KCjtiC2niPwTSuz4ktM82Ki5bjqBwYpssiHDsGr5BpejN/B3ksacRvrsdoxljdMIh2nCX78alnDkeemBmYUmTA==}
+
+  tr46@0.0.3:
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
 
   trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
@@ -1271,6 +1314,12 @@ packages:
     peerDependenciesMeta:
       typescript:
         optional: true
+
+  webidl-conversions@3.0.1:
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+
+  whatwg-url@5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
 
   wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==}
@@ -1920,6 +1969,13 @@ snapshots:
     dependencies:
       xml-js: 1.6.11
 
+  flat-cache@5.0.0:
+    dependencies:
+      flatted: 3.3.3
+      keyv: 4.5.4
+
+  flatted@3.3.3: {}
+
   floating-vue@5.2.2(vue@3.5.18(typescript@5.6.3)):
     dependencies:
       '@floating-ui/dom': 1.1.1
@@ -1972,6 +2028,8 @@ snapshots:
 
   html-void-elements@3.0.0: {}
 
+  image-size@2.0.2: {}
+
   is-extendable@0.1.1: {}
 
   is-fullwidth-code-point@3.0.0: {}
@@ -1984,6 +2042,12 @@ snapshots:
     dependencies:
       argparse: 1.0.10
       esprima: 4.0.1
+
+  json-buffer@3.0.1: {}
+
+  keyv@4.5.4:
+    dependencies:
+      json-buffer: 3.0.1
 
   kind-of@6.0.3: {}
 
@@ -2006,6 +2070,15 @@ snapshots:
       '@jridgewell/sourcemap-codec': 1.5.4
 
   mark.js@8.11.1: {}
+
+  markdown-it-image-size@14.7.0(markdown-it@14.1.0):
+    dependencies:
+      flat-cache: 5.0.0
+      image-size: 2.0.2
+      markdown-it: 14.1.0
+      sync-fetch: 0.5.2
+    transitivePeerDependencies:
+      - encoding
 
   markdown-it@14.1.0:
     dependencies:
@@ -2312,6 +2385,10 @@ snapshots:
 
   nanoid@3.3.11: {}
 
+  node-fetch@2.7.0:
+    dependencies:
+      whatwg-url: 5.0.0
+
   oniguruma-parser@0.12.1: {}
 
   oniguruma-to-es@4.3.3:
@@ -2478,6 +2555,12 @@ snapshots:
     dependencies:
       copy-anything: 3.0.5
 
+  sync-fetch@0.5.2:
+    dependencies:
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
   tabbable@6.2.0: {}
 
   tinyexec@1.0.1: {}
@@ -2488,6 +2571,8 @@ snapshots:
       picomatch: 4.0.3
 
   tokenx@1.1.0: {}
+
+  tr46@0.0.3: {}
 
   trim-lines@3.0.1: {}
 
@@ -2669,6 +2754,13 @@ snapshots:
       '@vue/shared': 3.5.18
     optionalDependencies:
       typescript: 5.6.3
+
+  webidl-conversions@3.0.1: {}
+
+  whatwg-url@5.0.0:
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
 
   wrap-ansi@7.0.0:
     dependencies:

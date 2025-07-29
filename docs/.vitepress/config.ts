@@ -1,3 +1,4 @@
+import path from 'node:path'
 import type { DefaultTheme } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
@@ -7,6 +8,7 @@ import {
 } from 'vitepress-plugin-group-icons'
 import llmstxt from 'vitepress-plugin-llms'
 import type { PluginOption } from 'vite'
+import { markdownItImageSize } from 'markdown-it-image-size'
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'Инструментарий для фронтенда нового поколения'
@@ -531,6 +533,9 @@ export default defineConfig({
     languages: ['js', 'jsx', 'ts', 'tsx', 'json'],
     config(md) {
       md.use(groupIconMdPlugin)
+      md.use(markdownItImageSize, {
+        publicDir: path.resolve(import.meta.dirname, '../public'),
+      })
     },
     container: {
       tipLabel: 'СОВЕТ',
