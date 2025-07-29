@@ -122,7 +122,7 @@ export default defineConfig({
 
 Обратите внимание, что если вы используете неотносительный [`base`](/config/shared-options.md#base), вы должны префиксировать каждый ключ этим `base`.
 
-Расширяет [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Дополнительные опции можно найти [здесь](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13).
+Расширяет [`http-proxy-3`](https://github.com/sagemathinc/http-proxy-3#options). Дополнительные опции можно найти [здесь](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13).
 
 В некоторых случаях вам также может понадобиться настроить основной dev-сервер (например, чтобы добавить пользовательские мидлвары в внутреннее приложение [connect](https://github.com/senchalabs/connect)). Для этого вам нужно написать свой собственный [плагин](/guide/using-plugins.html) и использовать функцию [configureServer](/guide/api-plugin.html#configureserver).
 
