@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import CommunityCard, { Testimonial } from './CommunityCard.vue'
-import placeholderAvatar from '/images/community/placeholder.jpg'
 
 const testimonials: Testimonial[] = [
   {
@@ -52,7 +51,7 @@ const testimonials: Testimonial[] = [
     name: 'Дэвид Кремер',
     handle: '@zeeg',
     avatar:
-      'https://pbs.twimg.com/profile_images/1706891973553168384/zdAPOznc_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1911613315765133312/HVkULegC_400x400.jpg',
     comment: ['Vite стал настоящей революцией для индустрии.'],
   },
   {
@@ -68,7 +67,7 @@ const testimonials: Testimonial[] = [
     name: 'Кристоф Наказава',
     handle: '@cpojer',
     avatar:
-      'https://pbs.twimg.com/profile_images/1854151427595407360/4GyUCgEH_400x400.jpg',
+      'https://pbs.twimg.com/profile_images/1910252462126313472/gXgT-jxL_400x400.jpg',
     comment: ['Vite собирается покорить (JavaScript) мир.'],
   },
   {
