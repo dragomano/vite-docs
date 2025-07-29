@@ -19,3 +19,5 @@
 ## Руководство по переходу {#migration-guide}
 
 Проверьте [Руководство по Environment API для фреймворков](../guide/api-environment-frameworks.md).
+
+`server.ssrFixStacktrace` и `server.ssrRewriteStacktrace` не нужно вызывать при использовании Module Runner API. Трассировки стека будут обновлены, если `sourcemapInterceptor` не установлен в `false`.
