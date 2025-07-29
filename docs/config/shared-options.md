@@ -114,7 +114,7 @@ declare const __APP_VERSION__: string
 Для сборок SSR дедупликация не работает для выходных данных сборки ESM, настроенных с помощью `build.rollupOptions.output`. Обходным решением является использование выходных данных сборки CJS, пока ESM не получит лучшую поддержку плагинов для загрузки модулей.
 :::
 
-## resolve.conditions
+## resolve.conditions <NonInheritBadge />
 
 - **Тип:** `string[]`
 - **По умолчанию:** `['module', 'browser', 'development|production']` (`defaultClientConditions`)
@@ -140,7 +140,7 @@ declare const __APP_VERSION__: string
 
 Обратите внимание, что условия `import`, `require`, `default` всегда применяются, если требования выполнены.
 
-## resolve.mainFields
+## resolve.mainFields <NonInheritBadge />
 
 - **Тип:** `string[]`
 - **По умолчанию:** `['browser', 'module', 'jsnext:main', 'jsnext']` (`defaultClientMainFields`)

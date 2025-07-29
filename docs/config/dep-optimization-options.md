@@ -4,7 +4,7 @@
 
 Если не указано иное, параметры в этом разделе применяются только к оптимизатору зависимостей, который используется только в режиме разработки.
 
-## optimizeDeps.entries
+## optimizeDeps.entries <NonInheritBadge />
 
 - **Тип:** `string | string[]`
 
@@ -12,7 +12,7 @@
 
 Если ни один из этих вариантов не подходит, вы можете указать пользовательские записи с помощью этой опции — значение должно быть шаблоном [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) или массивом шаблонов, заданных относительно корня проекта Vite. Это переопределит автоматическое определение записей по умолчанию. По умолчанию будут игнорироваться только папки `node_modules` и `build.outDir`, если `optimizeDeps.entries` явно определён. Если нужно игнорировать другие папки, можно использовать игнорирующий шаблон, начинающийся с `!`. Папка `node_modules` не будет игнорироваться для шаблонов, которые явно включают строку `node_modules`.
 
-## optimizeDeps.exclude
+## optimizeDeps.exclude <NonInheritBadge />
 
 - **Тип:** `string[]`
 
@@ -33,7 +33,7 @@ export default defineConfig({
 
 :::
 
-## optimizeDeps.include
+## optimizeDeps.include <NonInheritBadge />
 
 - **Тип:** `string[]`
 
@@ -51,7 +51,7 @@ export default defineConfig({
 })
 ```
 
-## optimizeDeps.esbuildOptions
+## optimizeDeps.esbuildOptions <NonInheritBadge />
 
 - **Тип:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
 | 'bundle'
@@ -78,14 +78,14 @@ export default defineConfig({
 
 Установите значение `true`, чтобы принудительно выполнить предварительное объединение зависимостей, игнорируя ранее кэшированные оптимизированные зависимости.
 
-## optimizeDeps.noDiscovery
+## optimizeDeps.noDiscovery <NonInheritBadge />
 
 - **Тип:** `boolean`
 - **По умолчанию:** `false`
 
 Когда установлено значение `true`, автоматическое обнаружение зависимостей будет отключено, и оптимизироваться будут только зависимости, указанные в `optimizeDeps.include`. Зависимости, использующие только CJS, должны быть указаны в `optimizeDeps.include` во время разработки.
 
-## optimizeDeps.holdUntilCrawlEnd
+## optimizeDeps.holdUntilCrawlEnd <NonInheritBadge />
 
 - **Экспериментально:** [Оставить отзыв](https://github.com/vitejs/vite/discussions/15834)
 - **Тип:** `boolean`
@@ -93,7 +93,7 @@ export default defineConfig({
 
 При включении эта опция будет удерживать результаты первых оптимизированных зависимостей до тех пор, пока все статические импорты не будут просканированы при холодном старте. Это позволяет избежать необходимости полной перезагрузки страницы, когда обнаруживаются новые зависимости, и они вызывают генерацию новых общих чанков. Если все зависимости найдены сканером, а также явно определённые в `include`, лучше отключить эту опцию, чтобы браузер мог обрабатывать больше запросов параллельно.
 
-## optimizeDeps.disabled
+## optimizeDeps.disabled <NonInheritBadge />
 
 - **Устарело**
 - **Экспериментально:** [Оставить отзыв](https://github.com/vitejs/vite/discussions/13839)
@@ -108,7 +108,7 @@ export default defineConfig({
 Оптимизация зависимостей во время сборки была **экспериментальной** функцией. Проекты, пробующие эту стратегию, также удалили `@rollup/plugin-commonjs`, используя `build.commonjsOptions: { include: [] }`. Если вы сделали это, предупреждение подскажет вам повторно включить его для поддержки только CJS пакетов во время объединения.
 :::
 
-## optimizeDeps.needsInterop
+## optimizeDeps.needsInterop <NonInheritBadge />
 
 - **Экспериментально**
 - **Тип:** `string[]`

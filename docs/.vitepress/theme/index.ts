@@ -8,6 +8,7 @@ import './styles/landing.css'
 import AsideSponsors from './components/AsideSponsors.vue'
 import SvgImage from './components/SvgImage.vue'
 import YouTubeVideo from './components/YouTubeVideo.vue'
+import NonInheritBadge from './components/NonInheritBadge.vue'
 import 'virtual:group-icons.css'
 
 export default {
@@ -20,6 +21,7 @@ export default {
   enhanceApp({ app }) {
     app.component('SvgImage', SvgImage)
     app.component('YouTubeVideo', YouTubeVideo)
+    app.component('NonInheritBadge', NonInheritBadge)
     app.use(TwoslashFloatingVue)
   },
 } satisfies Theme
