@@ -13,7 +13,7 @@ head:
       content: Анонс Vite 4
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-announcing-vite4.png
+      content: https://vite.dev/og-image-announcing-vite4.webp
   - - meta
     - property: og:url
       content: https://vite.dev/blog/announcing-vite4
@@ -31,13 +31,13 @@ _9 декабря 2022_ - посмотрите [анонс Vite 5.0](./announcin
 
 Vite 3 [был выпущен](./announcing-vite3.md) пять месяцев назад. С тех пор количество загрузок пакета npm в неделю увеличилось с 1 миллиона до 2.5 миллионов. Экосистема также созрела и продолжает расти. В этом году в [опросе Jamstack Conf](https://twitter.com/vite_js/status/1589665610119585793) использование среди сообщества выросло с 14% до 32%, при этом сохранив высокий уровень удовлетворенности 9.7. Мы увидели стабильные релизы [Astro 1.0](https://astro.build/), [Nuxt 3](https://v3.nuxtjs.org/) и других фреймворков на базе Vite, которые внедряют инновации и сотрудничают: [SvelteKit](https://kit.svelte.dev/), [Solid Start](https://www.solidjs.com/blog/introducing-solidstart), [Qwik City](https://qwik.builder.io/qwikcity/overview/). Storybook объявил о поддержке Vite в качестве одной из основных функций для [Storybook 7.0](https://storybook.js.org/blog/first-class-vite-support-in-storybook/). Deno теперь [поддерживает Vite](https://www.youtube.com/watch?v=Zjojo9wdvmY). Принятие [Vitest](https://vitest.dev) стремительно растет, и вскоре он будет представлять половину загрузок Vite в npm. Nx также инвестирует в экосистему и [официально поддерживает Vite](https://nx.dev/packages/vite).
 
-[![Экосистема Vite 4](/ecosystem-vite4.png)](https://viteconf.org/2022/replay)
+[![Экосистема Vite 4](../images/ecosystem-vite4.webp)](https://viteconf.org/2022/replay)
 
 В качестве демонстрации роста, который испытали Vite и связанные с ним проекты, экосистема Vite собралась 11 октября на [ViteConf 2022](https://viteconf.org/2022/replay). Мы увидели представителей основных веб-фреймворков и инструментов, рассказывающих истории об инновациях и сотрудничестве. И в символическом шаге команда Rollup выбрала именно этот день для выпуска [Rollup 3](https://rollupjs.org).
 
 Сегодня [команда Vite](/team) с помощью наших партнёров по экосистеме рада объявить о выпуске Vite 4, который в процессе сборки использует Rollup 3. Мы работали с экосистемой, чтобы обеспечить плавный путь обновления для этой новой мажорной версии. Vite теперь использует [Rollup 3](https://github.com/vitejs/vite/issues/9870), что позволило нам упростить внутреннюю обработку ресурсов Vite и получить множество улучшений. Смотрите [заметки о выпуске Rollup 3 здесь](https://github.com/rollup/rollup/releases/tag/v3.0.0).
 
-![Обложка анонса Vite 4](/og-image-announcing-vite4.png)
+![Обложка анонса Vite 4](/og-image-announcing-vite4.webp)
 
 Быстрые ссылки:
 

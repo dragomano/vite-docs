@@ -13,7 +13,7 @@ head:
       content: Анонс Vite 6
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-announcing-vite6.png
+      content: https://vite.dev/og-image-announcing-vite6.webp
   - - meta
     - property: og:url
       content: https://vite.dev/blog/announcing-vite6
@@ -29,7 +29,7 @@ head:
 
 _26 ноября 2024_
 
-![Обложка объявления Vite 6](/og-image-announcing-vite6.png)
+![Обложка объявления Vite 6](/og-image-announcing-vite6.webp)
 
 Прошедший год был насыщен событиями. Принятие Vite продолжает расти, со скачком загрузок npm с 7,5 миллионов до 17 миллионов в неделю с момента выпуска Vite 5 год назад. [Vitest](https://vitest.dev) выбирается не только конечными пользователями, но также начинает формировать собственную экосистему. Например, [Storybook](https://storybook.js.org) получил новые возможности тестирования на базе Vitest.
 
@@ -37,7 +37,7 @@ _26 ноября 2024_
 
 Vite используется такими компаниями, как OpenAI, Google, Apple, Microsoft, NASA, Shopify, Cloudflare, GitLab, Reddit, Linear и многими другими. Два месяца назад мы начали список [компаний, использующих Vite](https://github.com/vitejs/companies-using-vite). Мы рады видеть, как многие разработчики отправляют нам PR, чтобы добавить свои компании в этот список. Трудно поверить, насколько сильно экосистема, которую мы построили вместе, выросла с тех пор, как Vite сделал свои первые шаги.
 
-![Еженедельные загрузки Vite через npm](/vite6-npm-weekly-downloads.png)
+![Еженедельные загрузки Vite через npm](../images/vite6-npm-weekly-downloads.webp)
 
 ## Ускорение экосистемы Vite {#speeding-up-the-vite-ecosystem}
 

@@ -13,7 +13,7 @@ head:
       content: Анонс Vite 4.3
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-announcing-vite4-3.png
+      content: https://vite.dev/og-image-announcing-vite4-3.webp
   - - meta
     - property: og:url
       content: https://vite.dev/blog/announcing-vite4-3
@@ -29,7 +29,7 @@ head:
 
 _20 апреля 2023_
 
-![Обложка объявления Vite 4.3](/og-image-announcing-vite4-3.png)
+![Обложка объявления Vite 4.3](/og-image-announcing-vite4-3.webp)
 
 Быстрые ссылки:
 
@@ -60,9 +60,9 @@ _20 апреля 2023_
 | **Root HMR**       |    30.5мс |   24.0мс |      -21.3% |
 | **Leaf HMR**       |    16.9мс |   10.0мс |      -40.8% |
 
-![Сравнение времени старта Vite 4.3 и 4.2](/vite4-3-startup-time.png)
+![Сравнение времени старта Vite 4.3 и 4.2](../images/vite4-3-startup-time.webp)
 
-![Сравнение времени HMR (горячей замены модулей) Vite 4.3 и 4.2](/vite4-3-hmr-time.png)
+![Сравнение времени HMR (горячей замены модулей) Vite 4.3 и 4.2](../images/vite4-3-hmr-time.webp)
 
 Вы можете прочитать больше информации о бенчмарке [здесь](https://gist.github.com/sapphi-red/25be97327ee64a3c1dce793444afdf6e). Спецификации и версии для этого теста производительности:
 

@@ -12,7 +12,7 @@ Vite стремится предлагать устоявшиеся паттер
 
 ::: tip
 При обучении, отладке или написании плагинов мы рекомендуем включить [vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect) в ваш проект. Он позволяет вам просматривать промежуточное состояние плагинов Vite. После установки вы можете посетить `localhost:5173/__inspect/`, чтобы просмотреть модули и стек трансформаций вашего проекта. Ознакомьтесь с инструкциями по установке в [документации vite-plugin-inspect](https://github.com/antfu/vite-plugin-inspect).
-![vite-plugin-inspect](../images/vite-plugin-inspect.png)
+![vite-plugin-inspect](../images/vite-plugin-inspect.webp)
 :::
 
 ## Конвенции {#conventions}

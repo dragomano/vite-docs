@@ -6,7 +6,7 @@
 
 ## Введение {#overview}
 
-Vite (французское слово, означающее «быстрый», произносится `/vit/`<button style="border:none;padding:3px;border-radius:4px;vertical-align:bottom" id="play-vite-audio" aria-label="pronounce" onclick="document.getElementById('vite-audio').play();"><svg style="height:2em;width:2em"><use href="/voice.svg?no-inline#voice" /></svg ></button>, как «вит») — это инструмент сборки, цель которого — обеспечить более быструю и удобную разработку современных веб-проектов. Он состоит из двух основных частей:
+Vite (французское слово, означающее «быстрый», произносится `/vit/`<button style="border:none;padding:3px;border-radius:4px;vertical-align:bottom" id="play-vite-audio" aria-label="pronounce" onclick="document.getElementById('vite-audio').play();"><svg style="height:2em;width:2em"><use href="../images/voice.svg?no-inline#voice" /></svg ></button>, как «вит») — это инструмент сборки, цель которого — обеспечить более быструю и удобную разработку современных веб-проектов. Он состоит из двух основных частей:
 
 - Сервер разработки, обеспечивающий [расширенные возможности](./features) по сравнению со [встроенными ES-модулями](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Modules), например, чрезвычайно быструю [горячую замену модулей (HMR)](./features#hot-module-replacement).
 

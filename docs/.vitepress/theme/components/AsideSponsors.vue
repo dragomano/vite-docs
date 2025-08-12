@@ -4,7 +4,7 @@
     href="https://viteconf.org/?utm=vite-sidebar"
     target="_blank"
   >
-    <img width="22" height="22" src="/viteconf.svg" alt="ViteConf Logo" />
+    <img width="22" height="22" src="../../../images/viteconf.svg" alt="Логотип ViteConf" />
     <span>
       <p class="extra-info">Строим вместе</p>
       <p class="heading">ViteConf 2025</p>
