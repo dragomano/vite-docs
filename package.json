@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "typecheck": "vue-tsc -p docs/tsconfig.json",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
@@ -35,10 +36,12 @@
     "feed": "^5.1.0",
     "gsap": "^3.13.0",
     "markdown-it-image-size": "^14.8.0",
+    "typescript": "~5.9.2",
     "vite": "^7.1.2",
     "vitepress": "2.0.0-alpha.10",
     "vitepress-plugin-group-icons": "^1.6.2",
     "vitepress-plugin-llms": "^1.7.2",
-    "vue": "^3.5.18"
+    "vue": "^3.5.18",
+    "vue-tsc": "^3.0.5"
   }
 }
