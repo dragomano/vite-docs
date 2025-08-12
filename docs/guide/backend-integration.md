@@ -8,10 +8,9 @@
 
 1. В вашей конфигурации Vite настройте точку входа и включите манифест сборки:
 
-   ```js twoslash
+   ```js twoslash [vite.config.js]
    import { defineConfig } from 'vite'
    // ---cut---
-   // vite.config.js
    export default defineConfig({
      server: {
        cors: {
@@ -46,7 +45,6 @@
    ```
 
    Чтобы правильно обслуживать ресурсы, у вас есть два варианта:
-
    - Убедитесь, что сервер настроен на проксирование запросов статических ресурсов к серверу Vite
    - Установите [`server.origin`](/config/server-options.md#server-origin), чтобы сгенерированные URL-адреса ресурсов разрешались с использованием URL-адреса бэкенд-сервера вместо относительного пути
 
@@ -66,35 +64,71 @@
 
 3. Для продакшен-сборки: после выполнения команды `vite build` будет сгенерирован файл `.vite/manifest.json` рядом с другими файлами ресурсов. Пример файла манифеста выглядит следующим образом:
 
-   ```json
+   ```json [.vite/manifest.json]
    {
-     "main.js": {
-       "file": "assets/main.4889e940.js",
-       "src": "main.js",
+     "_shared-B7PI925R.js": {
+       "file": "assets/shared-B7PI925R.js",
+       "name": "shared",
+       "css": ["assets/shared-ChJ_j-JJ.css"]
+     },
+     "_shared-ChJ_j-JJ.css": {
+       "file": "assets/shared-ChJ_j-JJ.css",
+       "src": "_shared-ChJ_j-JJ.css"
+     },
+     "logo.svg": {
+       "file": "assets/logo-BuPIv-2h.svg",
+       "src": "logo.svg"
+     },
+     "baz.js": {
+       "file": "assets/baz-B2H3sXNv.js",
+       "name": "baz",
+       "src": "baz.js",
+       "isDynamicEntry": true
+     },
+     "views/bar.js": {
+       "file": "assets/bar-gkvgaI9m.js",
+       "name": "bar",
+       "src": "views/bar.js",
        "isEntry": true,
-       "dynamicImports": ["views/foo.js"],
-       "css": ["assets/main.b82dbe22.css"],
-       "assets": ["assets/asset.0ab0f9cd.png"],
-       "imports": ["_shared.83069a53.js"]
+       "imports": ["_shared-B7PI925R.js"],
+       "dynamicImports": ["baz.js"]
      },
      "views/foo.js": {
-       "file": "assets/foo.869aea0d.js",
+       "file": "assets/foo-BRBmoGS9.js",
+       "name": "foo",
        "src": "views/foo.js",
-       "isDynamicEntry": true,
-       "imports": ["_shared.83069a53.js"]
-     },
-     "_shared.83069a53.js": {
-       "file": "assets/shared.83069a53.js",
-       "css": ["assets/shared.a834bfc3.css"]
+       "isEntry": true,
+       "imports": ["_shared-B7PI925R.js"],
+       "css": ["assets/foo-5UjPuW-k.css"]
      }
    }
    ```
 
-   - Манифест имеет структуру `Record<name, chunk>`
-   - Для входных или динамических чанков ключом является относительный путь src от корня проекта.
-   - Для не входных чанков ключом является базовое имя сгенерированного файла, предшествующее символом `_`.
-   - Для CSS-файла, сгенерированного, когда [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit)  установлен в `false`, ключом является `style.css`.
-   - Чанки будут содержать информацию о своих статических и динамических импортах (оба являются ключами, которые сопоставляются с соответствующим чанком в манифесте), а также соответствующие CSS и файлы ресурсов (если таковые имеются).
+   Манифест имеет структуру `Record<name, chunk>`, где каждый чанк соответствует интерфейсу `ManifestChunk`:
+
+   ```ts
+   interface ManifestChunk {
+     src?: string
+     file: string
+     css?: string[]
+     assets?: string[]
+     isEntry?: boolean
+     name?: string
+     names?: string[]
+     isDynamicEntry?: boolean
+     imports?: string[]
+     dynamicImports?: string[]
+   }
+   ```
+
+   Каждая запись в манифесте представляет собой что-то одно из следующего списка:
+   - **Чанки точек входа**: Генерируются из файлов, указанных в [`build.rollupOptions.input`](https://rollupjs.org/configuration-options/#input). Эти чанки имеют `isEntry: true`, а их ключ — это относительный путь src от корня проекта.
+   - **Динамические чанки точек входа**: Генерируются из динамических импортов. Эти чанки имеют `isDynamicEntry: true`, а их ключ — это относительный путь src от корня проекта.
+   - **Чанки, не являющиеся точками входа**: Их ключ — это базовое имя сгенерированного файла с префиксом `_`.
+   - **Чанки активов**: Генерируются из импортированных активов, таких как изображения, шрифты. Их ключ — это относительный путь src от корня проекта.
+   - **CSS-**файлы**: Когда [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) равно `false`, генерируется единый CSS-файл с ключом `style.css`. Когда `build.cssCodeSplit` не равно `false`, ключ генерируется аналогично JS-чанкам (т. е. чанки точек входа не будут иметь префикс `_`, а чанки, не являющиеся точками входа, будут иметь префикс `_`).
+
+   Чанки содержат информацию о своих статических и динамических импортах (оба являются ключами, которые соответствуют соответствующему чанку в манифесте), а также о соответствующих CSS-файлах и файлах активов (если таковые имеются).
 
 4. Вы можете использовать этот файл для рендеринга ссылок или директив предварительной загрузки с хешированными именами файлов.
 
@@ -118,10 +152,11 @@
 
    В частности, бэкенд, генерирующий HTML, должен включать следующие теги, учитывая файл манифеста и точку входа:
 
-   - Тег `<link rel="stylesheet">` для каждого файла в списке `css` чанка точки входа
-   - Рекурсивно следовать всем чанкам в списке `imports` точки входа и включать тег `<link rel="stylesheet">` для каждого CSS файла каждого импортированного чанка.
-   - Тег для ключа `file` чанка точки входа (`<script type="module">` для JavaScript или `<link rel="stylesheet">` для CSS)
-   - Опционально, тег `<link rel="modulepreload">` для `file` каждого импортированного JavaScript чанка, снова рекурсивно следуя импортам, начиная с чанка точки входа.
+   Обратите внимание, что рекомендуется следовать этому порядку для оптимальной производительности:
+   1. Тег `<link rel="stylesheet">` для каждого файла в списке `css` чанка точки входа (если он существует).
+   2. Рекурсивно следовать всем чанкам в списке `imports` точки входа и включать тег `<link rel="stylesheet">` для каждого CSS-файла из списка `css` каждого импортированного чанка (если он существует).
+   3. Тег для ключа `file` чанка точки входа. Это может быть `<script type="module">` для JavaScript или `<link rel="stylesheet">` для CSS.
+   4. Опционально, тег `<link rel="modulepreload">` для ключа `file` каждого импортированного JavaScript-чанка, снова рекурсивно следуя импорту, начиная с чанка точки входа.
 
    Следуя приведённому выше примеру манифеста, для точки входа `main.js` в продакшен-сборке должны быть включены следующие теги:
 
@@ -141,3 +176,37 @@
    <!-- опционально -->
    <link rel="modulepreload" href="assets/shared.83069a53.js" />
    ```
+
+   ::: details Псевдо-реализация `importedChunks`
+   Пример псевдо-реализации `importedChunks` на TypeScript (это потребуется адаптировать для вашего языка программирования и языка шаблонов):
+
+   ```ts
+   import type { Manifest, ManifestChunk } from 'vite'
+
+   export default function importedChunks(
+     manifest: Manifest,
+     name: string,
+   ): ManifestChunk[] {
+     const seen = new Set<string>()
+
+     function getImportedChunks(chunk: ManifestChunk): ManifestChunk[] {
+       const chunks: ManifestChunk[] = []
+       for (const file of chunk.imports ?? []) {
+         const importee = manifest[file]
+         if (seen.has(file)) {
+           continue
+         }
+         seen.add(file)
+
+         chunks.push(...getImportedChunks(importee))
+         chunks.push(importee)
+       }
+
+       return chunks
+     }
+
+     return getImportedChunks(manifest[name])
+   }
+   ```
+
+   :::
