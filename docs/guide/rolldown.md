@@ -145,11 +145,17 @@ export default {
 
 Для тестирования можно активировать их, установив опцию `experimental.enableNativePlugin` в `true` в конфигурации Vite.
 
-### `@vitejs/plugin-react-oxc`
+### Использование React refresh transform от Oxc {#utilizing-oxc-s-react-refresh-transform}
 
-При использовании `@vitejs/plugin-react` или `@vitejs/plugin-react-swc` вы можете перейти на плагин `@vitejs/plugin-react-oxc`, который использует Oxc для быстрого обновления React вместо Babel или SWC. Он разработан как прямая замена, обеспечивая лучшую производительность сборки и соответствие базовой архитектуре `rolldown-vite`.
+`@vitejs/plugin-react` v5.0.0+ использует React refresh transform от Oxc. Если вы не используете плагины Babel (включая React compiler), теперь вся трансформация будет выполняться Oxc, что улучшит производительность сборки без каких-либо изменений, кроме обновления `@vitejs/plugin-react`.
 
-Обратите внимание, что переход на `@vitejs/plugin-react-oxc` возможен только в том случае, если вы не используете плагины Babel или SWC (включая компилятор React) и не изменяете настройки SWC.
+Если вы используете `@vitejs/plugin-react-swc` без плагинов SWC и пользовательских настроек SWC, вы можете перейти на плагин `@vitejs/plugin-react`, чтобы задействовать Oxc.
+
+::: details Плагин `@vitejs/plugin-react-oxc` устарел
+
+Ранее мы рекомендовали использовать `@vitejs/plugin-react-oxc` для задействования React refresh transform от Oxc. Однако мы объединили реализацию в `@vitejs/plugin-react`, чтобы упростить переход на `rolldown-vite`. `@vitejs/plugin-react-oxc` теперь устарел и больше не будет обновляться.
+
+:::
 
 ### Обёртка `withFilter` {#withfilter-wrapper}
 
