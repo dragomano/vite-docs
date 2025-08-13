@@ -108,6 +108,8 @@ $ deno init --npm vite my-vue-app --template vue
 
 ::::
 
+<YouTubeVideo videoId="D13wKzkQnMA" />
+
 ## Шаблоны сообщества {#community-templates}
 
 create-vite — это инструмент для быстрого запуска проекта из базового шаблона для популярных фреймворков. Посмотрите на Awesome Vite [шаблоны, поддерживаемые сообществом](https://github.com/vitejs/awesome-vite#templates), которые включают другие инструменты или ориентированы на другие фреймворки.
