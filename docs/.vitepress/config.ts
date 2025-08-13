@@ -293,11 +293,10 @@ export default defineConfig({
               },
             ],
           },
-          { text: 'Обучающий курс', link: 'https://www.youtube.com/playlist?list=PL-FhWbGlJPfZg649Ukk5vPa4nUjHhQ6o3' }
         ],
       },
       {
-        text: 'Версия',
+        text: 'Версии',
         items: versionLinks,
       },
     ],
