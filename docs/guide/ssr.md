@@ -59,15 +59,13 @@ if (import.meta.env.SSR) {
 }
 ```
 
-This is statically replaced during build so it will allow tree-shaking of unused branches.
+Это статически заменяется во время сборки, что позволяет выполнять tree-shaking («встряхивание дерева») неиспользуемого кода.
 
 ## Настройка dev-сервера {#setting-up-the-dev-server}
 
 При создании приложения SSR вы, вероятно, захотите иметь полный контроль над вашим основным сервером и отделить Vite от продакшен-среды. Поэтому рекомендуется использовать Vite в режиме мидлвара. Вот пример с [express](https://expressjs.com/):
 
-**server.js**
-
-```js{15-18} twoslash
+```js{15-18} twoslash [server.js]
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -109,7 +107,7 @@ createServer()
 
 Следующий шаг — реализовать обработчик `*`, чтобы обслуживать HTML, рендеренный на сервере:
 
-```js twoslash
+```js twoslash [server.js]
 // @noErrors
 import fs from 'node:fs'
 import path from 'node:path'
@@ -162,7 +160,7 @@ app.use('*all', async (req, res, next) => {
 
 Скрипт `dev` в `package.json` также следует изменить, чтобы использовать серверный скрипт:
 
-```diff
+```diff [package.json]
   "scripts": {
 -   "dev": "vite"
 +   "dev": "node server"
@@ -178,7 +176,7 @@ app.use('*all', async (req, res, next) => {
 
 Наши скрипты в `package.json` будут выглядеть так:
 
-```json
+```json [package.json]
 {
   "scripts": {
     "dev": "node server",
@@ -215,8 +213,7 @@ app.use('*all', async (req, res, next) => {
 
 `@vitejs/plugin-vue` поддерживает это из коробки и автоматически регистрирует используемые идентификаторы модулей компонентов в соответствующем контексте Vue SSR:
 
-```js
-// src/entry-server.js
+```js [src/entry-server.js]
 const ctx = {}
 const html = await vueServerRenderer.renderToString(app, ctx)
 // ctx.modules теперь является множеством идентификаторов модулей, которые были использованы во время рендеринга
