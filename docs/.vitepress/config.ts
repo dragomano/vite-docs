@@ -112,12 +112,12 @@ export default defineConfig({
   locales: {
     root: { label: 'Русский' },
     en: { label: 'English', link: 'https://vite.dev' },
-    zh: { label: '简体中文', link: 'https://cn.vite.dev' },
-    ja: { label: '日本語', link: 'https://ja.vite.dev' },
-    es: { label: 'Español', link: 'https://es.vite.dev' },
-    pt: { label: 'Português', link: 'https://pt.vite.dev' },
-    ko: { label: '한국어', link: 'https://ko.vite.dev' },
-    de: { label: 'Deutsch', link: 'https://de.vite.dev' },
+    /*     zh: { label: '简体中文', link: 'https://cn.vite.dev' },
+        ja: { label: '日本語', link: 'https://ja.vite.dev' },
+        es: { label: 'Español', link: 'https://es.vite.dev' },
+        pt: { label: 'Português', link: 'https://pt.vite.dev' },
+        ko: { label: '한국어', link: 'https://ko.vite.dev' },
+        de: { label: 'Deutsch', link: 'https://de.vite.dev' }, */
   },
 
   themeConfig: {
@@ -565,7 +565,7 @@ export default defineConfig({
 
 Vite это новый вид инструментария для сборки фронтендов, который значительно улучшает опыт разработки. Он состоит из двух основных частей:
 
-- Сервер разработки, который обслуживает ваши исходные файлы через [собственные модули ES](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) с [богатыми встроенными функциями](https://vite.dev/guide/features.html) и удивительно быструю [горячую замену модулей (HMR)](https://vite.dev/guide/features.html#hot-module-replacement).
+- Сервер разработки, который обслуживает ваши исходные файлы через [собственные модули ES](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Modules) с [богатыми встроенными функциями](https://vite.dev/guide/features.html) и удивительно быструю [горячую замену модулей (HMR)](https://vite.dev/guide/features.html#hot-module-replacement).
 
 - [Команда сборки](https://vite.dev/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенным на выдачу высокооптимизированных статических ресурсов для продакшена.
 
