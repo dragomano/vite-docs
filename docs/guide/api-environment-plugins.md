@@ -31,11 +31,19 @@ Environment API находится на стадии релиз-кандидат
 
 ## Регистрация новых окружений с помощью хуков {#registering-new-environments-using-hooks}
 
-Плагины могут добавлять новые окружения в хуке `config` (например, чтобы иметь отдельный граф модулей для [RSC](https://react.dev/blog/2023/03/22/react-labs-what-we-have-been-working-on-march-2023#react-server-components)):
+Плагины могут добавлять новые окружения в хуке `config`. Например, [поддержка RSC](/plugins/#vitejs-plugin-rsc) использует дополнительное окружение для создания отдельного графа модулей с условием `react-server`:
 
 ```ts
   config(config: UserConfig) {
-    config.environments.rsc ??= {}
+    return {
+      environments: {
+        rsc: {
+          resolve: {
+            conditions: ['react-server', ...defaultServerConditions],
+          },
+        },
+      },
+    }
   }
 ```
 
@@ -48,8 +56,15 @@ Environment API находится на стадии релиз-кандидат
 
 ```ts
   configEnvironment(name: string, options: EnvironmentOptions) {
+    // добавляем условие `workerd` к окружению RSC
     if (name === 'rsc') {
-      options.resolve.conditions = // ...
+      return {
+        resolve: {
+          conditions: ['workerd'],
+        },
+      }
+    }
+  }
 ```
 
 ## Хук `hotUpdate` {#the-hotupdate-hook}

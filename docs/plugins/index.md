@@ -24,6 +24,16 @@ Vite стремится обеспечить поддержку распрост
 
 Заменяет Babel на SWC во время разработки. Во время сборок для продакшена применяются SWC и esbuild при работе с плагинами, а в остальных случаях — только esbuild. Для крупных проектов, не требующих нестандартных расширений React, первоначальный запуск и горячая замена модулей (HMR) могут быть значительно быстрее.
 
+### [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
+
+Vite поддерживает [React Server Components (RSC)](https://react.dev/reference/rsc/server-components) через плагин. Он использует [Environment API](/guide/api-environment) для предоставления низкоуровневых примитивов, которые фреймворки React могут использовать для интеграции функций RSC. Вы можете попробовать минимальное автономное приложение RSC с помощью:
+
+```bash
+npm create vite@latest -- --template rsc
+```
+
+Ознакомьтесь с [документацией плагина](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc), чтобы узнать больше.
+
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
 Обеспечивает поддержку устаревших браузеров в продакшен-сборке.

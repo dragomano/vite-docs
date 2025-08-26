@@ -213,6 +213,7 @@ HTML-файлы занимают [центральное место](/guide/#ind
 - Поддержка Vue JSX через [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - Поддержка React через [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 - Поддержка React с использованием SWC через [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
+- Поддержка [React Server Components (RSC)](https://react.dev/reference/rsc/server-components) через [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
 
 Посмотрите [Руководство по плагинам](../plugins/) для получения дополнительной информации.
 
