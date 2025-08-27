@@ -99,11 +99,6 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: '@vite_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
     [
-      'script', {
-        src: 'https://app.secureprivacy.ai/script/68af1234e27c66f648484003.js'
-      }
-    ],
-    [
       'script',
       {},
       `(function(c,l,a,r,i,t,y){
