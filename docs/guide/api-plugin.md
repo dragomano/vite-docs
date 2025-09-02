@@ -179,7 +179,7 @@ console.log(msg)
 ### `config`
 
 - **Тип:** `(config: UserConfig, env: { mode: string, command: string }) => UserConfig | null | void`
-- **Вид:** `async`, `sequential`
+- **Режим работы:** `async`, `sequential`
 
   Измените конфигурацию Vite перед её разрешением. Хук получает необработанную пользовательскую конфигурацию (опции CLI, объединённые с файлом конфигурации) и текущую среду конфигурации, которая предоставляет используемые `mode` и `command`. Он может вернуть частичный объект конфигурации, который будет глубоко объединён с существующей конфигурацией, или напрямую изменить конфигурацию (если стандартное объединение не может достичь желаемого результата).
 
@@ -251,7 +251,7 @@ console.log(msg)
 ### `configureServer`
 
 - **Тип:** `(server: ViteDevServer) => (() => void) | void | Promise<(() => void) | void>`
-- **Вид:** `async`, `sequential`
+- **Режим работы:** `async`, `sequential`
 - **Смотрите также:** [ViteDevServer](./api-javascript#vitedevserver)
 
   Хук для настройки dev-сервера. Наиболее распространенный случай использования — добавление пользовательских промежуточных слоев к внутреннему [connect](https://github.com/senchalabs/connect) приложению:
@@ -311,7 +311,7 @@ console.log(msg)
 ### `configurePreviewServer`
 
 - **Тип:** `(server: PreviewServer) => (() => void) | void | Promise<(() => void) | void>`
-- **Вид:** `async`, `sequential`
+- **Режим работы:** `async`, `sequential`
 - **Смотрите также:** [PreviewServer](./api-javascript#previewserver)
 
   То же самое, что и [`configureServer`](/guide/api-plugin.html#configureserver), но для сервера предварительного просмотра. Аналогично `configureServer`, хук `configurePreviewServer` вызывается до установки других промежуточных слоев. Если вы хотите внедрить промежуточный слой **после** других промежуточных слоев, вы можете вернуть функцию из `configurePreviewServer`, которая будет вызвана после установки внутренних промежуточных слоев:
@@ -333,7 +333,7 @@ console.log(msg)
 ### `transformIndexHtml`
 
 - **Тип:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`
-- **Вид:** `async`, `sequential`
+- **Режим работы:** `async`, `sequential`
 
   Специальный хук для преобразования файлов HTML-точек входа, таких как `index.html`. Хук получает текущую строку HTML и контекст преобразования. Контекст предоставляет экземпляр [`ViteDevServer`](./api-javascript#vitedevserver) во время разработки и выводной пакет Rollup во время сборки.
 
@@ -404,6 +404,7 @@ console.log(msg)
 ### `handleHotUpdate`
 
 - **Тип:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
+- **Режим работы:** `async`, `sequential`
 - **Смотрите также:** [HMR API](./api-hmr)
 
   Выполняет пользовательскую обработку обновлений HMR. Хук получает объект контекста со следующей сигнатурой:

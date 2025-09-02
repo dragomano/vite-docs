@@ -70,6 +70,7 @@ Environment API находится на стадии релиз-кандидат
 ## Хук `hotUpdate` {#the-hotupdate-hook}
 
 - **Тип:** `(this: { environment: DevEnvironment }, options: HotUpdateOptions) => Array<EnvironmentModuleNode> | void | Promise<Array<EnvironmentModuleNode> | void>`
+- **Режим работы:** `async`, `sequential`
 - **См. также:** [HMR API](./api-hmr)
 
 Хук `hotUpdate` позволяет плагинам выполнять пользовательскую обработку обновлений HMR для данного окружения. Когда файл изменяется, алгоритм HMR выполняется для каждого окружения последовательно в соответствии с порядком в `server.environments`, поэтому хук `hotUpdate` будет вызываться несколько раз. Хук получает объект контекста со следующей сигнатурой:
