@@ -551,6 +551,41 @@ normalizePath('foo/bar') // 'foo/bar'
 
 Vite предоставляет функцию [`createFilter`](https://github.com/rollup/plugins/tree/master/packages/pluginutils#createfilter) из `@rollup/pluginutils`, чтобы побудить специфичные для Vite плагины и интеграции использовать стандартный шаблон фильтрации include/exclude, который также используется в Vite Core.
 
+### Фильтры хуков {#hook-filters}
+
+Rolldown ввёл [функцию фильтрации хуков](https://rolldown.rs/plugins/hook-filters), чтобы уменьшить накладные расходы на взаимодействие между средами выполнения Rust и JavaScript. Эта функция позволяет плагинам указывать шаблоны, определяющие, когда должны вызываться хуки, улучшая производительность за счёт избежания ненужных вызовов.
+
+Это также поддерживается в Rollup 4.38.0+ и Vite 6.3.0+. Чтобы сделать ваш плагин обратно совместимым со старыми версиями, убедитесь, что вы также запускаете фильтр внутри обработчиков хуков.
+
+```js
+export default function myPlugin() {
+  const jsFileRegex = /\.js$/
+
+  return {
+    name: 'my-plugin',
+    // Пример: вызывать transform только для .js файлов
+    transform: {
+      filter: {
+        id: jsFileRegex,
+      },
+      handler(code, id) {
+        // Дополнительная проверка для обратной совместимости
+        if (!jsFileRegex.test(id)) return null
+
+        return {
+          code: transformCode(code),
+          map: null,
+        }
+      },
+    },
+  }
+}
+```
+
+::: tip
+[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) экспортирует некоторые утилиты для фильтров хуков, такие как `exactRegex` и `prefixRegex`.
+:::
+
 ## Связь клиент-сервер {#client-server-communication}
 
 Начиная с Vite 2.9, мы предоставляем некоторые утилиты для плагинов, чтобы помочь в обработке связи с клиентами.
