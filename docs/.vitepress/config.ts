@@ -267,6 +267,10 @@ export default defineConfig({
           { text: 'Блог', link: '/blog' },
           { text: 'Релизы', link: '/releases' },
           {
+            text: 'Документальный фильм о Vite',
+            link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
+          },
+          {
             items: [
               {
                 text: 'Bluesky',
