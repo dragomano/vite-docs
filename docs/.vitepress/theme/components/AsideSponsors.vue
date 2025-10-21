@@ -1,14 +1,14 @@
 <template>
   <a
     class="viteconf"
-    href="https://viteconf.org/?utm=vite-sidebar"
+    href="https://www.youtube.com/playlist?list=PLqGQbXn_GDmkJaoykvHCUmXUPjhgH2bVr"
     target="_blank"
   >
     <img width="22" height="22" src="../../../images/viteconf.svg" alt="Логотип ViteConf" />
     <span>
       <p class="extra-info">Строим вместе</p>
       <p class="heading">ViteConf 2025</p>
-      <p class="extra-info">Первый раз вживую!</p>
+      <p class="extra-info">Посмотреть записи!</p>
     </span>
   </a>
 </template>

@@ -7,12 +7,12 @@ import HeroDiagram from './HeroDiagram.vue'
     <div class="container">
       <!-- ViteConf 2025 Button -->
       <a
-        href="https://viteconf.org/24/replay?utm=vite"
+        href="https://www.youtube.com/playlist?list=PLqGQbXn_GDmkJaoykvHCUmXUPjhgH2bVr"
         class="hero__pill"
         target="_blank"
       >
         <img src="../../../../../images/viteconf.svg" alt="Логотип Viteconf" width="20" height="20" />
-        <span>Доклады на ViteConf 2025</span>
+        <span>Записи выступлений на ViteConf 2025</span>
       </a>
 
       <!-- Heading -->
