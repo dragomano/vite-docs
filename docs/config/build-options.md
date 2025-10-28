@@ -183,6 +183,71 @@ export default defineConfig({
 })
 ```
 
+## build.license
+
+- **Тип:** `boolean | { fileName?: string }`
+- **По умолчанию:** `false`
+
+Когда установлено в `true`, сборка сгенерирует файл `.vite/license.md`, который включает лицензии всех собранных зависимостей. Его можно разместить для отображения и подтверждения зависимостей, используемых приложением. Когда передаётся `fileName`, он будет использоваться как имя файла лицензии относительно `outDir`. Пример вывода может выглядеть так:
+
+```md
+# Licenses
+
+The app bundles dependencies which contain the following licenses:
+
+## dep-1 - 1.2.3 (CC0-1.0)
+
+CC0 1.0 Universal
+
+...
+
+## dep-2 - 4.5.6 (MIT)
+
+MIT License
+
+...
+```
+
+Если `fileName` заканчивается на `.json`, вместо этого будут сгенерированы сырые метаданные JSON, который можно использовать для дальнейшей обработки. Например:
+
+```json
+[
+  {
+    "name": "dep-1",
+    "version": "1.2.3",
+    "identifier": "CC0-1.0",
+    "text": "CC0 1.0 Universal\n\n..."
+  },
+  {
+    "name": "dep-2",
+    "version": "4.5.6",
+    "identifier": "MIT",
+    "text": "MIT License\n\n..."
+  }
+]
+```
+
+::: tip
+Если вы хотите сослаться на файл лицензии в собранном коде, вы можете использовать `build.rollupOptions.output.banner`, чтобы вставить комментарий в начало файлов. Например:
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+    rollupOptions: {
+      output: {
+        banner:
+          '/* See licenses of bundled dependencies at https://example.com/license.md */',
+      },
+    },
+  },
+})
+```
+
+:::
+
 ## build.manifest
 
 - **Тип:** `boolean | string`
