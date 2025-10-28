@@ -92,8 +92,6 @@ export default defineConfig({
 
 Включите TLS + HTTP/2. Значение является [объектом `options`](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener), переданным в `https.createServer()`.
 
-Обратите внимание, что это понижает уровень только до TLS, если также используется опция [`server.proxy`](#server-proxy).
-
 Необходим действительный сертификат. Для базовой настройки вы можете добавить [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) в плагины проекта, который автоматически создаст и кэширует самоподписанный сертификат. Однако мы рекомендуем создавать свои собственные сертификаты.
 
 ## server.open
