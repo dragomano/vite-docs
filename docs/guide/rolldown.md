@@ -345,4 +345,4 @@ const plugin = {
 }
 ```
 
-Это связано с тем, что [Rolldown поддерживает модули, отличные от JavaScript](https://rolldown.rs/guide/in-depth/module-types), и определяет тип модуля по расширению файла, если он не указан явно.
+Это связано с тем, что [Rolldown поддерживает модули, отличные от JavaScript](https://rolldown.rs/in-depth/module-types), и определяет тип модуля по расширению файла, если он не указан явно.
