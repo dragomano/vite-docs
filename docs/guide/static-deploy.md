@@ -63,7 +63,7 @@ $ npm run preview
 
 2. Перейдите к настройкам вашего репозитория на странице конфигурации GitHub Pages и выберите «GitHub Actions» в качестве источника развёртывания. Это приведёт вас к созданию рабочего процесса, который собирает и развёртывает ваш проект. Пример рабочего процесса, который устанавливает зависимости и собирает с помощью npm:
 
-   <<< ./static-deploy-github-pages.yaml#content
+   <<< ./static-deploy-github-pages.yaml#content [.github/workflows/deploy.yml]
 
 ## GitLab Pages и GitLab CI {#gitlab-pages-and-gitlab-ci}
 
