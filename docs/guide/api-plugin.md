@@ -388,6 +388,9 @@ console.log(msg)
 
   interface HtmlTagDescriptor {
     tag: string
+    /**
+     * значения атрибутов будут экранированы автоматически, если это необходимо
+     */
     attrs?: Record<string, string | boolean>
     children?: string | HtmlTagDescriptor[]
     /**
