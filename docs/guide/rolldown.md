@@ -36,7 +36,7 @@ Rolldown — это современный высокопроизводител�
 
 ```json
 {
-  "dependencies": {
+  "devDependencies": {
     "vite": "^7.0.0" // [!code --]
     "vite": "npm:rolldown-vite@latest" // [!code ++]
   }
