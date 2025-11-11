@@ -338,6 +338,4 @@ Vite стремится быть полностью пригодным для и
 4. Отметьте **Release** и нажмите **Approve and deploy**.
 5. Пакет начнёт публиковаться в npm.
 
-## Вклад в перевод документации
-
-Чтобы добавить новый язык в документацию Vite, смотрите [`vite-docs-template`](https://github.com/tony19/vite-docs-template/blob/main/.github/CONTRIBUTING.md).
+Подробнее о том, как Vite выпускает новые версии и как часто это происходит, можно прочитать в разделе [Релизы](https://vite-docs.ru/releases).
