@@ -31,7 +31,7 @@ $ npm run build
 
 По умолчанию выходные данные сборки будут помещены в `dist`. Вы можете развернуть эту папку `dist` на любой из предпочитаемых вами платформе.
 
-### Тестирование приложения локально {#testing-the-app-locally}
+### Локальное тестирование приложения {#testing-the-app-locally}
 
 После того как вы собрали приложение, вы можете протестировать его локально, выполнив команду `npm run preview`.
 
@@ -55,13 +55,25 @@ $ npm run preview
 
 ## GitHub Pages {#github-pages}
 
-1. Установите правильное значение `base` в `vite.config.js`.
+1. **Обновите конфигурацию Vite**
+
+   Установите правильное значение `base` в `vite.config.js`.
 
    Если вы развёртываете на `https://<USERNAME>.github.io/` или на пользовательском домене через GitHub Pages (например, `www.example.com`), установите `base` в `'/'`. В качестве альтернативы, вы можете удалить `base` из конфигурации, так как по умолчанию оно равно `'/'`.
 
    Если вы развёртываете на `https://<USERNAME>.github.io/<REPO>/` (например, ваш репозиторий находится по адресу `https://github.com/<USERNAME>/<REPO>`), тогда установите `base` в `'/<REPO>/'`.
 
-2. Перейдите к настройкам вашего репозитория на странице конфигурации GitHub Pages и выберите «GitHub Actions» в качестве источника развёртывания. Это приведёт вас к созданию рабочего процесса, который собирает и развёртывает ваш проект. Пример рабочего процесса, который устанавливает зависимости и собирает с помощью npm:
+2. **Включите GitHub Pages**
+
+   В вашем репозитории перейдите в **Settings → Pages**. В разделе **Build and deployment** откройте выпадающее меню **Source** и выберите **GitHub Actions**.
+
+   GitHub теперь сам соберёт и опубликует ваш сайт с помощью [сценария](https://docs.github.com/ru/actions/concepts/workflows-and-actions/workflows) GitHub Actions. Это необходимо, потому что для Vite сайт нужно сначала собрать.
+
+3. **Создайте файл сценария**
+
+   Создайте новый файл в вашем репозитории по пути `.github/workflows/deploy.yml`. Вы также можете нажать на **«create your own»** на предыдущем шаге, что сгенерирует для вас заготовку сценария.
+
+   Вот пример файла, который при каждом пуше изменений в ветку `main` устанавливает зависимости с помощью npm, собирает сайт и разворачивает его:
 
    <<< ./static-deploy-github-pages.yaml#content [.github/workflows/deploy.yml]
 
@@ -289,7 +301,7 @@ $ npx wrangler pages deploy distwrangler pages deploy dist
 
 ## Хостинг статических сайтов Kinsta {#kinsta-static-site-hosting}
 
-Разверните свой статический сайт, используя [Kinsta](https://kinsta.com/static-site-hosting/) и следуя этим [инструкциям](https://kinsta.com/docs/react-vite-example/).
+Разверните свой статический сайт, используя [Kinsta](https://kinsta.com/static-site-hosting/) и следуя этим [инструкциям](https://kinsta.com/docs/static-site-hosting/static-site-quick-start/react-static-site-examples/#react-with-vite).
 
 ## Хостинг статических сайтов xmit {#xmit-static-site-hosting}
 
@@ -301,4 +313,4 @@ $ npx wrangler pages deploy distwrangler pages deploy dist
 
 Zephyr использует подход, отличный от других облачных провайдеров. Он интегрируется непосредственно с процессом сборки Vite, поэтому каждый раз, когда вы собираете или запускаете сервер разработки для вашего приложения, оно автоматически развёртывается с помощью Zephyr Cloud.
 
-Следуйте инструкциям в [руководстве по развёртыванию Vite](https://docs.zephyr-cloud.io/recipes/react-vite), чтобы начать.
+Следуйте инструкциям в [руководстве по развёртыванию Vite](https://docs.zephyr-cloud.io/bundlers/vite), чтобы начать.
