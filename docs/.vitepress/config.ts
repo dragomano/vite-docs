@@ -8,7 +8,6 @@ import {
   groupIconVitePlugin,
 } from 'vitepress-plugin-group-icons'
 import llmstxt from 'vitepress-plugin-llms'
-import type { PluginOption } from 'vite'
 import { markdownItImageSize } from 'markdown-it-image-size'
 import packageJson from '../../package.json' with { type: 'json' }
 import { buildEnd } from './buildEnd.config'
@@ -71,30 +70,6 @@ export default defineConfig({
     [
       'link',
       { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
-    ],
-    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    [
-      'link',
-      {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        crossorigin: 'true',
-      },
-    ],
-    [
-      'link',
-      {
-        rel: 'preload',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600&family=IBM+Plex+Mono:wght@400&display=swap',
-        as: 'style',
-      },
-    ],
-    [
-      'link',
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600&family=IBM+Plex+Mono:wght@400&display=swap',
-      },
     ],
     inlineScript('banner.js'),
     ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
@@ -527,16 +502,34 @@ export default defineConfig({
       level: [2, 3],
     },
   },
-  transformPageData(pageData) {
-    const canonicalUrl = `${ogUrl}/${pageData.relativePath}`
-      .replace(/\/index\.md$/, '/')
-      .replace(/\.md$/, '')
-    pageData.frontmatter.head ??= []
-    pageData.frontmatter.head.unshift(
-      ['link', { rel: 'canonical', href: canonicalUrl }],
-      ['meta', { property: 'og:title', content: pageData.title }],
-    )
-    return pageData
+  transformHead(ctx) {
+    const path = ctx.page.replace(/(^|\/)index\.md$/, '$1').replace(/\.md$/, '')
+
+    if (path !== '404') {
+      const canonicalUrl = path ? `${ogUrl}/${path}` : ogUrl
+      ctx.head.push(
+        ['link', { rel: 'canonical', href: canonicalUrl }],
+        ['meta', { property: 'og:title', content: ctx.pageData.title }],
+      )
+    }
+
+    // For the landing page, move the google font links to the top for better performance
+    if (path === '') {
+      const googleFontLinks: HeadConfig[] = []
+      for (let i = 0; i < ctx.head.length; i++) {
+        const tag = ctx.head[i]
+        if (
+          tag[0] === 'link' &&
+          (tag[1]?.href?.includes('fonts.googleapis.com') ||
+            tag[1]?.href?.includes('fonts.gstatic.com'))
+        ) {
+          ctx.head.splice(i, 1)
+          googleFontLinks.push(tag)
+          i--
+        }
+      }
+      ctx.head.unshift(...googleFontLinks)
+    }
   },
   markdown: {
     codeTransformers: [transformerTwoslash()],
@@ -585,7 +578,7 @@ Vite это новый вид инструментария для сборки �
 - [Команда сборки](https://vite.dev/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенным на выдачу высокооптимизированных статических ресурсов для продакшена.
 
 Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite.dev/guide/api-plugin.html) и [JavaScript API](https://vite.dev/guide/api-javascript.html) с полной поддержкой типизации.`,
-      }) as PluginOption,
+      }),
     ],
     optimizeDeps: {
       include: [
