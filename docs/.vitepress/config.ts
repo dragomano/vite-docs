@@ -595,6 +595,9 @@ Vite это новый вид инструментария для сборки �
         'gsap/dist/MotionPathPlugin',
       ],
     },
+    define: {
+      __VITE_VERSION__: JSON.stringify(viteVersion),
+    },
   },
   buildEnd,
 })
