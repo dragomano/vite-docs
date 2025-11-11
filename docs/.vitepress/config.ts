@@ -10,7 +10,11 @@ import {
 import llmstxt from 'vitepress-plugin-llms'
 import type { PluginOption } from 'vite'
 import { markdownItImageSize } from 'markdown-it-image-size'
+import packageJson from '../../package.json' with { type: 'json' }
 import { buildEnd } from './buildEnd.config'
+
+const viteVersion = packageJson.devDependencies.vite.replace(/^\^/, '')
+const viteMajorVersion = +viteVersion.split('.')[0]
 
 const ogDescription = 'Инструментарий для фронтенда нового поколения'
 const ogImage = 'https://vite-docs.ru/og-image.jpg'
@@ -18,36 +22,27 @@ const ogTitle = 'Vite по-русски'
 const ogUrl = 'https://vite-docs.ru/'
 
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
-  const oldVersions: DefaultTheme.NavItemWithLink[] = [
-    {
-      text: 'Документация Vite 6',
-      link: 'https://v6.vite.dev',
-    },
-    {
-      text: 'Документация Vite 5',
-      link: 'https://v5.vite.dev',
-    },
-    {
-      text: 'Документация Vite 4',
-      link: 'https://v4.vite.dev',
-    },
-    {
-      text: 'Документация Vite 3',
-      link: 'https://v3.vite.dev',
-    },
-    {
-      text: 'Документация Vite 2',
-      link: 'https://v2.vite.dev',
-    },
-  ]
+  const links: DefaultTheme.NavItemWithLink[] = []
 
-  return [
-    {
-      text: 'Документация Vite 7 (релиз)',
-      link: 'https://vite.dev',
-    },
-    ...oldVersions,
-  ]
+  links.push({
+    text: 'Документация в разработке',
+    link: 'https://main.vite.dev',
+  })
+
+  links.push({
+    text: `Документация Vite ${viteMajorVersion} (релиз)`,
+    link: 'https://vite.dev',
+  })
+
+  // Create version links from v2 onwards
+  for (let i = viteMajorVersion - 1; i >= 2; i--) {
+    links.push({
+      text: `Документация Vite ${i}`,
+      link: `https://v${i}.vite.dev`,
+    })
+  }
+
+  return links
 })()
 
 function inlineScript(file: string): HeadConfig {
@@ -65,6 +60,7 @@ export default defineConfig({
   lang: 'ru',
   title: `Vite по-русски`,
   description: 'Инструментарий для фронтенда нового поколения',
+  cleanUrls: true,
   //base: '/vite-docs/',
   sitemap: {
     hostname: 'https://vite-docs.ru/'
@@ -125,12 +121,6 @@ export default defineConfig({
   locales: {
     root: { label: 'Русский' },
     en: { label: 'English', link: 'https://vite.dev' },
-    /*     zh: { label: '简体中文', link: 'https://cn.vite.dev' },
-        ja: { label: '日本語', link: 'https://ja.vite.dev' },
-        es: { label: 'Español', link: 'https://es.vite.dev' },
-        pt: { label: 'Português', link: 'https://pt.vite.dev' },
-        ko: { label: '한국어', link: 'https://ko.vite.dev' },
-        de: { label: 'Deutsch', link: 'https://de.vite.dev' }, */
   },
 
   themeConfig: {
@@ -300,21 +290,25 @@ export default defineConfig({
                 text: 'DEV Community',
                 link: 'https://dev.to/t/vite',
               },
-              {
-                text: 'Журнал изменений',
-                link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
-              },
-              {
-                text: 'Сотрудничество',
-                link: 'https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md',
-              },
             ],
           },
         ],
       },
       {
-        text: 'Версии',
-        items: versionLinks,
+        text: `v${viteVersion}`,
+        items: [
+          {
+            text: 'Журнал изменений',
+            link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
+          },
+          {
+            text: 'Сотрудничество',
+            link: 'https://github.com/vitejs/vite/blob/main/CONTRIBUTING.md',
+          },
+          {
+            items: versionLinks,
+          },
+        ],
       },
     ],
 
@@ -393,7 +387,7 @@ export default defineConfig({
               link: '/guide/rolldown',
             },
             {
-              text: 'Переход с версии v6',
+              text: `Переход с версии v${viteMajorVersion - 1}`,
               link: '/guide/migration',
             },
             {
