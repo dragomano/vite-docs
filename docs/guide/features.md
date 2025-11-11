@@ -789,6 +789,42 @@ import MyWorker from './worker?worker&url'
 Не разрешайте `data:` для [`script-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src). Это позволит внедрить произвольные скрипты.
 :::
 
+## Лицензия {#license}
+
+Vite может сгенерировать файл со всеми лицензиями зависимостей, использованных в сборке, с помощью опции [`build.license`](/config/build-options.md#build-license). Его можно разместить для отображения и подтверждения зависимостей, используемых приложением.
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+  },
+})
+```
+
+Это сгенерирует файл `.vite/license.md` с выводом, который может выглядеть так:
+
+```md
+# Licenses
+
+The app bundles dependencies which contain the following licenses:
+
+## dep-1 - 1.2.3 (CC0-1.0)
+
+CC0 1.0 Universal
+
+...
+
+## dep-2 - 4.5.6 (MIT)
+
+MIT License
+
+...
+```
+
+Чтобы обслуживать файл по другому пути, вы можете передать, например, `{ fileName: 'license.md' }`, чтобы он обслуживался по адресу `https://example.com/license.md`. Подробнее см. в документации по [`build.license`](/config/build-options.md#build-license).
+
 ## Оптимизация сборки {#build-optimizations}
 
 > Функции, перечисленные ниже, автоматически применяются в процессе сборки, и нет необходимости в их явной настройке, если только вы не хотите их отключить.
