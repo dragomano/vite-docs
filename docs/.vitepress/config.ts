@@ -532,7 +532,27 @@ export default defineConfig({
     }
   },
   markdown: {
-    codeTransformers: [transformerTwoslash()],
+    codeTransformers: [
+      transformerTwoslash(),
+      // add `style:*` support
+      {
+        root(hast) {
+          const meta = this.options.meta?.__raw
+            ?.split(' ')
+            .find((m) => m.startsWith('style:'))
+          if (meta) {
+            const style = meta.slice('style:'.length)
+            const rootPre = hast.children.find(
+              (n): n is typeof n & { type: 'element'; tagName: 'pre' } =>
+                n.type === 'element' && n.tagName === 'pre',
+            )
+            if (rootPre) {
+              rootPre.properties.style += '; ' + style
+            }
+          }
+        },
+      },
+    ],
     languages: ['js', 'jsx', 'ts', 'tsx', 'json'],
     config(md) {
       md.use(groupIconMdPlugin, {
