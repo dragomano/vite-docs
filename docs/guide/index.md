@@ -106,6 +106,8 @@ $ deno init --npm vite my-vue-app --template vue
 
 Используйте `.` в качестве имени проекта для создания шаблона в текущей директории.
 
+Используйте флаг `--no-interactive` для создания проекта без интерактивных запросов.
+
 ::::
 
 <YouTubeVideo videoId="D13wKzkQnMA" />
