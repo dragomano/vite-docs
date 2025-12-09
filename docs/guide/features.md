@@ -53,6 +53,10 @@ export type { T }
 
 ### Параметры компилятора TypeScript {#typescript-compiler-options}
 
+Vite учитывает некоторые опции из `tsconfig.json` и автоматически устанавливает соответствующие параметры esbuild. Для каждого файла Vite берёт `tsconfig.json`, расположенный в ближайшей родительской директории. Если в этом `tsconfig.json` есть поле [`references`](https://www.typescriptlang.org/tsconfig/#references), Vite будет использовать тот из указанных конфигов, который удовлетворяет полям `include` и `exclude`.
+
+Когда одна и та же опция задана и в конфигурации Vite, и в `tsconfig.json`, приоритет имеет значение из конфигурации Vite.
+
 Некоторые поля конфигурации в секции `compilerOptions` в `tsconfig.json` требуют особого внимания.
 
 #### `isolatedModules`
