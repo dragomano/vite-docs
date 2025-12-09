@@ -1,0 +1,36 @@
+name: yuki-no-v8
+
+on:
+  schedule:
+    - cron: "0 0 * * 3" # Every Wednesday
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  yuki-no:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Gumball12/yuki-no@v1
+        with:
+          # GitHub token for authentication
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Upstream repository configuration
+          head-repo: https://github.com/vitejs/vite
+          head-repo-branch: main
+          labels: v8
+
+          # REQUIRED: Set this to a recent commit hash from vitejs/vite
+          # Yuki-no will only track commits after this hash.
+          # Using an old commit hash will cause the initial action run to be very slow
+          # as it processes each historical commit.
+          # (Subsequent runs are faster as they skip previously processed commits.)
+          track-from: 1804417e32d33dfb888482301e3778f9ddbbad70 # Replace with a recent commit hash from vitejs/vite
+
+          # Files to track (Glob patterns)
+          include: |
+            docs/**
+
+          # Enable release tracking
+          # When enabled, Yuki-no will track releases for each issue
+          # and add comments about release status.
+          release-tracking: false
