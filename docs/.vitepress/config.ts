@@ -25,12 +25,12 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
 
   links.push({
     text: 'Документация в разработке',
-    link: 'https://main.vite.dev',
+    link: '/next/',
   })
 
   links.push({
     text: `Документация Vite ${viteMajorVersion} (релиз)`,
-    link: 'https://vite.dev',
+    link: '/',
   })
 
   // Create version links from v2 onwards
@@ -53,6 +53,223 @@ function inlineScript(file: string): HeadConfig {
       'utf-8',
     ),
   ]
+}
+
+function getGuideSidebar(prefix: string = '') {
+  return [
+    {
+      text: 'Введение',
+      items: [
+        {
+          text: 'Начало работы',
+          link: `${prefix}/guide`,
+        },
+        {
+          text: 'Философия',
+          link: `${prefix}/guide/philosophy`,
+        },
+        {
+          text: 'Почему Vite',
+          link: `${prefix}/guide/why`,
+        },
+      ],
+    },
+    {
+      text: 'Руководство',
+      items: [
+        {
+          text: 'Возможности',
+          link: `${prefix}/guide/features`,
+        },
+        {
+          text: 'Консоль',
+          link: `${prefix}/guide/cli`,
+        },
+        {
+          text: 'Использование плагинов',
+          link: `${prefix}/guide/using-plugins`,
+        },
+        {
+          text: 'Предварительное объединение зависимостей',
+          link: `${prefix}/guide/dep-pre-bundling`,
+        },
+        {
+          text: 'Обработка статических ресурсов',
+          link: `${prefix}/guide/assets`,
+        },
+        {
+          text: 'Продакшен-сборка',
+          link: `${prefix}/guide/build`,
+        },
+        {
+          text: 'Развёртывание статического сайта',
+          link: `${prefix}/guide/static-deploy`,
+        },
+        {
+          text: 'Переменные окружения и режимы',
+          link: `${prefix}/guide/env-and-mode`,
+        },
+        {
+          text: 'Серверный рендеринг (SSR)',
+          link: `${prefix}/guide/ssr`,
+        },
+        {
+          text: 'Интеграция с бэкэндом',
+          link: `${prefix}/guide/backend-integration`,
+        },
+        {
+          text: 'Решение проблем',
+          link: `${prefix}/guide/troubleshooting`,
+        },
+        {
+          text: 'Производительность',
+          link: `${prefix}/guide/performance`,
+        },
+        {
+          text: 'Rolldown',
+          link: `${prefix}/guide/rolldown`,
+        },
+        {
+          text: `Переход с версии v${prefix === 'next' ? 7 : viteMajorVersion - 1}`,
+          link: `${prefix}/guide/migration`,
+        },
+        {
+          text: 'Критические изменения',
+          link: `${prefix}/changes`,
+        },
+      ],
+    },
+    {
+      text: 'Интерфейсы',
+      items: [
+        {
+          text: 'Plugin API',
+          link: `${prefix}/guide/api-plugin`,
+        },
+        {
+          text: 'HMR API',
+          link: `${prefix}/guide/api-hmr`,
+        },
+        {
+          text: 'JavaScript API',
+          link: `${prefix}/guide/api-javascript`,
+        },
+        {
+          text: 'Справочник по конфигурации',
+          link: `${prefix}/config`,
+        },
+      ],
+    },
+    {
+      text: 'Environment API',
+      items: [
+        {
+          text: 'Введение',
+          link: `${prefix}/guide/api-environment`,
+        },
+        {
+          text: 'Экземпляры окружения',
+          link: `${prefix}/guide/api-environment-instances`,
+        },
+        {
+          text: 'Плагины',
+          link: `${prefix}/guide/api-environment-plugins`,
+        },
+        {
+          text: 'Фреймворки',
+          link: `${prefix}/guide/api-environment-frameworks`,
+        },
+        {
+          text: 'Среды выполнения',
+          link: `${prefix}/guide/api-environment-runtimes`,
+        },
+      ],
+    },
+  ];
+}
+
+function getConfigSidebar(prefix: string = '') {
+  return [
+    {
+      text: 'Настройка',
+      items: [
+        {
+          text: 'Конфигурация Vite',
+          link: `${prefix}/config`,
+        },
+        {
+          text: 'Общие параметры',
+          link: `${prefix}/config/shared-options`,
+        },
+        {
+          text: 'Параметры сервера',
+          link: `${prefix}/config/server-options`,
+        },
+        {
+          text: 'Параметры сборки',
+          link: `${prefix}/config/build-options`,
+        },
+        {
+          text: 'Параметры сервера предварительного просмотра',
+          link: `${prefix}/config/preview-options`,
+        },
+        {
+          text: 'Параметры оптимизации зависимостей',
+          link: `${prefix}/config/dep-optimization-options`,
+        },
+        {
+          text: 'Параметры SSR',
+          link: `${prefix}/config/ssr-options`,
+        },
+        {
+          text: 'Параметры воркера',
+          link: `${prefix}/config/worker-options`,
+        },
+      ],
+    },
+  ];
+}
+
+function getChangesSidebar(prefix: string = '') {
+  return [
+    {
+      text: 'Критические изменения',
+      link: `${prefix}/changes`,
+    },
+    {
+      text: 'Текущие',
+      items: [],
+    },
+    {
+      text: 'Будущие',
+      items: [
+        {
+          text: 'this.environment в хуках',
+          link: `${prefix}/changes/this-environment-in-hooks`,
+        },
+        {
+          text: 'Хук hotUpdate плагина HMR',
+          link: `${prefix}/changes/hotupdate-hook`,
+        },
+        {
+          text: 'Переход на API для каждой среды',
+          link: `${prefix}/changes/per-environment-apis`,
+        },
+        {
+          text: 'SSR с использованием ModuleRunner API',
+          link: `${prefix}/changes/ssr-using-modulerunner`,
+        },
+        {
+          text: 'Общие плагины во время сборки',
+          link: `${prefix}/changes/shared-plugins-during-build`,
+        },
+      ],
+    },
+    {
+      text: 'Прошлые',
+      items: [],
+    },
+  ];
 }
 
 export default defineConfig({
@@ -222,15 +439,15 @@ export default defineConfig({
     },
 
     nav: [
-      { text: 'Руководство', link: '/guide/', activeMatch: '/guide/' },
-      { text: 'Конфигурация', link: '/config/', activeMatch: '/config/' },
-      { text: 'Плагины', link: '/plugins/', activeMatch: '/plugins/' },
+      { text: 'Руководство', link: (page) => page.relativePath.startsWith('next/') ? '/next/guide/' : '/guide/', activeMatch: '/guide/' },
+      { text: 'Конфигурация', link: (page) => page.relativePath.startsWith('next/') ? '/next/config/' : '/config/', activeMatch: '/config/' },
+      { text: 'Плагины', link: (page) => page.relativePath.startsWith('next/') ? '/next/plugins/' : '/plugins/', activeMatch: '/plugins/' },
       {
         text: 'Ресурсы',
         items: [
           { text: 'Команда', link: '/team' },
           { text: 'Блог', link: '/blog' },
-          { text: 'Релизы', link: '/releases' },
+          { text: 'Релизы', link: (page) => page.relativePath.startsWith('next/') ? '/next/releases' : '/releases' },
           {
             text: 'Документальный фильм о Vite',
             link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
@@ -288,214 +505,12 @@ export default defineConfig({
     ],
 
     sidebar: {
-      '/guide/': [
-        {
-          text: 'Введение',
-          items: [
-            {
-              text: 'Начало работы',
-              link: '/guide/',
-            },
-            {
-              text: 'Философия',
-              link: '/guide/philosophy',
-            },
-            {
-              text: 'Почему Vite',
-              link: '/guide/why',
-            },
-          ],
-        },
-        {
-          text: 'Руководство',
-          items: [
-            {
-              text: 'Возможности',
-              link: '/guide/features',
-            },
-            {
-              text: 'Консоль',
-              link: '/guide/cli',
-            },
-            {
-              text: 'Использование плагинов',
-              link: '/guide/using-plugins',
-            },
-            {
-              text: 'Предварительное объединение зависимостей',
-              link: '/guide/dep-pre-bundling',
-            },
-            {
-              text: 'Обработка статических ресурсов',
-              link: '/guide/assets',
-            },
-            {
-              text: 'Продакшен-сборка',
-              link: '/guide/build',
-            },
-            {
-              text: 'Развёртывание статического сайта',
-              link: '/guide/static-deploy',
-            },
-            {
-              text: 'Переменные окружения и режимы',
-              link: '/guide/env-and-mode',
-            },
-            {
-              text: 'Серверный рендеринг (SSR)',
-              link: '/guide/ssr',
-            },
-            {
-              text: 'Интеграция с бэкэндом',
-              link: '/guide/backend-integration',
-            },
-            {
-              text: 'Решение проблем',
-              link: '/guide/troubleshooting',
-            },
-            {
-              text: 'Производительность',
-              link: '/guide/performance',
-            },
-            {
-              text: 'Rolldown',
-              link: '/guide/rolldown',
-            },
-            {
-              text: `Переход с версии v${viteMajorVersion - 1}`,
-              link: '/guide/migration',
-            },
-            {
-              text: 'Критические изменения',
-              link: '/changes/',
-            },
-          ],
-        },
-        {
-          text: 'Интерфейсы',
-          items: [
-            {
-              text: 'Plugin API',
-              link: '/guide/api-plugin',
-            },
-            {
-              text: 'HMR API',
-              link: '/guide/api-hmr',
-            },
-            {
-              text: 'JavaScript API',
-              link: '/guide/api-javascript',
-            },
-            {
-              text: 'Справочник по конфигурации',
-              link: '/config/',
-            },
-          ],
-        },
-        {
-          text: 'Environment API',
-          items: [
-            {
-              text: 'Введение',
-              link: '/guide/api-environment',
-            },
-            {
-              text: 'Экземпляры окружения',
-              link: '/guide/api-environment-instances',
-            },
-            {
-              text: 'Плагины',
-              link: '/guide/api-environment-plugins',
-            },
-            {
-              text: 'Фреймворки',
-              link: '/guide/api-environment-frameworks',
-            },
-            {
-              text: 'Среды выполнения',
-              link: '/guide/api-environment-runtimes',
-            },
-          ],
-        },
-      ],
-      '/config/': [
-        {
-          text: 'Настройка',
-          items: [
-            {
-              text: 'Конфигурация Vite',
-              link: '/config/',
-            },
-            {
-              text: 'Общие параметры',
-              link: '/config/shared-options',
-            },
-            {
-              text: 'Параметры сервера',
-              link: '/config/server-options',
-            },
-            {
-              text: 'Параметры сборки',
-              link: '/config/build-options',
-            },
-            {
-              text: 'Параметры сервера предварительного просмотра',
-              link: '/config/preview-options',
-            },
-            {
-              text: 'Параметры оптимизации зависимостей',
-              link: '/config/dep-optimization-options',
-            },
-            {
-              text: 'Параметры SSR',
-              link: '/config/ssr-options',
-            },
-            {
-              text: 'Параметры воркера',
-              link: '/config/worker-options',
-            },
-          ],
-        },
-      ],
-      '/changes/': [
-        {
-          text: 'Критические изменения',
-          link: '/changes/',
-        },
-        {
-          text: 'Текущие',
-          items: [],
-        },
-        {
-          text: 'Будущие',
-          items: [
-            {
-              text: 'this.environment в хуках',
-              link: '/changes/this-environment-in-hooks',
-            },
-            {
-              text: 'Хук hotUpdate плагина HMR',
-              link: '/changes/hotupdate-hook',
-            },
-            {
-              text: 'Переход на API для каждой среды',
-              link: '/changes/per-environment-apis',
-            },
-            {
-              text: 'SSR с использованием ModuleRunner API',
-              link: '/changes/ssr-using-modulerunner',
-            },
-            {
-              text: 'Общие плагины во время сборки',
-              link: '/changes/shared-plugins-during-build',
-            },
-          ],
-        },
-        {
-          text: 'Прошлые',
-          items: [],
-        },
-      ],
+      '/guide/': getGuideSidebar(),
+      '/config/': getConfigSidebar(),
+      '/changes/': getChangesSidebar(),
+      '/next/guide/': getGuideSidebar('next'),
+      '/next/config/': getConfigSidebar('next'),
+      '/next/changes/': getChangesSidebar('next'),
     },
 
     outline: {
@@ -581,7 +596,7 @@ export default defineConfig({
         },
       }),
       llmstxt({
-        ignoreFiles: ['blog/*', 'blog.md', 'index.md', 'team.md'],
+        ignoreFiles: ['blog/*', 'blog.md', 'index.md', 'team.md', 'next/*'],
         description: 'Инструмент сборки для веба',
         details: `\
 - 💡 Мгновенный запуск сервера
@@ -593,11 +608,11 @@ export default defineConfig({
 
 Vite это новый вид инструментария для сборки фронтендов, который значительно улучшает опыт разработки. Он состоит из двух основных частей:
 
-- Сервер разработки, который обслуживает ваши исходные файлы через [собственные модули ES](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Modules) с [богатыми встроенными функциями](https://vite.dev/guide/features.html) и удивительно быструю [горячую замену модулей (HMR)](https://vite.dev/guide/features.html#hot-module-replacement).
+- Сервер разработки, который обслуживает ваши исходные файлы через [собственные модули ES](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Modules) с [богатыми встроенными функциями](https://vite-docs.ru/guide/features.html) и удивительно быструю [горячую замену модулей (HMR)](https://vite-docs.ru/guide/features.html#hot-module-replacement).
 
-- [Команда сборки](https://vite.dev/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенным на выдачу высокооптимизированных статических ресурсов для продакшена.
+- [Команда сборки](https://vite-docs.ru/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенным на выдачу высокооптимизированных статических ресурсов для продакшена.
 
-Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite.dev/guide/api-plugin.html) и [JavaScript API](https://vite.dev/guide/api-javascript.html) с полной поддержкой типизации.`,
+Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite-docs.ru/guide/api-plugin.html) и [JavaScript API](https://vite-docs.ru/guide/api-javascript.html) с полной поддержкой типизации.`,
       }),
     ],
     optimizeDeps: {
