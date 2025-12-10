@@ -45,9 +45,9 @@ _23 июля 2022_ - посмотрите [анонс Vite 4.0](./announcing-vit
 
 ## Новая документация {#new-documentation}
 
-Перейдите на [vite.dev](https://vite.dev), чтобы насладиться новой документацией v3. Vite теперь использует новую [тему по умолчанию VitePress](https://vitepress.vuejs.org), с потрясающим тёмным режимом и другими функциями.
+Перейдите на [vite.dev](https://v3.vite.dev), чтобы насладиться новой документацией v3. Vite теперь использует новую [тему по умолчанию VitePress](https://vitepress.vuejs.org), с потрясающим тёмным режимом и другими функциями.
 
-[![Главная страница документации Vite](../images/v3-docs.webp)](https://vite.dev)
+[![Главная страница документации Vite](../images/v3-docs.webp)](https://v3.vite.dev)
 
 Несколько проектов в экосистеме уже мигрировали на нее (см. [Vitest](https://vitest.dev), [vite-plugin-pwa](https://vite-plugin-pwa.netlify.app/) и [VitePress](https://vitepress.vuejs.org/)).
 
