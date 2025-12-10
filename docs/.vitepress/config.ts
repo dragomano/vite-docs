@@ -7,7 +7,6 @@ import {
   groupIconMdPlugin,
   groupIconVitePlugin,
 } from 'vitepress-plugin-group-icons'
-import llmstxt from 'vitepress-plugin-llms'
 import { markdownItImageSize } from 'markdown-it-image-size'
 import packageJson from '../../package.json' with { type: 'json' }
 import { buildEnd } from './buildEnd.config'
@@ -594,25 +593,6 @@ export default defineConfig({
           firebase: 'vscode-icons:file-type-firebase',
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
         },
-      }),
-      llmstxt({
-        ignoreFiles: ['blog/*', 'blog.md', 'index.md', 'team.md', 'next/*'],
-        description: 'Инструмент сборки для веба',
-        details: `\
-- 💡 Мгновенный запуск сервера
-- ⚡️ Горячая замена модулей
-- 🛠️ Богатые возможности
-- 📦 Оптимизированная сборка
-- 🔩 Универсальный интерфейс плагинов
-- 🔑 Полностью типизированные API
-
-Vite это новый вид инструментария для сборки фронтендов, который значительно улучшает опыт разработки. Он состоит из двух основных частей:
-
-- Сервер разработки, который обслуживает ваши исходные файлы через [собственные модули ES](https://developer.mozilla.org/ru/docs/Web/JavaScript/Guide/Modules) с [богатыми встроенными функциями](https://vite-docs.ru/guide/features.html) и удивительно быструю [горячую замену модулей (HMR)](https://vite-docs.ru/guide/features.html#hot-module-replacement).
-
-- [Команда сборки](https://vite-docs.ru/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенным на выдачу высокооптимизированных статических ресурсов для продакшена.
-
-Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite-docs.ru/guide/api-plugin.html) и [JavaScript API](https://vite-docs.ru/guide/api-javascript.html) с полной поддержкой типизации.`,
       }),
     ],
     optimizeDeps: {
