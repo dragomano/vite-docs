@@ -125,7 +125,7 @@ function getGuideSidebar(prefix: string = '') {
           text: 'Производительность',
           link: `${prefix}/guide/performance`,
         },
-        {
+        prefix === 'next' ? {} : {
           text: 'Rolldown',
           link: `${prefix}/guide/rolldown`,
         },
