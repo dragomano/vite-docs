@@ -52,7 +52,7 @@ Vite 3 [был выпущен](./announcing-vite3.md) пять месяцев н
 - [日本語](https://ja.vite.dev/)
 - [Español](https://es.vite.dev/)
 
-Если вы недавно начали использовать Vite, мы рекомендуем прочитать следующие разделы руководства: [Почему Vite](/guide/why.html), [Начало работы](/guide/) и [Возможности](/guide/features). Если вы хотите участвовать, мы будем рады вашим вкладам на [GitHub](https://github.com/vitejs/vite). Почти [700 человек](https://github.com/vitejs/vite/graphs/contributors) уже внесли свой вклад в Vite. Следите за обновлениями в [Twitter](https://twitter.com/vite_js) и [Mastodon](https://webtoo.ls/@vite), или присоединяйтесь к сотрудничеству с другими в нашем [сообществе Discord](http://chat.vite.dev/).
+Если вы недавно начали использовать Vite, мы рекомендуем прочитать следующие разделы руководства: [Почему Vite](/guide/why.html), [Начало работы](/guide/) и [Возможности](/guide/features). Если вы хотите участвовать, мы будем рады вашим вкладам на [GitHub](https://github.com/vitejs/vite). Почти [700 человек](https://github.com/vitejs/vite/graphs/contributors) уже внесли свой вклад в Vite. Следите за обновлениями в [Twitter](https://twitter.com/vite_js) и [Mastodon](https://webtoo.ls/@vite), или сотрудничайте с другими в нашем [сообществе Discord](https://chat.vite.dev/).
 
 ## Поэкспериментируйте с Vite 4 {#start-playing-with-vite-4}
 

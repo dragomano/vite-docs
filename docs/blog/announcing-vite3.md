@@ -41,7 +41,7 @@ _23 июля 2022_ - посмотрите [анонс Vite 4.0](./announcing-vit
 - [Руководство по переходу](https://v3.vite.dev/guide/migration.html)
 - [Журнал изменений](https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md#300-2022-07-13)
 
-Если вы новичок в Vite, мы рекомендуем прочитать раздел [Почему Vite](/guide/why.html). Затем ознакомьтесь с разделами [Начало работы](/guide/) и [Возможности](/guide/features), чтобы увидеть, что Vite предлагает из коробки. Как обычно, мы приветствуем ваши вклады на [GitHub](https://github.com/vitejs/vite). Более [600 человек](https://github.com/vitejs/vite/graphs/contributors) уже помогли улучшить Vite. Следите за обновлениями в [Twitter](https://twitter.com/vite_js) или присоединяйтесь к обсуждениям с другими пользователями Vite на нашем [Discord-сервере](http://chat.vite.dev/).
+Если вы новичок в Vite, мы рекомендуем прочитать раздел [Почему Vite](/guide/why.html). Затем ознакомьтесь с разделами [Начало работы](/guide/) и [Возможности](/guide/features), чтобы увидеть, что Vite предлагает из коробки. Как обычно, мы приветствуем ваши вклады на [GitHub](https://github.com/vitejs/vite). Более [600 человек](https://github.com/vitejs/vite/graphs/contributors) уже помогли улучшить Vite. Следите за обновлениями в [Twitter](https://twitter.com/vite_js) или присоединяйтесь к обсуждениям с другими пользователями Vite на нашем [Discord-сервере](https://chat.vite.dev/).
 
 ## Новая документация {#new-documentation}
 

@@ -242,7 +242,7 @@ $ npx wrangler pages deploy distwrangler pages deploy dist
 
 3. Разверните на Surge, введя `surge dist`.
 
-Вы также можете развернуть на [пользовательском домене](http://surge.sh/help/adding-a-custom-domain), добавив `surge dist yourdomain.com`.
+Вы также можете развернуть на [пользовательском домене](https://surge.sh/help/adding-a-custom-domain), добавив `surge dist yourdomain.com`.
 
 ## Azure Static Web Apps {#azure-static-web-apps}
 
@@ -314,3 +314,7 @@ $ npx wrangler pages deploy distwrangler pages deploy dist
 Zephyr использует подход, отличный от других облачных провайдеров. Он интегрируется непосредственно с процессом сборки Vite, поэтому каждый раз, когда вы собираете или запускаете сервер разработки для вашего приложения, оно автоматически развёртывается с помощью Zephyr Cloud.
 
 Следуйте инструкциям в [руководстве по развёртыванию Vite](https://docs.zephyr-cloud.io/bundlers/vite), чтобы начать.
+
+## EdgeOne Pages
+
+Разверните свой статический сайт с помощью [EdgeOne Pages](https://edgeone.ai/products/pages), следуя этим [инструкциям](https://pages.edgeone.ai/document/vite).
