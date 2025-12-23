@@ -223,6 +223,30 @@ export default defineConfig({
 ]
 ```
 
+::: tip
+
+Если вы хотите добавить ссылку на файл лицензии в собранный код, вы можете использовать `build.rolldownOptions.output.postBanner`, чтобы вставить комментарий в начало файлов. Например:
+
+<!-- TODO: add a link for output.postBanner above to Rolldown's documentation -->
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+    rolldownOptions: {
+      output: {
+        postBanner:
+          '/* Смотрите лицензии включённых зависимостей по адресу https://example.com/license.md */',
+      },
+    },
+  },
+})
+```
+
+:::
+
 ## build.manifest
 
 - **Тип:** `boolean | string`
