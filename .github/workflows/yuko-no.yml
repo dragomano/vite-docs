@@ -16,15 +16,13 @@ jobs:
 
           # Upstream repository configuration
           head-repo: https://github.com/vitejs/vite
-          head-repo-branch: v7
-          labels: v7
 
           # REQUIRED: Set this to a recent commit hash from vitejs/vite
           # Yuki-no will only track commits after this hash.
           # Using an old commit hash will cause the initial action run to be very slow
           # as it processes each historical commit.
           # (Subsequent runs are faster as they skip previously processed commits.)
-          track-from: 317b3b272f9ef6faa647a51ab3b0768fecc1071d # Replace with a recent commit hash from vitejs/vite
+          track-from: 4a472418c02a0821900678778752c2d361bae3bd
 
           # Files to track (Glob patterns)
           include: |
