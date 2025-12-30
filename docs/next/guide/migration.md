@@ -372,7 +372,7 @@ const plugin = {
   - Хук `resolveImportMeta` [](https://github.com/rolldown/rolldown/issues/1010)
   - Хук `renderDynamicImport` [](https://github.com/rolldown/rolldown/issues/4532)
   - Хук `resolveFileUrl`
-- Функции `parseAst` / `parseAstAsync` объявлены устаревшими в пользу `parse` / `parseAsync`, у которых больше возможностей.
+- Функции `parseAst` / `parseAstAsync` объявлены устаревшими в пользу `parseSync` / `parse`, у которых больше возможностей.
 
 ## Переход с v6 {#migration-from-v6}
 
