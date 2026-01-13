@@ -347,13 +347,8 @@ const plugin = {
 Эти нарушающие совместимость изменения затронут лишь небольшое количество проектов:
 
 - **[TODO: будет исправлено до стабильного релиза]** https://github.com/rolldown/rolldown/issues/5726 (затрагивает nuxt, qwik)
-- **[TODO: будет исправлено до стабильного релиза]** https://github.com/rolldown/rolldown/issues/3403 (затрагивает sveltekit)
 - **[TODO: будет исправлено до стабильного релиза]** Устаревшие чанки теперь выводятся как файл-ресурс (asset), а не как чанк, из-за отсутствия функции предварительного emit-чанка [](https://github.com/rolldown/rolldown/issues/4034). Это означает, что опции чанков к ним не применяются, и в манифесте они не будут отображаться как чанки.
-- **[TODO: будет исправлено до стабильного релиза]** Кэш резолвера ломает редкие кейсы в Vitest [](https://github.com/vitest-dev/vitest/issues/8754#issuecomment-3441115032)
-- **[TODO: будет исправлено до стабильного релиза]** Резолвер не работает с Yarn PnP [](https://github.com/vitejs/rolldown-vite/issues/392)
-- **[TODO: будет исправлено до стабильного релиза]** Проблема с порядком нативных плагинов [](https://github.com/vitejs/rolldown-vite/issues/373)
 - **[TODO: будет исправлено до стабильного релиза]** Крайний случай с комментарием `@vite-ignore` [](https://github.com/vitejs/rolldown-vite/issues/426)
-- **[TODO: будет исправлено до стабильного релиза]** https://github.com/rolldown/rolldown/issues/3403
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) пока не поддерживаются [](https://github.com/vitejs/rolldown-vite/issues/365)
 - `define` не делит ссылку на объекты: если передать объект в `define`, каждая переменная получит свою копию объекта. Подробности — в [документации Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define).
 - Изменения в объекте `bundle` (объект, передаваемый в хуки `generateBundle` / `writeBundle` и возвращаемый функцией `build`):
