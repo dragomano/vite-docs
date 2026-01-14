@@ -24,7 +24,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
 
   links.push({
     text: 'Документация в разработке',
-    link: '/next/',
+    link: 'https://main.vite.dev',
   })
 
   links.push({
@@ -438,15 +438,15 @@ export default defineConfig({
     },
 
     nav: [
-      { text: 'Руководство', link: (page) => page.relativePath.startsWith('next/') ? '/next/guide/' : '/guide/', activeMatch: '/guide/' },
-      { text: 'Конфигурация', link: (page) => page.relativePath.startsWith('next/') ? '/next/config/' : '/config/', activeMatch: '/config/' },
-      { text: 'Плагины', link: (page) => page.relativePath.startsWith('next/') ? '/next/plugins/' : '/plugins/', activeMatch: '/plugins/' },
+      { text: 'Руководство', link: '/guide/', activeMatch: '/guide/' },
+      { text: 'Конфигурация', link: '/config/', activeMatch: '/config/' },
+      { text: 'Плагины', link: '/plugins/', activeMatch: '/plugins/' },
       {
         text: 'Ресурсы',
         items: [
           { text: 'Команда', link: '/team' },
           { text: 'Блог', link: '/blog' },
-          { text: 'Релизы', link: (page) => page.relativePath.startsWith('next/') ? '/next/releases' : '/releases' },
+          { text: 'Релизы', link: '/releases' },
           {
             text: 'Документальный фильм о Vite',
             link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
@@ -507,9 +507,6 @@ export default defineConfig({
       '/guide/': getGuideSidebar(),
       '/config/': getConfigSidebar(),
       '/changes/': getChangesSidebar(),
-      '/next/guide/': getGuideSidebar('next'),
-      '/next/config/': getConfigSidebar('next'),
-      '/next/changes/': getChangesSidebar('next'),
     },
 
     outline: {

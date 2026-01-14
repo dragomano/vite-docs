@@ -1,4 +1,3 @@
 User-agent: *
-Disallow: /next/
 
 Sitemap: https://vite-docs.ru/sitemap.xml
