@@ -127,12 +127,12 @@ function getGuideSidebar(prefix: string = '') {
           text: 'Производительность',
           link: `${prefix}/guide/performance`,
         },
-        prefix === 'next' ? {} : {
+        {
           text: 'Rolldown',
           link: `${prefix}/guide/rolldown`,
         },
         {
-          text: `Переход с версии v${prefix === 'next' ? 7 : viteMajorVersion - 1}`,
+          text: `Переход с версии v${viteMajorVersion - 1}`,
           link: `${prefix}/guide/migration`,
         },
         {
