@@ -40,7 +40,7 @@
 
 Определите замены глобальных констант. Записи будут определены как глобальные во время разработки и статически заменены во время сборки.
 
-Vite использует [esbuild с параметром `define`](https://esbuild.github.io/api/#define) для выполнения замен, поэтому выражения значений должны быть строкой, содержащей значение, сериализуемое в JSON (null, boolean, number, string, array или object), или единственным идентификатором. Для нестроковых значений Vite автоматически преобразует их в строку с помощью `JSON.stringify`.
+Vite использует [функцию `define` от Oxc](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define) для выполнения замен, поэтому выражения значений должны быть строкой, содержащей значение, сериализуемое в JSON (null, boolean, number, string, array или object), или единственным идентификатором. Для нестроковых значений Vite автоматически преобразует их в строку с помощью `JSON.stringify`.
 
 **Пример:**
 
@@ -95,6 +95,8 @@ declare const __APP_VERSION__: string
   `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
 Будет передано в `@rollup/plugin-alias` как его [опция `entries`](https://github.com/rollup/plugins/tree/master/packages/alias#entries). Может быть либо объектом, либо массивом пар `{ find, replacement, customResolver }`.
+
+<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-alias. we should say it's compatible with it though -->
 
 При создании псевдонимов для путей файловой системы всегда используйте абсолютные пути. Относительные значения псевдонимов будут использоваться как есть и не будут разрешены в пути файловой системы.
 
@@ -162,6 +164,13 @@ declare const __APP_VERSION__: string
 Включение этой настройки заставляет Vite определять идентичность файла по исходному пути файла (т. е. пути без учёта символических ссылок), а не по реальному пути файла (т. е. пути с учётом символических ссылок).
 
 - **Связано:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks), [webpack#resolve.symlinks](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
+
+## resolve.tsconfigPaths
+
+- **Тип:** `boolean`
+- **По умолчанию:** `false`
+
+Включает функцию разрешения путей из tsconfig. Опция `paths` в `tsconfig.json` будет использоваться для разрешения импортов. Подробности см. в разделе [Возможности](/guide/features.md#paths).
 
 ## html.cspNonce
 

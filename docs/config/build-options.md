@@ -8,13 +8,13 @@
 - **По умолчанию:** `'baseline-widely-available'`
 - **Связано:** [Совместимость с браузерами](/guide/build#browser-compatibility)
 
-Целевой уровень совместимости с браузерами для итоговой сборки. Значение по умолчанию — специальное значение Vite `'baseline-widely-available'`, которое ориентируется на браузеры, входящие в категорию [базовых](https://web-platform-dx.github.io/web-features/) широко распространённых (Baseline Widely Available) на 1 мая 2025 года. В частности, это `['chrome107', 'edge107', 'firefox104', 'safari16']`.
+Целевой уровень совместимости с браузерами для итоговой сборки. Значение по умолчанию — специальное значение Vite `'baseline-widely-available'`, которое ориентируется на браузеры, входящие в категорию [базовых](https://web-platform-dx.github.io/web-features/) широко распространённых (Baseline Widely Available) на 1 января 2026 года. В частности, это `['chrome111', 'edge111', 'firefox114', 'safari16']`.
 
 Другим специальным значением является `'esnext'`, которое предполагает встроенную поддержку динамического импорта и будет выполнять только минимальную транспиляцию.
 
-Преобразование выполняется с помощью esbuild, и значение должно быть допустимой [опцией цели esbuild](https://esbuild.github.io/api/#target). Пользовательские цели могут быть либо версией ES (например, `es2015`), браузером с версией (например, `chrome58`), либо массивом нескольких целевых строк.
+Преобразование выполняется с помощью Oxc Transformer, и значение должно быть валидной [опцией `target` для Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/lowering#target). Пользовательские цели могут быть либо версией ES (например, `es2015`), либо браузером с версией (например, `chrome58`), либо массивом из нескольких таких строк.
 
-Обратите внимание, что сборка завершится неудачей, если код содержит функции, которые не могут быть безопасно транспилированы esbuild. См. [документацию esbuild](https://esbuild.github.io/content-types/#javascript) для получения дополнительных сведений.
+Обратите внимание: сборка выдаст предупреждение, если в коде есть возможности, которые Oxc не может безопасно транспилировать. Подробности см. в [документации Oxc](https://oxc.rs/docs/guide/usage/transformer/lowering#warnings).
 
 ## build.modulePreload
 
@@ -123,7 +123,9 @@ modulePreload: {
 
 Эта опция позволяет пользователям установить другую целевую версию браузера для минификации CSS, отличную от той, которая используется для транспиляции JavaScript.
 
-Используйте этот параметр только при разработке для нестандартных браузеров. Например, Android WeChat WebView поддерживает большинство современных функций JavaScript, но не понимает [шестнадцатеричную нотацию цветов `#RGBA` в CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb_colors). Чтобы Vite не преобразовывал цвета `rgba()` в шестнадцатеричный формат `#RGBA`, установите значение `chrome61` для параметра `build.cssTarget`.
+Используйте этот параметр только при разработке для нестандартных браузеров.
+Например, Android WeChat WebView поддерживает большинство современных функций JavaScript, но не понимает [шестнадцатеричную нотацию цветов `#RGBA` в CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb_colors).
+Чтобы Vite не преобразовывал цвета `rgba()` в шестнадцатеричный формат `#RGBA`, установите значение `chrome61` для параметра `build.cssTarget`.
 
 ## build.cssMinify
 
@@ -132,24 +134,33 @@ modulePreload: {
 
 Эта опция позволяет пользователям переопределить минификацию CSS, вместо того чтобы использовать значение по умолчанию `build.minify`, так что вы можете настраивать минификацию для JS и CSS отдельно. Vite по умолчанию использует `esbuild` для минификации CSS. Установите опцию в `'lightningcss'`, чтобы использовать [Lightning CSS](https://lightningcss.dev/minification.html) вместо этого. Если выбрано, это можно настроить с помощью [`css.lightningcss`](./shared-options.md#css-lightningcss).
 
+esbuild должен быть установлен, когда выбран режим `'esbuild'`.
+
+```sh
+npm add -D esbuild
+```
+
 ## build.sourcemap
 
 - **Тип:** `boolean | 'inline' | 'hidden'`
 - **По умолчанию:** `false`
 
-Генерировать исходные карты для продакшен-сборки. Если `true`, будет создан отдельный файл sourcemap. Если `'inline'`, sourcemap будет добавлен к результирующему выходному файлу в виде data URI. `'hidden'` работает как `true`, за исключением того, что соответствующие комментарии sourcemap в собранных файлах подавляются.
+Включение генерации исходных карт для продакшен-сборки. Если `true`, будет создан отдельный файл sourcemap. Если `'inline'`, sourcemap будет добавлен к результирующему выходному файлу в виде data URI. `'hidden'` работает как `true`, за исключением того, что соответствующие комментарии sourcemap в собранных файлах подавляются.
+
+## build.rolldownOptions
+
+- **Тип:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+
+<!-- TODO: update the link above and below to Rolldown's documentation -->
+
+Позволяет напрямую настраивать сборку Rolldown. Это те же параметры, которые можно экспортировать из файла конфигурации Rolldown; они будут объединены с внутренними параметрами Rolldown, используемыми Vite. Подробности — в [документации по параметрам Rolldown](https://rollupjs.org/configuration-options/).
 
 ## build.rollupOptions
 
-- **Тип:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
+- **Тип:** `RolldownOptions`
+- **Устарело**
 
-Напрямую настраивайте базовую сборку Rollup. Это то же самое, что и параметры, которые могут быть экспортированы из файла конфигурации Rollup, и они будут объединены с внутренними параметрами Rollup Vite. См. [документацию по параметрам Rollup](https://rollupjs.org/configuration-options/) для получения дополнительных сведений.
-
-## build.commonjsOptions
-
-- **Тип:** [`RollupCommonJSOptions`](https://github.com/rollup/plugins/tree/master/packages/commonjs#options)
-
-Опции, которые передаются в [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs).
+Эта опция является псевдонимом `build.rolldownOptions`. Используйте `build.rolldownOptions` вместо неё.
 
 ## build.dynamicImportVarsOptions
 
@@ -157,6 +168,8 @@ modulePreload: {
 - **Связано:** [Динамический импорт](/guide/features#dynamic-import)
 
 Опции, которые передаются в [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars).
+
+<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-dynamic-import-vars. we should say it's compatible with it though -->
 
 ## build.lib
 
@@ -210,6 +223,30 @@ export default defineConfig({
 ]
 ```
 
+::: tip
+
+Если вы хотите добавить ссылку на файл лицензии в собранный код, вы можете использовать `build.rolldownOptions.output.postBanner`, чтобы вставить комментарий в начало файлов. Например:
+
+<!-- TODO: add a link for output.postBanner above to Rolldown's documentation -->
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    license: true,
+    rolldownOptions: {
+      output: {
+        postBanner:
+          '/* Смотрите лицензии включённых зависимостей по адресу https://example.com/license.md */',
+      },
+    },
+  },
+})
+```
+
+:::
+
 ## build.manifest
 
 - **Тип:** `boolean | string`
@@ -257,13 +294,16 @@ export default defineConfig({
 - **Тип:** `boolean | 'terser' | 'esbuild'`
 - **По умолчанию:** `'esbuild'` для клиентской сборки, `false` для сборки SSR
 
-Установите значение `false`, чтобы отключить минификацию, или укажите используемый минификатор. Значение по умолчанию — [esbuild](https://github.com/evanw/esbuild), который в 20 ~ 40 раз быстрее, чем terser, и только на 1 ~ 2% хуже по сжатию. [Бенчмарки](https://github.com/privatenumber/minification-benchmarks)
+Установка в `false` отключает минификацию, либо можно явно указать используемый минификатор. По умолчанию используется [Oxc Minifier](https://oxc.rs/docs/guide/usage/minifier) — он в 30 ~ 90 раз быстрее terser и даёт сжатие хуже лишь на 0.5 ~ 2%. [Бенчмарки](https://github.com/privatenumber/minification-benchmarks)
 
-Обратите внимание, что опция `build.minify` не минифицирует пробелы при использовании формата `'es'` в режиме библиотеки, так как это удаляет аннотации pure и нарушает tree-shaking («встряхивание дерева»).
+`build.minify: 'esbuild'` устарел и будет удалён в будущем.
 
-Terser должен быть установлен, когда он установлен в `'terser'`.
+Обратите внимание: опция `build.minify` не удаляет пробельные символы при использовании формата `'es'` в режиме библиотеки, потому что это удаляет pure-аннотации и ломает tree-shaking («встряхивание дерева»).
+
+esbuild или Terser должны быть установлены, если выбрано значение `'esbuild'` или `'terser'` соответственно.
 
 ```sh
+npm add -D esbuild
 npm add -D terser
 ```
 
@@ -312,6 +352,8 @@ npm add -D terser
 
 ## build.watch
 
+<!-- TODO: update the link below to Rolldown's documentation -->
+
 - **Тип:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) `| null`
 - **По умолчанию:** `null`
 
@@ -319,6 +361,7 @@ npm add -D terser
 
 ::: warning Использование Vite в Windows Subsystem for Linux (WSL) 2
 
-Существуют случаи, когда наблюдение за файловой системой не работает с WSL2. См. [`server.watch`](./server-options.md#server-watch) для получения дополнительных сведений.
+Существуют случаи, когда наблюдение за файловой системой не работает с WSL2.
+См. [`server.watch`](./server-options.md#server-watch) для получения дополнительных сведений.
 
 :::

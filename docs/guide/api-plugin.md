@@ -4,6 +4,8 @@
 
 **Рекомендуется сначала ознакомиться с [документацией по плагинам Rollup](https://rollupjs.org/plugin-development/), прежде чем читать разделы ниже.**
 
+<!-- TODO: update the link above to Rolldown's documentation -->
+
 ## Создание плагина {#authoring-a-plugin}
 
 Vite стремится предлагать устоявшиеся паттерны из коробки, поэтому перед созданием нового плагина убедитесь, что вы проверили [Возможности](/guide/features), чтобы узнать, покрывает ли они ваши потребности. Также ознакомьтесь с доступными плагинами сообщества, как в виде [совместимого плагина Rollup](https://github.com/rollup/awesome), так и [специфичных для Vite плагинов](https://github.com/vitejs/awesome-vite#plugins).

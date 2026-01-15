@@ -171,7 +171,6 @@ interface ViteDevServer {
    * Перезапуск сервера.
    *
    * @param forceOptimize - принудить оптимизатор к повторной сборке, то же самое, что и флаг командной строки --force.
-
    */
   restart(forceOptimize?: boolean): Promise<void>
   /**
@@ -388,6 +387,21 @@ function normalizePath(id: string): string
 
 Нормализует путь для взаимодействия между плагинами Vite.
 
+## `transformWithOxc`
+
+**Сигнатура типа:**
+
+```ts
+async function transformWithOxc(
+  code: string,
+  filename: string,
+  options?: OxcTransformOptions,
+  inMap?: object,
+): Promise<Omit<OxcTransformResult, 'errors'> & { warnings: string[] }>
+```
+
+Преобразовывает JavaScript или TypeScript с помощью [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer). Полезно для плагинов, которые предпочитают соответствовать внутреннему преобразованию Oxc Transformer в Vite.
+
 ## `transformWithEsbuild`
 
 **Сигнатура типа:**
@@ -400,6 +414,8 @@ async function transformWithEsbuild(
   inMap?: object,
 ): Promise<ESBuildTransformResult>
 ```
+
+**Устарело:** Используйте `transformWithOxc`.
 
 Преобразовывает JavaScript или TypeScript с помощью esbuild. Полезно для плагинов, которые предпочитают соответствовать внутреннему преобразованию esbuild в Vite.
 

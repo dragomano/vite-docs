@@ -18,11 +18,11 @@ Vite стремится обеспечить поддержку распрост
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-Использует esbuild и Babel, что позволяет достичь быстрого HMR при небольшом размере пакета и гибкости использования конвейера преобразований Babel. Без дополнительных плагинов Babel при сборке используется только esbuild.
+Использует [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer) и [Babel](https://babeljs.io/), обеспечивая быстрый HMR с небольшим размером пакета и гибкостью использования конвейера трансформаций Babel. Без дополнительных плагинов Babel используется только Oxc Transformer.
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-Заменяет Babel на SWC во время разработки. Во время сборок для продакшена применяются SWC и esbuild при работе с плагинами, а в остальных случаях — только esbuild. Для крупных проектов, не требующих нестандартных расширений React, первоначальный запуск и горячая замена модулей (HMR) могут быть значительно быстрее.
+Заменяет Babel на [SWC](https://swc.rs/) во время разработки. Во время production-сборки при использовании плагинов применяются SWC + Oxc Transformer, в остальных случаях — только Oxc Transformer. Для крупных проектов с кастомными плагинами первоначальный запуск и горячая замена модулей (HMR) могут стать значительно быстрее, если плагин также доступен для SWC.
 
 ### [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
 
@@ -41,6 +41,12 @@ npm create vite@latest -- --template rsc
 ## Плагины сообщества {#community-plugins}
 
 Загляните на [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) — там вы также можете отправить PR со списком своих плагинов.
+
+## Rolldown Builtin Plugins {#rolldown-builtin-plugins}
+
+Vite использует [Rolldown](https://rolldown.rs/) под капотом, и он предоставляет несколько встроенных плагинов для типичных сценариев.
+
+Подробности — в разделе [Rolldown Builtin Plugins](https://rolldown.rs/builtin-plugins/).
 
 ## Плагины Rollup {#rollup-plugins}
 

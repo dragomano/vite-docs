@@ -91,12 +91,19 @@ Vite по умолчанию не транспилирует TypeScript с за�
 
 Вместо этого может быть использована опция [`esbuild.target`](/config/shared-options.html#esbuild), по умолчанию устанавливая значение `esnext` для минимальной транспиляции. В сборках опция [`build.target`](/config/build-options.html#build-target) имеет более высокий приоритет и также может быть установлена при необходимости.
 
-::: warning `useDefineForClassFields`
+#### `emitDecoratorMetadata`
 
-Если `target` не содержит `ESNext` или `ES2022` или новее, или если нет файла `tsconfig.json`, `useDefineForClassFields` по умолчанию будет установлено в `false`, что может вызвать проблемы со значением `esbuild.target` по умолчанию, равным `esnext`. Это может привести к транспиляции в [статические блоки инициализации](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility), которые могут не поддерживаться в вашем браузере.
+- [Документация TypeScript](https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata)
 
-Таким образом, рекомендуется установить `target` на `ESNext` или `ES2022` или новее, или явно установить `useDefineForClassFields` в `true` при настройке `tsconfig.json`.
-:::
+Эта опция поддерживается лишь частично. Полная поддержка требует вывода типов компилятором TypeScript, что не поддерживается. Подробности см. в [документации Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/typescript#decorators).
+
+#### `paths`
+
+- [Документация TypeScript](https://www.typescriptlang.org/tsconfig/#paths)
+
+Можно указать `resolve.tsconfigPaths: true`, чтобы Vite использовал опцию `paths` из `tsconfig.json` для разрешения импортов.
+
+Обратите внимание: эта возможность имеет накладные расходы по производительности и [не рекомендуется командой TypeScript для изменения поведения внешних инструментов](https://www.typescriptlang.org/tsconfig/#paths:~:text=Note%20that%20this%20feature%20does%20not%20change%20how%20import%20paths%20are%20emitted%20by%20tsc%2C%20so%20paths%20should%20only%20be%20used%20to%20inform%20TypeScript%20that%20another%20tool%20has%20this%20mapping%20and%20will%20use%20it%20at%20runtime%20or%20when%20bundling.).
 
 #### Другие параметры компилятора, влияющие на результат сборки {#other-compiler-options-affecting-the-build-result}
 
@@ -109,7 +116,6 @@ Vite по умолчанию не транспилирует TypeScript с за�
 - [`jsxFragmentFactory`](https://www.typescriptlang.org/tsconfig#jsxFragmentFactory)
 - [`jsxImportSource`](https://www.typescriptlang.org/tsconfig#jsxImportSource)
 - [`experimentalDecorators`](https://www.typescriptlang.org/tsconfig#experimentalDecorators)
-- [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 
 ::: tip `skipLibCheck`
 В стартовых шаблонах Vite есть `"skipLibCheck": "true"` по умолчанию, чтобы избежать проверки типов зависимостей, поскольку они могут поддерживать только определённые версии и конфигурации TypeScript. Более подробную информацию вы можете найти на сайте [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
