@@ -576,11 +576,12 @@ export default defineConfig({
       })
     },
     container: {
+      dangerLabel: 'ОПАСНОСТЬ',
+      detailsLabel: 'ПОДРОБНОСТИ',
+      importantLabel: 'ВАЖНО',
+      infoLabel: 'ИНФОРМАЦИЯ',
       tipLabel: 'СОВЕТ',
       warningLabel: 'ПРЕДУПРЕЖДЕНИЕ',
-      dangerLabel: 'ОПАСНОСТЬ',
-      infoLabel: 'ИНФОРМАЦИЯ',
-      detailsLabel: 'Подробная информация'
     }
   },
   vite: {
