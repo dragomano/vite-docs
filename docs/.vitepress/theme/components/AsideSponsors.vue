@@ -4,7 +4,12 @@
     href="https://www.youtube.com/playlist?list=PLqGQbXn_GDmkJaoykvHCUmXUPjhgH2bVr"
     target="_blank"
   >
-    <img width="22" height="22" src="../../../images/viteconf.svg" alt="Логотип ViteConf" />
+    <img
+      width="22"
+      height="22"
+      src="../../../images/viteconf.svg"
+      alt="Логотип ViteConf"
+    />
     <span>
       <p class="extra-info">Строим вместе</p>
       <p class="heading">ViteConf 2025</p>
@@ -13,7 +18,7 @@
   </a>
 </template>
 
-<style>
+<style scoped>
 .viteconf {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -43,20 +48,21 @@
 .viteconf:hover img {
   transform: scale(1.75);
 }
+.viteconf span {
+  display: block;
+}
+.viteconf p {
+  margin: 0;
+  padding: 0;
+  line-height: 1.1rem;
+  color: var(--vp-c-text-1);
+}
 .viteconf .heading {
-  background-image: linear-gradient(
-    120deg,
-    #b047ff 16%,
-    var(--vp-c-brand-lighter),
-    var(--vp-c-brand-lighter)
-  );
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--vp-c-brand-lighter);
 }
 .viteconf .extra-info {
   color: var(--vp-c-text-1);
-  opacity: 0;
+  opacity: 1;
   font-size: 0.7rem;
   padding-left: 0.1rem;
   transition: opacity 0.5s;

@@ -1,13 +1,16 @@
 import path from 'node:path'
 import fs from 'node:fs'
-import type { DefaultTheme, HeadConfig } from 'vitepress'
+import type { HeadConfig } from 'vitepress'
 import { defineConfig } from 'vitepress'
 import { transformerTwoslash } from '@shikijs/vitepress-twoslash'
 import {
   groupIconMdPlugin,
   groupIconVitePlugin,
+  localIconLoader,
 } from 'vitepress-plugin-group-icons'
 import { markdownItImageSize } from 'markdown-it-image-size'
+import { extendConfig } from '@voidzero-dev/vitepress-theme/config'
+import type { FooterLink } from '@voidzero-dev/vitepress-theme'
 import packageJson from '../../package.json' with { type: 'json' }
 import { buildEnd } from './buildEnd.config'
 
@@ -19,8 +22,8 @@ const ogImage = 'https://vite-docs.ru/og-image.jpg'
 const ogTitle = 'Vite по-русски'
 const ogUrl = 'https://vite-docs.ru/'
 
-const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
-  const links: DefaultTheme.NavItemWithLink[] = []
+const versionLinks = (() => {
+  const links: FooterLink[] = []
 
   links.push({
     text: 'Документация в разработке',
@@ -271,7 +274,7 @@ function getChangesSidebar(prefix: string = '') {
   ];
 }
 
-export default defineConfig({
+const config = defineConfig({
   lang: 'ru',
   title: `Vite по-русски`,
   description: 'Инструментарий для фронтенда нового поколения',
@@ -282,11 +285,15 @@ export default defineConfig({
   },
   lastUpdated: true,
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
+    [
+      'link',
+      { rel: 'icon', type: 'image/svg+xml', href: '/logo-without-border.svg' },
+    ],
     [
       'link',
       { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
     ],
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     inlineScript('banner.js'),
     ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
@@ -298,7 +305,7 @@ export default defineConfig({
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:site', content: '@vite_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
-    [
+    /* [
       'script',
       {},
       `(function(c,l,a,r,i,t,y){
@@ -306,7 +313,7 @@ export default defineConfig({
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "p4lpwfiwp1")`,
-    ],
+    ], */
   ],
 
   locales: {
@@ -315,6 +322,7 @@ export default defineConfig({
   },
 
   themeConfig: {
+    variant: 'vite',
     logo: '/logo.svg',
 
     outlineTitle: 'Содержание',
@@ -334,6 +342,12 @@ export default defineConfig({
       quote: 'Но если не менять направление и продолжать искать, то можно оказаться там, где надо.',
       linkLabel: 'перейти на главную',
       linkText: 'Вернуться на главную'
+    },
+
+    banner: {
+      id: 'vite+',
+      text: 'Поставьте звезду репозиторию перевода на GitHub',
+      url: 'https://github.com/dragomano/vite-docs',
     },
 
     editLink: {
@@ -433,8 +447,38 @@ export default defineConfig({
     },
 
     footer: {
-      message: `Выпущено под лицензией MIT.`,
-      copyright: '© 2019 — настоящее время, VoidZero Inc. и контрибьюторы Vite',
+      copyright: `© 2025 VoidZero Inc. и контрибьюторы Vite.`,
+      nav: [
+        {
+          title: 'Vite',
+          items: [
+            { text: 'Руководство', link: '/guide/' },
+            { text: 'Конфигурация', link: '/config/' },
+            { text: 'Плагины', link: '/plugins/' },
+          ],
+        },
+        {
+          title: 'Ресурсы',
+          items: [
+            { text: 'Команда', link: '/team' },
+            { text: 'Блог', link: '/blog' },
+            {
+              text: 'Релизы',
+              link: 'https://github.com/vitejs/vite/releases',
+            },
+          ],
+        },
+        {
+          title: 'Версии',
+          items: versionLinks,
+        },
+      ],
+      social: [
+        { icon: 'github', link: 'https://github.com/vitejs/vite' },
+        { icon: 'discord', link: 'https://chat.vite.dev' },
+        { icon: 'bluesky', link: 'https://bsky.app/profile/vite.dev' },
+        { icon: 'x', link: 'https://x.com/vite_js' },
+      ],
     },
 
     nav: [
@@ -585,21 +629,23 @@ export default defineConfig({
     }
   },
   vite: {
+    build: {
+      chunkSizeWarningLimit: 1000,
+    },
     plugins: [
       groupIconVitePlugin({
         customIcon: {
           firebase: 'vscode-icons:file-type-firebase',
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
+          'vite.config': localIconLoader(
+            import.meta.url,
+            '../public/logo-without-border.svg',
+          ),
         },
       }),
     ],
     optimizeDeps: {
-      include: [
-        '@shikijs/vitepress-twoslash/client',
-        'gsap',
-        'gsap/dist/ScrollTrigger',
-        'gsap/dist/MotionPathPlugin',
-      ],
+      include: ['@shikijs/vitepress-twoslash/client'],
     },
     define: {
       __VITE_VERSION__: JSON.stringify(viteVersion),
@@ -607,3 +653,5 @@ export default defineConfig({
   },
   buildEnd,
 })
+
+export default extendConfig(config)

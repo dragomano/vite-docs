@@ -3,11 +3,7 @@
   "type": "module",
   "description": "Russian localization for Vite documentation",
   "main": "docs/index.md",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
-    "typecheck": "vue-tsc -p docs/tsconfig.json",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
@@ -28,19 +24,16 @@
   },
   "homepage": "https://github.com/dragomano/vite-docs?tab=readme-ov-file#readme",
   "devDependencies": {
-    "@algolia/client-search": "^5.46.2",
     "@shikijs/vitepress-twoslash": "^3.21.0",
     "@type-challenges/utils": "^0.1.1",
     "@types/express": "^5.0.6",
-    "@types/node": "^24.10.7",
+    "@types/node": "^25.0.8",
+    "@voidzero-dev/vitepress-theme": "^4.1.1",
     "feed": "^5.2.0",
-    "gsap": "^3.14.2",
     "markdown-it-image-size": "^15.0.1",
-    "typescript": "~5.9.3",
     "vite": "^7.3.1",
     "vitepress": "2.0.0-alpha.15",
     "vitepress-plugin-group-icons": "^1.6.5",
-    "vue": "^3.5.26",
-    "vue-tsc": "^3.2.2"
+    "vue": "^3.5.26"
   }
 }
