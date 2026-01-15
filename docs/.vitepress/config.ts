@@ -279,7 +279,6 @@ const config = defineConfig({
   title: `Vite по-русски`,
   description: 'Инструментарий для фронтенда нового поколения',
   cleanUrls: true,
-  //base: '/vite-docs/',
   sitemap: {
     hostname: 'https://vite-docs.ru/'
   },
@@ -305,7 +304,7 @@ const config = defineConfig({
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:site', content: '@vite_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
-    /* [
+    [
       'script',
       {},
       `(function(c,l,a,r,i,t,y){
@@ -313,7 +312,7 @@ const config = defineConfig({
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "p4lpwfiwp1")`,
-    ], */
+    ],
   ],
 
   locales: {
