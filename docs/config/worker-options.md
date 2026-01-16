@@ -18,9 +18,7 @@
 
 ## worker.rolldownOptions
 
-<!-- TODO: update the link below to Rolldown's documentation -->
-
-- **Тип:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+- **Тип:** [`RolldownOptions`](https://rolldown.rs/reference/)
 
 Опции Rollup для сборки воркера.
 
