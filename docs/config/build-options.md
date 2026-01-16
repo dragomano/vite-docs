@@ -149,11 +149,9 @@ npm add -D esbuild
 
 ## build.rolldownOptions
 
-- **Тип:** [`RolldownOptions`](https://rollupjs.org/configuration-options/)
+- **Тип:** [`RolldownOptions`](https://rolldown.rs/reference/)
 
-<!-- TODO: update the link above and below to Rolldown's documentation -->
-
-Позволяет напрямую настраивать сборку Rolldown. Это те же параметры, которые можно экспортировать из файла конфигурации Rolldown; они будут объединены с внутренними параметрами Rolldown, используемыми Vite. Подробности — в [документации по параметрам Rolldown](https://rollupjs.org/configuration-options/).
+Позволяет напрямую настраивать сборку Rolldown. Это те же параметры, которые можно экспортировать из файла конфигурации Rolldown; они будут объединены с внутренними параметрами Rolldown, используемыми Vite. Подробности — в [документации по параметрам Rolldown](https://rolldown.rs/reference/).
 
 ## build.rollupOptions
 
@@ -352,9 +350,7 @@ npm add -D terser
 
 ## build.watch
 
-<!-- TODO: update the link below to Rolldown's documentation -->
-
-- **Тип:** [`WatcherOptions`](https://rollupjs.org/configuration-options/#watch) `| null`
+- **Тип:** [`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch) `| null`
 - **По умолчанию:** `null`
 
 Установите значение `{}`, чтобы включить наблюдатель Rollup. Это в основном используется в случаях, связанных с плагинами только для сборки или процессами интеграции.
