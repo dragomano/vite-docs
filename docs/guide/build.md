@@ -50,15 +50,13 @@ URL-адреса ресурсов, импортируемых через JS, с�
 
 ## Настройка сборки {#customizing-the-build}
 
-Сборку можно настроить с помощью различных [параметров конфигурации](/config/build-options.md). В частности, вы можете напрямую настроить основные [параметры Rolldown](https://rollupjs.org/configuration-options/) через `build.rolldownOptions`:
-
-<!-- TODO: update the link above and below to Rolldown's documentation -->
+Сборку можно настроить с помощью различных [параметров конфигурации](/config/build-options.md). В частности, вы можете напрямую настроить основные [параметры Rolldown](https://rolldown.rs/reference/) через `build.rolldownOptions`:
 
 ```js
 export default defineConfig({
   build: {
     rolldownOptions: {
-      // https://rollupjs.org/configuration-options/
+      // https://rolldown.rs/reference/
     }
   }
 })
@@ -84,15 +82,13 @@ window.addEventListener('vite:preloadError', (event) => {
 
 ## Пересборка при изменении файлов {#rebuild-on-files-changes}
 
-Вы можете включить наблюдатель Rollup с помощью команды `vite build --watch`. Либо вы можете напрямую настроить основные параметры наблюдателя ([`WatcherOptions`](https://rollupjs.org/configuration-options/#watch)) через опцию `build.watch`:
-
-<!-- TODO: update the link above to Rolldown's documentation -->
+Вы можете включить наблюдатель Rollup с помощью команды `vite build --watch`. Либо вы можете напрямую настроить основные параметры наблюдателя ([`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch)) через опцию `build.watch`:
 
 ```js [vite.config.js]
 export default defineConfig({
   build: {
     watch: {
-      // https://rollupjs.org/configuration-options/#watch
+      // https://rolldown.rs/reference/InputOptions.watch
     }
   }
 })
