@@ -340,7 +340,9 @@ const plugin = {
 
 ## Удалённые устаревшие функции {#removed-deprecated-features} [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
-**_TODO: This change is not implemented yet, but will be implemented before stable release._**
+Передача URL в `import.meta.hot.accept` больше не поддерживается. Пожалуйста, [передавайте вместо этого id](https://github.com/vitejs/vite/pull/21382)
+
+**TODO: Это изменение ещё не реализовано, но будет реализовано до стабильного релиза.**
 
 ## Расширенные возможности {#advanced}
 
