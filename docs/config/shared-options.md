@@ -94,9 +94,9 @@ declare const __APP_VERSION__: string
 - **Тип:**
   `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
-Будет передано в `@rollup/plugin-alias` как его [опция `entries`](https://github.com/rollup/plugins/tree/master/packages/alias#entries). Может быть либо объектом, либо массивом пар `{ find, replacement, customResolver }`.
+Определяет псевдонимы, используемые для замены значений в операторах `import` или `require`. Это работает аналогично [`@rollup/plugin-alias`](https://github.com/rollup/plugins/tree/master/packages/alias).
 
-<!-- TODO: we need to have a more detailed explanation here as we no longer use @rollup/plugin-alias. we should say it's compatible with it though -->
+Порядок записей важен, поскольку сначала применяются первые определённые правила.
 
 При создании псевдонимов для путей файловой системы всегда используйте абсолютные пути. Относительные значения псевдонимов будут использоваться как есть и не будут разрешены в пути файловой системы.
 
@@ -105,6 +105,40 @@ declare const __APP_VERSION__: string
 ::: warning Использование с SSR
 Если вы настроили псевдонимы для [экстернализованных зависимостей SSR](/guide/ssr.md#ssr-externals), вы можете захотеть создать псевдонимы для фактических пакетов `node_modules`. Как [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias), так и [pnpm](https://pnpm.io/aliases/) поддерживают создание псевдонимов через префикс `npm:`.
 :::
+
+### Формат объекта (`Record<string, string>`) {#object-format-record-string-string}
+
+Формат объекта позволяет указывать псевдонимы как ключ, а соответствующее значение — как фактическое значение импорта. Например:
+
+```js
+resolve: {
+  alias: {
+    utils: '../../../utils',
+    'batman-1.0.0': './joker-1.5.0'
+  }
+}
+```
+
+### Формат массива (`Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`) {#array-format-array-find-string-regexp-replacement-string-customresolver-resolverfunction-resolverobject}
+
+Формат массива позволяет указывать псевдонимы как объекты, что полезно для сложных пар ключ/значение.
+
+```js
+resolve: {
+  alias: [
+    { find: 'utils', replacement: '../../../utils' },
+    { find: 'batman-1.0.0', replacement: './joker-1.5.0' },
+  ]
+}
+```
+
+Когда `find` является регулярным выражением, `replacement` может использовать [шаблоны замены](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace#specifying_a_string_as_the_replacement), такие как `$1`. Например, для удаления расширений можно использовать шаблон вроде следующего:
+
+```js
+{ find:/^(.*)\.js$/, replacement: '$1.alias' }
+```
+
+Опция `customResolver` может использоваться для предоставления отдельного разрешения модулей для индивидуального псевдонима.
 
 ## resolve.dedupe
 
