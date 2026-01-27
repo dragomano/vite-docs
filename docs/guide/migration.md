@@ -335,6 +335,7 @@ const plugin = {
 - `build.rollupOptions` → переименована в `build.rolldownOptions`
 - `worker.rollupOptions` переименована в `worker.rolldownOptions`
 - `build.commonjsOptions` теперь не делает ничего (no-op)
+- `build.dynamicImportVarsOptions.warnOnError`: теперь не делает ничего (no-op)
 
 ## Основные изменения {#general-changes} [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
