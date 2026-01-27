@@ -111,45 +111,21 @@ $ npm run preview
 
 ## Netlify {#netlify}
 
-1. Установите [Netlify CLI](https://cli.netlify.com/).
-2. Создайте новый сайт с помощью `ntl init`.
-3. Разверните с помощью `ntl deploy`.
+1. Установите [Netlify CLI](https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/) командой `npm install -g netlify-cli`.
+2. Создайте новый сайт с помощью `netlify init`.
+3. Разверните с помощью `netlify deploy`.
 
-```bash
-# Установите Netlify CLI
-$ npm install -g netlify-cli
-
-# Создайте новый сайт в Netlify
-$ ntl init
-
-# Разверните на уникальном URL для предварительного просмотра
-$ ntl deploy
-```
-
-Netlify CLI предоставит вам URL для предварительного просмотра, чтобы вы могли его проверить. Когда вы будете готовы к развёртыванию продакшен-версии, используйте флаг `prod`:
-
-```bash
-# Разверните продакшен-версию
-$ ntl deploy --prod
-```
+Netlify CLI предоставит вам URL для предварительного просмотра. Когда вы будете готовы к продакшену, используйте флаг `prod`: `netlify deploy --prod`.
 
 ## Vercel {#vercel}
 
 ### Vercel CLI {#vercel-cli}
 
-1. Установите [Vercel CLI](https://vercel.com/cli) и выполните команду `vercel` для развёртывания.
+1. Установите [Vercel CLI](https://vercel.com/cli) командой `npm i -g vercel` и выполните команду `vercel` для развёртывания.
 2. Vercel обнаружит, что вы используете Vite, и включит правильные настройки для вашего развёртывания.
 3. Ваше приложение развёрнуто! (например, [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
 
-```bash
-$ npm i -g vercel
-$ vercel init vite
-Vercel CLI
-> Success! Initialized "vite" example in ~/your-folder.
-- To deploy, `cd vite` and run `vercel`.
-```
-
-### Vercel для Git {#vercel-for-git}
+### Vercel с Git {#vercel-with-git}
 
 1. Запушьте ваш код в ваш git-репозиторий (GitHub, GitLab, Bitbucket).
 2. [Импортируйте ваш проект Vite](https://vercel.com/new) в Vercel.
@@ -201,13 +177,13 @@ $ npx wrangler pages deploy distwrangler pages deploy dist
 
 ## Google Firebase {#google-firebase}
 
-1. Убедитесь, что у вас установлен пакет [firebase-tools](https://www.npmjs.com/package/firebase-tools).
+1. Установите пакет [firebase-tools](https://www.npmjs.com/package/firebase-tools) командой `npm i -g firebase-tools`.
 
-2. Создайте `firebase.json` и `.firebaserc` в корне вашего проекта со следующим содержимым:
+2. Создайте следующие файлы в корне вашего проекта:
 
-   `firebase.json`:
+  ::: code-group
 
-   ```json
+   ```json [firebase.json]
    {
      "hosting": {
        "public": "dist",
@@ -222,9 +198,7 @@ $ npx wrangler pages deploy distwrangler pages deploy dist
    }
    ```
 
-   `.firebaserc`:
-
-   ```js
+   ```js [.firebaserc]
    {
      "projects": {
        "default": "<YOUR_FIREBASE_ID>"
@@ -232,11 +206,13 @@ $ npx wrangler pages deploy distwrangler pages deploy dist
    }
    ```
 
+   :::
+
 3. После выполнения команды `npm run build` разверните с помощью команды `firebase deploy`.
 
 ## Surge {#surge}
 
-1. Сначала установите [surge](https://www.npmjs.com/package/surge), если вы ещё этого не сделали.
+1. Установите пакет [surge](https://www.npmjs.com/package/surge) командой `npm i -g surge`.
 
 2. Выполните команду `npm run build`.
 
@@ -273,9 +249,7 @@ $ npx wrangler pages deploy distwrangler pages deploy dist
    - **Команда сборки**: `npm install && npm run build`
    - **Папка для публикации**: `dist`
 
-5. Нажмите **Create Static Site**.
-
-   Ваше приложение должно быть развёрнуто по адресу `https://<PROJECTNAME>.onrender.com/`.
+5. Нажмите **Create Static Site**. Ваше приложение должно быть развёрнуто по адресу `https://<PROJECTNAME>.onrender.com/`.
 
 По умолчанию любое новое изменение, запушенное в указанную ветку, автоматически запустит новое развёртывание. [Автоматическое развёртывание](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) можно настроить в настройках проекта.
 
