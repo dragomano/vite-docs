@@ -359,6 +359,8 @@ npm add -D lightningcss
 
 ## Статические ресурсы {#static-assets}
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05pq?via=vite" title="Статические ресурсы в Vite">Посмотреть интерактивный урок на Scrimba</ScrimbaLink>
+
 Импорт статического ресурса вернёт разрешённый публичный URL при его обслуживании:
 
 ```js twoslash

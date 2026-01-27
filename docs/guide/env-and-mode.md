@@ -13,6 +13,8 @@ if (import.meta.env.DEV) {
 
 :::
 
+<ScrimbaLink href="https://scrimba.com/intro-to-vite-c03p6pbbdq/~05an?via=vite" title="Переменные окружения в Vite">Посмотреть интерактивный урок на Scrimba</ScrimbaLink>
+
 ## Встроенные константы {#built-in-constants}
 
 Некоторые встроенные константы доступны во всех случаях:
