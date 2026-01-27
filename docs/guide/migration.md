@@ -38,19 +38,17 @@ Vite 8 использует инструменты на базе Rolldown и Oxc
 
 Следующие опции преобразуются автоматически:
 
-- [`esbuildOptions.minify`](https://esbuild.github.io/api/#minify) -> `rolldownOptions.output.minify`
-- [`esbuildOptions.treeShaking`](https://esbuild.github.io/api/#tree-shaking) -> `rolldownOptions.treeshake`
-- [`esbuildOptions.define`](https://esbuild.github.io/api/#define) -> `rolldownOptions.transform.define`
-- [`esbuildOptions.loader`](https://esbuild.github.io/api/#loader) -> `rolldownOptions.moduleTypes`
-- [`esbuildOptions.preserveSymlinks`](https://esbuild.github.io/api/#preserve-symlinks) -> `!rolldownOptions.resolve.symlinks`
-- [`esbuildOptions.resolveExtensions`](https://esbuild.github.io/api/#resolve-extensions) -> `rolldownOptions.resolve.extensions`
-- [`esbuildOptions.mainFields`](https://esbuild.github.io/api/#main-fields) -> `rolldownOptions.resolve.mainFields`
-- [`esbuildOptions.conditions`](https://esbuild.github.io/api/#conditions) -> `rolldownOptions.resolve.conditionNames`
-- [`esbuildOptions.keepNames`](https://esbuild.github.io/api/#keep-names) -> `rolldownOptions.output.keepNames`
-- [`esbuildOptions.platform`](https://esbuild.github.io/api/#platform) -> `rolldownOptions.platform`
-- [`esbuildOptions.plugins`](https://esbuild.github.io/plugins/) -> `rolldownOptions.plugins` (частичная поддержка)
-
-<!-- TODO: add link to rolldownOptions.* -->
+- [`esbuildOptions.minify`](https://esbuild.github.io/api/#minify) -> [`rolldownOptions.output.minify`](https://rolldown.rs/reference/OutputOptions.minify)
+- [`esbuildOptions.treeShaking`](https://esbuild.github.io/api/#tree-shaking) -> [`rolldownOptions.treeshake`](https://rolldown.rs/reference/InputOptions.treeshake)
+- [`esbuildOptions.define`](https://esbuild.github.io/api/#define) -> [`rolldownOptions.transform.define`](https://rolldown.rs/reference/InputOptions.transform#define)
+- [`esbuildOptions.loader`](https://esbuild.github.io/api/#loader) -> [`rolldownOptions.moduleTypes`](https://rolldown.rs/reference/InputOptions.moduleTypes)
+- [`esbuildOptions.preserveSymlinks`](https://esbuild.github.io/api/#preserve-symlinks) -> [`!rolldownOptions.resolve.symlinks`](https://rolldown.rs/reference/InputOptions.resolve#symlinks)
+- [`esbuildOptions.resolveExtensions`](https://esbuild.github.io/api/#resolve-extensions) -> [`rolldownOptions.resolve.extensions`](https://rolldown.rs/reference/InputOptions.resolve#extensions)
+- [`esbuildOptions.mainFields`](https://esbuild.github.io/api/#main-fields) -> [`rolldownOptions.resolve.mainFields`](https://rolldown.rs/reference/InputOptions.resolve#mainfields)
+- [`esbuildOptions.conditions`](https://esbuild.github.io/api/#conditions) -> [`rolldownOptions.resolve.conditionNames`](https://rolldown.rs/reference/InputOptions.resolve#conditionnames)
+- [`esbuildOptions.keepNames`](https://esbuild.github.io/api/#keep-names) -> [`rolldownOptions.output.keepNames`](https://rolldown.rs/reference/OutputOptions.keepNames)
+- [`esbuildOptions.platform`](https://esbuild.github.io/api/#platform) -> [`rolldownOptions.platform`](https://rolldown.rs/reference/InputOptions.platform)
+- [`esbuildOptions.plugins`](https://esbuild.github.io/plugins/) -> [`rolldownOptions.plugins`](https://rolldown.rs/reference/InputOptions.plugins) (частичная поддержка)
 
 Получить опции, которые подставил слой совместимости, можно из хука `configResolved`:
 
@@ -97,8 +95,6 @@ const plugin = {
   },
 },
 ```
-
-<!-- TODO: add link to rolldownOptions.output.minify -->
 
 На данный момент Oxc-трансформер не поддерживает понижение нативных декораторов, так как мы ждём дальнейшего продвижения спецификации (см. [oxc-project/oxc#9170](https://github.com/oxc-project/oxc/issues/9170)).
 
@@ -293,19 +289,15 @@ export default defineConfig({
 
 ### `import.meta.url` в форматах UMD / IIFE {#import-meta-url-in-umd-iife}
 
-Свойство `import.meta.url` больше не заменяется полифиллом в форматах вывода UMD / IIFE. По умолчанию оно заменяется на `undefined`. Если нужно сохранить прежнее поведение, используйте опцию `define` вместе с `build.rolldownOptions.output.intro`. Подробности — в [документации Rolldown](https://rolldown.rs/in-depth/non-esm-output-formats#well-known-import-meta-properties).
+Свойство `import.meta.url` больше не заменяется полифиллом в форматах вывода UMD / IIFE. По умолчанию оно заменяется на `undefined`. Если нужно сохранить прежнее поведение, используйте опцию [`define`](/config/shared-options#define) вместе с [`build.rolldownOptions.output.intro`](https://rolldown.rs/reference/OutputOptions.intro). Подробности — в [документации Rolldown](https://rolldown.rs/in-depth/non-esm-output-formats#well-known-import-meta-properties).
 
 ### Удалена опция `build.rollupOptions.watch.chokidar` {#removed-build-rollupoptions-watch-chokidar-option}
 
-Опция `build.rollupOptions.watch.chokidar` удалена. Переходите на `build.rolldownOptions.watch.notify`.
-
-<!-- TODO: add link to rolldownOptions.watch.notify -->
+Опция `build.rollupOptions.watch.chokidar` удалена. Переходите на [`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify).
 
 ### Устарела опция `build.rollupOptions.output.manualChunks` {#deprecate-build-rollupoptions-output-manualchunks}
 
-Опция `output.manualChunks` объявлена устаревшей. В Rolldown есть более гибкая опция — [`advancedChunks`](https://rolldown.rs/in-depth/advanced-chunks).
-
-<!-- TODO: add link to rolldownOptions.output.advancedChunks -->
+Опция `output.manualChunks` устарела. Rolldown имеет более гибкую опцию [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting). Подробности об `codeSplitting` см. в документации Rolldown: [Ручное разделение кода - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting).
 
 ### Поддержка типов модулей и их автоопределение {#module-type-support-and-auto-detection}
 

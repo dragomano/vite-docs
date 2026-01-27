@@ -221,9 +221,7 @@ export default defineConfig({
 
 ::: tip
 
-Если вы хотите добавить ссылку на файл лицензии в собранный код, вы можете использовать `build.rolldownOptions.output.postBanner`, чтобы вставить комментарий в начало файлов. Например:
-
-<!-- TODO: add a link for output.postBanner above to Rolldown's documentation -->
+Если вы хотите сослаться на файл лицензии в собранном коде, вы можете использовать [`build.rolldownOptions.output.postBanner`](https://rolldown.rs/reference/OutputOptions.postBanner#postbanner) для вставки комментария в начало файлов. Например:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'

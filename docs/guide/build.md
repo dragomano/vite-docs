@@ -66,7 +66,7 @@ export default defineConfig({
 
 ## Стратегия разделения на чанки {#chunking-strategy}
 
-Вы можете настроить, как чанки разделяются, используя `build.rolldownOptions.output.advancedChunks` (см. [документацию Rolldown](https://rolldown.rs/in-depth/advanced-chunks)). Для настройки разделения сборки на чанки при работе с фреймворком обратитесь к соответствующей документации.
+Вы можете настроить разделение чанков с помощью [`build.rolldownOptions.output.codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting) (см. [документацию Rolldown](https://rolldown.rs/in-depth/manual-code-splitting)). Если вы используете фреймворк, обратитесь к его документации по настройке разделения чанков.
 
 ## Обработка ошибок загрузки {#load-error-handling}
 

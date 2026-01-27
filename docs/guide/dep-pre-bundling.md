@@ -57,9 +57,7 @@ export default defineConfig({
 
 Для решения этой проблемы можно использовать как `include`, так и `exclude`. Если зависимость большая (с большим количеством внутренних модулей) или является CommonJS, то её следует включить. Если зависимость небольшая и уже является валидным ESM, вы можете исключить её и позволить браузеру загружать её напрямую.
 
-Вы также можете дополнительно настроить esbuild с помощью [опции `optimizeDeps.rolldownOptions`](/config/dep-optimization-options.md#optimizedeps-rolldownoptions). Например, добавив плагин Rolldown для обработки специальных файлов в зависимостях, или изменив параметр [`target` в секции `build`](https://esbuild.github.io/api/#target).
-
-<!-- TODO: update the link above to Rolldown's documentation -->
+Вы также можете дополнительно настроить Rolldown с помощью опции [`optimizeDeps.rolldownOptions`](/config/dep-optimization-options.md#optimizedeps-rolldownoptions). Например, добавить плагин Rolldown для обработки специальных файлов в зависимостях или изменить [цель сборки `target`](https://rolldown.rs/reference/InputOptions.transform#target).
 
 ## Кэширование {#caching}
 

@@ -51,6 +51,20 @@ export default defineConfig({
 })
 ```
 
+## optimizeDeps.rolldownOptions <NonInheritBadge />
+
+- **Тип:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`RolldownOptions`](https://rolldown.rs/reference/), `'input' | 'logLevel' | 'output'> & {
+  output?: [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`
+    [`RolldownOutputOptions`](https://rolldown.rs/reference/),
+    `'format' | 'sourcemap' | 'dir' | 'banner'>`
+`}`
+
+Опции, передаваемые Rolldown во время сканирования зависимостей и оптимизации.
+
+Некоторые опции исключены, поскольку их изменение несовместимо с оптимизацией зависимостей Vite.
+
+- `plugins` объединяются с плагином зависимостей Vite
+
 ## optimizeDeps.esbuildOptions <NonInheritBadge />
 
 - **Тип:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
@@ -64,13 +78,9 @@ export default defineConfig({
 | 'outbase'
 | 'outExtension'
 | 'metafile'>`
+- **Deprecated**
 
-Опции, которые можно передать esbuild во время сканирования зависимостей и оптимизации.
-
-Некоторые опции опущены, так как их изменение не будет совместимо с оптимизацией зависимостей Vite.
-
-- `external` также опущен, используйте опцию `optimizeDeps.exclude` Vite
-- `plugins` объединяются с плагином зависимостей Vite
+Эта опция преобразуется во внутреннюю `optimizeDeps.rolldownOptions`. Используйте `optimizeDeps.rolldownOptions` вместо неё.
 
 ## optimizeDeps.force
 
