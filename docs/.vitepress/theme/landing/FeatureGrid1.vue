@@ -59,7 +59,7 @@ import viteAnimation from '@assets/vite/animations/563_x_420_rich_features.riv'
     <div class="p-5 sm:p-10 pb-0 sm:pb-0 flex flex-col gap-3 lg:border-b-0">
       <h5 class="text-white">Богатые возможности из коробки</h5>
       <p class="sm:max-w-[28rem] text-pretty">
-        Встроенная поддержка TypeScript, JSX, CSS, веб-воркеров, Web Assembly и многого другого.
+        TypeScript, JSX, CSS, воркеры, WebAssembly… и многое другое — всё в одном плагине.
       </p>
       <RiveAnimation
         :desktop-src="viteAnimation"
