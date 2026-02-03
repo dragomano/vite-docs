@@ -52,10 +52,7 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 ```js
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const viteServer = await createServer({
   server: { middlewareMode: true },
@@ -75,7 +72,7 @@ app.use('*', async (req, res, next) => {
   const url = req.originalUrl
 
   // 1. Чтение index.html
-  const indexHtmlPath = path.resolve(__dirname, 'index.html')
+  const indexHtmlPath = path.resolve(import.meta.dirname, 'index.html')
   let template = fs.readFileSync(indexHtmlPath, 'utf-8')
 
   // 2. Применение HTML-преобразований Vite. Это внедряет клиент HMR Vite,

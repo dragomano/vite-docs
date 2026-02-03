@@ -118,24 +118,21 @@ export default defineConfig({
 
 ```js twoslash [vite.config.js]
 import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
     rolldownOptions: {
       input: {
-        main: resolve(__dirname, 'index.html'),
-        nested: resolve(__dirname, 'nested/index.html')
+        main: resolve(import.meta.dirname, 'index.html'),
+        nested: resolve(import.meta.dirname, 'nested/index.html')
       }
     }
   }
 })
 ```
 
-Если вы укажете другую корневую директорию, помните, что `__dirname` всё равно будет указывать на папку вашего файла `vite.config.js` при разрешении входных путей. Поэтому вам нужно будет добавить вашу запись `root` в аргументы для `resolve`.
+Если вы укажете другую корневую директорию, помните, что `import.meta.dirname` всё равно будет указывать на папку вашего файла `vite.config.js` при разрешении входных путей. Поэтому вам нужно будет добавить вашу запись `root` в аргументы для `resolve`.
 
 Обратите внимание, что для HTML файлов Vite игнорирует имя, указанное для входа в объекте `rolldownOptions.input`, и вместо этого учитывает разрешённый идентификатор файла при генерации HTML-ресурса в папке dist. Это обеспечивает согласованную структуру с тем, как работает dev-сервер.
 
@@ -149,15 +146,12 @@ export default defineConfig({
 
 ```js twoslash [vite.config.js (одна точка входа)]
 import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'lib/main.js'),
+      entry: resolve(import.meta.dirname, 'lib/main.js'),
       name: 'MyLib',
       // соответствующие расширения будут добавлены
       fileName: 'my-lib'
@@ -180,17 +174,14 @@ export default defineConfig({
 
 ```js twoslash [vite.config.js (несколько точек входа)]
 import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
-
-const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
   build: {
     lib: {
       entry: {
-        'my-lib': resolve(__dirname, 'lib/main.js'),
-        secondary: resolve(__dirname, 'lib/secondary.js')
+        'my-lib': resolve(import.meta.dirname, 'lib/main.js'),
+        secondary: resolve(import.meta.dirname, 'lib/secondary.js')
       },
       name: 'MyLib'
     },
