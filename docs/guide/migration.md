@@ -262,7 +262,7 @@ Lightning CSS по умолчанию использует более совре
 
 Подробности об этой проблеме — в [документации Rolldown](https://rolldown.rs/in-depth/bundling-cjs#ambiguous-default-import-from-cjs-modules).
 
-Это изменение может сломать существующий код, импортирующий CJS-модули. Для временного возврата к старому поведению можно использовать устаревшую опцию `legacy.inconsistentCjsInterop: true`. Если вы обнаружили пакет, который пострадал от этого изменения — сообщите об этом автору пакета или отправьте ему пулреквест, обязательно приложив ссылку на документ Rolldown выше, чтобы автор понял контекст.
+Это изменение может сломать существующий код, импортирующий CJS-модули. Для временного возврата к старому поведению можно использовать устаревшую опцию `legacy.inconsistentCjsInterop: true`. Если вы обнаружили пакет, который пострадал от этого изменения — сообщите об этом автору пакета или отправьте ему пулреквест, обязательно приложив ссылку на документацию Rolldown выше, чтобы автор понял контекст.
 
 ### Удалено определение формата модуля по содержимому файла {#removed-module-resolution-using-format-sniffing}
 
@@ -295,9 +295,9 @@ export default defineConfig({
 
 Опция `build.rollupOptions.watch.chokidar` удалена. Переходите на [`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify).
 
-### Устарела опция `build.rollupOptions.output.manualChunks` {#deprecate-build-rollupoptions-output-manualchunks}
+### Удалена объектная форма `build.rollupOptions.output.manualChunks`, а функциональная форма помечена как устаревшая {#removed-object-form-build-rollupoptions-output-manualchunks-and-deprecate-function-form-one}
 
-Опция `output.manualChunks` устарела. Rolldown имеет более гибкую опцию [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting). Подробности об `codeSplitting` см. в документации Rolldown: [Ручное разделение кода - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting).
+Объектная форма опции `output.manualChunks` больше не поддерживается. Функциональная форма `output.manualChunks` помечена как устаревшая (deprecated). Rolldown предлагает более гибкую опцию [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting). Подробности о `codeSplitting` смотрите в документации Rolldown: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting).
 
 ### Поддержка типов модулей и их автоопределение {#module-type-support-and-auto-detection}
 
@@ -335,16 +335,14 @@ const plugin = {
 
 Передача URL в `import.meta.hot.accept` больше не поддерживается. Пожалуйста, [передавайте вместо этого id](https://github.com/vitejs/vite/pull/21382)
 
-**TODO: Это изменение ещё не реализовано, но будет реализовано до стабильного релиза.**
-
 ## Расширенные возможности {#advanced}
 
 Эти нарушающие совместимость изменения затронут лишь небольшое количество проектов:
 
 - **[TODO: будет исправлено до стабильного релиза]** https://github.com/rolldown/rolldown/issues/5726 (затрагивает nuxt, qwik)
-- **[TODO: будет исправлено до стабильного релиза]** Устаревшие чанки теперь выводятся как файл-ресурс (asset), а не как чанк, из-за отсутствия функции предварительного emit-чанка [](https://github.com/rolldown/rolldown/issues/4034). Это означает, что опции чанков к ним не применяются, и в манифесте они не будут отображаться как чанки.
 - **[TODO: будет исправлено до стабильного релиза]** Крайний случай с комментарием `@vite-ignore` [](https://github.com/vitejs/rolldown-vite/issues/426)
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) пока не поддерживаются [](https://github.com/vitejs/rolldown-vite/issues/365)
+- Наследуемые пространства имён TypeScript поддерживаются только частично. Подробности смотрите в [документации Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/typescript.html#partial-namespace-support).
 - `define` не делит ссылку на объекты: если передать объект в `define`, каждая переменная получит свою копию объекта. Подробности — в [документации Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define).
 - Изменения в объекте `bundle` (объект, передаваемый в хуки `generateBundle` / `writeBundle` и возвращаемый функцией `build`):
   - назначение `bundle[foo] = …` больше не поддерживается (Rollup тоже не рекомендовал). Используйте `this.emitFile()`.
@@ -357,7 +355,6 @@ const plugin = {
 - Функции, которые Rolldown не поддерживает (и Vite больше не поддерживает):
   - `build.rollupOptions.output.format: 'system'` [](https://github.com/rolldown/rolldown/issues/2387)
   - `build.rollupOptions.output.format: 'amd'` [](https://github.com/rolldown/rolldown/issues/2528)
-  - Полная поддержка legacy namespace в TypeScript [](https://github.com/oxc-project/oxc/issues/14227)
   - Хук `shouldTransformCachedModule` [](https://github.com/rolldown/rolldown/issues/4389)
   - Хук `resolveImportMeta` [](https://github.com/rolldown/rolldown/issues/1010)
   - Хук `renderDynamicImport` [](https://github.com/rolldown/rolldown/issues/4532)
