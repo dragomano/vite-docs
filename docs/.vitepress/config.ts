@@ -485,6 +485,7 @@ const config = defineConfig({
           { text: 'Команда', link: '/team' },
           { text: 'Блог', link: '/blog' },
           { text: 'Релизы', link: '/releases' },
+          { text: 'Благодарности', link: '/acknowledgements' },
           {
             text: 'Документальный фильм о Vite',
             link: 'https://www.youtube.com/watch?v=bmWQqAKLgT4',
