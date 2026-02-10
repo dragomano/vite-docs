@@ -587,7 +587,7 @@ export default function myPlugin() {
 ```
 
 ::: tip
-[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) экспортирует некоторые утилиты для фильтров хуков, такие как `exactRegex` и `prefixRegex`.
+[`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) экспортирует некоторые утилиты для фильтров хуков, такие как `exactRegex` и `prefixRegex`. Они также переэкспортируются из `rolldown/filter` для удобства.
 :::
 
 ## Связь клиент-сервер {#client-server-communication}
