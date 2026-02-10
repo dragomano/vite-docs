@@ -92,7 +92,7 @@ declare const __APP_VERSION__: string
 ## resolve.alias
 
 - **Тип:**
-  `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
+  `Record<string, string> | Array<{ find: string | RegExp, replacement: string }>`
 
 Определяет псевдонимы, используемые для замены значений в операторах `import` или `require`. Это работает аналогично [`@rollup/plugin-alias`](https://github.com/rollup/plugins/tree/master/packages/alias).
 
@@ -119,7 +119,7 @@ resolve: {
 }
 ```
 
-### Формат массива (`Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`) {#array-format-array-find-string-regexp-replacement-string-customresolver-resolverfunction-resolverobject}
+### Формат массива (`Array<{ find: string | RegExp, replacement: string }>`) {#array-format-array-find-string-regexp-replacement-string-customresolver-resolverfunction-resolverobject}
 
 Формат массива позволяет указывать псевдонимы как объекты, что полезно для сложных пар ключ/значение.
 
@@ -137,8 +137,6 @@ resolve: {
 ```js
 { find:/^(.*)\.js$/, replacement: '$1.alias' }
 ```
-
-Опция `customResolver` может использоваться для предоставления отдельного разрешения модулей для индивидуального псевдонима.
 
 ## resolve.dedupe
 
@@ -399,36 +397,44 @@ import type {
 
 Если установлено значение `'auto'`, данные будут сериализованы в строку только в том случае, если [они весят больше 10 КБ](https://v8.dev/blog/cost-of-javascript-2019#json:~:text=A%20good%20rule%20of%20thumb%20is%20to%20apply%20this%20technique%20for%20objects%20of%2010%20kB%20or%20larger).
 
+## oxc
+
+- **Тип:** `OxcOptions | false`
+
+`OxcOptions` расширяет [опции трансформера Oxc](https://oxc.rs/docs/guide/usage/transformer). Наиболее распространённый сценарий использования — настройка обработки JSX:
+
+```js
+export default defineConfig({
+  oxc: {
+    jsx: {
+      runtime: 'classic',
+      pragma: 'h',
+      pragmaFrag: 'Fragment',
+    },
+  },
+})
+```
+
+По умолчанию трансформация с помощью Oxc применяется к файлам с расширениями `ts`, `jsx` и `tsx`. Вы можете настроить это поведение с помощью опций `oxc.include` и `oxc.exclude`. Значением может быть регулярное выражение, шаблон [picomatch](https://github.com/micromatch/picomatch#globbing-features) или массив таких значений.
+
+Кроме того, с помощью `oxc.jsxInject` можно автоматически добавлять импорты вспомогательных функций JSX во все файлы, которые обрабатываются Oxc:
+
+```js
+export default defineConfig({
+  oxc: {
+    jsxInject: `import React from 'react'`,
+  },
+})
+```
+
+Установите в `false`, чтобы отключить трансформацию с помощью Oxc.
+
 ## esbuild
 
 - **Тип:** `ESBuildOptions | false`
+- **Устарело**
 
-`ESBuildOptions` расширяет [опции трансформации esbuild](https://esbuild.github.io/api/#transform). Наиболее распространённый случай использования — это настройка JSX:
-
-```js
-export default defineConfig({
-  esbuild: {
-    jsxFactory: 'h',
-    jsxFragment: 'Fragment'
-  }
-})
-```
-
-По умолчанию esbuild применяется к файлам `ts`, `jsx` и `tsx`. Вы можете настроить это с помощью `esbuild.include` и `esbuild.exclude`, которые могут быть регулярным выражением, шаблоном [picomatch](https://github.com/micromatch/picomatch#globbing-features) или массивом любого из них.
-
-Кроме того, вы также можете использовать `esbuild.jsxInject`, чтобы автоматически внедрять импорты вспомогательных функций JSX для каждого файла, преобразованного с помощью esbuild:
-
-```js
-export default defineConfig({
-  esbuild: {
-    jsxInject: `import React from 'react'`
-  }
-})
-```
-
-Когда [`build.minify`](./build-options.md#build-minify) установлено в `true`, все оптимизации минификации применяются по умолчанию. Чтобы отключить [определённые аспекты](https://esbuild.github.io/api/#minify) минификации, установите любое из параметров `esbuild.minifyIdentifiers`, `esbuild.minifySyntax` или `esbuild.minifyWhitespace` в `false`. Обратите внимание, что опцию `esbuild.minify` нельзя использовать для переопределения `build.minify`.
-
-Установите в `false`, чтобы отключить трансформации esbuild.
+Эта опция внутренне преобразована в опцию `oxc`. Используйте вместо неё опцию `oxc`.
 
 ## assetsInclude
 
@@ -539,6 +545,16 @@ define: {
 - `'custom'`: не включайте HTML-мидлвары
 
 Узнайте больше в [руководстве по SSR](/guide/ssr#vite-cli) Vite. Связано: [`server.middlewareMode`](./server-options#server-middlewaremode).
+
+## devtools
+
+- **Экспериментально:** [Оставить отзыв](https://github.com/vitejs/devtools/discussions)
+- **Тип:** `boolean` | `DevToolsConfig`
+- **По умолчанию:** `false`
+
+Включает интеграцию с devtools для визуализации внутреннего состояния и анализа сборки. Убедитесь, что пакет `@vitejs/devtools` установлен как зависимость. На данный момент эта функция поддерживается только в режиме сборки.
+
+Подробнее смотрите в репозитории [Vite DevTools](https://github.com/vitejs/devtools).
 
 ## future
 
