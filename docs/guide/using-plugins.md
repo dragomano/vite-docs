@@ -36,9 +36,7 @@ export default defineConfig({
 Vite стремится предоставить поддержку распространённых паттернов веб-разработки из коробки. Прежде чем искать плагин для Vite или совместимый плагин Rollup, ознакомьтесь с [Руководством по возможностям](../guide/features.md). Многие случаи, когда в проекте Rollup может потребоваться плагин, уже охвачены в Vite.
 :::
 
-Ознакомьтесь с главой [Плагины](../plugins/) для получения информации об официальных плагинах. Плагины сообщества перечислены в репозитории [awesome-vite](https://github.com/vitejs/awesome-vite#plugins).
-
-Вы также можете найти плагины, которые следуют [рекомендуемым соглашениям](./api-plugin.md#conventions), используя поиск npm [для плагинов Vite](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) или [для плагинов Rollup](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity).
+Ознакомьтесь с разделом [Плагины](../plugins/), чтобы получить информацию об официальных плагинах. Плагины от сообщества, опубликованные в npm, перечислены в [Реестре плагинов Vite](https://registry.vite.dev/plugins).
 
 ## Принудительное упорядочивание плагинов {#enforcing-plugin-ordering}
 
