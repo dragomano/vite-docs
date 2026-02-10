@@ -15,7 +15,7 @@
 
 ## Rolldown
 
-Vite 8 использует инструменты на базе Rolldown и Oxc вместо esbuild и Rollup.
+Vite 8 использует инструменты на базе [Rolldown](https://rolldown.rs/) и [Oxc](https://oxc.rs/) вместо [esbuild](https://esbuild.github.io/) и [Rollup](https://rollupjs.org/).
 
 ### Поэтапная миграция {#gradual-migration}
 
@@ -270,7 +270,7 @@ Lightning CSS по умолчанию использует более совре
 
 ### Сохранение вызовов `require` для внешних модулей {#require-calls-for-externalized-modules}
 
-Вызовы `require` для внешних модулей теперь сохраняются как `require` и не преобразуются в `import`. Это сделано для сохранения правильной семантики `require`. Если нужно всё-таки преобразовать их в `import` — используйте встроенный плагин Rolldown `esmExternalRequirePlugin`, который переэкспортируется из `vite`.
+Вызовы `require` для внешних модулей теперь сохраняются как `require` и не преобразуются в `import`. Это сделано для сохранения правильной семантики `require`. Если нужно всё-таки преобразовать их в `import` — используйте [встроенный плагин Rolldown `esmExternalRequirePlugin`](https://rolldown.rs/builtin-plugins/esm-external-require), который переэкспортируется из `vite`.
 
 ```js
 import { defineConfig, esmExternalRequirePlugin } from 'vite'
@@ -328,8 +328,7 @@ const plugin = {
 - `worker.rollupOptions` переименована в `worker.rolldownOptions`
 - `build.commonjsOptions` теперь не делает ничего (no-op)
 - `build.dynamicImportVarsOptions.warnOnError`: теперь не делает ничего (no-op)
-
-## Основные изменения {#general-changes} [<Badge text="NRV" type="warning" />](#migration-from-v7)
+- `resolve.alias[].customResolver`: Вместо этого используйте собственный плагин с хуком `resolveId` и опцией `enforce: 'pre'`
 
 ## Удалённые устаревшие функции {#removed-deprecated-features} [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
@@ -339,8 +338,6 @@ const plugin = {
 
 Эти нарушающие совместимость изменения затронут лишь небольшое количество проектов:
 
-- **[TODO: будет исправлено до стабильного релиза]** https://github.com/rolldown/rolldown/issues/5726 (затрагивает nuxt, qwik)
-- **[TODO: будет исправлено до стабильного релиза]** Крайний случай с комментарием `@vite-ignore` [](https://github.com/vitejs/rolldown-vite/issues/426)
 - [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) пока не поддерживаются [](https://github.com/vitejs/rolldown-vite/issues/365)
 - Наследуемые пространства имён TypeScript поддерживаются только частично. Подробности смотрите в [документации Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/typescript.html#partial-namespace-support).
 - `define` не делит ссылку на объекты: если передать объект в `define`, каждая переменная получит свою копию объекта. Подробности — в [документации Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define).
@@ -352,14 +349,15 @@ const plugin = {
 - Директива `"use strict";` иногда не вставляется. Подробности — в [документации Rolldown](https://rolldown.rs/in-depth/directives).
 - Понижение ниже ES5 с помощью plugin-legacy не поддерживается [](https://github.com/vitejs/rolldown-vite/issues/452)
 - Передача одного и того же браузера с разными версиями в `build.target` теперь вызывает ошибку: раньше esbuild брал последнюю версию, что, скорее всего, не было желаемым поведением.
-- Функции, которые Rolldown не поддерживает (и Vite больше не поддерживает):
-  - `build.rollupOptions.output.format: 'system'` [](https://github.com/rolldown/rolldown/issues/2387)
-  - `build.rollupOptions.output.format: 'amd'` [](https://github.com/rolldown/rolldown/issues/2528)
-  - Хук `shouldTransformCachedModule` [](https://github.com/rolldown/rolldown/issues/4389)
-  - Хук `resolveImportMeta` [](https://github.com/rolldown/rolldown/issues/1010)
-  - Хук `renderDynamicImport` [](https://github.com/rolldown/rolldown/issues/4532)
+- Функции, которые Rolldown и Vite больше не поддерживают:
+  - `build.rollupOptions.output.format: 'system'` [rolldown#2387](https://github.com/rolldown/rolldown/issues/2387)
+  - `build.rollupOptions.output.format: 'amd'` [rolldown#2528](https://github.com/rolldown/rolldown/issues/2528)
+  - Хук `shouldTransformCachedModule` [rolldown#4389](https://github.com/rolldown/rolldown/issues/4389)
+  - Хук `resolveImportMeta` [rolldown#1010](https://github.com/rolldown/rolldown/issues/1010)
+  - Хук `renderDynamicImport` [rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)
   - Хук `resolveFileUrl`
 - Функции `parseAst` / `parseAstAsync` объявлены устаревшими в пользу `parseSync` / `parse`, у которых больше возможностей.
+- (баг) Краевой случай с комментарием `@vite-ignore` [rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)
 
 ## Переход с v6 {#migration-from-v6}
 
