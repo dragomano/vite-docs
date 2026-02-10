@@ -40,14 +40,14 @@ npm create vite@latest -- --template rsc
 
 ## Плагины сообщества {#community-plugins}
 
-Загляните на [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) — там вы также можете отправить PR со списком своих плагинов.
+Ознакомьтесь с [Реестром плагинов Vite](https://registry.vite.dev/plugins), чтобы увидеть список плагинов, опубликованных в npm.
 
-## Rolldown Builtin Plugins {#rolldown-builtin-plugins}
+## Встроенные плагины Rolldown {#rolldown-builtin-plugins}
 
 Vite использует [Rolldown](https://rolldown.rs/) под капотом, и он предоставляет несколько встроенных плагинов для типичных сценариев.
 
 Подробности — в разделе [Rolldown Builtin Plugins](https://rolldown.rs/builtin-plugins/).
 
-## Плагины Rollup {#rollup-plugins}
+## Плагины Rolldown / Rollup {#rolldown-rollup-plugins}
 
-[Плагины Vite](../guide/api-plugin) — это расширение интерфейса плагинов Rollup. Ознакомьтесь с главой [Совместимость плагинов Rollup](../guide/api-plugin#rollup-plugin-compatibility) для получения дополнительной информации.
+[Плагины Vite](../guide/api-plugin) — это расширение интерфейса плагинов Rollup. Ознакомьтесь с главой [Совместимость плагинов Rollup](../guide/api-plugin#rolldown-plugin-compatibility) для получения дополнительной информации.
