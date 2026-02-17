@@ -119,6 +119,12 @@ import InlineWorker from './shader.js?worker&inline'
 
 Обратите внимание, что ресурсы в папке `public` всегда следует указывать с использованием абсолютного пути от корня — например, `public/icon.png` в исходном коде должен быть указан как `/icon.png`.
 
+::: tip Выбор между импортами и директорией `public`
+
+В общем случае предпочтительнее **импортировать ресурсы**, если только вам не нужны конкретные гарантии, которые предоставляет директория `public`.
+
+:::
+
 ## new URL(url, import.meta.url) {#new-url-url-import-meta-url}
 
 [import.meta.url](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/import.meta) — это нативная функция ESM, которая предоставляет URL текущего модуля. Сочетая её со встроенным [конструктором URL](https://developer.mozilla.org/ru/docs/Web/API/URL), мы можем получить полный, разрешённый URL статического ресурса, используя относительный путь из JavaScript модуля:
