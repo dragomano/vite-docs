@@ -42,8 +42,7 @@ Vite стремится предлагать устоявшиеся паттер
 
 Пользователи добавят плагины в `devDependencies` проекта и настроят их с помощью опции массива `plugins`:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import vitePlugin from 'vite-plugin-feature'
 import rollupPlugin from 'rollup-plugin-feature'
 
@@ -66,8 +65,7 @@ export default function framework(config) {
 }
 ```
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import { defineConfig } from 'vite'
 import framework from 'vite-plugin-framework'
 
@@ -471,6 +469,44 @@ console.log(msg)
       })
     }
     ```
+
+## Метаданные выходного бандла {#output-bundle-metadata}
+
+Во время сборки Vite дополняет объекты вывода сборки Rolldown специфическим для Vite полем `viteMetadata`.
+
+Оно доступно через:
+
+- `RenderedChunk` (например, в хуках `renderChunk` и `augmentChunkHash`)
+- `OutputChunk` и `OutputAsset` (например, в хуках `generateBundle` и `writeBundle`)
+
+`viteMetadata` предоставляет:
+
+- `viteMetadata.importedCss: Set<string>`
+- `viteMetadata.importedAssets: Set<string>`
+
+Это полезно при написании плагинов, которым нужно проверить сгенерированные CSS-файлы и статические ресурсы, не полагаясь на [`build.manifest`](/config/build-options#build-manifest).
+
+Пример:
+
+```ts [vite.config.ts]
+function outputMetadataPlugin(): Plugin {
+  return {
+    name: 'output-metadata-plugin',
+    generateBundle(_, bundle) {
+      for (const output of Object.values(bundle)) {
+        const css = output.viteMetadata?.importedCss
+        const assets = output.viteMetadata?.importedAssets
+        if (!css?.size && !assets?.size) continue
+
+        console.log(output.fileName, {
+          css: css ? [...css] : [],
+          assets: assets ? [...assets] : [],
+        })
+      }
+    },
+  }
+}
+```
 
 ## Порядок плагинов {#plugin-ordering}
 
