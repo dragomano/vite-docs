@@ -116,44 +116,47 @@ const plugin = {
 ::: code-group
 
 ```bash [npm]
-$ npm install -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ npm install -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Yarn]
-$ yarn add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ yarn add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [pnpm]
-$ pnpm add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ pnpm add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Bun]
-$ bun add -D @rollup/plugin-babel @babel/plugin-proposal-decorators
+$ bun add -D @rolldown/plugin-babel @babel/plugin-proposal-decorators
 ```
 
 ```bash [Deno]
-$ deno add -D npm:@rollup/plugin-babel npm:@babel/plugin-proposal-decorators
+$ deno add -D npm:@rolldown/plugin-babel npm:@babel/plugin-proposal-decorators
 ```
 
 :::
 
 ```ts [vite.config.ts]
-import { defineConfig, withFilter } from 'vite'
-import { babel } from '@rollup/plugin-babel'
+import { defineConfig } from 'vite'
+import babel from '@rolldown/plugin-babel'
+
+function decoratorPreset(options: Record<string, unknown>) {
+  return {
+    preset: () => ({
+      plugins: [['@babel/plugin-proposal-decorators', options]],
+    }),
+    rolldown: {
+      // Выполнять эту трансформацию только если файл содержит декоратор.
+      filter: {
+        code: '@',
+      },
+    },
+  }
+}
 
 export default defineConfig({
-  plugins: [
-    withFilter(
-      babel({
-        configFile: false,
-        plugins: [
-          ['@babel/plugin-proposal-decorators', { version: '2023-11' }],
-        ],
-      }),
-      // Выполнять эту трансформацию только если файл содержит декоратор.
-      { transform: { code: '@' } },
-    ),
-  ],
+  plugins: [babel({ presets: [decoratorPreset({ version: '2023-11' })] })],
 })
 ```
 
@@ -293,7 +296,7 @@ export default defineConfig({
 
 ### Удалена опция `build.rollupOptions.watch.chokidar` {#removed-build-rollupoptions-watch-chokidar-option}
 
-Опция `build.rollupOptions.watch.chokidar` удалена. Переходите на [`build.rolldownOptions.watch.notify`](https://rolldown.rs/reference/InputOptions.watch#notify).
+Опция `build.rollupOptions.watch.chokidar` удалена. Переходите на [`build.rolldownOptions.watch.watcher`](https://rolldown.rs/reference/InputOptions.watch#watcher).
 
 ### Удалена объектная форма `build.rollupOptions.output.manualChunks`, а функциональная форма помечена как устаревшая {#removed-object-form-build-rollupoptions-output-manualchunks-and-deprecate-function-form-one}
 
@@ -332,32 +335,31 @@ const plugin = {
 
 ## Удалённые устаревшие функции {#removed-deprecated-features} [<Badge text="NRV" type="warning" />](#migration-from-v7)
 
-Передача URL в `import.meta.hot.accept` больше не поддерживается. Пожалуйста, [передавайте вместо этого id](https://github.com/vitejs/vite/pull/21382)
+Передача URL в `import.meta.hot.accept` больше не поддерживается. Пожалуйста, [передавайте id вместо этого](https://github.com/vitejs/vite/pull/21382)
 
 ## Расширенные возможности {#advanced}
 
 Эти нарушающие совместимость изменения затронут лишь небольшое количество проектов:
 
-- [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) пока не поддерживаются [](https://github.com/vitejs/rolldown-vite/issues/365)
+- [Extglobs](https://github.com/micromatch/picomatch/blob/master/README.md#extglobs) пока не поддерживаются ([rolldown-vite#365](https://github.com/vitejs/rolldown-vite/issues/365))
 - Наследуемые пространства имён TypeScript поддерживаются только частично. Подробности смотрите в [документации Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/typescript.html#partial-namespace-support).
 - `define` не делит ссылку на объекты: если передать объект в `define`, каждая переменная получит свою копию объекта. Подробности — в [документации Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer/global-variable-replacement#define).
 - Изменения в объекте `bundle` (объект, передаваемый в хуки `generateBundle` / `writeBundle` и возвращаемый функцией `build`):
   - назначение `bundle[foo] = …` больше не поддерживается (Rollup тоже не рекомендовал). Используйте `this.emitFile()`.
-  - ссылка на объект не сохраняется между хуками [](https://github.com/vitejs/rolldown-vite/issues/410)
-  - `structuredClone(bundle)` падает с `DataCloneError`. Эта возможность удалена. Клонируйте через `structuredClone({ ...bundle })` [](https://github.com/vitejs/rolldown-vite/issues/128)
+  - ссылка на объект не сохраняется между хуками ([rolldown-vite#410](https://github.com/vitejs/rolldown-vite/issues/410))
+  - `structuredClone(bundle)` падает с `DataCloneError`. Эта возможность удалена. Клонируйте через `structuredClone({ ...bundle })` ([rolldown-vite#128](https://github.com/vitejs/rolldown-vite/issues/128))
 - Все параллельные хуки Rollup теперь работают как последовательные. Подробности — в [документации Rolldown](https://rolldown.rs/apis/plugin-api#sequential-hook-execution).
 - Директива `"use strict";` иногда не вставляется. Подробности — в [документации Rolldown](https://rolldown.rs/in-depth/directives).
-- Понижение ниже ES5 с помощью plugin-legacy не поддерживается [](https://github.com/vitejs/rolldown-vite/issues/452)
+- Трансформация в ES5 и ниже с помощью plugin-legacy не поддерживается ([rolldown-vite#452](https://github.com/vitejs/rolldown-vite/issues/452))
 - Передача одного и того же браузера с разными версиями в `build.target` теперь вызывает ошибку: раньше esbuild брал последнюю версию, что, скорее всего, не было желаемым поведением.
 - Функции, которые Rolldown и Vite больше не поддерживают:
-  - `build.rollupOptions.output.format: 'system'` [rolldown#2387](https://github.com/rolldown/rolldown/issues/2387)
-  - `build.rollupOptions.output.format: 'amd'` [rolldown#2528](https://github.com/rolldown/rolldown/issues/2528)
-  - Хук `shouldTransformCachedModule` [rolldown#4389](https://github.com/rolldown/rolldown/issues/4389)
-  - Хук `resolveImportMeta` [rolldown#1010](https://github.com/rolldown/rolldown/issues/1010)
-  - Хук `renderDynamicImport` [rolldown#4532](https://github.com/rolldown/rolldown/issues/4532)
+  - `build.rollupOptions.output.format: 'system'` ([rolldown#2387](https://github.com/rolldown/rolldown/issues/2387))
+  - `build.rollupOptions.output.format: 'amd'` ([rolldown#2528](https://github.com/rolldown/rolldown/issues/2528))
+  - Хук `shouldTransformCachedModule` ([rolldown#4389](https://github.com/rolldown/rolldown/issues/4389))
+  - Хук `resolveImportMeta` ([rolldown#1010](https://github.com/rolldown/rolldown/issues/1010))
+  - Хук `renderDynamicImport` ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - Хук `resolveFileUrl`
 - Функции `parseAst` / `parseAstAsync` объявлены устаревшими в пользу `parseSync` / `parse`, у которых больше возможностей.
-- (баг) Краевой случай с комментарием `@vite-ignore` [rolldown-vite#426](https://github.com/vitejs/rolldown-vite/issues/426)
 
 ## Переход с v6 {#migration-from-v6}
 
