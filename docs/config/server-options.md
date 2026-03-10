@@ -222,6 +222,44 @@ Direct websocket connection fallback. Check out https://vite.dev/config/server-o
 
 :::
 
+## server.forwardConsole
+
+- **Тип:** `boolean | { unhandledErrors?: boolean, logLevels?: ('error' | 'warn' | 'info' | 'log' | 'debug')[] }`
+- **По умолчанию:** автоопределение (`true`, если обнаружен AI-кодинговый агент с помощью пакета [`@vercel/detect-agent`](https://www.npmjs.com/package/@vercel/detect-agent), в остальных случаях — `false`)
+
+Перенаправляет события консоли браузера на консоль dev-сервера Vite во время разработки.
+
+- Значение `true` включает пересылку необработанных ошибок и вызовов `console.error` / `console.warn`.
+- Опция `unhandledErrors` управляет пересылкой необработанных исключений и необработанных отклонений промисов.
+- Опция `logLevels` определяет, какие методы `console.*` будут перенаправляться.
+
+Пример:
+
+```js
+export default defineConfig({
+  server: {
+    forwardConsole: {
+      unhandledErrors: true,
+      logLevels: ['warn', 'error'],
+    },
+  },
+})
+```
+
+Когда необработанные ошибки перенаправляются, они выводятся в терминале сервера с улучшенным форматированием, например:
+
+```log
+1:18:38 AM [vite] (client) [Unhandled error] Error: this is test error
+ > testError src/main.ts:20:8
+     18|
+     19| function testError() {
+     20|   throw new Error('this is test error')
+       |        ^
+     21| }
+     22|
+ > HTMLButtonElement.<anonymous> src/main.ts:6:2
+```
+
 ## server.warmup
 
 - **Тип:** `{ clientFiles?: string[], ssrFiles?: string[] }`
