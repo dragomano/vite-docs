@@ -93,6 +93,25 @@ if (import.meta.hot) {
 
 Модуль, который «принимает» горячие обновления, считается **границей HMR**.
 
+```dot
+digraph hmr_boundary {
+  rankdir=RL
+  ranksep=0.3
+  node [shape=box style="rounded,filled" fontname="Arial" fontsize=11 margin="0.2,0.1" fontcolor="${#3c3c43|#ffffff}" color="${#c2c2c4|#3c3f44}"]
+  edge [color="${#67676c|#98989f}" fontname="Arial" fontsize=10 fontcolor="${#67676c|#98989f}"]
+  bgcolor="transparent"
+
+  root [label="main.js" fillcolor="${#f6f6f7|#2e2e32}"]
+  parent [label="App.vue" fillcolor="${#f6f6f7|#2e2e32}"]
+  boundary [label="Component.vue\n(граница HMR)\nhot.accept()" fillcolor="${#def5ed|#15312d}" color="${#18794e|#3dd68c}" penwidth=2]
+  edited [label="utils.js\n(изменён)" fillcolor="${#fcf4dc|#38301a}" color="${#915930|#f9b44e}" penwidth=2]
+
+  boundary -> edited [label="  импорты" color="${#915930|#f9b44e}" style=bold]
+  parent -> boundary [label="  импорты" style=dashed]
+  root -> parent [label="  импорты" style=dashed]
+}
+```
+
 HMR в Vite на самом деле не заменяет изначально импортированный модуль: если модуль границы HMR повторно экспортирует импорты из зависимости, то он отвечает за обновление этих повторных экспортов (и эти экспорты должны использовать `let`). Кроме того, импортеры выше по цепочке от модуля границы не будут уведомлены об изменении. Эта упрощённая реализация HMR достаточна для большинства случаев использования в разработке, позволяя нам избежать дорогостоящей работы по созданию прокси-модулей.
 
 Vite требует, чтобы вызов этой функции выглядел как `import.meta.hot.accept(` (чувствительно к пробелам) в исходном коде, чтобы модуль мог принимать обновления. Это требование статического анализа, который Vite выполняет для включения поддержки HMR для модуля.

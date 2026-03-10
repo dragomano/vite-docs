@@ -82,6 +82,53 @@ const ssrEnvironment = server.environments.ssr
 
 Модульный раннер Vite позволяет выполнять любой код, предварительно обрабатывая его с помощью плагинов Vite. Это отличается от `server.ssrLoadModule`, поскольку реализация раннера отделена от сервера. Это позволяет авторам библиотек и фреймворков реализовать свой уровень взаимодействия между сервером Vite и раннером. Браузер взаимодействует с соответствующим окружением, используя WebSocket-сервер и через HTTP-запросы. Модульный раннер Node может напрямую вызывать функции для обработки модулей, так как он работает в том же процессе. Другие окружения могут запускать модули, подключаясь к среде выполнения JS, такой как workerd, или к Worker Thread, как это делает Vitest.
 
+
+```dot
+digraph module_runner {
+  rankdir=LR
+  node [shape=box style="rounded,filled" fontname="Arial" fontsize=11 margin="0.2,0.1" fontcolor="${#3c3c43|#ffffff}" color="${#c2c2c4|#3c3f44}"]
+  edge [color="${#67676c|#98989f}" fontname="Arial" fontsize=10 fontcolor="${#67676c|#98989f}"]
+  bgcolor="transparent"
+  compound=true
+
+  subgraph cluster_server {
+    label="Dev-сервер Vite (Node.js)" labeljust=l fontname="Arial" fontsize=12
+    style="rounded,filled" fillcolor="${#f6f6f7|#1a1a1f}" color="${#c2c2c4|#3c3f44}"
+    fontcolor="${#3c3c43|#ffffff}"
+
+    subgraph cluster_env {
+      label="DevEnvironment" labeljust=l fontname="Arial" fontsize=11
+      style="rounded,filled" fillcolor="${#f2ecfc|#2c273e}" color="${#c2c2c4|#3c3f44}"
+      fontcolor="${#3c3c43|#ffffff}"
+
+      plugins [label="Конвейер\nплагинов" fillcolor="${#e9eaff|#222541}"]
+      mg [label="Граф\nмодулей" fillcolor="${#e9eaff|#222541}"]
+      hot [label="HotChannel" fillcolor="${#fcf4dc|#38301a}"]
+
+      plugins -> mg [dir=both]
+      mg -> hot [style=invis]
+    }
+  }
+
+  subgraph cluster_runtime {
+    label="Целевая среда выполнения" labeljust=l fontname="Arial" fontsize=12
+    style="rounded,filled" fillcolor="${#f0fdf4|#131b15}" color="${#c2c2c4|#3c3f44}"
+    fontcolor="${#3c3c43|#ffffff}"
+
+    subgraph cluster_runner {
+      label="ModuleRunner" labeljust=l fontname="Arial" fontsize=11
+      style="rounded,filled" fillcolor="${#def5ed|#15312d}" color="${#c2c2c4|#3c3f44}"
+      fontcolor="${#3c3c43|#ffffff}"
+
+      evaluator [label="Исполнитель\nмодулей" fillcolor="${#def5ed|#15312d}"]
+      transport [label="Транспорт" fillcolor="${#fcf4dc|#38301a}"]
+    }
+  }
+
+  hot -> transport [label="HMR / загрузка\nи вызов модуля" dir=both style=bold color="${#6f42c1|#c8abfa}"]
+}
+```
+
 Одна из целей этой функции — предоставить настраиваемый API для обработки и выполнения кода. Пользователи могут создавать новые фабрики окружений, используя открытые примитивы.
 
 ```ts

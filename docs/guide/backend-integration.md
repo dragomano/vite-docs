@@ -104,6 +104,31 @@
    }
    ```
 
+   Манифест сопоставляет исходные файлы с их выходными артефактами сборки и зависимостями:
+
+   ```dot
+   digraph manifest {
+     rankdir=TB
+     node [shape=box style="rounded,filled" fontname="Arial" fontsize=10 margin="0.2,0.1" fontcolor="${#3c3c43|#ffffff}" color="${#c2c2c4|#3c3f44}"]
+     edge [color="${#67676c|#98989f}" fontname="Arial" fontsize=9 fontcolor="${#67676c|#98989f}"]
+     bgcolor="transparent"
+
+     foo [label="views/foo.js\n(точка входа)" fillcolor="${#e9eaff|#222541}"]
+     bar [label="views/bar.js\n(точка входа)" fillcolor="${#e9eaff|#222541}"]
+     shared [label="_shared-B7PI925R.js\n(общий чанк)" fillcolor="${#f2ecfc|#2c273e}"]
+     baz [label="baz.js\n(динамический импорт)" fillcolor="${#fcf4dc|#38301a}"]
+     foocss [label="foo.css" shape=ellipse fillcolor="${#fde4e8|#3a1d27}"]
+     sharedcss [label="shared.css" shape=ellipse fillcolor="${#fde4e8|#3a1d27}"]
+     logo [label="logo.svg\n(ресурс)" shape=ellipse fillcolor="${#def5ed|#15312d}"]
+
+     foo -> shared [label="imports"]
+     bar -> shared [label="imports"]
+     bar -> baz [label="dynamicImports" style=dashed]
+     foo -> foocss [label="css"]
+     shared -> sharedcss [label="css"]
+   }
+   ```
+
    Манифест имеет структуру `Record<name, chunk>`, где каждый чанк соответствует интерфейсу `ManifestChunk`:
 
    ```ts style:max-height:400px

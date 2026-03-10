@@ -3,4 +3,5 @@ node_modules
 docs/.vitepress/dist
 docs/.vitepress/temp
 docs/.vitepress/cache
+.vitepress/cache
 .vscode
