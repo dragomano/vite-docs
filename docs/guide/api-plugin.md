@@ -89,13 +89,16 @@ export default function myPlugin() {
   return {
     name: 'transform-file',
 
-    transform(src, id) {
-      if (fileRegex.test(id)) {
+    transform: {
+      filter: {
+        id: fileRegex,
+      },
+      handler(src, id) {
         return {
           code: compileFileToJS(src),
           map: null, // предоставьте карту источников, если она доступна
         }
-      }
+      },
     },
   }
 }
@@ -110,21 +113,25 @@ export default function myPlugin() {
 Виртуальные модули — это полезная схема, которая позволяет передавать информацию о времени сборки в исходные файлы, используя обычный синтаксис импорта ESM.
 
 ```js
+import { exactRegex } from '@rolldown/pluginutils'
+
 export default function myPlugin() {
   const virtualModuleId = 'virtual:my-module'
   const resolvedVirtualModuleId = '\0' + virtualModuleId
 
   return {
     name: 'my-plugin', // обязательно, будет отображаться в предупреждениях и ошибках
-    resolveId(id) {
-      if (id === virtualModuleId) {
+    resolveId: {
+      filter: { id: exactRegex(virtualModuleId) },
+      handler() {
         return resolvedVirtualModuleId
-      }
+      },
     },
-    load(id) {
-      if (id === resolvedVirtualModuleId) {
+    load: {
+      filter: { id: exactRegex(resolvedVirtualModuleId) },
+      handler() {
         return `export const msg = "from virtual module"`
-      }
+      },
     },
   }
 }
