@@ -73,6 +73,31 @@
 
 В случае, если сервер работает внутри dev-контейнера в VS Code, запрос может казаться зависшим. Для решения этой проблемы обратитесь к разделу [Dev-контейнеры / Перенаправление портов в VS Code](#dev-containers-vs-code-port-forwarding).
 
+### Vite падает с ошибкой ENOSPC {#vite-crashes-with-enospc-error}
+
+Если вы видите ошибку такого вида на Linux:
+
+> Error: ENOSPC: System limit for number of file watchers reached
+
+Это происходит, когда в директории вашего проекта слишком много файлов (например, много изображений или ресурсов) и превышается системный лимит на количество файловых наблюдателей. В Linux по умолчанию лимит составляет примерно 8192–10000 наблюдателей за файлами.
+
+Чтобы решить эту проблему, вы можете:
+
+- Увеличить системный лимит файловых наблюдателей:
+
+  ```shell
+  # Check current limit
+  $ cat /proc/sys/fs/inotify/max_user_watches
+  # Increase limit (temporary)
+  $ sudo sysctl fs.inotify.max_user_watches=524288
+  # Make it permanent - add to /etc/sysctl.conf (or edit if it already exists)
+  $ echo "fs.inotify.max_user_watches=524288" | sudo tee -a /etc/sysctl.conf
+  $ sudo sysctl -p
+  ```
+
+- Исключите директории с большим количеством файлов из наблюдения за файлами с помощью [`server.watch.ignored`](/config/server-options#server-watch)
+- Используйте опрос вместо событий файловой системы с помощью [`server.watch.usePolling`](/config/server-options#server-watch). Обратите внимание, что опрос потребляет больше ресурсов процессора
+
 ### Сетевые запросы перестают загружаться {#network-requests-stop-loading}
 
 При использовании самоподписанного SSL-сертификата Chrome игнорирует все директивы кэширования и перезагружает контент. Vite полагается на эти директивы кэширования.
