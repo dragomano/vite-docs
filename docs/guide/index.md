@@ -114,7 +114,9 @@ $ deno init --npm vite my-vue-app --template vue
 
 ::::
 
+::: details Краткий видеокурс для новичков
 <YouTubeVideo videoId="D13wKzkQnMA" />
+:::
 
 ## Шаблоны сообщества {#community-templates}
 
