@@ -2,7 +2,7 @@
 
 Если вы мигрируете с `rolldown-vite` — это был технический preview Rolldown для Vite 6 и 7, — то вам актуальны только разделы с бейджем <Badge text="NRV" type="warning" /> в заголовке.
 
-## Изменение целевых браузеров по умолчанию {#default-browser-target-change} [<Badge text="NRV" type="warning" />](#migration-from-v7)
+## Изменение целевых браузеров по умолчанию [<Badge text="NRV" type="warning" />](#migration-from-v7) {#default-browser-target-change}
 
 Значение по умолчанию для `build.target` и `'baseline-widely-available'` обновлено до более новых версий браузеров:
 
@@ -351,7 +351,7 @@ const plugin = {
 - `build.dynamicImportVarsOptions.warnOnError`: теперь не делает ничего (no-op)
 - `resolve.alias[].customResolver`: Вместо этого используйте собственный плагин с хуком `resolveId` и опцией `enforce: 'pre'`
 
-## Удалённые устаревшие функции {#removed-deprecated-features} [<Badge text="NRV" type="warning" />](#migration-from-v7)
+## Удалённые устаревшие функции [<Badge text="NRV" type="warning" />](#migration-from-v7) {#removed-deprecated-features}
 
 Передача URL в `import.meta.hot.accept` больше не поддерживается. Пожалуйста, [передавайте id вместо этого](https://github.com/vitejs/vite/pull/21382)
 
