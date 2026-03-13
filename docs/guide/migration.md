@@ -302,6 +302,24 @@ export default defineConfig({
 
 Объектная форма опции `output.manualChunks` больше не поддерживается. Функциональная форма `output.manualChunks` помечена как устаревшая (deprecated). Rolldown предлагает более гибкую опцию [`codeSplitting`](https://rolldown.rs/reference/OutputOptions.codeSplitting). Подробности о `codeSplitting` смотрите в документации Rolldown: [Manual Code Splitting - Rolldown](https://rolldown.rs/in-depth/manual-code-splitting).
 
+### `build()` выбрасывает `BundleError` {#build-throws-bundleerror}
+
+_Это изменение касается только пользователей JS API._
+
+`build()` теперь выбрасывает [`BundleError`](https://rolldown.rs/reference/TypeAlias.BundleError) вместо «сырой» ошибки, возникшей в плагине. `BundleError` типизирован как `Error & { errors?: RolldownError[] }` и оборачивает отдельные ошибки в массив `errors`. Если вам нужны конкретные ошибки, вам необходимо обратиться к свойству `.errors`:
+
+```js
+try {
+  await build()
+} catch (e) {
+  if (e.errors) {
+    for (const error of e.errors) {
+      console.log(error.code) // код ошибки
+    }
+  }
+}
+```
+
 ### Поддержка типов модулей и их автоопределение {#module-type-support-and-auto-detection}
 
 _Это изменение касается только авторов плагинов._
