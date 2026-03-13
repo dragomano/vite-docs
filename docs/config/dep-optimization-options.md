@@ -53,11 +53,7 @@ export default defineConfig({
 
 ## optimizeDeps.rolldownOptions <NonInheritBadge />
 
-- **Тип:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`RolldownOptions`](https://rolldown.rs/reference/), `'input' | 'logLevel' | 'output'> & {
-  output?: [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`
-    [`RolldownOutputOptions`](https://rolldown.rs/reference/),
-    `'format' | 'sourcemap' | 'dir' | 'banner'>`
-`}`
+- **Тип:** <code>Omit<<a href="https://rolldown.rs/reference/Interface.RolldownOptions">RolldownOptions</a>, 'input' | 'logLevel' | 'output'> & { output?: Omit<<a href="https://rolldown.rs/reference/#:~:text=Output%20Options">RolldownOutputOptions</a>, 'format' | 'sourcemap' | 'dir' | 'banner'> }</code>
 
 Опции, передаваемые Rolldown во время сканирования зависимостей и оптимизации.
 
@@ -67,18 +63,8 @@ export default defineConfig({
 
 ## optimizeDeps.esbuildOptions <NonInheritBadge />
 
-- **Тип:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
-| 'bundle'
-| 'entryPoints'
-| 'external'
-| 'write'
-| 'watch'
-| 'outdir'
-| 'outfile'
-| 'outbase'
-| 'outExtension'
-| 'metafile'>`
-- **Deprecated**
+- **Тип:** <code>Omit<<a href="https://esbuild.github.io/api/#general-options">EsbuildBuildOptions</a>, 'bundle' | 'entryPoints' | 'external' | 'write' | 'watch' | 'outdir' | 'outfile' | 'outbase' | 'outExtension' | 'metafile'></code>
+- **Устарела**
 
 Эта опция преобразуется во внутреннюю `optimizeDeps.rolldownOptions`. Используйте `optimizeDeps.rolldownOptions` вместо неё.
 
@@ -105,7 +91,7 @@ export default defineConfig({
 
 ## optimizeDeps.disabled <NonInheritBadge />
 
-- **Устарело**
+- **Устарела**
 - **Экспериментально:** [Оставить отзыв](https://github.com/vitejs/vite/discussions/13839)
 - **Тип:** `boolean | 'build' | 'dev'`
 - **По умолчанию:** `'build'`
