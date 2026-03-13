@@ -477,6 +477,33 @@ console.log(msg)
     }
     ```
 
+## Метаданные контекста плагина {#plugin-context-meta}
+
+Для хуков плагина, имеющих доступ к контексту плагина, Vite предоставляет дополнительные свойства в `this.meta`:
+
+- `this.meta.viteVersion`: Строка с текущей версией Vite (например, `"8.0.0"`).
+
+::: tip Определение Vite на базе Rolldown
+
+[`this.meta.rolldownVersion`](https://rolldown.rs/reference/Interface.PluginContextMeta#rolldownversion) доступно только для Vite, работающего на Rolldown (т. е. Vite 8+). Вы можете использовать это свойство, чтобы определить, работает ли текущий экземпляр Vite на базе Rolldown:
+
+```ts
+function versionCheckPlugin(): Plugin {
+  return {
+    name: 'version-check',
+    buildStart() {
+      if (this.meta.rolldownVersion) {
+        // Действуем только в случае, если Vite работает на Rolldown
+      } else {
+        // В противном случае (Vite на Rollup) делаем что-то другое
+      }
+    },
+  }
+}
+```
+
+:::
+
 ## Метаданные выходного бандла {#output-bundle-metadata}
 
 Во время сборки Vite дополняет объекты вывода сборки Rolldown специфическим для Vite полем `viteMetadata`.
