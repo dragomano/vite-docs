@@ -14,15 +14,15 @@ Vite стремится обеспечить поддержку распрост
 
 ### [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 
-Обеспечивает поддержку Vue 3 JSX через [специальную трансформацию Babel](https://github.com/vuejs/jsx-next)).
+Обеспечивает поддержку Vue 3 JSX через [специальную трансформацию Babel](https://github.com/vuejs/jsx-next).
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-Использует [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer) и [Babel](https://babeljs.io/), обеспечивая быстрый HMR с небольшим размером пакета и гибкостью использования конвейера трансформаций Babel. Без дополнительных плагинов Babel используется только Oxc Transformer.
+Обеспечивает поддержку React Fast Refresh через [Oxc Transformer](https://oxc.rs/docs/guide/usage/transformer).
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
-Заменяет Babel на [SWC](https://swc.rs/) во время разработки. Во время production-сборки при использовании плагинов применяются SWC + Oxc Transformer, в остальных случаях — только Oxc Transformer. Для крупных проектов с кастомными плагинами первоначальный запуск и горячая замена модулей (HMR) могут стать значительно быстрее, если плагин также доступен для SWC.
+Во время разработки заменяет Oxc на [SWC](https://swc.rs/), чтобы поддерживать плагины для SWC. В продакшен-сборках используются SWC + Oxc Transformer при наличии плагинов. В больших проектах с кастомными плагинами это может значительно ускорить холодный старт и обновление модулей в HMR — при условии, что плагин также реализован для SWC.
 
 ### [@vitejs/plugin-rsc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-rsc)
 
