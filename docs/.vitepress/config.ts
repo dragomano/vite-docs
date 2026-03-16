@@ -618,7 +618,9 @@ const config = defineConfig({
       md.use(markdownItImageSize, {
         publicDir: path.resolve(import.meta.dirname, '../public'),
       })
-      await graphvizMarkdownPlugin(md)
+      await graphvizMarkdownPlugin(md, {
+        cacheDir: 'docs/.vitepress/cache/graphviz',
+      })
     },
     container: {
       dangerLabel: 'ОПАСНОСТЬ',
