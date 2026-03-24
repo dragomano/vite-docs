@@ -100,16 +100,7 @@ const plugin = {
 
 :::: details Обходное решение для понижения нативных декораторов
 
-Пока можно использовать [Babel](https://babeljs.io/) или [SWC](https://swc.rs/) для понижения нативных декораторов. SWC быстрее Babel, но **не поддерживает самую свежую версию спецификации декораторов**, которую поддерживает esbuild.
-
-Спецификация декораторов несколько раз обновлялась после достижения stage 3. Поддерживаемые инструментами версии:
-
-- `"2023-11"` — поддерживают esbuild, TypeScript 5.4+ и Babel
-- `"2023-05"` — поддерживает TypeScript 5.2+
-- `"2023-01"` — поддерживает TypeScript 5.0+
-- `"2022-03"` — поддерживает SWC
-
-Различия между версиями описаны в [руководстве Babel по версиям декораторов](https://babeljs.io/docs/babel-plugin-proposal-decorators#version).
+Пока можно использовать [Babel](https://babeljs.io/) или [SWC](https://swc.rs/) для понижения нативных декораторов.
 
 **Использование Babel:**
 
@@ -197,8 +188,7 @@ export default defineConfig({
         swc: {
           jsc: {
             parser: { decorators: true, decoratorsBeforeExport: true },
-            // ПРИМЕЧАНИЕ: SWC пока не поддерживает версию '2023-11'.
-            transform: { decoratorVersion: '2022-03' },
+            transform: { decoratorVersion: '2023-11' },
           },
         },
       }),
