@@ -20,7 +20,7 @@
 
 - **Тип:** [`RolldownOptions`](https://rolldown.rs/reference/)
 
-Опции Rollup для сборки воркера.
+Опции Rolldown для сборки воркера.
 
 ## worker.rollupOptions
 
