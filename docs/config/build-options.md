@@ -130,7 +130,7 @@ modulePreload: {
 ## build.cssMinify
 
 - **Тип:** `boolean | 'esbuild' | 'lightningcss'`
-- **По умолчанию:** такой же, как и [`build.minify`](#build-minify) для клиента, `'esbuild'` для SSR
+- **По умолчанию:** `'lightningcss'`, но `false`, если [`build.minify`](#build-minify) отключён для клиентской сборки
 
 Эта опция позволяет пользователям переопределить минификацию CSS, вместо того чтобы использовать значение по умолчанию `build.minify`, так что вы можете настраивать минификацию для JS и CSS отдельно. Vite по умолчанию использует `esbuild` для минификации CSS. Установите опцию в `'lightningcss'`, чтобы использовать [Lightning CSS](https://lightningcss.dev/minification.html) вместо этого. Если выбрано, это можно настроить с помощью [`css.lightningcss`](./shared-options.md#css-lightningcss).
 
