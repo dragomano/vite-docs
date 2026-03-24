@@ -185,7 +185,7 @@ export default defineConfig({
       },
       name: 'MyLib'
     },
-    rollupOptions: {
+    rolldownOptions: {
       // убедитесь, что вы исключили зависимости, которые не должны быть объединены
       // в вашу библиотеку
       external: ['vue'],
