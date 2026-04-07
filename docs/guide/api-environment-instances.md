@@ -85,6 +85,18 @@ class DevEnvironment {
    * подготовить граф модулей, чтобы модули уже были обработаны, когда они запрашиваются.
    */
   async warmupRequest(url: string): Promise<void>
+
+  /**
+   * Вызывается загрузчиком модулей для получения информации об указанном
+   * модуле. Внутри вызывает `transformRequest` и оборачивает результат в
+   * формат, который понимает загрузчик модулей.
+   * Данный метод не предназначен для вызова вручную.
+   */
+  async fetchModule(
+    id: string,
+    importer?: string,
+    options?: FetchFunctionOptions,
+  ): Promise<FetchResult>
 }
 ```
 
@@ -208,5 +220,71 @@ export class EnvironmentModuleGraph {
   ): void
 
   getModuleByEtag(etag: string): EnvironmentModuleNode | undefined
+}
+```
+
+## `FetchResult`
+
+Метод `environment.fetchModule` возвращает `FetchResult`, который предназначен для использования раннером модулей. `FetchResult` представляет собой объединение `CachedFetchResult`, `ExternalFetchResult` и `ViteFetchResult`.
+
+`CachedFetchResult` аналогичен HTTP-статусу `304` (Not Modified).
+
+```ts
+export interface CachedFetchResult {
+  /**
+   * Если модуль закэширован в раннере, это подтверждает,
+   * что он не был инвалидирован на стороне сервера.
+   */
+  cache: true
+}
+```
+
+`ExternalFetchResult` указывает раннеру модулей импортировать модуль с помощью метода `runExternalModule` у [`ModuleEvaluator`](/guide/api-environment-runtimes#moduleevaluator). В этом случае оценщик модулей по умолчанию использует нативный `import` среды выполнения вместо обработки файла через Vite.
+
+```ts
+export interface ExternalFetchResult {
+  /**
+   * Путь к внешнему модулю, начинающийся с file://.
+   * По умолчанию он будет импортирован через динамический `import`,
+   * а не преобразован Vite и загружен раннером Vite.
+   */
+  externalize: string
+  /**
+   * Тип модуля. Используется, чтобы определить, корректна ли инструкция импорта.
+   * Например, если Vite должен выбросить ошибку, когда переменная на самом деле не экспортируется.
+   */
+  type: 'module' | 'commonjs' | 'builtin' | 'network'
+}
+```
+
+`ViteFetchResult` возвращает информацию о текущем модуле, включая `code` для выполнения, а также `id`, `file` и `url` модуля.
+
+Поле `invalidate` указывает раннеру модулей инвалидировать модуль перед повторным выполнением, а не отдавать его из кэша. Обычно оно равно `true`, когда было вызвано обновление HMR.
+
+```ts
+export interface ViteFetchResult {
+  /**
+   * Код, который будет вычислен раннером Vite.
+   * По умолчанию он будет обёрнут в асинхронную функцию.
+   */
+  code: string
+  /**
+   * Путь к файлу модуля на диске.
+   * Будет разрешён как import.meta.url/filename.
+   * Для виртуальных модулей будет `null`.
+   */
+  file: string | null
+  /**
+   * ID модуля в графе модулей сервера.
+   */
+  id: string
+  /**
+   * URL модуля, используемый в импорте.
+   */
+  url: string
+  /**
+   * Инвалидировать модуль на стороне клиента.
+   */
+  invalidate: boolean
 }
 ```
