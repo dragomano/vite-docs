@@ -106,7 +106,7 @@ $ deno init --npm vite my-vue-app --template vue
 
 :::
 
-Более подробную информацию о каждом поддерживаемом шаблоне см. в [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite): `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `react-swc`, `react-swc-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
+Более подробную информацию о каждом поддерживаемом шаблоне см. в [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite): `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
 Используйте `.` в качестве имени проекта для создания шаблона в текущей директории.
 
