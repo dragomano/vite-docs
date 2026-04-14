@@ -359,86 +359,36 @@ const config = defineConfig({
     ],
 
     search: {
-      provider: 'algolia',
+      provider: 'local',
       options: {
-        appId: 'VETIKID9KS',
-        apiKey: '9c447d0510cb766c2c7fbac08a206050',
-        indexName: 'vite-ru',
-        locales: {
-          root: {
-            placeholder: 'Поиск в документации',
-            translations: {
-              button: {
-                buttonText: 'Поиск',
-                buttonAriaLabel: 'Поиск'
-              },
-              modal: {
-                searchBox: {
-                  clearButtonTitle: 'Очистить поиск',
-                  clearButtonAriaLabel: 'Очистить поиск',
-                  closeButtonText: 'Закрыть',
-                  closeButtonAriaLabel: 'Закрыть',
-                  placeholderText: 'Поиск в документации',
-                  placeholderTextAskAi: 'Задайте вопрос ИИ:',
-                  placeholderTextAskAiStreaming: 'Формируется ответ...',
-                  searchInputLabel: 'Поиск',
-                  backToKeywordSearchButtonText: 'Вернуться к поиску по ключевым словам',
-                  backToKeywordSearchButtonAriaLabel: 'Вернуться к поиску по ключевым словам'
-                },
-                startScreen: {
-                  recentSearchesTitle: 'История поиска',
-                  noRecentSearchesText: 'Нет истории поиска',
-                  saveRecentSearchButtonTitle: 'Сохранить в истории поиска',
-                  removeRecentSearchButtonTitle: 'Удалить из истории поиска',
-                  favoriteSearchesTitle: 'Избранное',
-                  removeFavoriteSearchButtonTitle: 'Удалить из избранного',
-                  recentConversationsTitle: 'Последние диалоги',
-                  removeRecentConversationButtonTitle: 'Удалить диалог из истории'
-                },
-                errorScreen: {
-                  titleText: 'Невозможно получить результаты',
-                  helpText: 'Проверьте подключение к Интернету'
-                },
-                noResultsScreen: {
-                  noResultsText: 'Ничего не найдено',
-                  suggestedQueryText: 'Попробуйте изменить запрос',
-                  reportMissingResultsText: 'Считаете, что результаты должны быть?',
-                  reportMissingResultsLinkText: 'Сообщите об этом'
-                },
-                resultsScreen: {
-                  askAiPlaceholder: 'Задайте вопрос ИИ: '
-                },
-                askAiScreen: {
-                  disclaimerText: 'Ответ сгенерирован ИИ и может быть неточным. Пожалуйста, проверьте информацию самостоятельно.',
-                  relatedSourcesText: 'Связанные источники',
-                  thinkingText: 'Думаю...',
-                  copyButtonText: 'Копировать',
-                  copyButtonCopiedText: 'Скопировано!',
-                  copyButtonTitle: 'Копировать',
-                  likeButtonTitle: 'Нравится',
-                  dislikeButtonTitle: 'Не нравится',
-                  thanksForFeedbackText: 'Спасибо за ваш отзыв!',
-                  preToolCallText: 'Идёт поиск...',
-                  duringToolCallText: 'Поиск ',
-                  afterToolCallText: 'Поиск выполнен'
-                },
-                footer: {
-                  selectText: 'выбрать',
-                  submitQuestionText: 'Отправить вопрос',
-                  selectKeyAriaLabel: 'Клавиша Enter',
-                  navigateText: 'перейти',
-                  navigateUpKeyAriaLabel: 'Стрелка вверх',
-                  navigateDownKeyAriaLabel: 'Стрелка вниз',
-                  closeText: 'закрыть',
-                  backToSearchText: 'Вернуться к поиску',
-                  closeKeyAriaLabel: 'Клавиша Esc',
-                  poweredByText: 'поиск от'
-                }
-              }
+        miniSearch: {
+          searchOptions: {
+            boostDocument(page) {
+              if (page.startsWith('/guide/')) return 2 // Prefer guide pages
+              if (page.startsWith('/config/')) return 1.5 // Then config pages
+              if (page.startsWith('/blog/')) return 0 // Do not index blog posts
+              return 1
+            },
+          },
+        },
+        translations: {
+          button: {
+            buttonText: 'Поиск',
+            buttonAriaLabel: 'Поиск'
+          },
+          modal: {
+            displayDetails: 'Отобразить подробный список',
+            resetButtonTitle: 'Сбросить поиск',
+            backButtonTitle: 'Закрыть поиск',
+            noResultsText: 'Нет результатов для',
+            footer: {
+              selectText: 'выбрать',
+              navigateText: 'перейти',
+              closeText: 'закрыть'
             }
           }
         }
-      }
+      },
     },
 
     footer: {
