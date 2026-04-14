@@ -6,22 +6,10 @@ description: Vite стоит на плечах гигантов. Спасибо 
 <script setup>
 import { computed } from 'vue'
 import { data } from './_data/acknowledgements.data'
-import { useSponsor, voidZero } from './.vitepress/theme/composables/sponsor'
+import { useSponsor } from './.vitepress/theme/composables/sponsor'
 import VPSponsors from '@components/vitepress-default/VPSponsors.vue'
 
-const { data: sponsorData } = useSponsor()
-
-const allSponsors = computed(() => {
-  if (!sponsorData.value) return []
-  return [
-    {
-      tier: 'Предоставлено вам',
-      size: 'big',
-      items: [voidZero],
-    },
-    ...sponsorData.value,
-  ]
-})
+const sponsors = useSponsor()
 
 function npmUrl(name) {
   return `https://npmx.dev/package/${name}`
@@ -43,7 +31,7 @@ Vite разрабатывается международной командой 
 Разработка Vite поддерживается щедрыми спонсорами. Вы можете поддержать Vite через [GitHub Sponsors](https://github.com/sponsors/vitejs) или [Open Collective](https://opencollective.com/vite).
 
 <div class="sponsors-container">
-  <VPSponsors :data="allSponsors" />
+  <VPSponsors :data="sponsors ?? []" />
 </div>
 
 ## Зависимости {#dependencies}
