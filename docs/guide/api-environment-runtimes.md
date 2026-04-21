@@ -110,6 +110,8 @@ function createWorkerdDevEnvironment(
 }
 ```
 
+По умолчанию к транспортам `HotChannel` применяются ограничения `server.fs`, то есть обслуживаться могут только файлы внутри разрешённых директорий. Если ваш транспорт не доступен по сети (например, он обменивается данными через рабочие потоки или внутрипроцессные вызовы), вы можете установить `skipFsCheck: true` в `HotChannel`, чтобы обойти эти ограничения.
+
 Существует [несколько уровней взаимодействия для `DevEnvironment`](/guide/api-environment-frameworks#devenvironment-communication-levels). Чтобы упростить фреймворкам написание кода, независимого от рантайма, мы рекомендуем реализовывать наиболее гибкий уровень взаимодействия из возможных.
 
 ## `ModuleRunner`
@@ -323,6 +325,8 @@ function createWorkerEnvironment(name, config, context) {
   }
 
   const workerHotChannel = {
+    // Сообщения, отправленные рабочими потоками, не передаются по сети, пропустить проверки server.fs
+    skipFsCheck: true,
     send: (data) => worker.postMessage(data),
     on: (event, handler) => {
       // клиент уже подключен
