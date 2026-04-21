@@ -46,17 +46,6 @@ const versionLinks = (() => {
   return links
 })()
 
-function inlineScript(file: string): HeadConfig {
-  return [
-    'script',
-    {},
-    fs.readFileSync(
-      path.resolve(__dirname, `./inlined-scripts/${file}`),
-      'utf-8',
-    ),
-  ]
-}
-
 function getGuideSidebar(prefix: string = '') {
   return [
     {
@@ -293,7 +282,6 @@ const config = defineConfig({
       { rel: 'alternate', type: 'application/rss+xml', href: '/blog.rss' },
     ],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-    inlineScript('banner.js'),
     ['link', { rel: 'me', href: 'https://m.webtoo.ls/@vite' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: ogTitle }],
@@ -341,12 +329,6 @@ const config = defineConfig({
       quote: 'Но если не менять направление и продолжать искать, то можно оказаться там, где надо.',
       linkLabel: 'перейти на главную',
       linkText: 'Вернуться на главную'
-    },
-
-    banner: {
-      id: 'vite+',
-      text: 'Поставьте звезду репозиторию перевода на GitHub',
-      url: 'https://github.com/dragomano/vite-docs',
     },
 
     editLink: {
@@ -632,7 +614,7 @@ const config = defineConfig({
       chunkSizeWarningLimit: 1000,
     },
     plugins: [
-      groupIconVitePlugin({
+      (groupIconVitePlugin({
         customIcon: {
           firebase: 'vscode-icons:file-type-firebase',
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
@@ -641,7 +623,7 @@ const config = defineConfig({
             '../public/logo-without-border.svg',
           ),
         },
-      }),
+      }) as any),
     ],
     optimizeDeps: {
       include: ['@shikijs/vitepress-twoslash/client'],
