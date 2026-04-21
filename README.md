@@ -32,13 +32,13 @@
 - 🔩 Универсальный интерфейс плагинов
 - 🔑 Полностью типизированные API
 
-Vite (французское слово, означающее «быстрый», произносится [`/viːt/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), как «вит») - это новый вид инструментария для сборки фронтендов, который значительно улучшает процесс разработки. Он состоит из двух основных частей:
+Vite (французское слово, означающее «быстрый», произносится [`/viːt/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), как «вит») — это инструмент сборки, который стремится обеспечить более быструю и лёгкую разработку современных веб-проектов. Он состоит из двух основных частей:
 
-- Сервер разработки, который обслуживает ваши исходные файлы через [собственные ES-модули](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), обладает [богатыми встроенными функциями](https://vite-docs.ru/guide/features.html) и обеспечивает невероятно быструю [замену модулей в горячем режиме (HMR)](https://vite-docs.ru/guide/features.html#hot-module-replacement).
+- Сервер разработки, который предоставляет [богатые функциональные улучшения](https://vite-docs.ru/guide/features) поверх [нативных ES-модулей](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), например, чрезвычайно быструю [замену модулей в горячем режиме (HMR)](https://vite-docs.ru/guide/features#hot-module-replacement).
 
-- [Команда сборки](https://vite-docs.ru/guide/build.html), которая объединяет ваш код с помощью сборщика [Rollup](https://rollupjs.org), предварительно настроенного на выдачу высокооптимизированных статических ресурсов для продакшена.
+- Команда сборки, которая объединяет ваш код с помощью [Rolldown](https://rolldown.rs), предварительно настроенного на выдачу высокооптимизированных статических ресурсов для продакшена.
 
-Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite-docs.ru/guide/api-plugin.html) и [JavaScript API](https://vite-docs.ru/guide/api-javascript.html) с полной поддержкой типизации.
+Кроме того, Vite обладает широкими возможностями расширения благодаря [Plugin API](https://vite-docs.ru/guide/api-plugin) и [JavaScript API](https://vite-docs.ru/guide/api-javascript) с полной поддержкой типизации.
 
 [Чтобы узнать больше, прочитайте документацию](https://vite-docs.ru/).
 
