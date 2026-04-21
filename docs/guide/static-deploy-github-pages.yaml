@@ -8,7 +8,7 @@ name: Deploy static content to Pages
 on:
   # Запускается при пушах в целевую ветку по умолчанию
   push:
-    branches: ['main']
+    branches: ["main"]
 
   # Позволяет вам запускать этот рабочий процесс вручную из вкладки Actions
   workflow_dispatch:
@@ -21,7 +21,7 @@ permissions:
 
 # Разрешает одно параллельное развёртывание
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
@@ -33,12 +33,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          cache: 'npm'
+          cache: "npm"
       - name: Install dependencies
         run: npm ci
       - name: Build
@@ -46,11 +46,12 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           # Загружаем папку dist
-          path: './dist'
+          path: "./dist"
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
+
 #endregion content
