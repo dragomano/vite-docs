@@ -368,6 +368,8 @@ const plugin = {
   - Хук `renderDynamicImport` ([rolldown#4532](https://github.com/rolldown/rolldown/issues/4532))
   - Хук `resolveFileUrl`
 - Функции `parseAst` / `parseAstAsync` объявлены устаревшими в пользу `parseSync` / `parse`, у которых больше возможностей.
+- Комментарии удаляются до хука `renderChunk`, а не после хука `renderChunk`
+- Комментарии, кроме перечисленных [здесь](https://rolldown.rs/reference/OutputOptions.comments), перемещаются, в то время как Rollup удаляет комментарии только если удалён соответствующий код
 
 ## Переход с v6 {#migration-from-v6}
 
