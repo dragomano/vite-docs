@@ -14,18 +14,15 @@ const coreTeam = [
     sponsor: 'https://github.com/sponsors/yyx990803'
   },
   {
-    avatar: 'https://www.github.com/patak-dev.png',
+    avatar: 'https://www.github.com/patak-cat.png',
     name: 'Patak',
-    title: 'Готов к сотрудничеству',
-    org: 'StackBlitz',
-    orgLink: 'https://stackblitz.com/',
-    desc: 'Член основной команды Vite. Член команды Vue.',
+    title: 'Искатель приключений в мире открытого кода',
+    desc: 'Участник основной команды Vite, Vitest, Elk. Хранитель npmx.',
     links: [
-      { icon: 'github', link: 'https://github.com/patak-dev' },
-      { icon: 'bluesky', link: 'https://bsky.app/profile/patak.dev' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@patak' }
+      { icon: 'github', link: 'https://github.com/patak-cat' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/patak.cat' },
     ],
-    sponsor: 'https://github.com/sponsors/patak-dev'
+    sponsor: 'https://github.com/sponsors/patak-cat'
   },
   {
     avatar: 'https://www.github.com/antfu.png',
