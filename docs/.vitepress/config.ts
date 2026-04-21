@@ -575,7 +575,7 @@ const config = defineConfig({
       md.use(markdownItImageSize, {
         publicDir: path.resolve(import.meta.dirname, '../public'),
       })
-      await graphvizMarkdownPlugin(md, {
+      await (graphvizMarkdownPlugin as any)(md, {
         cacheDir: 'docs/.vitepress/cache/graphviz',
       })
     },
@@ -593,12 +593,12 @@ const config = defineConfig({
       chunkSizeWarningLimit: 1000,
     },
     plugins: [
-      groupIconVitePlugin({
+      (groupIconVitePlugin({
         customIcon: {
           firebase: 'vscode-icons:file-type-firebase',
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
         },
-      }),
+      }) as any),
     ],
     optimizeDeps: {
       include: ['@shikijs/vitepress-twoslash/client'],
