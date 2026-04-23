@@ -13,6 +13,7 @@ import { extendConfig } from '@voidzero-dev/vitepress-theme/config'
 import type { FooterLink } from '@voidzero-dev/vitepress-theme'
 import packageJson from '../../package.json' with { type: 'json' }
 import { buildEnd } from './buildEnd.config'
+import { redirectPlugin } from 'vite-plugin-redirects'
 
 const viteVersion = packageJson.devDependencies.vite.replace(/^\^/, '')
 const viteMajorVersion = +viteVersion.split('.')[0]
@@ -599,6 +600,9 @@ const config = defineConfig({
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab',
         },
       }) as any),
+      redirectPlugin({
+        '/guide/rolldown': 'https://v7.vite.dev/guide/rolldown',
+      }),
     ],
     optimizeDeps: {
       include: ['@shikijs/vitepress-twoslash/client'],
