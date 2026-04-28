@@ -67,7 +67,7 @@ const testimonials: Testimonial[] = [
     avatar:
       'https://pbs.twimg.com/profile_images/3380865881/f73b3687ff39b795db05fcaf35972270_400x400.jpeg',
     comment: [
-      'Я так рад видеть, как множество отличных фреймворков объединяются на базе Vite. Многие получат от этого пользу. ❤️ Команде Vite.',
+      'Я так рад видеть, как множество отличных фреймворков объединяются на базе Vite. Многие получат от этого пользу. Спасибо команде Vite от всего сердца.',
     ],
   },
   {
@@ -104,7 +104,7 @@ const testimonials: Testimonial[] = [
       >
         <!-- GitHub Stars -->
         <div class="flex flex-col gap-3">
-          <h2 class="text-white">75k+</h2>
+          <h2 class="text-white">80k+</h2>
           <p class="text-grey flex items-center gap-2">
             <Icon icon="simple-icons:github" width="20px" height="20px" />
             звёзд на Github
@@ -113,7 +113,7 @@ const testimonials: Testimonial[] = [
 
         <!-- NPM Downloads -->
         <div class="flex flex-col gap-3">
-          <h2 class="text-white">40m+</h2>
+          <h2 class="text-white">80m+</h2>
           <p class="text-grey">загрузок Vite за неделю</p>
         </div>
       </div>
