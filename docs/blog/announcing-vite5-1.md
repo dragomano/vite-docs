@@ -67,9 +67,9 @@ Runtime API Vite эволюционировал в Module Runner API, выпущ
 
 Импорт CSS-файлов в виде URL теперь работает надежно и корректно. Это было последнее препятствие на пути перехода Remix в Vite. См. ([#15259](https://github.com/vitejs/vite/issues/15259)).
 
-### `build.assetsInlineLimit` теперь поддерживает обратный вызов {#build-assetsinlinelimit-now-supports-a-callback}
+### `build.assetsInlineLimit` теперь поддерживает колбек {#build-assetsinlinelimit-now-supports-a-callback}
 
-Теперь пользователи могут [предоставить обратный вызов](/config/build-options.html#build-assetsinlinelimit), который возвращает булево значение для отказа или включения инлайнинга для определённых ресурсов. Если возвращается `undefined`, применяется логика по умолчанию. См. ([#15366](https://github.com/vitejs/vite/issues/15366)).
+Теперь пользователи могут [предоставить колбек](/config/build-options.html#build-assetsinlinelimit), который возвращает булево значение для отказа или включения инлайнинга для определённых ресурсов. Если возвращается `undefined`, применяется логика по умолчанию. См. ([#15366](https://github.com/vitejs/vite/issues/15366)).
 
 ### Улучшен HMR для циклического импорта {#improved-hmr-for-circular-import}
 
