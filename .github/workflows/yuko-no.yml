@@ -22,7 +22,7 @@ jobs:
           # Using an old commit hash will cause the initial action run to be very slow
           # as it processes each historical commit.
           # (Subsequent runs are faster as they skip previously processed commits.)
-          track-from: 8e05b61d3f2271adb16713835b943e5e13d20499
+          track-from: 2151f701dc98270c905c540b209fb6d23d53d3ad
 
           # Files to track (Glob patterns)
           include: |
