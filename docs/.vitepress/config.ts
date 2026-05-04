@@ -85,7 +85,7 @@ function getGuideSidebar(prefix: string = '') {
           link: `${prefix}/guide/features`,
         },
         {
-          text: 'Консоль',
+          text: 'Интерфейс командной строки',
           link: `${prefix}/guide/cli`,
         },
         {
@@ -341,8 +341,8 @@ const config = defineConfig({
     },
 
     banner: {
-      id: 'vite+',
-      text: 'Русскоязычных и японоязычных программистов почти поровну, но звёзд у японского перевода больше. Исправьте дисбаланс  — поставьте ⭐ репозиторию русскоязычного перевода на GitHub!',
+      id: 'motto',
+      text: 'Поставьте ⭐ проекту перевода на GitHub!',
       url: 'https://github.com/dragomano/vite-docs',
     },
 
