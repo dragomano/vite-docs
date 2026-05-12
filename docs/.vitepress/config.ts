@@ -576,6 +576,16 @@ const config = defineConfig({
       md.use(markdownItImageSize, {
         publicDir: path.resolve(import.meta.dirname, '../public'),
       })
+      // Патч: гарантируем что env.path всегда содержит путь к файлу,
+      // чтобы markdown-it-image-size корректно разрешал относительные пути
+      // в dev-режиме (когда VitePress иногда не передаёт env.path)
+      const originalRender = md.render.bind(md)
+      md.render = (src: string, env: any) => {
+        if (env && env.relativePath && !env.path) {
+          env.path = path.resolve(import.meta.dirname, '../../docs', env.relativePath)
+        }
+        return originalRender(src, env)
+      }
       await (graphvizMarkdownPlugin as any)(md, {
         cacheDir: 'docs/.vitepress/cache/graphviz',
       })
