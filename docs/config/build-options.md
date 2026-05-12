@@ -21,7 +21,7 @@
 - **Тип:** `boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }`
 - **По умолчанию:** `{ polyfill: true }`
 
-По умолчанию встраивается [полифилл для предварительной загрузки модулей](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill). Полифилл автоматически встраивается в прокси-модуль каждого входа `index.html`. Если сборка настроена на использование нестандартного HTML-входа через `build.rollupOptions.input`, то необходимо вручную импортировать полифилл в вашем пользовательском входе:
+По умолчанию встраивается [полифилл для предварительной загрузки модулей](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill). Полифилл автоматически встраивается в прокси-модуль каждого входа `index.html`. Если сборка настроена на использование нестандартного HTML-входа через `build.rolldownOptions.input`, то необходимо вручную импортировать полифилл в вашем пользовательском входе:
 
 ```js
 import 'vite/modulepreload-polyfill'
@@ -269,7 +269,7 @@ export default defineConfig({
 - **По умолчанию:** `false`
 - **Связано:** [Серверный рендеринг](/guide/ssr)
 
-Создать сборку, ориентированную на SSR. Значение может быть строкой для прямого указания входа SSR или `true`, что требует указания входа SSR через `rollupOptions.input`.
+Создать сборку, ориентированную на SSR. Значение может быть строкой для прямого указания входа SSR или `true`, что требует указания входа SSR через `rolldownOptions.input`.
 
 ## build.emitAssets
 
