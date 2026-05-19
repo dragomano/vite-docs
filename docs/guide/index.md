@@ -276,7 +276,7 @@ pnpm link # используйте предпочитаемый менеджер
 Подробнее о том, как Vite выпускает новые версии и как часто это происходит, можно прочитать в разделе [Релизы](../releases.md).
 
 ::: tip Зависимости, использующие Vite
-Чтобы заменить версию Vite, используемую зависимостями транзитивно, вы должны использовать [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) или [pnpm overrides](https://pnpm.io/9.x/package_json#pnpmoverrides).
+Чтобы заменить версию Vite, используемую зависимостями транзитивно, вы должны использовать [npm overrides](https://docs.npmjs.com/cli/v11/configuring-npm/package-json#overrides) или [pnpm overrides](https://pnpm.io/settings#overrides).
 :::
 
 ## Сообщество {#community}
