@@ -602,6 +602,15 @@ const config = defineConfig({
   vite: {
     build: {
       chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        onwarn(warning, warn) {
+          if (warning.code === 'INVALID_ANNOTATION') {
+            return
+          }
+
+          warn(warning)
+        },
+      },
     },
     plugins: [
       (groupIconVitePlugin({
