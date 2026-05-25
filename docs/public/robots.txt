@@ -1,3 +1,3 @@
 User-agent: *
 
-Sitemap: https://vite-docs.ru/sitemap.xml
+Sitemap: https://v7.vite-docs.ru/sitemap.xml

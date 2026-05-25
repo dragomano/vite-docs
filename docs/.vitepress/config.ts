@@ -18,9 +18,9 @@ const viteVersion = packageJson.devDependencies.vite.replace(/^\^/, '')
 const viteMajorVersion = +viteVersion.split('.')[0]
 
 const ogDescription = 'Инструментарий для фронтенда нового поколения'
-const ogImage = 'https://vite-docs.ru/og-image.jpg'
+const ogImage = 'https://v7.vite-docs.ru/og-image.jpg'
 const ogTitle = 'Vite по-русски'
-const ogUrl = 'https://vite-docs.ru/'
+const ogUrl = 'https://v7.vite-docs.ru/'
 
 const versionLinks = (() => {
   const links: FooterLink[] = []
@@ -31,8 +31,8 @@ const versionLinks = (() => {
   })
 
   links.push({
-    text: `Документация Vite ${viteMajorVersion} (релиз)`,
-    link: '/',
+    text: `Документация Vite 8 (релиз)`,
+    link: 'https://vite-docs.ru/',
   })
 
   // Create version links from v2 onwards
@@ -269,7 +269,7 @@ const config = defineConfig({
   description: 'Инструментарий для фронтенда нового поколения',
   cleanUrls: true,
   sitemap: {
-    hostname: 'https://vite-docs.ru/'
+    hostname: 'https://v7.vite-docs.ru/'
   },
   lastUpdated: true,
   head: [
@@ -292,15 +292,6 @@ const config = defineConfig({
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:site', content: '@vite_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
-    [
-      'script',
-      {},
-      `(function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "p4lpwfiwp1")`,
-    ],
   ],
 
   locales: {
@@ -332,7 +323,7 @@ const config = defineConfig({
     },
 
     editLink: {
-      pattern: 'https://github.com/dragomano/vite-docs/edit/main/docs/:path',
+      pattern: 'https://github.com/dragomano/vite-docs/edit/v7/docs/:path',
       text: 'Предложить изменения',
     },
 
@@ -345,90 +336,40 @@ const config = defineConfig({
     ],
 
     search: {
-      provider: 'algolia',
+      provider: 'local',
       options: {
-        appId: 'VETIKID9KS',
-        apiKey: '9c447d0510cb766c2c7fbac08a206050',
-        indexName: 'vite-ru',
-        locales: {
-          root: {
-            placeholder: 'Поиск в документации',
-            translations: {
-              button: {
-                buttonText: 'Поиск',
-                buttonAriaLabel: 'Поиск'
-              },
-              modal: {
-                searchBox: {
-                  clearButtonTitle: 'Очистить поиск',
-                  clearButtonAriaLabel: 'Очистить поиск',
-                  closeButtonText: 'Закрыть',
-                  closeButtonAriaLabel: 'Закрыть',
-                  placeholderText: 'Поиск в документации',
-                  placeholderTextAskAi: 'Задайте вопрос ИИ:',
-                  placeholderTextAskAiStreaming: 'Формируется ответ...',
-                  searchInputLabel: 'Поиск',
-                  backToKeywordSearchButtonText: 'Вернуться к поиску по ключевым словам',
-                  backToKeywordSearchButtonAriaLabel: 'Вернуться к поиску по ключевым словам'
-                },
-                startScreen: {
-                  recentSearchesTitle: 'История поиска',
-                  noRecentSearchesText: 'Нет истории поиска',
-                  saveRecentSearchButtonTitle: 'Сохранить в истории поиска',
-                  removeRecentSearchButtonTitle: 'Удалить из истории поиска',
-                  favoriteSearchesTitle: 'Избранное',
-                  removeFavoriteSearchButtonTitle: 'Удалить из избранного',
-                  recentConversationsTitle: 'Последние диалоги',
-                  removeRecentConversationButtonTitle: 'Удалить диалог из истории'
-                },
-                errorScreen: {
-                  titleText: 'Невозможно получить результаты',
-                  helpText: 'Проверьте подключение к Интернету'
-                },
-                noResultsScreen: {
-                  noResultsText: 'Ничего не найдено',
-                  suggestedQueryText: 'Попробуйте изменить запрос',
-                  reportMissingResultsText: 'Считаете, что результаты должны быть?',
-                  reportMissingResultsLinkText: 'Сообщите об этом'
-                },
-                resultsScreen: {
-                  askAiPlaceholder: 'Задайте вопрос ИИ: '
-                },
-                askAiScreen: {
-                  disclaimerText: 'Ответ сгенерирован ИИ и может быть неточным. Пожалуйста, проверьте информацию самостоятельно.',
-                  relatedSourcesText: 'Связанные источники',
-                  thinkingText: 'Думаю...',
-                  copyButtonText: 'Копировать',
-                  copyButtonCopiedText: 'Скопировано!',
-                  copyButtonTitle: 'Копировать',
-                  likeButtonTitle: 'Нравится',
-                  dislikeButtonTitle: 'Не нравится',
-                  thanksForFeedbackText: 'Спасибо за ваш отзыв!',
-                  preToolCallText: 'Идёт поиск...',
-                  duringToolCallText: 'Поиск ',
-                  afterToolCallText: 'Поиск выполнен'
-                },
-                footer: {
-                  selectText: 'выбрать',
-                  submitQuestionText: 'Отправить вопрос',
-                  selectKeyAriaLabel: 'Клавиша Enter',
-                  navigateText: 'перейти',
-                  navigateUpKeyAriaLabel: 'Стрелка вверх',
-                  navigateDownKeyAriaLabel: 'Стрелка вниз',
-                  closeText: 'закрыть',
-                  backToSearchText: 'Вернуться к поиску',
-                  closeKeyAriaLabel: 'Клавиша Esc',
-                  poweredByText: 'поиск от'
-                }
-              }
+        miniSearch: {
+          searchOptions: {
+            boostDocument(page) {
+              if (page.startsWith('/guide/')) return 2 // Prefer guide pages
+              if (page.startsWith('/config/')) return 1.5 // Then config pages
+              if (page.startsWith('/blog/')) return 0 // Do not index blog posts
+              return 1
+            },
+          },
+        },
+        translations: {
+          button: {
+            buttonText: 'Поиск',
+            buttonAriaLabel: 'Поиск'
+          },
+          modal: {
+            displayDetails: 'Отобразить подробный список',
+            resetButtonTitle: 'Сбросить поиск',
+            backButtonTitle: 'Закрыть поиск',
+            noResultsText: 'Нет результатов для',
+            footer: {
+              selectText: 'выбрать',
+              navigateText: 'перейти',
+              closeText: 'закрыть'
             }
           }
         }
-      }
+      },
     },
 
     footer: {
-      copyright: `© 2025 VoidZero Inc. и контрибьюторы Vite.`,
+      copyright: `© 2019—${new Date().getFullYear()} VoidZero Inc. и контрибьюторы Vite.`,
       nav: [
         {
           title: 'Vite',
