@@ -36,8 +36,13 @@ const versionLinks = (() => {
     link: '/',
   })
 
+  links.push({
+    text: `Документация Vite 7`,
+    link: 'https://v7.vite-docs.ru',
+  })
+
   // Create version links from v2 onwards
-  for (let i = viteMajorVersion - 1; i >= 2; i--) {
+  for (let i = viteMajorVersion - 2; i >= 2; i--) {
     links.push({
       text: `Документация Vite ${i}`,
       link: `https://v${i}.vite.dev`,
@@ -620,7 +625,7 @@ const config = defineConfig({
         },
       }) as any),
       redirectPlugin({
-        '/guide/rolldown': 'https://v7.vite.dev/guide/rolldown',
+        '/guide/rolldown': 'https://v7.vite-docs.ru/guide/rolldown',
       }),
     ],
     optimizeDeps: {
