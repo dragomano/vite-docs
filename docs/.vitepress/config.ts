@@ -444,6 +444,10 @@ const config = defineConfig({
           { text: 'Релизы', link: '/releases' },
           { text: 'Благодарности', link: '/acknowledgements' },
           {
+            text: 'Кодекс поведения',
+            link: 'https://github.com/vitejs/.github/blob/main/CODE_OF_CONDUCT.md',
+          },
+          {
             text: 'Реестр плагинов',
             link: 'https://registry.vite.dev/plugins',
           },
