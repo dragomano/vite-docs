@@ -213,6 +213,48 @@ resolve: {
 
 Заполнитель значения `nonce`, который будет использоваться при генерации тегов script / style. Установка этого значения также создаст мета-тег с значением `nonce`.
 
+## html.additionalAssetSources
+
+- **Тип:** `Record<string, HtmlAssetSource>`
+
+```ts
+interface HtmlAssetSource {
+  srcAttributes?: string[]
+  srcsetAttributes?: string[]
+  filter?: (data: {
+    key: string
+    value: string
+    attributes: Record<string, string>
+  }) => boolean
+}
+```
+
+Определите дополнительные HTML-элементы и атрибуты, которые следует рассматривать как источники ресурсов. Это расширяет встроенный список, включающий стандартные элементы, такие как `<img src>`, `<video src>`, `<link href>` и т. д.
+
+Это полезно при использовании пользовательских веб-компонентов или нестандартных атрибутов (например, `data-*`), которые ссылаются на ресурсы.
+
+**Пример:**
+
+```js
+export default defineConfig({
+  html: {
+    additionalAssetSources: {
+      // Пользовательский веб-компонент
+      'html-import': { srcAttributes: ['src'] },
+      // Добавление data-* атрибутов к существующему элементу
+      img: { srcAttributes: ['data-src-dark', 'data-src-light'] },
+      // С форматом srcset
+      'my-picture': { srcsetAttributes: ['data-srcset'] },
+      // С фильтрующей функцией
+      'my-component': {
+        srcAttributes: ['asset'],
+        filter: ({ attributes }) => attributes.type === 'image',
+      },
+    },
+  },
+})
+```
+
 ## css.modules
 
 - **Тип:**
