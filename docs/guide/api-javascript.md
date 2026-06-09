@@ -367,9 +367,9 @@ function loadEnv(
 ): Record<string, string>
 ```
 
-**Связанные темы:** [`.env` Files](./env-and-mode.md#env-files)
+**Связанные темы:** [Файлы `.env`](./env-and-mode.md#env-files)
 
-Загружает файлы `.env` в директории `envDir`. По умолчанию загружаются только переменные окружения, начинающиеся с `VITE_`, если параметр `prefixes` не изменён.
+Загружает файлы `.env` в директории `envDir` и объединяет их с совпадающими переменными, уже присутствующими в `process.env`. По умолчанию загружаются только переменные окружения, начинающиеся с `VITE_`, если параметр `prefixes` не изменён.
 
 ## `normalizePath`
 
@@ -379,7 +379,7 @@ function loadEnv(
 function normalizePath(id: string): string
 ```
 
-**Связанные темы:** [Path Normalization](./api-plugin.md#path-normalization)
+**Связанные темы:** [Нормализация путей](./api-plugin.md#path-normalization)
 
 Нормализует путь для взаимодействия между плагинами Vite.
 
