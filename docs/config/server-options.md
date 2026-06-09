@@ -57,7 +57,7 @@
 :::
 
 ::: details Настройка через переменную окружения
-Вы можете установить переменную окружения `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS`, чтобы добавить дополнительный разрешённый хост.
+Вы можете установить переменную окружения `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS`, чтобы добавить дополнительные разрешённые хосты. Используйте запятые для разделения нескольких хостов (например, `host1.example.com,host2.example.com`).
 :::
 
 ## server.port
@@ -179,17 +179,45 @@ export default defineConfig({
 
 ## server.hmr
 
-- **Тип:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
+- **Тип:** `boolean | { overlay?: boolean }`
 
-Отключите или настройте соединение HMR (в случаях, когда веб-сокет HMR должен использовать иной адрес, чем HTTP-сервер).
+Отключите или настройте поведение HMR.
 
 Установите `server.hmr.overlay` в `false`, чтобы отключить наложение ошибок сервера.
 
-`protocol` устанавливает протокол WebSocket, используемый для подключения HMR: `ws` (WebSocket) или `wss` (WebSocket Secure).
+::: warning Устаревшие параметры
 
-`clientPort` — это расширенная опция, которая переопределяет порт только на стороне клиента, позволяя вам обслуживать веб-сокет на другом порту, чем тот, который ищет клиентский код.
+Параметры, связанные с WebSocket (`protocol`, `host`, `port`, `path`, `clientPort`, `timeout`, `server`), устарели. Вместо них используйте [`server.ws`](#server-ws). Эти параметры автоматически синхронизируются, поэтому существующие конфигурации продолжат работать.
 
-Когда `server.hmr.server` определён, Vite будет обрабатывать запросы на соединение HMR через предоставленный сервер. Если не активен режим мидлвара, Vite попытается обработать запросы на соединение HMR через существующий сервер. Это может быть полезно при использовании самоподписанных сертификатов или когда вы хотите открыть Vite через сеть на одном порту.
+:::
+
+## server.ws
+
+- **Тип:** `false | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, clientPort?: number, server?: Server }`
+
+Настройте параметры подключения WebSocket. Установите значение `false`, чтобы полностью отключить подключение WebSocket.
+
+- `protocol` — протокол WebSocket (`ws` или `wss`)
+- `host` — хост сервера WebSocket
+- `port` — порт сервера WebSocket
+- `path` — путь WebSocket
+- `clientPort` — Переопределение порта на стороне клиента, позволяющее обслуживать websocket на другом порту, отличном от того, который ищет клиентский код
+- `timeout` — Таймаут подключения в миллисекундах (по умолчанию: 30000)
+- `server` — Использовать пользовательский HTTP-сервер для подключений WebSocket
+
+Когда `server.ws.server` определён, Vite будет обрабатывать запросы на подключение WebSocket через предоставленный сервер. Если не в режиме мидлвара, Vite попытается обрабатывать запросы на подключение WebSocket через существующий сервер. Это может быть полезно при использовании самоподписанных сертификатов или когда вы хотите открыть Vite в сети на одном порту.
+
+```js
+export default defineConfig({
+  server: {
+    ws: {
+      protocol: 'wss',
+      host: 'localhost',
+      port: 3001,
+    },
+  },
+})
+```
 
 Посмотрите [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue) для получения примеров.
 
@@ -198,14 +226,14 @@ export default defineConfig({
 С учётом конфигурации по умолчанию, обратные прокси перед Vite должны поддерживать проксирование WebSocket. Если клиент HMR Vite не может подключиться к WebSocket, клиент будет переключаться на прямое подключение к серверу HMR Vite, обходя обратные прокси:
 
 ```
-Direct websocket connection fallback. Check out https://vite.dev/config/server-options.html#server-hmr to remove the previous connection error.
+Direct websocket connection fallback. Check out https://vite.dev/config/server-options.html#server-ws to remove the previous connection error.
 ```
 
 Ошибка, которая появляется в браузере, когда происходит переключение на резервный вариант, может быть проигнорирована. Чтобы избежать ошибки, обходя обратные прокси, вы можете:
 
 - настроить обратный прокси для проксирования WebSocket
-- установить [`server.strictPort = true`](#server-strictport) и установить `server.hmr.clientPort` на то же значение, что и `server.port`
-- установить `server.hmr.port` на другое значение, отличное от [`server.port`](#server-port)
+- установить [`server.strictPort = true`](#server-strictport) и установить `server.ws.clientPort` на то же значение, что и `server.port`
+- установить `server.ws.port` на другое значение, отличное от [`server.port`](#server-port)
 
 :::
 
