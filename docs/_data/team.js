@@ -14,10 +14,25 @@ const coreTeam = [
     sponsor: 'https://github.com/sponsors/yyx990803'
   },
   {
+    avatar: 'https://github.com/sapphi-red.png',
+    name: 'sapphi-red',
+    title: 'Веб-разработчик',
+    org: 'VoidZero',
+    orgLink: 'https://voidzero.dev/',
+    desc: 'Член основной команды Vite. Можно обращаться ко мне sapphi или midori ;)',
+    links: [
+      { icon: 'github', link: 'https://github.com/sapphi-red' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/sapphi.red' },
+      { icon: 'twitter', link: 'https://twitter.com/sapphi_red' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@sapphi_red' },
+    ],
+    sponsor: 'https://github.com/sponsors/sapphi-red',
+  },
+  {
     avatar: 'https://www.github.com/patak-cat.png',
     name: 'Patak',
     title: 'Искатель приключений в мире открытого кода',
-    desc: 'Участник основной команды Vite, Vitest, Elk. Хранитель npmx.',
+    desc: 'Член основной команды Vite, Vitest, Elk. Хранитель npmx.',
     links: [
       { icon: 'github', link: 'https://github.com/patak-cat' },
       { icon: 'bluesky', link: 'https://bsky.app/profile/patak.cat' },
@@ -28,9 +43,9 @@ const coreTeam = [
     avatar: 'https://www.github.com/antfu.png',
     name: 'Энтони Фу',
     title: 'Фанат открытого исходного кода',
-    org: 'NuxtLabs',
-    orgLink: 'https://nuxtlabs.com/',
-    desc: 'Член основной команды Vite & Vue. Работает в NuxtLabs.',
+    org: 'Vercel',
+    orgLink: 'https://vercel.com/',
+    desc: 'Член основной команды Vite & Vue. Работает над Nuxt.',
     links: [
       { icon: 'github', link: 'https://github.com/antfu' },
       { icon: 'bluesky', link: 'https://bsky.app/profile/antfu.me' },
@@ -52,19 +67,6 @@ const coreTeam = [
     sponsor: 'https://bjornlu.com/sponsor'
   },
   {
-    avatar: 'https://github.com/sapphi-red.png',
-    name: 'green',
-    title: 'Веб-разработчик',
-    desc: 'Член основной команды Vite. Зовите меня sapphi, или green, или midori ;)',
-    links: [
-      { icon: 'github', link: 'https://github.com/sapphi-red' },
-      { icon: 'bluesky', link: 'https://bsky.app/profile/sapphi.red' },
-      { icon: 'twitter', link: 'https://twitter.com/sapphi_red' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@sapphi_red' }
-    ],
-    sponsor: 'https://github.com/sponsors/sapphi-red'
-  },
-  {
     avatar: 'https://github.com/ArnaudBarre.png',
     name: 'Арно Барре',
     title: 'Фронтенд-разработчик',
@@ -80,20 +82,11 @@ const coreTeam = [
     sponsor: 'https://github.com/sponsors/ArnaudBarre'
   },
   {
-    avatar: 'https://github.com/dominikg.png',
-    name: 'Доминик Г.',
-    title: 'Постоянный эксперт по информационной безопасности',
-    desc: 'Член команды Vite и Svelte',
-    links: [
-      { icon: 'github', link: 'https://github.com/dominikg' },
-      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@dominikg' }
-    ],
-    sponsor: 'https://github.com/sponsors/dominikg'
-  },
-  {
     avatar: 'https://github.com/sheremet-va.png',
     name: 'Владимир',
     title: 'Член основной команды Vitest & Vite',
+    org: 'VoidZero',
+    orgLink: 'https://voidzero.dev/',
     desc: 'Fullstack-разработчик с открытым исходным кодом',
     links: [
       { icon: 'github', link: 'https://github.com/sheremet-va' },
@@ -106,6 +99,8 @@ const coreTeam = [
     avatar: 'https://github.com/hi-ogawa.png',
     name: 'Хироши Огава',
     title: 'Член команды Vitest & Vite',
+    org: 'VoidZero',
+    orgLink: 'https://voidzero.dev/',
     desc: 'Энтузиаст открытого исходного кода',
     links: [
       { icon: 'github', link: 'https://github.com/hi-ogawa' },
@@ -214,7 +209,18 @@ const emeritiMembers = [
       { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@haoqun' }
     ],
     sponsor: 'https://github.com/sponsors/haoqunjiang'
-  }
+  },
+  {
+    avatar: 'https://github.com/dominikg.png',
+    name: 'Доминик Г.',
+    title: 'Постоянный эксперт по CI',
+    desc: 'Член команд Vite и Svelte',
+    links: [
+      { icon: 'github', link: 'https://github.com/dominikg' },
+      { icon: 'mastodon', link: 'https://elk.zone/m.webtoo.ls/@dominikg' },
+    ],
+    sponsor: 'https://github.com/sponsors/dominikg',
+  },
 ]
 
 export const core = coreTeam.map(obj => ({ ...obj, actionText: 'Поддержать' }));
