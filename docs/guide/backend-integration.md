@@ -267,3 +267,11 @@
    ```
 
    :::
+
+   :::info Поддержка карты импортов чанков (экспериментальная функция)
+
+    Если вы используете экспериментальный параметр [`build.chunkImportMap`](/config/build-options#build-chunkimportmap), необходимо также внедрить карту импортов в HTML.
+
+    Карта импортов сохраняется в файл `importmap.json` в каталоге сборки. Убедитесь, что тег `<script type="importmap">` вставлен перед любыми тегами `<script type="module">` или `<link rel="modulepreload">`.
+
+   :::

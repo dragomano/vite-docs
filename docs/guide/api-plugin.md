@@ -661,6 +661,44 @@ export default function myPlugin() {
 [`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) экспортирует некоторые утилиты для фильтров хуков, такие как `exactRegex` и `prefixRegex`. Они также переэкспортируются из `rolldown/filter` для удобства.
 :::
 
+## Сведения о карте импортов чанков {#chunk-import-map-information}
+
+:::info Экспериментальная функция
+
+Эта функция является экспериментальной и в будущем может измениться.
+
+:::
+
+Когда включён параметр [`build.chunkImportMap`](/config/build-options#build-chunkimportmap), инструкции импорта в сгенерированных чанках будут использовать уникальный идентификатор каждого чанка вместо пути к файлу.
+
+Чтобы получить соответствие между идентификатором чанка и путём к файлу, можно обратиться к карте импортов, добавленной в сборку, в хуке `generateBundle` или `writeBundle`. Карта импортов получает имя, указанное в параметре [`build.rolldownOptions.experimental.chunkImportMap.fileName`](https://rolldown.rs/reference/InputOptions.experimental#chunkimportmap) (по умолчанию — `importmap.json`).
+
+```ts
+function accessImportMap() {
+  let config: ResolvedConfig
+  return {
+    name: 'access-import-map',
+    configResolved(resolvedConfig) {
+      config = resolvedConfig
+    },
+    generateBundle(options, bundle) {
+      const chunkImportMap =
+        config.build.rolldownOptions.experimental?.chunkImportMap
+      if (chunkImportMap) {
+        const importMapFilename =
+          typeof chunkImportMap === 'object' && chunkImportMap.fileName
+            ? chunkImportMap.fileName
+            : 'importmap.json'
+        const importMap = bundle[importMapFilename]! as OutputAsset
+        const mapping = JSON.parse(importMap.source).imports
+        console.log(mapping)
+        // { "./entry.hash1.js": "./entry.hash2.js" }
+      }
+    },
+  }
+}
+```
+
 ## Связь клиент-сервер {#client-server-communication}
 
 Начиная с Vite 2.9, мы предоставляем некоторые утилиты для плагинов, чтобы помочь в обработке связи с клиентами.

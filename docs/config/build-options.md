@@ -147,6 +147,17 @@ npm add -D esbuild
 
 Включение генерации исходных карт для продакшен-сборки. Если `true`, будет создан отдельный файл sourcemap. Если `'inline'`, sourcemap будет добавлен к результирующему выходному файлу в виде data URI. `'hidden'` работает как `true`, за исключением того, что соответствующие комментарии sourcemap в собранных файлах подавляются.
 
+## build.chunkImportMap
+
+- **Тип:** `boolean`
+- **По умолчанию:** `false`
+- **Экспериментально**
+- **Связано:** [Оптимизация карты импортов чанков](/guide/features#chunk-import-map-optimization)
+
+Определяет, следует ли использовать функцию карты импортов для повышения эффективности кэширования чанков.
+
+Обратите внимание, что этот параметр требует поддержки [`import.meta.resolve`](https://caniuse.com/mdn-javascript_operators_import_meta_resolve). Если необходима поддержка более старых браузеров, используйте [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy).
+
 ## build.rolldownOptions
 
 - **Тип:** [`RolldownOptions`](https://rolldown.rs/reference/)
