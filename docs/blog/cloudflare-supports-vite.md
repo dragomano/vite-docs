@@ -39,7 +39,7 @@ _4 июня 2026_
 - Средства [Vite Open Collective](https://opencollective.com/vite) управляются командой Vite и используются для финансирования независимых участников основного состава, зависимостей и других ключевых проектов экосистемы.
 - Все участники команды Vite, работавшие в VoidZero, переходят в Cloudflare и продолжат работать над Vite.
 
-Как указано в анонсах VoidZero и Cloudflare, то же самое касается [Vitest](https://vitest.dev/team.html), [Rolldown](https://rolldown.rs/team), [Oxc](https://oxc.rs/team.html) и [Vite+](https://viteplus.dev/team).
+Как указано в анонсах VoidZero и Cloudflare, то же самое касается [Vitest](https://vitest.dev/team.html), [Rolldown](https://rolldown.rs/team), [Oxc](https://oxc.rs/team.html) и [Vite+](https://plus.vite-docs.ru/team).
 
 ## Фонд Cloudflare для Open Source экосистемы Vite {#cloudflare-s-vite-ecosystem-open-source-fund}
 

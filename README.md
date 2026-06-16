@@ -1,11 +1,11 @@
 <p align="center">
   <br>
   <br>
-  <a href="https://dragomano.github.io/vite-docs" target="_blank" rel="noopener noreferrer">
+  <a href="https://vite-docs.ru" target="_blank" rel="noopener noreferrer">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://vite.dev/vite-light.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://vite.dev/vite-dark.svg">
-      <img alt="vite logo" src="https://vite.dev/vite-dark.svg" height="60">
+      <source media="(prefers-color-scheme: dark)" srcset="https://vite-docs.ru/vite-light.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://vite-docs.ru/vite-dark.svg">
+      <img alt="vite logo" src="https://vite-docs.ru/vite-dark.svg" height="60">
     </picture>
   </a>
   <br>
