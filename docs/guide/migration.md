@@ -216,7 +216,7 @@ export default defineConfig({
 esbuild и Oxc Minifier делают немного разные предположения об исходном коде. Если подозреваете, что минификатор ломает ваш код, сравните эти предположения:
 
 - [Предположения esbuild при минификации](https://esbuild.github.io/api/#minify-considerations)
-- [Предположения Oxc Minifier](https://oxc.rs/docs/guide/usage/minifier.html#assumptions)
+- [Предположения Oxc Minifier](https://github.com/oxc-project/oxc/blob/main/crates/oxc_minifier/docs/ASSUMPTIONS.md)
 
 Пожалуйста, сообщайте о любых найденных проблемах с минификацией в ваших JavaScript-приложениях.
 
