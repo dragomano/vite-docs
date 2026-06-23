@@ -183,7 +183,7 @@ console.log(msg)
 
 ### `config`
 
-- **Тип:** `(config: UserConfig, env: { mode: string, command: string }) => UserConfig | null | void`
+- **Тип:** `(config: UserConfig, env: { mode: 'build' | 'serve', command: string, isSsrBuild?: boolean, isPreview?: boolean }) => UserConfig | null | void`
 - **Режим работы:** `async`, `sequential`
 
   Измените конфигурацию Vite перед её разрешением. Хук получает необработанную пользовательскую конфигурацию (опции CLI, объединённые с файлом конфигурации) и текущую среду конфигурации, которая предоставляет используемые `mode` и `command`. Он может вернуть частичный объект конфигурации, который будет глубоко объединён с существующей конфигурацией, или напрямую изменить конфигурацию (если стандартное объединение не может достичь желаемого результата).
@@ -375,8 +375,9 @@ console.log(msg)
       path: string
       filename: string
       server?: ViteDevServer
-      bundle?: import('rollup').OutputBundle
-      chunk?: import('rollup').OutputChunk
+      bundle?: import('rolldown').OutputBundle
+      chunk?: import('rolldown').OutputChunk
+      originalUrl?: string
     },
   ) =>
     | IndexHtmlTransformResult
