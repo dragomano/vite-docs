@@ -422,7 +422,7 @@ export default defineConfig({
 ## server.fs.deny
 
 - **Тип:** `string[]`
-- **По умолчанию:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
+- **По умолчанию:** `['.env', '.env.*', '*.{crt,pem,key,p12,pfx,cer,der}', '.npmrc', '.yarnrc.yml', '**/.git/**']`
 
 Чёрный список для чувствительных файлов, которые ограничены для обслуживания dev-сервером Vite. Этот список будет иметь более высокий приоритет, чем [`server.fs.allow`](#server-fs-allow). Поддерживаются [шаблоны picomatch](https://github.com/micromatch/picomatch#globbing-features).
 
