@@ -18,10 +18,10 @@ head:
       content: website
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-5-anniversary-live.webp
+      content: https://vite-docs.ru/og-image-5-anniversary-live.webp
   - - meta
     - property: og:url
-      content: https://vite.dev/live
+      content: https://vite-docs.ru/live
   - - meta
     - name: twitter:card
       content: summary_large_image

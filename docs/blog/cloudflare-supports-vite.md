@@ -13,10 +13,10 @@ head:
       content: Cloudflare поддерживает миссию Vite
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-cloudflare-supports-vite.webp
+      content: https://vite-docs.ru/og-image-cloudflare-supports-vite.webp
   - - meta
     - property: og:url
-      content: https://vite.dev/blog/cloudflare-supports-vite
+      content: https://vite-docs.ru/blog/cloudflare-supports-vite
   - - meta
     - property: og:description
       content: Команда VoidZero присоединяется к Cloudflare. Vite остаётся под лицензией MIT, независимым от вендоров и поддерживается той же командой.

@@ -13,7 +13,7 @@ head:
       content: Анонс Vite 2.0
   - - meta
     - property: og:url
-      content: https://vite.dev/blog/announcing-vite2
+      content: https://vite-docs.ru/blog/announcing-vite2
   - - meta
     - property: og:description
       content: Объявление о выпуске Vite 2

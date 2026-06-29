@@ -13,10 +13,10 @@ head:
       content: Анонс Vite 6
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-announcing-vite6.webp
+      content: https://vite-docs.ru/og-image-announcing-vite6.webp
   - - meta
     - property: og:url
-      content: https://vite.dev/blog/announcing-vite6
+      content: https://vite-docs.ru/blog/announcing-vite6
   - - meta
     - property: og:description
       content: Анонс выпуска Vite 6

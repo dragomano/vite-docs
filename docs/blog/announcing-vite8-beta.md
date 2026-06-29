@@ -13,10 +13,10 @@ head:
       content: Анонс Vite 8 Beta
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-announcing-vite8-beta.webp
+      content: https://vite-docs.ru/og-image-announcing-vite8-beta.webp
   - - meta
     - property: og:url
-      content: https://vite.dev/blog/announcing-vite8-beta
+      content: https://vite-docs.ru/blog/announcing-vite8-beta
   - - meta
     - property: og:description
       content: Анонс выпуска Vite 8 Beta

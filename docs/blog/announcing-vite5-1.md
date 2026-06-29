@@ -13,10 +13,10 @@ head:
       content: Анонс Vite 5.1
   - - meta
     - property: og:image
-      content: https://vite.dev/og-image-announcing-vite5-1.webp
+      content: https://vite-docs.ru/og-image-announcing-vite5-1.webp
   - - meta
     - property: og:url
-      content: https://vite.dev/blog/announcing-vite5-1
+      content: https://vite-docs.ru/blog/announcing-vite5-1
   - - meta
     - property: og:description
       content: Анонс выпуска Vite 5.1
