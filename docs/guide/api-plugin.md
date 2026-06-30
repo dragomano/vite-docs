@@ -155,7 +155,7 @@ console.log(msg)
 
 Следующие хуки вызываются один раз при запуске сервера:
 
-- [`options`](https://rolldown.rs/reference/interface.plugin#options)
+- [`options`](https://rolldown.rs/reference/Interface.Plugin#options)
 - [`buildStart`](https://rolldown.rs/reference/Interface.Plugin#buildstart)
 
 Следующие хуки вызываются при каждом входящем запросе модуля:
