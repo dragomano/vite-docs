@@ -200,7 +200,7 @@ interface ViteDevServer {
 ```ts
 async function build(
   inlineConfig?: InlineConfig,
-): Promise<RollupOutput | RollupOutput[]>
+): Promise<RolldownOutput | RolldownOutput[] | RolldownWatcher>
 ```
 
 **Пример использования:**
@@ -433,7 +433,7 @@ async function loadConfigFromFile(
 } | null>
 ```
 
-Загружает файл конфигурации Vite вручную с помощью esbuild.
+Загружает файл конфигурации Vite вручную с помощью Rolldown.
 
 ## `preprocessCSS`
 
