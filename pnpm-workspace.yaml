@@ -4,3 +4,4 @@ allowBuilds:
 minimumReleaseAgeExclude:
   - '@typescript-eslint/*'
   - 'typescript-eslint'
+  - vitepress@2.0.0-alpha.18
