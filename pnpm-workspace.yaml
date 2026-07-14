@@ -5,3 +5,4 @@ minimumReleaseAgeExclude:
   - '@typescript-eslint/*'
   - 'typescript-eslint'
   - vitepress@2.0.0-alpha.18
+  - '@voidzero-dev/vitepress-theme@5.0.2'
