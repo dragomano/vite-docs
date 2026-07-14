@@ -140,7 +140,7 @@ export default defineConfig({
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
         configure: (proxy, options) => {
-          // прокси будет представлять собой экземпляр 'http-proxy'
+          // прокси будет представлять собой экземпляр 'http-proxy-3'
         }
       },
       // Проксирование веб-сокетов или socket.io:
