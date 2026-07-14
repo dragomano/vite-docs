@@ -5,7 +5,7 @@ const coreTeam = [
     title: 'Создатель',
     org: 'Vue.js',
     orgLink: 'https://vuejs.org/',
-    desc: 'Независимый разработчик с открытым исходным кодом, создатель Vue.js и Vite.',
+    desc: 'Создатель Vue.js и Vite.',
     links: [
       { icon: 'github', link: 'https://github.com/yyx990803' },
       { icon: 'x', link: 'https://x.com/evanyou' },
@@ -113,6 +113,43 @@ const coreTeam = [
     name: 'btea',
     title: 'Веб-разработчик',
     links: [{ icon: 'github', link: 'https://github.com/btea' }],
+  },
+]
+
+export const advisors = [
+  {
+    avatar: 'https://github.com/serhalp.png',
+    name: 'Филипп Серхаль',
+    title: 'Ведущий инженер-программист',
+    org: 'Netlify',
+    orgLink: 'https://www.netlify.com/',
+    desc: 'Развивает поддержку всех фреймворков в Netlify',
+    links: [
+      { icon: 'github', link: 'https://github.com/serhalp' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/philippeserhal.com' },
+    ],
+  },
+  {
+    avatar: 'https://github.com/jamesopstad.png',
+    name: 'Джеймс Опстад',
+    title: 'Старший инженер',
+    org: 'Cloudflare',
+    orgLink: 'https://www.cloudflare.com/',
+    desc: 'Создаёт инструменты для разработчиков в Cloudflare',
+    links: [{ icon: 'github', link: 'https://github.com/jamesopstad' }],
+  },
+  {
+    avatar: 'https://github.com/danielroe.png',
+    name: 'Дэниел Роу',
+    title: 'Сопровождающий проектов с открытым исходным кодом',
+    org: 'Vercel',
+    orgLink: 'https://vercel.com/',
+    desc: 'Руководит командой Nuxt',
+    links: [
+      { icon: 'github', link: 'https://github.com/danielroe' },
+      { icon: 'bluesky', link: 'https://bsky.app/profile/danielroe.dev' },
+    ],
+    sponsor: 'https://github.com/sponsors/danielroe',
   },
 ]
 
