@@ -12,6 +12,8 @@
    import { defineConfig } from 'vite'
    // ---cut---
    export default defineConfig({
+     // перезаписываем стандартную точку входа .html
+     input: '/path/to/main.js',
      server: {
        cors: {
          // источник, к которому вы будете обращаться через браузер
@@ -21,10 +23,6 @@
      build: {
        // генерация .vite/manifest.json в outDir
        manifest: true,
-       rolldownOptions: {
-         // перезапись стандартной точки входа .html
-         input: '/path/to/main.js',
-       },
      },
    })
    ```

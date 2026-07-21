@@ -34,6 +34,22 @@
 
 Смотрите [Переменные окружения и режимы](/guide/env-and-mode) для получения дополнительной информации.
 
+## input <NonInheritBadge />
+
+- **Тип:** `string | string[] | { [entryAlias: string]: string }`
+
+Точки входа вашего приложения, разрешаемые относительно корня проекта. Это значение используется по умолчанию для [`build.rolldownOptions.input`](/config/build-options#build-rolldownoptions), [`build.lib.entry`](/config/build-options#build-lib), [`build.ssr`](/config/build-options#build-ssr) (если установлено значение `true`) и [`optimizeDeps.entries`](/config/dep-optimization-options#optimizedeps-entries), если они не заданы явно.
+
+Это полезно, когда ваше приложение не использует `index.html` в качестве точки входа, поскольку в таком случае достаточно объявить точку входа один раз, вместо того чтобы повторять её во всех перечисленных выше параметрах.
+
+```js twoslash [vite.config.js]
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  input: 'src/main.ts',
+})
+```
+
 ## define
 
 - **Тип:** `Record<string, any>`

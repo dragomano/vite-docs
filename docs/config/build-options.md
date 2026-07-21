@@ -164,6 +164,8 @@ npm add -D esbuild
 
 Позволяет напрямую настраивать сборку Rolldown. Это те же параметры, которые можно экспортировать из файла конфигурации Rolldown; они будут объединены с внутренними параметрами Rolldown, используемыми Vite. Подробности — в [документации по параметрам Rolldown](https://rolldown.rs/reference/).
 
+Вместо `build.rolldownOptions.input` рекомендуется использовать параметр верхнего уровня [`input`](/config/shared-options#input), поскольку он применяется и в режиме разработки. Если задан `build.rolldownOptions.input`, то при сборке он переопределяет значение параметра верхнего уровня `input`.
+
 ## build.rollupOptions
 
 - **Тип:** `RolldownOptions`
@@ -180,10 +182,10 @@ npm add -D esbuild
 
 ## build.lib
 
-- **Тип:** `{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
+- **Тип:** `{ entry?: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
 - **Связано:** [Режим библиотеки](/guide/build#library-mode)
 
-Сборка в виде библиотеки. `entry` является обязательным, так как библиотека не может использовать HTML в качестве входа. `name` — это открытая глобальная переменная и обязательна, когда `formats` включает `'umd'` или `'iife'`. Значения по умолчанию для `formats` — `['es', 'umd']`, или `['es', 'cjs']`, если используются несколько входов.
+Сборка в виде библиотеки. `entry` по умолчанию использует параметр верхнего уровня [`input`](/config/shared-options#input), и один из них является обязательным, поскольку библиотека не может использовать HTML в качестве точки входа. `name` задаёт имя экспортируемой глобальной переменной и является обязательным параметром, если `formats` включает `'umd'` или `'iife'`. Значение `formats` по умолчанию — `['es', 'umd']` или `['es', 'cjs']`, если используется несколько точек входа.
 
 `fileName` — это имя выходного файла пакета, значение по умолчанию для `fileName` — это опция name из package.json, его также можно определить как функцию, принимающую `format` и `entryAlias` в качестве аргументов, и возвращающая имя файла.
 
@@ -280,7 +282,7 @@ export default defineConfig({
 - **По умолчанию:** `false`
 - **Связано:** [Серверный рендеринг](/guide/ssr)
 
-Создать сборку, ориентированную на SSR. Значение может быть строкой для прямого указания входа SSR или `true`, что требует указания входа SSR через `rolldownOptions.input`.
+Создаёт SSR-ориентированную сборку. Значением может быть строка для прямого указания SSR-точки входа или `true`, при этом SSR-точка входа должна быть указана через [`input`](/config/shared-options#input) или `build.rolldownOptions.input`.
 
 ## build.emitAssets
 
