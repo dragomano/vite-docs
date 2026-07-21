@@ -143,9 +143,11 @@ console.log(msg)
 
 В Vite, поскольку `\0` не является допустимым символом в URL импорта, виртуальный идентификатор `\0{id}` в режиме разработки в браузере преобразуется в `/@id/__x00__{id}`. Перед передачей в конвейер плагинов идентификатор декодируется обратно, поэтому в коде хуков плагинов это преобразование не видно.
 
-## Универсальные хуки {#universal-hooks}
+## Хуки Rolldown {#rolldown-hooks}
 
 Во время разработки dev-сервер Vite создает контейнер плагинов, который вызывает [хуки сборки Rolldown](https://rolldown.rs/apis/plugin-api#build-hooks) точно так же, как это делает Rolldown.
+
+Все хуки Rolldown являются [хуками уровня окружения](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks).
 
 Следующие хуки вызываются один раз при запуске сервера:
 
@@ -179,6 +181,7 @@ console.log(msg)
 
 - **Тип:** `(config: UserConfig, env: { mode: 'build' | 'serve', command: string, isSsrBuild?: boolean, isPreview?: boolean }) => UserConfig | null | void`
 - **Режим работы:** `async`, `sequential`
+- **Область применения:** [Глобальная](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   Измените конфигурацию Vite перед её разрешением. Хук получает необработанную пользовательскую конфигурацию (опции CLI, объединённые с файлом конфигурации) и текущую среду конфигурации, которая предоставляет используемые `mode` и `command`. Он может вернуть частичный объект конфигурации, который будет глубоко объединён с существующей конфигурацией, или напрямую изменить конфигурацию (если стандартное объединение не может достичь желаемого результата).
 
@@ -214,8 +217,9 @@ console.log(msg)
 
 ### `configResolved`
 
-- **Type:** `(config: ResolvedConfig) => void | Promise<void>`
-- **Kind:** `async`, `parallel`
+- **Тип:** `(config: ResolvedConfig) => void | Promise<void>`
+- **Режим работы:** `async`, `parallel`
+- **Область применения:** [Глобальная](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   Вызывается после разрешения конфигурации Vite. Используйте этот хук, чтобы прочитать и сохранить окончательную разрешённую конфигурацию. Он также полезен, когда плагин должен выполнять что-то другое в зависимости от выполняемой команды.
 
@@ -252,6 +256,7 @@ console.log(msg)
 - **Тип:** `(server: ViteDevServer) => (() => void) | void | Promise<(() => void) | void>`
 - **Режим работы:** `async`, `sequential`
 - **Смотрите также:** [ViteDevServer](./api-javascript#vitedevserver)
+- **Область применения:** [Глобальная](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   Хук для настройки dev-сервера. Наиболее распространённый случай использования — добавление пользовательских прослоек к внутреннему [connect](https://github.com/senchalabs/connect) приложению:
 
@@ -274,7 +279,8 @@ console.log(msg)
   const myPlugin = () => ({
     name: 'configure-server',
     configureServer(server) {
-      // возвращаем пост-хук, который вызывается после установки внутренних прослоек
+      // возвращаем пост-хук, который вызывается
+      // после установки внутренних прослоек
       return () => {
         server.middlewares.use((req, res, next) => {
           // пользовательская обработка запроса...
@@ -312,6 +318,7 @@ console.log(msg)
 - **Тип:** `(server: PreviewServer) => (() => void) | void | Promise<(() => void) | void>`
 - **Режим работы:** `async`, `sequential`
 - **Смотрите также:** [PreviewServer](./api-javascript#previewserver)
+- **Область применения:** [Глобальная](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
 
   То же самое, что и [`configureServer`](/guide/api-plugin.html#configureserver), но для сервера предварительного просмотра. Аналогично `configureServer`, хук `configurePreviewServer` вызывается до установки других прослоек. Если вы хотите внедрить свою прослойку **после** стандартных, вы можете вернуть функцию из `configurePreviewServer`, которая будет вызвана после установки внутренних прослоек:
 
@@ -319,7 +326,8 @@ console.log(msg)
   const myPlugin = () => ({
     name: 'configure-preview-server',
     configurePreviewServer(server) {
-      // возвращаем пост-хук, который вызывается после установки других прослоек
+      // возвращаем пост-хук, который вызывается
+      // после установки других прослоек
       return () => {
         server.middlewares.use((req, res, next) => {
           // пользовательская обработка запроса...
@@ -333,11 +341,11 @@ console.log(msg)
 
 - **Тип:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`
 - **Режим работы:** `async`, `sequential`
+- **Область применения:** [Уровень окружения](#per-environment-hooks-and-global-hooks)
 
   Специальный хук для преобразования файлов HTML-точек входа, таких как `index.html`. Хук получает текущую строку HTML и контекст преобразования. Контекст предоставляет экземпляр [`ViteDevServer`](./api-javascript#vitedevserver) во время разработки и выводной пакет Rollup во время сборки.
 
   Хук может быть асинхронным и может возвращать одно из следующих значений:
-
   - Преобразованную строку HTML
   - Массив объектов-дескрипторов тегов (`{ tag, attrs, children }`), которые нужно вставить в существующий HTML. Каждый тег также может указывать, куда он должен быть вставлен (по умолчанию — добавление в `<head>`)
   - Объект, содержащий оба значения в виде `{ html, tags }`
@@ -407,6 +415,7 @@ console.log(msg)
 - **Тип:** `(ctx: HmrContext) => Array<ModuleNode> | void | Promise<Array<ModuleNode> | void>`
 - **Режим работы:** `async`, `sequential`
 - **Смотрите также:** [HMR API](./api-hmr)
+- **Область применения:** [Уровень окружения](#per-environment-hooks-and-global-hooks)
 
   Выполняет пользовательскую обработку обновлений HMR. Хук получает объект контекста со следующей сигнатурой:
 

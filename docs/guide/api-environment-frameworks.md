@@ -336,6 +336,10 @@ export default defineConfig({
 
 ### Хук плагина `buildApp` {#the-buildapp-plugin-hook}
 
+- **Тип:** `(this: MinimalPluginContextWithoutEnvironment, builder: ViteBuilder) => Promise<void>`
+- **Режим работы:** `async`, `sequential`
+- **Область применения:** [Глобальная](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
+
 Помимо опции конфигурации `builder.buildApp`, плагины могут определять хук `buildApp`, чтобы участвовать в сборке приложения. Опция конфигурации и хуки плагинов выполняются в определённом порядке: сначала хуки с порядком `'pre'` или `null`, затем настроенный `builder.buildApp`, а потом хуки с порядком `'post'`. Внутри хука свойство `environment.isBuilt` сообщает, было ли окружение уже собрано, что позволяет плагину избежать повторной сборки.
 
 ### Программная сборка с помощью `createBuilder` {#building-programmatically-with-createbuilder}
