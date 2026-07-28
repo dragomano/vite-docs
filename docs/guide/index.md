@@ -106,7 +106,7 @@ $ deno init --npm vite my-vue-app --template vue
 
 :::
 
-Более подробную информацию о каждом поддерживаемом шаблоне см. в [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite): `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
+Более подробную информацию о каждом поддерживаемом шаблоне см. в [create-vite](https://github.com/vitejs/vite/tree/main/packages/create-vite): `vanilla`, `vanilla-ts`, `vue`, `vue-ts`, `react`, `react-compiler`, `react-ts`, `react-compiler-ts`, `preact`, `preact-ts`, `lit`, `lit-ts`, `svelte`, `svelte-ts`, `solid`, `solid-ts`, `qwik`, `qwik-ts`.
 
 Используйте `.` в качестве имени проекта для создания шаблона в текущей директории.
 
@@ -228,7 +228,7 @@ Vite также поддерживает [многостраничные при�
 
 Вы можете указать дополнительные опции CLI, такие как `--port` или `--open`. Для получения полного списка опций CLI выполните команду `npx vite --help` в вашем проекте.
 
-Подробнее об [Интерфейсе командной строки](./cli.md)
+Подробнее об [Интерфейсе командной строки](./cli.md).
 
 ## Использование невыпущенных коммитов {#using-unreleased-commits}
 

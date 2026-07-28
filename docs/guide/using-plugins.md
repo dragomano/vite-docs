@@ -8,7 +8,7 @@ Vite можно расширять с помощью плагинов, кото�
 
 Чтобы использовать плагин, его необходимо добавить в `devDependencies` проекта и включить в массив `plugins` в файле конфигурации `vite.config.js`. Например, для обеспечения поддержки устаревших браузеров можно использовать официальный [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy):
 
-```
+```bash
 $ npm add -D @vitejs/plugin-legacy
 ```
 

@@ -122,7 +122,7 @@ vite preview [root]
 | `--port <port>`           | Указать номер порта (`number`)                                                                                                                    |
 | `--strictPort`            | Выйти, если указанный порт уже используется (`boolean`)                                                                                           |
 | `--open [path]`           | Открыть браузер при запуске (`boolean \| string`)                                                                                                 |
-| `--outDir <dir>`          | Выходная директория (по умолчанию: `dist`)(`string`)                                                                                              |
+| `--outDir <dir>`          | Выходная директория (по умолчанию: `dist`) (`string`)                                                                                             |
 | `-c, --config <file>`     | Использовать указанный файл конфигурации (`string`)                                                                                               |
 | `--base <path>`           | Публичный базовый путь (по умолчанию: `/`) (`string`)                                                                                             |
 | `-l, --logLevel <level>`  | Уровень предупреждений: info \| warn \| error \| silent (`string`)                                                                                |
