@@ -4,7 +4,7 @@
 
 ## Изменение целевых браузеров по умолчанию [<Badge text="NRV" type="warning" />](#migration-from-v7) {#default-browser-target-change}
 
-Значение по умолчанию для `build.target` и `'baseline-widely-available'` обновлено до более новых версий браузеров:
+Дефолтные значения `build.target` и `'baseline-widely-available'` обновлены до более новых версий браузеров:
 
 - Chrome 107 → 111
 - Edge 107 → 111
