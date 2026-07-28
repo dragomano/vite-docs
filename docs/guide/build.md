@@ -117,7 +117,7 @@ export default defineConfig({
 Во время сборки всё, что вам нужно сделать, это указать несколько `.html` файлов в качестве точек входа:
 
 ```js twoslash [vite.config.js]
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -141,7 +141,7 @@ export default defineConfig({
 ::: code-group
 
 ```js twoslash [vite.config.js (одна точка входа)]
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -169,7 +169,7 @@ export default defineConfig({
 ```
 
 ```js twoslash [vite.config.js (несколько точек входа)]
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
