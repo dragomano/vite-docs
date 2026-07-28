@@ -4,7 +4,7 @@
 Оставьте нам отзыв в [обсуждении обратной связи по Environment API](https://github.com/vitejs/vite/discussions/16358)
 :::
 
-Мы планируем депрекацию хука `handleHotUpdate` плагина в пользу хука [`hotUpdate`](/guide/api-environment#the-hotupdate-hook), чтобы он был осведомлён об [Environment API](/guide/api-environment.md) и обрабатывал дополнительные события наблюдения с `create` и `delete`.
+Мы планируем депрекацию хука `handleHotUpdate` плагина в пользу хука [`hotUpdate`](/guide/api-environment-plugins#the-hotupdate-hook), чтобы он был осведомлён об [Environment API](/guide/api-environment.md) и обрабатывал дополнительные события наблюдения с `create` и `delete`.
 
 Область применения: `Авторы плагинов Vite`
 
