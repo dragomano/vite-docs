@@ -313,12 +313,17 @@ const config = defineConfig({
     variant: 'vite',
     logo: '/logo.svg',
 
-    outlineTitle: 'Содержание',
+    outline: {
+      level: [2, 3],
+      label: 'Содержание',
+    },
     docFooter: {
       prev: 'Предыдущая страница',
       next: 'Следующая страница'
     },
-    lastUpdatedText: 'Обновлено',
+    lastUpdated: {
+      text: 'Обновлено',
+    },
     darkModeSwitchLabel: 'Оформление',
     lightModeSwitchTitle: 'Переключить на светлую тему',
     darkModeSwitchTitle: 'Переключить на тёмную тему',
@@ -498,10 +503,6 @@ const config = defineConfig({
       '/guide/': getGuideSidebar(),
       '/config/': getConfigSidebar(),
       '/changes/': getChangesSidebar(),
-    },
-
-    outline: {
-      level: [2, 3],
     },
   },
   transformHead(ctx) {
