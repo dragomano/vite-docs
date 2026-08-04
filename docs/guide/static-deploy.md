@@ -296,10 +296,6 @@ Cloudflare Pages предоставляет способ развёртыван�
 
 Разверните свой статический сайт, используя [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite) и следуя этим [инструкциям](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).
 
-## Хостинг статических сайтов Kinsta {#kinsta-static-site-hosting}
-
-Разверните свой статический сайт, используя [Kinsta](https://kinsta.com/static-site-hosting/) и следуя этим [инструкциям](https://kinsta.com/docs/static-site-hosting/static-site-quick-start/react-static-site-examples/#react-with-vite).
-
 ## Хостинг статических сайтов xmit {#xmit-static-site-hosting}
 
 Разверните свой статический сайт, используя [xmit](https://xmit.co) и следуя этому [руководству](https://xmit.dev/guides/vite-quickstart/).
