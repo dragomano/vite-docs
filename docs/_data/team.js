@@ -116,7 +116,7 @@ const coreTeam = [
   },
 ]
 
-export const advisors = [
+const advisorsGroup = [
   {
     avatar: 'https://github.com/serhalp.png',
     name: 'Филипп Серхаль',
@@ -261,4 +261,5 @@ const emeritiMembers = [
 ]
 
 export const core = coreTeam.map(obj => ({ ...obj, actionText: 'Поддержать' }));
+export const advisors = advisorsGroup.map(obj => ({ ...obj, actionText: 'Поддержать' }));
 export const emeriti = emeritiMembers.map(obj => ({ ...obj, actionText: 'Поддержать' }));
