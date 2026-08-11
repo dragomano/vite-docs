@@ -6,7 +6,7 @@
 
 ## Совместимость с браузерами {#browser-compatibility}
 
-По умолчанию продакшен-сборка ориентируется на современные браузеры, входящие в категорию [базовых](https://web-platform-dx.github.io/web-features/) широко распространённых (Baseline Widely Available). Поддерживаемые версии браузеров:
+По умолчанию продакшен-сборка ориентирована на минимальные версии браузеров, совместимые с категорией [Baseline](https://web-platform-dx.github.io/baseline/) Widely Available на дату, фиксированную для каждого мажорного релиза. Диапазон поддержки браузеров по умолчанию для этого мажорного релиза:
 
 <!-- Search for the `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` constant for more information -->
 
@@ -84,7 +84,7 @@ window.addEventListener('vite:preloadError', (event) => {
 
 ## Пересборка при изменении файлов {#rebuild-on-files-changes}
 
-Вы можете включить наблюдатель Rollup с помощью команды `vite build --watch`. Либо вы можете напрямую настроить основные параметры наблюдателя ([`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch)) через опцию `build.watch`:
+Вы можете включить наблюдатель Rolldown с помощью команды `vite build --watch`. Либо вы можете напрямую настроить основные параметры наблюдателя ([`WatcherOptions`](https://rolldown.rs/reference/InputOptions.watch)) через опцию `build.watch`:
 
 ```js [vite.config.js]
 export default defineConfig({

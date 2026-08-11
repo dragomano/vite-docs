@@ -11,7 +11,7 @@
 - Firefox 104 → 114
 - Safari 16.0 → 16.4
 
-Эти версии браузеров соответствуют наборам функций [Baseline](https://web-platform-dx.github.io/web-features/), классифицируемых как широко доступные на 1 января 2026. Другими словами, все они были выпущены примерно два с половиной года назад.
+Эти версии браузеров соответствуют наборам функций [Baseline](https://web-platform-dx.github.io/baseline/), классифицируемых как широко доступные на 1 января 2026. Другими словами, все они были выпущены примерно два с половиной года назад.
 
 ## Rolldown
 
@@ -179,6 +179,7 @@ $ deno add -D npm:@rollup/plugin-swc npm:@swc/core
 
 ```js
 import { defineConfig, withFilter } from 'vite'
+import swc from '@rollup/plugin-swc'
 
 export default defineConfig({
   // ...
