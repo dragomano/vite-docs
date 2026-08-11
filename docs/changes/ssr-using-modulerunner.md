@@ -4,7 +4,7 @@
 Оставьте нам отзыв в [обсуждении обратной связи по Environment API](https://github.com/vitejs/vite/discussions/16358)
 :::
 
-`server.ssrLoadModule` был заменён на импорт из [Module Runner](/guide/api-environment#modulerunner).
+`server.ssrLoadModule` был заменён на импорт из [Module Runner](/guide/api-environment-runtimes#modulerunner).
 
 Затронутая область: `Авторы плагинов Vite`
 
