@@ -328,10 +328,12 @@ export default defineConfig({
 
 ## server.middlewareMode
 
-- **Тип:** `boolean`
+- **Тип:** `boolean | { server: http.Server }`
 - **По умолчанию:** `false`
 
 Создайте сервер Vite в режиме мидлвара.
+
+Если для [прокси](./server-options#server-proxy) настроен WebSocket, необходимо передать `server`, чтобы корректно привязать прокси.
 
 - **Связано:** [appType](./shared-options#apptype), [SSR - Настройка dev-сервера](/guide/ssr#setting-up-the-dev-server)
 
@@ -459,7 +461,7 @@ export default defineConfig({
 
 Определяет, следует ли игнорировать исходные файлы в sourcemap сервера, используемом для заполнения расширения sourcemap [`x_google_ignoreList`](https://developer.chrome.com/articles/x-google-ignore-list/).
 
-`server.sourcemapIgnoreList` является эквивалентом [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) для dev-сервера. Разница между этими двумя параметрами конфигурации заключается в том, что функция rollup вызывается с относительным путём для `sourcePath`, в то время как `server.sourcemapIgnoreList` вызывается с абсолютным путём. В процессе разработки большинство модулей имеют карту и источник в одной папке, поэтому относительный путь для `sourcePath` — это само имя файла. В этих случаях использование абсолютных путей делает это более удобным.
+`server.sourcemapIgnoreList` является эквивалентом [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rolldown.rs/reference/OutputOptions.sourcemapIgnoreList) для dev-сервера. Разница между этими двумя параметрами конфигурации заключается в том, что функция Rolldown вызывается с относительным путём для `sourcePath`, в то время как `server.sourcemapIgnoreList` вызывается с абсолютным путём. В процессе разработки большинство модулей имеют карту и источник в одной папке, поэтому относительный путь для `sourcePath` — это само имя файла. В таких случаях вместо этого удобно использовать абсолютные пути.
 
 По умолчанию исключаются все пути, содержащие `node_modules`. Вы можете передать `false`, чтобы отключить это поведение, или, для полного контроля, функцию, которая принимает путь к источнику и путь к sourcemap и возвращает, следует ли игнорировать путь к источнику.
 
@@ -476,5 +478,5 @@ export default defineConfig({
 ```
 
 ::: tip Примечание
-[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) и [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) необходимо устанавливать независимо. `server.sourcemapIgnoreList` — это конфигурация только для сервера и не получает своего значения по умолчанию из определённых опций rollup.
+[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) и [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rolldown.rs/reference/OutputOptions.sourcemapIgnoreList) необходимо устанавливать независимо. `server.sourcemapIgnoreList` — это конфигурация только для сервера и не получает своего значения по умолчанию из определённых опций Rolldown.
 :::
