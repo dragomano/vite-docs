@@ -65,7 +65,7 @@ if (import.meta.env.SSR) {
 
 При создании приложения SSR вы, вероятно, захотите иметь полный контроль над вашим основным сервером и отделить Vite от продакшен-среды. Поэтому рекомендуется использовать Vite в режиме мидлвара. Вот пример с [express](https://expressjs.com/):
 
-```js{15-18} twoslash [server.js]
+```js{12-15} twoslash [server.js]
 import fs from 'node:fs'
 import path from 'node:path'
 import express from 'express'
