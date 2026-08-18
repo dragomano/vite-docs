@@ -123,6 +123,8 @@ modulePreload: {
 
 Эта опция позволяет пользователям установить другую целевую версию браузера для минификации CSS, отличную от той, которая используется для транспиляции JavaScript.
 
+Когда `build.cssMinify` имеет значение `'lightningcss'` (по умолчанию), этот параметр имеет приоритет над [`css.lightningcss.targets`](./shared-options.md#css-lightningcss) на этапе минификации.
+
 Используйте этот параметр только при разработке для нестандартных браузеров.
 Например, Android WeChat WebView поддерживает большинство современных функций JavaScript, но не понимает [шестнадцатеричную нотацию цветов `#RGBA` в CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb_colors).
 Чтобы Vite не преобразовывал цвета `rgba()` в шестнадцатеричный формат `#RGBA`, установите значение `chrome61` для параметра `build.cssTarget`.
