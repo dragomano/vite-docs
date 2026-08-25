@@ -57,11 +57,3 @@ Vite (французское слово, означающее «быстрый»
 ## Лицензия
 
 [MIT](LICENSE).
-
-## Спонсоры
-
-<p align="center">
-  <a target="_blank" href="https://github.com/sponsors/vite">
-    <img alt="sponsors" src="https://sponsors.vite.dev/sponsors.svg">
-  </a>
-</p>
