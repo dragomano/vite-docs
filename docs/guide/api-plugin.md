@@ -337,6 +337,58 @@ console.log(msg)
   })
   ```
 
+### `closeServer`
+
+- **Тип:** `(context: { reason: 'restart' | 'close' }) => void | Promise<void>`
+- **Режим работы:** `async`, `parallel`
+- **Область применения:** [Глобальная](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
+
+  Вызывается при перезапуске или закрытии dev-сервера после завершения работы сервера. Обычно используется для освобождения ресурсов, созданных в [`configureServer`](/guide/api-plugin.html#configureserver).
+
+  `context.reason` позволяет различить эти два случая:
+  - `'restart'`: сервер перезапускается (например, из-за изменения файла конфигурации или вызова `server.restart()`).
+  - `'close'`: сервер завершает работу (например, при нажатии сочетания клавиш `q` или вызове `server.close()`).
+
+  ```js
+  const myPlugin = () => {
+    let resource
+    return {
+      name: 'close-server',
+      configureServer(server) {
+        resource = createResource()
+      },
+      async closeServer({ reason }) {
+        if (reason === 'close') {
+          await resource.dispose()
+        }
+      },
+    }
+  }
+  ```
+
+### `closePreviewServer`
+
+- **Тип:** `() => void | Promise<void>`
+- **Режим работы:** `async`, `parallel`
+- **Область применения:** [Глобальная](/guide/api-environment-plugins#per-environment-hooks-and-global-hooks)
+
+  То же, что и [`closeServer`](/guide/api-plugin.html#closeserver), но для сервера предварительного просмотра. Сервер предварительного просмотра никогда не перезапускается, поэтому параметр `reason` отсутствует.
+
+  ```js
+  const myPlugin = () => {
+    let resource
+    return {
+      name: 'close-preview-server',
+      configurePreviewServer(server) {
+        resource = createResource()
+      },
+      async closePreviewServer() {
+        await resource.dispose()
+      },
+    }
+  }
+  ```
+
 ### `transformIndexHtml`
 
 - **Тип:** `IndexHtmlTransformHook | { order?: 'pre' | 'post', handler: IndexHtmlTransformHook }`
@@ -543,6 +595,33 @@ function outputMetadataPlugin(): Plugin {
     },
   }
 }
+```
+
+## Ссылки на сгенерированные ресурсы {#referencing-emitted-assets}
+
+Чтобы сгенерировать ресурс из плагина, вызовите [`this.emitFile({ type: 'asset', ... })`](https://rolldown.rs/reference/Interface.PluginContext#in-depth-type-asset). Он возвращает `referenceId`, который можно использовать для генерации URL ресурса, поскольку его окончательное имя файла становится известно только после создания бандла.
+
+### В JavaScript {#in-javascript}
+
+Используйте `import.meta.ROLLDOWN_FILE_URL_<referenceId>`:
+
+```js
+const referenceId = this.emitFile({
+  type: 'asset',
+  name: 'icon.png',
+  source: fileContent,
+})
+
+// это выражение JavaScript, поэтому добавляйте любой query-параметр или hash с помощью конкатенации строк
+return `export default import.meta.ROLLDOWN_FILE_URL_${referenceId} + '#frag'`
+```
+
+### В CSS или HTML {#in-css-or-html}
+
+`import.meta.ROLLDOWN_FILE_URL_<referenceId>` работает только в позиции выражения JavaScript. В CSS или HTML вместо него используйте токен `__VITE_ASSET__<referenceId>__`, добавляя любой query-параметр или hash сразу после него:
+
+```css
+background: url(__VITE_ASSET__<referenceId>__#frag);
 ```
 
 ## Порядок плагинов {#plugin-ordering}
