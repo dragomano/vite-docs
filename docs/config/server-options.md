@@ -158,6 +158,12 @@ export default defineConfig({
 })
 ```
 
+::: warning Проверка источника для WebSocket
+
+Vite не проверяет источник WebSocket-запросов перед их проксированием. Предполагается, что целевой сервер прокси проверяет заголовок `Origin` или выполняет другие проверки. Обратите внимание, что параметр `rewriteWsOrigin` изменяет источник на источник целевого сервера и приводит к обходу проверки источника.
+
+:::
+
 ## server.cors
 
 - **Тип:** `boolean | CorsOptions`
@@ -302,6 +308,8 @@ export default defineConfig({
 - **Тип:** `object | null`
 
 Опции для наблюдателя файловой системы, которые передаются в [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api).
+
+Когда включён режим `bundled-dev`, также принимаются опции watch из [Rolldown](https://rolldown.rs/reference/InputOptions.watch) (например, `usePolling`, `pollInterval`, `useDebounce`, `debounceDuration`, `include`, `exclude`). Опции, доступные только в chokidar, по-прежнему используются наблюдателем chokidar, который продолжает отслеживать файлы за пределами графа модулей, такие как зависимости файла конфигурации и env-файлы.
 
 Наблюдатель сервера Vite следит за `root` и по умолчанию пропускает директории `.git/`, `node_modules/`, `test-results/`, а также `cacheDir` и `build.outDir` Vite. При обновлении отслеживаемого файла Vite применит HMR и обновит страницу только при необходимости.
 
