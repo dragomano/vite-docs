@@ -84,13 +84,6 @@ const devTools: Dependency[] = [
     repository: 'https://github.com/microsoft/playwright',
   },
   {
-    name: 'prettier',
-    description: 'Prettier is an opinionated code formatter',
-    author: 'James Long',
-    repository: 'https://github.com/prettier/prettier',
-    funding: 'https://github.com/prettier/prettier?sponsor=1',
-  },
-  {
     name: 'typescript',
     description: 'TypeScript is a language for application scale JavaScript development',
     author: 'Microsoft Corporation',
