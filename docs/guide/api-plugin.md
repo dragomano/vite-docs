@@ -486,7 +486,6 @@ console.log(msg)
   - `read` — это асинхронная функция чтения, которая возвращает содержимое файла. Это предоставляется, потому что в некоторых системах обратный вызов изменения файла может срабатывать слишком быстро, прежде чем редактор завершит обновление файла, и прямой вызов `fs.readFile` вернет пустое содержимое. Функция чтения, переданная в хук, нормализует это поведение.
 
   Хук может выбрать:
-
   - Отфильтровать и уточнить список затронутых модулей, чтобы HMR был более точным.
 
   - Вернуть пустой массив и выполнить полную перезагрузку:
@@ -674,8 +673,7 @@ apply(config, { command }) {
 
 Вы также можете дополнить существующий плагин Rolldown / Rollup свойствами, специфичными для Vite:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import example from 'rolldown-plugin-example'
 import { defineConfig } from 'vite'
 
@@ -788,8 +786,7 @@ function accessImportMap() {
 
 На стороне плагина мы можем использовать `server.ws.send`, чтобы транслировать события клиенту:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default defineConfig({
   plugins: [
     {
@@ -834,8 +831,7 @@ if (import.meta.hot) {
 
 Затем используйте `server.ws.on` и слушайте события на стороне сервера:
 
-```js
-// vite.config.js
+```js [vite.config.js]
 export default defineConfig({
   plugins: [
     {
@@ -854,10 +850,13 @@ export default defineConfig({
 
 ### TypeScript для пользовательских событий {#typescript-for-custom-events}
 
-Возможно типизировать пользовательские события, расширяя интерфейс `CustomEventMap`:
+Vite определяет тип полезной нагрузки на основе интерфейса `CustomEventMap`. Типизировать пользовательские события можно, расширив этот интерфейс:
 
-```ts
-// events.d.ts
+:::tip ПРИМЕЧАНИЕ
+Обязательно указывайте расширение `.d.ts` при задании файлов деклараций TypeScript. В противном случае TypeScript может не определить, какой файл модуль пытается расширить.
+:::
+
+```ts [events.d.ts]
 import 'vite/types/customEvent'
 
 declare module 'vite/types/customEvent' {
@@ -866,4 +865,24 @@ declare module 'vite/types/customEvent' {
     // 'event-key': payload
   }
 }
+```
+
+Это расширение интерфейса используется `InferCustomEventPayload<T>` для определения типа полезной нагрузки события `T`. Подробнее о том, как используется этот интерфейс, см. в [документации по HMR API](./api-hmr#hmr-api).
+
+```ts twoslash
+import 'vite/client'
+import type { InferCustomEventPayload } from 'vite/types/customEvent.d.ts'
+declare module 'vite/types/customEvent.d.ts' {
+  interface CustomEventMap {
+    'custom:foo': { msg: string }
+  }
+}
+// ---cut---
+type CustomFooPayload = InferCustomEventPayload<'custom:foo'>
+import.meta.hot?.on('custom:foo', (payload) => {
+  // Тип payload будет { msg: string }
+})
+import.meta.hot?.on('unknown:event', (payload) => {
+  // Тип payload будет any
+})
 ```

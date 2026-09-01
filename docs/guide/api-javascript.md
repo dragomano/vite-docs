@@ -1,6 +1,6 @@
 # JavaScript API {#javascript-api}
 
-JavaScript API Vite полностью типизированы, и рекомендуется использовать TypeScript или включить проверку типов JS в VS Code, чтобы воспользоваться интуитивным вводом и валидацией.
+JavaScript API в Vite имеют полную типизацию, поэтому рекомендуется использовать TypeScript или включить проверку типов JavaScript в VS Code, чтобы воспользоваться IntelliSense и валидацией.
 
 ## `createServer`
 
