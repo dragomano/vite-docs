@@ -53,7 +53,7 @@ export type { T }
 
 ### Параметры компилятора TypeScript {#typescript-compiler-options}
 
-Vite учитывает некоторые параметры из `tsconfig.json` и устанавливает соответствующие параметры Oxc Transformer. Для каждого файла Vite использует ближайший родительский `tsconfig.json`, которому соответствует этот файл, либо конфигурацию, указанную в его поле [`references`](https://www.typescriptlang.org/tsconfig/#references), если она соответствует файлу. Vite считает, что конфигурация соответствует файлу, если файл удовлетворяет условиям, заданным в её полях [`files`](https://www.typescriptlang.org/tsconfig/#files), [`include`](https://www.typescriptlang.org/tsconfig/#include) и [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude).
+Vite учитывает некоторые параметры из `tsconfig.json` и задаёт соответствующие параметры Oxc Transformer. По умолчанию Vite использует ближайший родительский `tsconfig.json`, соответствующий каждому файлу. Если в поле [`references`](https://www.typescriptlang.org/tsconfig/#references) этого конфига указана другая конфигурация и она соответствует файлу, используется именно она. Vite считает конфигурацию соответствующей файлу, если файл удовлетворяет полям [`files`](https://www.typescriptlang.org/tsconfig/#files), [`include`](https://www.typescriptlang.org/tsconfig/#include) и [`exclude`](https://www.typescriptlang.org/tsconfig/#exclude) этой конфигурации.
 
 Когда одна и та же опция задана и в конфигурации Vite, и в `tsconfig.json`, приоритет имеет значение из конфигурации Vite.
 

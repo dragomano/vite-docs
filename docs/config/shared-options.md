@@ -627,6 +627,20 @@ define: {
 
 Подробнее смотрите в репозитории [Vite DevTools](https://github.com/vitejs/devtools).
 
+## tsconfig
+
+- **Тип:** `string`
+
+Путь к файлу конфигурации TypeScript, используемому Vite. Относительные пути разрешаются относительно [`root`](#root) проекта.
+
+Если этот параметр не задан, Vite для каждого файла ищет ближайший подходящий `tsconfig.json`. Подробнее см. в разделе [Параметры компилятора TypeScript](/guide/features#typescript-compiler-options).
+
+::: warning Рекомендуется автоматическое обнаружение
+Задавать этот параметр не рекомендуется, поскольку он отключает определение `tsconfig` для каждого файла, выполняемое Vite в соответствии с логикой сервера языка TypeScript. Вместо этого размещайте `tsconfig.json` рядом с файлами, для которых он предназначен, и используйте TypeScript [`references`](https://www.typescriptlang.org/tsconfig/#references) при работе с несколькими проектами.
+
+Если задача заключается в переназначении импортов, используйте [`resolve.alias`](#resolve-alias) или поля `imports` и `exports` в `package.json`, а не выбирайте `tsconfig` исключительно ради [`compilerOptions.paths`](https://www.typescriptlang.org/tsconfig/#paths). Используйте этот параметр только в случаях, когда автоматическое обнаружение не позволяет определить нужную конфигурацию.
+:::
+
 ## future
 
 - **Тип:** `Record<string, 'warn' | undefined>`
