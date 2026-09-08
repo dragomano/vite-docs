@@ -242,6 +242,8 @@ export default defineConfig({
 })
 ```
 
+Обратите внимание, что плагин, возвращаемый из `applyToEnvironment` или `perEnvironmentPlugin`, не должен использовать специфичные для Vite хуки.
+
 Хук `applyToEnvironment` вызывается во время конфигурации, в настоящее время после `configResolved`, поскольку проекты в экосистеме модифицируют плагины в нём. Разрешение плагинов окружения может быть перенесено на этап до `configResolved` в будущем.
 
 ## Связь между приложением и плагином {#application-plugin-communication}
