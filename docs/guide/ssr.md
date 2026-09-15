@@ -102,6 +102,52 @@ createServer()
 
 Здесь `vite` — это экземпляр [ViteDevServer](./api-javascript#vitedevserver). `vite.middlewares` — это экземпляр [Connect](https://github.com/senchalabs/connect), который можно использовать в качестве мидлвара в любом совместимом с Connect фреймворке Node.js.
 
+::: tip Обновление модулей, используемых только в SSR
+По умолчанию обновление модуля, который импортируется только в среде SSR, не приводит к перезагрузке страницы в браузере. Интеграции с фреймворками обычно обрабатывают это за вас. Если вы используете низкоуровневую пользовательскую настройку SSR, можно добавить плагин, который будет перезагружать браузер при изменении модуля, используемого только в SSR:
+
+```ts twoslash
+import type { EnvironmentModuleNode, Plugin } from 'vite'
+
+export function ssrReload(): Plugin {
+  return {
+    name: 'ssr-reload',
+    enforce: 'post',
+    hotUpdate: {
+      order: 'post',
+      handler({ modules, server, timestamp }) {
+        if (this.environment.name !== 'ssr') return
+
+        const invalidatedModules = new Set<EnvironmentModuleNode>()
+        let hasSsrOnlyModules = false
+
+        for (const mod of modules) {
+          if (mod.file == null) continue
+          const clientModules =
+            server.environments.client.moduleGraph.getModulesByFile(mod.file)
+          if (clientModules != null) continue
+
+          this.environment.moduleGraph.invalidateModule(
+            mod,
+            invalidatedModules,
+            timestamp,
+            true,
+          )
+          hasSsrOnlyModules = true
+        }
+
+        if (hasSsrOnlyModules) {
+          server.environments.client.hot.send({ type: 'full-reload' })
+          return []
+        }
+      },
+    },
+  }
+}
+```
+
+Добавьте `ssrReload()` в массив `plugins`, передаваемый в `createViteServer` в примере выше. Подробнее см. в разделе [Хук `hotUpdate`](./api-environment-plugins#the-hotupdate-hook).
+:::
+
 Следующий шаг — реализовать обработчик `*`, чтобы обслуживать HTML, рендеренный на сервере:
 
 ```js twoslash [server.js]
