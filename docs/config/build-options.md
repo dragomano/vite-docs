@@ -166,6 +166,8 @@ npm add -D esbuild
 
 Позволяет напрямую настраивать сборку Rolldown. Это те же параметры, которые можно экспортировать из файла конфигурации Rolldown; они будут объединены с внутренними параметрами Rolldown, используемыми Vite. Подробности — в [документации по параметрам Rolldown](https://rolldown.rs/reference/).
 
+Vite переопределяет значение по умолчанию Rolldown для `preserveEntrySignatures`. Если этот параметр не задан, Vite использует `false` для обычных клиентских сборок, `'strict'` для сборок библиотек и `'allow-extension'` для SSR-сборок.
+
 Вместо `build.rolldownOptions.input` рекомендуется использовать параметр верхнего уровня [`input`](/config/shared-options#input), поскольку он применяется и в режиме разработки. Если задан `build.rolldownOptions.input`, то при сборке он переопределяет значение параметра верхнего уровня `input`.
 
 ## build.rollupOptions
