@@ -42,11 +42,11 @@ npm create vite@latest -- --template rsc
 
 Ознакомьтесь с [Реестром плагинов Vite](https://registry.vite.dev/plugins), чтобы увидеть список плагинов, опубликованных в npm.
 
-## Встроенные плагины Rolldown {#rolldown-builtin-plugins}
+## Встроенные плагины Rolldown {#rolldown-built-in-plugins}
 
 Vite использует [Rolldown](https://rolldown.rs/) под капотом, и он предоставляет несколько встроенных плагинов для типичных сценариев.
 
-Подробности — в разделе [Rolldown Builtin Plugins](https://rolldown.rs/builtin-plugins/).
+Подробности — в разделе [Rolldown Built-in Plugins](https://rolldown.rs/builtin-plugins/).
 
 ## Плагины Rolldown / Rollup {#rolldown-rollup-plugins}
 
