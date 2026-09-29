@@ -593,14 +593,6 @@ const config = defineConfig({
     }
   },
   vite: {
-    resolve: {
-      alias: {
-        '@components/oss/TopBanner.vue': path.resolve(
-          import.meta.dirname,
-          'theme/components/TopBanner.vue',
-        ),
-      },
-    },
     build: {
       chunkSizeWarningLimit: 1000,
       rollupOptions: {

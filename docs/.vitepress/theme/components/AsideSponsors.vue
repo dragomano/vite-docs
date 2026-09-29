@@ -1,9 +1,5 @@
 <template>
-  <a
-    class="viteconf"
-    href="https://www.youtube.com/playlist?list=PLqGQbXn_GDmkJaoykvHCUmXUPjhgH2bVr"
-    target="_blank"
-  >
+  <a class="viteconf" href="https://viteconf.org/" target="_blank">
     <img
       width="22"
       height="22"
@@ -12,8 +8,8 @@
     />
     <span>
       <p class="extra-info">Строим вместе</p>
-      <p class="heading">ViteConf 2025</p>
-      <p class="extra-info">Посмотреть записи!</p>
+      <p class="heading">ViteConf 2026</p>
+      <p class="extra-info">15 октября, онлайн</p>
     </span>
   </a>
 </template>
