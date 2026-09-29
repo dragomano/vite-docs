@@ -465,21 +465,21 @@ export default defineConfig({
 ## server.sourcemapIgnoreList
 
 - **Тип:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
-- **По умолчанию:** `(sourcePath) => sourcePath.includes('node_modules')`
+- **По умолчанию:** `(sourcePath) => /(?:^|[\\/])node_modules(?:[\\/]|$)/.test(sourcePath)`
 
 Определяет, следует ли игнорировать исходные файлы в sourcemap сервера, используемом для заполнения расширения sourcemap [`x_google_ignoreList`](https://developer.chrome.com/articles/x-google-ignore-list/).
 
 `server.sourcemapIgnoreList` является эквивалентом [`build.rolldownOptions.output.sourcemapIgnoreList`](https://rolldown.rs/reference/OutputOptions.sourcemapIgnoreList) для dev-сервера. Разница между этими двумя параметрами конфигурации заключается в том, что функция Rolldown вызывается с относительным путём для `sourcePath`, в то время как `server.sourcemapIgnoreList` вызывается с абсолютным путём. В процессе разработки большинство модулей имеют карту и источник в одной папке, поэтому относительный путь для `sourcePath` — это само имя файла. В таких случаях вместо этого удобно использовать абсолютные пути.
 
-По умолчанию исключаются все пути, содержащие `node_modules`. Вы можете передать `false`, чтобы отключить это поведение, или, для полного контроля, функцию, которая принимает путь к источнику и путь к sourcemap и возвращает, следует ли игнорировать путь к источнику.
+По умолчанию исключаются все пути, содержащие `node_modules` в качестве сегмента пути. Чтобы отключить это поведение, можно передать `false`, а для полного контроля — функцию, которая принимает исходный путь и путь к sourcemap и возвращает значение, указывающее, следует ли игнорировать исходный путь.
 
 ```js
 export default defineConfig({
   server: {
-    // Это значение по умолчанию, и оно добавит все файлы с `node_modules`
-    // в их путях в список игнорируемых.
+    // Это значение используется по умолчанию и добавит в список игнорируемых все файлы,
+    // в пути которых присутствует `node_modules` в качестве сегмента пути.
     sourcemapIgnoreList(sourcePath, sourcemapPath) {
-      return sourcePath.includes('node_modules')
+      return /(?:^|[\\/])node_modules(?:[\\/]|$)/.test(sourcePath)
     }
   }
 })
