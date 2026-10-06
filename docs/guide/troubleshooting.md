@@ -134,6 +134,20 @@ security add-trusted-cert -d -r trustRoot -k ~/Library/Keychains/login.keychain-
 
 Смотрите [#16522](https://github.com/vitejs/vite/issues/16522) для получения дополнительных сведений.
 
+### Vite не может отслеживать изменения файлов {#illegal-operation-error-when-watching-files}
+
+Если файл или директория расположены в файловой системе, которая не поддерживает события файловой системы, Vite может не суметь отслеживать их изменения.
+
+Пример ошибки, с которой вы можете столкнуться:
+
+```
+Error: EISDIR: illegal operation on a directory, watch 'C:/Users/me/project/vite.config.js'
+```
+
+Например, это может произойти с общей папкой VirtualBox.
+
+Чтобы решить эту проблему, вы можете включить [`server.watch.usePolling`](/config/server-options#server-watch). Обратите внимание, что [`usePolling` приводит к высокой нагрузке на процессор](https://github.com/paulmillr/chokidar/tree/3.6.0#performance).
+
 ## HMR
 
 ### Vite обнаруживает изменение файла, но HMR не работает {#vite-detects-a-file-change-but-the-hmr-is-not-working}
