@@ -180,7 +180,7 @@ Vite проверяет входные и выходные данные мето
 // код, использующий API Vite
 import { createServer } from 'vite'
 
-const server = createServer({
+const server = await createServer({
   plugins: [
     // плагин, который обрабатывает `virtual:entrypoint`
     {
@@ -189,7 +189,7 @@ const server = createServer({
     },
   ],
 })
-const ssrEnvironment = server.environment.ssr
+const ssrEnvironment = server.environments.ssr
 const input = {}
 
 // используйте открытые функции от каждой фабрики окружений, которые выполняют код
@@ -252,7 +252,7 @@ function vitePluginVirtualIndexHtml(): Plugin {
 // код, использующий API Vite
 import { createServer } from 'vite'
 
-const server = createServer({
+const server = await createServer({
   plugins: [
     // плагин, который обрабатывает `virtual:entrypoint`
     {
@@ -261,13 +261,13 @@ const server = createServer({
     },
   ],
 })
-const ssrEnvironment = server.environment.ssr
+const ssrEnvironment = server.environments.ssr
 const input = {}
 
 // используйте открытые функции от каждой фабрики окружений, которые выполняют код
 // проверьте, что они предоставляют для каждой фабрики окружений
 if (ssrEnvironment instanceof RunnableDevEnvironment) {
-  ssrEnvironment.runner.import('virtual:entrypoint')
+  await ssrEnvironment.runner.import('virtual:entrypoint')
 } else if (ssrEnvironment instanceof CustomDevEnvironment) {
   ssrEnvironment.runEntrypoint('virtual:entrypoint')
 } else {
@@ -277,9 +277,9 @@ if (ssrEnvironment instanceof RunnableDevEnvironment) {
 const req = new Request('http://example.com/')
 
 const uniqueId = 'a-unique-id'
-ssrEnvironment.send('request', serialize({ req, uniqueId }))
+ssrEnvironment.hot.send('request', serialize({ req, uniqueId }))
 const response = await new Promise((resolve) => {
-  ssrEnvironment.on('response', (data) => {
+  ssrEnvironment.hot.on('response', (data) => {
     data = deserialize(data)
     if (data.uniqueId === uniqueId) {
       resolve(data.res)
