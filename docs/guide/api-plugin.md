@@ -43,8 +43,8 @@ Vite стремится предлагать устоявшиеся паттер
 Пользователи добавят плагины в `devDependencies` проекта и настроят их с помощью опции массива `plugins`:
 
 ```js [vite.config.js]
-import vitePlugin from 'vite-plugin-feature'
 import rollupPlugin from 'rollup-plugin-feature'
+import vitePlugin from 'vite-plugin-feature'
 
 export default defineConfig({
   plugins: [vitePlugin(), rollupPlugin()],
@@ -56,9 +56,8 @@ export default defineConfig({
 `plugins` также принимает пресеты, включающие несколько плагинов в качестве одного элемента. Это полезно для сложных функций (например, интеграции с фреймворками), которые реализованы с использованием нескольких плагинов. Массив будет внутренне уплощён.
 
 ```js
-// framework-plugin
-import frameworkRefresh from 'vite-plugin-framework-refresh'
 import frameworkDevtools from 'vite-plugin-framework-devtools'
+import frameworkRefresh from 'vite-plugin-framework-refresh'
 
 export default function framework(config) {
   return [frameworkRefresh(config), frameworkDevTools(config)]
@@ -434,7 +433,9 @@ console.log(msg)
       originalUrl?: string
     },
   ) =>
-    IndexHtmlTransformResult | void | Promise<IndexHtmlTransformResult | void>
+    | IndexHtmlTransformResult
+    | void
+    | Promise<IndexHtmlTransformResult | void>
 
   type IndexHtmlTransformResult =
     | string

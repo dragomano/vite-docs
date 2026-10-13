@@ -58,7 +58,7 @@ const plugin = {
   configResolved(config) {
     console.log('options', config.optimizeDeps.rolldownOptions)
   },
-},
+}
 ```
 
 ### Трансформации JavaScript с помощью Oxc {#javascript-transforms-by-oxc}
@@ -93,7 +93,7 @@ const plugin = {
   configResolved(config) {
     console.log('options', config.oxc)
   },
-},
+}
 ```
 
 На данный момент Oxc-трансформер не поддерживает понижение нативных декораторов, так как мы ждём дальнейшего продвижения спецификации (см. [oxc-project/oxc#9170](https://github.com/oxc-project/oxc/issues/9170)).
@@ -129,8 +129,8 @@ $ deno add -D npm:@rolldown/plugin-babel npm:@babel/plugin-proposal-decorators
 :::
 
 ```ts [vite.config.ts]
-import { defineConfig } from 'vite'
 import babel from '@rolldown/plugin-babel'
+import { defineConfig } from 'vite'
 
 function decoratorPreset(options: Record<string, unknown>) {
   return {
@@ -178,8 +178,8 @@ $ deno add -D npm:@rollup/plugin-swc npm:@swc/core
 :::
 
 ```js
-import { defineConfig, withFilter } from 'vite'
 import swc from '@rollup/plugin-swc'
+import { defineConfig, withFilter } from 'vite'
 
 export default defineConfig({
   // ...
@@ -318,16 +318,19 @@ _Это изменение касается только авторов плаг
 Rolldown имеет экспериментальную поддержку [типов модулей](https://rolldown.rs/guide/notable-features#module-types), аналогичную опции [`loader`](https://esbuild.github.io/api/#loader) в esbuild. Из-за этого Rolldown теперь автоматически определяет тип модуля по расширению файла. Если в хуках `load` или `transform` вы преобразуете содержимое других типов модулей в JavaScript, может потребоваться явно указывать `moduleType: 'js'` в возвращаемом значении:
 
 ```js
+import fs from 'node:fs'
+
 const plugin = {
   name: 'txt-loader',
-  load(id) {
-    if (id.endsWith('.txt')) {
-      const content = fs.readFile(id, 'utf-8')
+  load: {
+    filter: { id: /\.txt$/ },
+    handler(id) {
+      const content = fs.readFileSync(id, 'utf-8')
       return {
         code: `export default ${JSON.stringify(content)}`,
         moduleType: 'js', // [!code ++]
       }
-    }
+    },
   },
 }
 ```

@@ -9,11 +9,11 @@
 Vite предоставляет собственный интерфейс управления HMR через специальный объект `import.meta.hot`:
 
 ```ts twoslash
-import type { ModuleNamespace } from 'vite/types/hot.d.ts'
 import type {
   CustomEventName,
   InferCustomEventPayload,
 } from 'vite/types/customEvent.d.ts'
+import type { ModuleNamespace } from 'vite/types/hot.d.ts'
 
 // ---cut---
 interface ImportMeta {

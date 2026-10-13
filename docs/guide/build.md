@@ -202,8 +202,8 @@ export default defineConfig({
 Файл входа будет содержать экспорты, которые могут быть импортированы пользователями вашего пакета:
 
 ```js [lib/main.js]
-import Foo from './Foo.vue'
 import Bar from './Bar.vue'
+import Foo from './Foo.vue'
 export { Foo, Bar }
 ```
 
@@ -334,8 +334,8 @@ experimental: {
 Если хэшированные ресурсы и публичные файлы не развёртываются вместе, опции для каждой группы могут быть определены независимо, используя тип ресурса `type`, который включен во второй параметр `context`, передаваемый функции.
 
 ```ts twoslash
-import type { UserConfig } from 'vite'
 import path from 'node:path'
+import type { UserConfig } from 'vite'
 // prettier-ignore
 const config: UserConfig = {
 // ---cut-before---
