@@ -2,11 +2,8 @@
   <br>
   <br>
   <a href="https://vite-docs.ru" target="_blank" rel="noopener noreferrer">
-    <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://vite-docs.ru/vite-light.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://vite-docs.ru/vite-dark.svg">
-      <img alt="vite logo" src="https://vite-docs.ru/vite-dark.svg" height="60">
-    </picture>
+    <img alt="vite logo" src="https://vite-docs.ru/vite-dark.svg#gh-light-mode-only" height="60">
+    <img alt="vite logo" src="https://vite-docs.ru/vite-light.svg#gh-dark-mode-only" height="60">
   </a>
   <br>
   <br>
