@@ -246,7 +246,7 @@ Direct websocket connection fallback. Check out https://vite.dev/config/server-o
 ## server.forwardConsole
 
 - **Тип:** `boolean | { unhandledErrors?: boolean, logLevels?: ('error' | 'warn' | 'info' | 'log' | 'debug')[] }`
-- **По умолчанию:** автоопределение (`true`, если обнаружен AI-кодинговый агент с помощью пакета [`@vercel/detect-agent`](https://www.npmjs.com/package/@vercel/detect-agent), в остальных случаях — `false`)
+- **По умолчанию:** автоопределение (`true`, если обнаружен ИИ-агент для кодинга с помощью пакета [`std-env`](https://www.npmjs.com/package/std-env), в остальных случаях — `false`)
 
 Перенаправляет события консоли браузера на консоль dev-сервера Vite во время разработки.
 
