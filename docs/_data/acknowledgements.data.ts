@@ -78,6 +78,13 @@ const devTools: Dependency[] = [
     funding: 'https://eslint.org/donate',
   },
   {
+    name: 'oxfmt',
+    description: 'Formatter for the JavaScript Oxidation Compiler',
+    author: 'Boshen and oxc contributors',
+    repository: 'https://github.com/oxc-project/oxc',
+    funding: 'https://github.com/sponsors/oxc-project',
+  },
+  {
     name: 'playwright-chromium',
     description: 'Chromium build for Playwright',
     author: 'Microsoft Corporation',
