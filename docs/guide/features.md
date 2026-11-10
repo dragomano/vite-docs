@@ -320,7 +320,8 @@ document.getElementById('foo').className = applyColor
 
 ```bash
 # .scss и .sass
-npm add -D sass
+npm add -D sass-embedded # рекомендуется для лучшей производительности
+npm add -D sass # если платформа не поддерживается
 
 # .less
 npm add -D less
