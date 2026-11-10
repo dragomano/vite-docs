@@ -35,7 +35,7 @@
   transition: border-color 0.5s;
 }
 .viteconf:hover {
-  border: 2px solid var(--vp-c-brand-light);
+  border-color: var(--vp-c-brand-1);
 }
 .viteconf img {
   transition: transform 0.5s;
@@ -54,7 +54,7 @@
   color: var(--vp-c-text-1);
 }
 .viteconf .heading {
-  color: var(--vp-c-brand-lighter);
+  color: var(--vp-c-brand-1);
 }
 .viteconf .extra-info {
   color: var(--vp-c-text-1);
